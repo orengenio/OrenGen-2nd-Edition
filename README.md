@@ -1,8 +1,146 @@
-# OrenGen.io Website - Development Guide
+# OrenGen.io - AI Automation Platform
 
-> **Production Homepage Template & Style Guide**  
+> **Complete AI-Powered Automation Platform**  
 > Last Updated: January 4, 2026  
-> Version: 3.0
+> Version: 3.0 - Production Infrastructure
+
+---
+
+## 🎯 PROJECT STATUS
+
+### ✅ COMPLETED
+- [x] Marketing website deployed (orengen.io)
+- [x] Clean navbar with demo bar, theme toggle, translation
+- [x] All images migrated from GoHighLevel to local storage
+- [x] Custom nginx configuration for clean URLs
+- [x] Docker containerization for marketing site
+- [x] SSL/HTTPS via Coolify
+- [x] Mobile responsive design
+- [x] Payment methods branding updated
+- [x] Badge text updated to "HUB Certified Minority Business"
+- [x] Twenty CRM deployment files created
+- [x] Complete system architecture documented
+- [x] Memory optimization (16GB RAM upgrade in progress)
+- [x] Database backup strategy defined
+- [x] n8n workflow automation deployed
+
+### ⏳ IN PROGRESS
+- [ ] **SERVER UPGRADE** - Waiting for 16GB RAM configuration (2 hours)
+- [ ] **CRM DEPLOYMENT** - Deploy Twenty CRM after server upgrade
+
+### 📋 NEXT UP (This Week)
+- [ ] Generate security secrets with `./setup.sh`
+- [ ] Deploy Twenty CRM to Coolify (crm.orengen.io)
+- [ ] Configure SSL for CRM domain
+- [ ] White-label Twenty CRM branding
+- [ ] Create admin account in CRM
+- [ ] Build n8n workflows for lead capture
+- [ ] Connect marketing form to n8n webhook
+- [ ] Test end-to-end: Form → n8n → CRM
+
+### 🚀 FUTURE PHASES
+- [ ] Client dashboard (app.orengen.io) - Next.js/React
+- [ ] Admin portal (admin.orengen.io)
+- [ ] Custom API gateway for business logic
+- [ ] Twilio integration for AI voice calls
+- [ ] OpenAI integration for automation
+- [ ] Stripe payment processing
+- [ ] Multi-tenant white-label system
+- [ ] Automated client onboarding
+- [ ] Analytics dashboard
+
+---
+
+## 📁 Repository Structure
+
+```
+/workspaces/home/
+├── marketing/              # ✅ LIVE - Marketing Site (orengen.io)
+│   ├── index.html         # Homepage with navbar, demo bar, theme toggle
+│   ├── services.html      # Services page
+│   ├── pricing.html       # Pricing page
+│   ├── case-studies.html  # Case studies
+│   ├── about.html         # About page
+│   ├── contact.html       # Contact page
+│   ├── assets/
+│   │   └── images/        # Local image storage (11MB, 9 images)
+│   ├── nginx.conf         # Custom nginx config
+│   └── Dockerfile         # Container image
+│
+├── crm/                   # ⏳ READY - Twenty CRM (crm.orengen.io)
+│   ├── docker-compose.yml # CRM stack (PostgreSQL + Redis + Twenty)
+│   ├── .env.example       # Configuration template
+│   ├── README.md          # CRM setup guide
+│   └── .gitignore         # Git ignore rules
+│
+├── ARCHITECTURE.md        # ✅ Complete system documentation
+├── setup.sh              # ✅ Automated secret generation script
+├── Dockerfile            # ✅ Marketing site Docker image
+└── README.md             # This file
+
+```
+
+---
+
+## 🖥️ Infrastructure
+
+### Server Configuration
+- **Provider**: VPS Elite
+- **Specs**: 8 vCores, 16GB RAM, 160GB Storage
+- **Cost**: $49.50/month
+- **IP**: 15.204.243.95
+- **Platform**: Coolify (self-hosted PaaS)
+
+### Services & Domains
+| Domain              | Service        | Status | SSL | Memory  |
+|---------------------|----------------|--------|-----|---------|
+| orengen.io          | Marketing      | ✅ Live | ✅  | 512MB   |
+| crm.orengen.io      | Twenty CRM     | ⏳ Setup| ⏳  | 4.5GB   |
+| n8n.orengen.io      | Workflows      | ✅ Live | ✅  | 2GB     |
+| app.orengen.io      | Client Portal  | 📋 Plan | -   | TBD     |
+| admin.orengen.io    | Admin Panel    | 📋 Plan | -   | TBD     |
+
+**Total Allocated**: ~7GB  
+**Available for Growth**: ~9GB
+
+---
+
+## 🚀 Quick Start
+
+### Deploy CRM (After Server Upgrade)
+
+1. **Generate Secrets**:
+   ```bash
+   ./setup.sh
+   ```
+
+2. **In Coolify Dashboard**:
+   - Create new "Docker Compose" service
+   - Repository: `orengenio/OrenGen-2nd-Edition`
+   - Base directory: `crm`
+   - Add environment variables from setup.sh output
+   - Domain: `crm.orengen.io`
+   - Enable SSL
+   - Deploy!
+
+3. **First Login**:
+   - Visit https://crm.orengen.io
+   - Create admin account
+   - Configure workspace branding
+
+### Local Development
+
+```bash
+# Marketing site
+cd marketing
+python3 -m http.server 8000
+# Visit http://localhost:8000
+
+# CRM (local testing)
+cd crm
+docker-compose up -d
+# Visit http://localhost:3000
+```
 
 ---
 
