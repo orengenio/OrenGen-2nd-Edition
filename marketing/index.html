@@ -440,10 +440,12 @@
 
         /* Navigation Bar */
         .navbar {
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            background: var(--bg-dark);
+            background: rgba(17, 17, 17, 0.95);
             border-bottom: 1px solid var(--border);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -455,25 +457,26 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 40px;
-            gap: 32px;
+            padding: 12px 40px;
+            gap: 20px;
+            height: 64px;
         }
 
         .navbar-logo {
             flex-shrink: 0;
+            z-index: 10;
         }
 
         .navbar-logo img {
-            height: 40px;
+            height: 36px;
             width: auto;
+            display: block;
         }
 
         .navbar-menu {
             display: flex;
             align-items: center;
-            gap: 32px;
-            flex: 1;
-            justify-content: center;
+            gap: 24px;
         }
 
         .navbar-item {
@@ -483,101 +486,26 @@
             font-size: 14px;
             font-weight: 500;
             transition: color 0.2s;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            white-space: nowrap;
         }
 
         .navbar-item:hover {
             color: var(--text);
         }
 
-        .navbar-item svg {
-            width: 14px;
-            height: 14px;
-            transition: transform 0.2s;
-        }
-
-        .navbar-item:hover svg {
-            transform: rotate(180deg);
-        }
-
         .navbar-actions {
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-shrink: 0;
         }
 
-        .demo-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--orange);
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 8px 12px;
-            background: rgba(204, 85, 0, 0.1);
-            border-radius: 6px;
-        }
-
-        .demo-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--orange);
-            border-radius: 50%;
-            animation: blink 1.5s infinite;
-        }
-
-        .phone-input-compact {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .phone-input-compact input {
-            padding: 8px 12px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text);
-            font-size: 13px;
-            width: 140px;
-            outline: none;
-        }
-
-        .phone-input-compact input:focus {
-            border-color: var(--orange);
-        }
-
-        .call-me-btn-compact {
+        .navbar-login {
             padding: 8px 16px;
             background: var(--orange);
             border: none;
             border-radius: 6px;
             color: white;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.2s;
-        }
-
-        .call-me-btn-compact:hover {
-            background: #e65c00;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(204, 85, 0, 0.4);
-        }
-
-        .navbar-login {
-            padding: 8px 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text);
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
@@ -589,8 +517,8 @@
         }
 
         .navbar-login:hover {
-            background: var(--bg-hover);
-            border-color: var(--orange);
+            background: #e65c00;
+            transform: translateY(-1px);
         }
 
         .navbar-login svg {
@@ -598,95 +526,9 @@
             height: 16px;
         }
 
-        /* Mega Menu */
+        /* Remove mega menu complexity for now */
         .mega-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 900px;
-            max-width: 90vw;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            padding: 32px;
-            margin-top: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-        }
-
-        .navbar-item:hover .mega-menu {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: all;
-        }
-
-        .mega-menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .mega-menu-category {
-            padding: 16px;
-            background: var(--bg-dark);
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .mega-menu-category:hover {
-            background: var(--bg-hover);
-            transform: translateY(-2px);
-        }
-
-        .mega-menu-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--orange);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .mega-menu-title svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .mega-menu-links {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .mega-menu-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 13px;
-            transition: all 0.2s;
-            padding: 6px 8px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .mega-menu-link:hover {
-            color: var(--text);
-            background: var(--bg-card);
-            padding-left: 12px;
-        }
-
-        .mega-menu-link svg {
-            width: 14px;
-            height: 14px;
-            opacity: 0.5;
+            display: none !important;
         }
 
         /* Mobile Menu */
@@ -703,6 +545,7 @@
         .mobile-menu-toggle svg {
             width: 24px;
             height: 24px;
+            display: block;
         }
 
         .mobile-menu-overlay {
@@ -2272,93 +2115,6 @@
                 </a>
 
                 <div class="navbar-menu">
-                    <div class="navbar-item">
-                        Solutions
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                        
-                        <!-- Mega Menu -->
-                        <div class="mega-menu">
-                            <div class="mega-menu-grid">
-                                <div class="mega-menu-category">
-                                    <div class="mega-menu-title">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8m4-4H8"></path></svg>
-                                        AI Systems
-                                    </div>
-                                    <div class="mega-menu-links">
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            Buy-Lingual™ AI Agents
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            AI Call Center
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            AI Chatbots
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            Custom AI Systems
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="mega-menu-category">
-                                    <div class="mega-menu-title">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-                                        Marketing & Sales
-                                    </div>
-                                    <div class="mega-menu-links">
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            Lead Generation
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            Marketing Automation
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            SEO Services
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            Advertising
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="mega-menu-category">
-                                    <div class="mega-menu-title">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6"></path></svg>
-                                        Operations
-                                    </div>
-                                    <div class="mega-menu-links">
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            Business Automation
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            CRM Systems
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            Web Development
-                                        </a>
-                                        <a href="#" class="mega-menu-link">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"></circle></svg>
-                                            Web Security
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <a href="/services.html" class="navbar-item">Services</a>
                     <a href="/pricing.html" class="navbar-item">Pricing</a>
                     <a href="/case-studies.html" class="navbar-item">Case Studies</a>
@@ -2367,13 +2123,6 @@
                 </div>
 
                 <div class="navbar-actions">
-                    <div class="demo-badge">
-                        Live AI Demo
-                    </div>
-                    <div class="phone-input-compact">
-                        <input type="tel" placeholder="Phone number">
-                        <button class="call-me-btn-compact">Call Me</button>
-                    </div>
                     <a href="https://app.orengen.io" class="navbar-login">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -2413,20 +2162,6 @@
                 <a href="/about.html" class="mobile-menu-item">About</a>
                 <a href="/contact.html" class="mobile-menu-item">Contact</a>
 
-                <div class="mobile-menu-category">
-                    <div class="mobile-menu-category-title">AI Solutions</div>
-                    <a href="#" class="mobile-menu-item">Buy-Lingual™ AI Agents</a>
-                    <a href="#" class="mobile-menu-item">AI Call Center</a>
-                    <a href="#" class="mobile-menu-item">AI Chatbots</a>
-                </div>
-
-                <div class="mobile-menu-category">
-                    <div class="mobile-menu-category-title">Marketing & Sales</div>
-                    <a href="#" class="mobile-menu-item">Lead Generation</a>
-                    <a href="#" class="mobile-menu-item">Marketing Automation</a>
-                    <a href="#" class="mobile-menu-item">SEO Services</a>
-                </div>
-
                 <div class="mobile-menu-category" style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border);">
                     <a href="https://app.orengen.io" class="navbar-login" style="width: 100%; justify-content: center;">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2439,7 +2174,7 @@
             </div>
         </div>
 
-        <div class="content">
+        <div class="content" style="padding-top: 64px;">
             <!-- Hero Section -->
             <section class="hero">
                 <div class="hero-badge">HUB Certified Minority Business Enterprise</div>
