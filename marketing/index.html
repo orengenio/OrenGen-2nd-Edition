@@ -1571,7 +1571,7 @@
 
         @media (max-width: 1024px) {
             .sidebar {
-                transform: translateX(-100%);
+                display: none !important;
             }
 
             .main {
@@ -1597,28 +1597,70 @@
 
         @media (max-width: 768px) {
             .hero {
-                padding: 60px 24px;
+                padding: 40px 20px !important;
+                min-height: auto !important;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem !important;
+                line-height: 1.6 !important;
+                margin-top: 16px !important;
+            }
+
+            .topbar {
+                padding: 12px 20px !important;
+            }
+
+            .topbar-left img {
+                height: 32px !important;
+            }
+
+            .topbar-right {
+                gap: 8px !important;
+            }
+
+            .call-me-btn,
+            .login-btn {
+                padding: 8px 16px !important;
+                font-size: 0.875rem !important;
+            }
+
+            .phone-input {
+                width: 140px !important;
+                font-size: 0.875rem !important;
+            }
+
+            .badge {
+                font-size: 0.75rem !important;
+                padding: 6px 12px !important;
             }
 
             .feature-section,
             .tabs-section,
             .workforce-section,
             .testimonials-section {
-                padding: 60px 24px;
+                padding: 60px 20px;
             }
 
             .stats-section {
-                padding: 40px 24px;
+                padding: 40px 20px;
+                grid-template-columns: 1fr !important;
             }
 
             .workforce-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
             }
 
             .newsletter-section {
                 flex-direction: column;
-                margin: 24px;
-                padding: 32px 24px;
+                margin: 20px;
+                padding: 32px 20px;
             }
 
             .newsletter-form {
@@ -1631,7 +1673,11 @@
             }
 
             .footer {
-                padding: 40px 24px;
+                padding: 40px 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr !important;
             }
         }
     </style>
