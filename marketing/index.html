@@ -1680,6 +1680,16 @@
                 grid-template-columns: 1fr !important;
             }
         }
+
+        /* Force hide sidebar on mobile - absolute override */
+        @media (max-width: 1024px) {
+            aside.sidebar {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+        }
     </style>
 </head>
 <body>
