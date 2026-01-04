@@ -46,8 +46,15 @@ services:
 
   twenty:
     image: twentycrm/twenty:latest
-    ports:
-      - "3000:3000"
+    expose:
+      - 3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.crm.rule=Host(`crm.orengen.io`)"
+      - "traefik.http.routers.crm.entrypoints=websecure"
+      - "traefik.http.routers.crm.tls=true"
+      - "traefik.http.routers.crm.tls.certresolver=letsencrypt"
+      - "traefik.http.services.crm.loadbalancer.server.port=3000"
     deploy:
       resources:
         limits:
