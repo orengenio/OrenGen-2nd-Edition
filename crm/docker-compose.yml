@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_in_production}
+      POSTGRES_USER: twenty
+      POSTGRES_DB: twenty
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U twenty"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  twenty:
+    image: twentycrm/twenty:latest
+    ports:
+      - "3000:3000"
+    environment:
+      # Database
+      PG_DATABASE_URL: postgres://twenty:${POSTGRES_PASSWORD:-change_me_in_production}@postgres:5432/twenty
+      
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      
+      # App Config
+      SERVER_URL: ${SERVER_URL:-http://localhost:3000}
+      FRONT_BASE_URL: ${FRONT_BASE_URL:-http://localhost:3000}
+      
+      # Auth - CHANGE THESE
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET:-your-secret-change-me}
+      LOGIN_TOKEN_SECRET: ${LOGIN_TOKEN_SECRET:-your-secret-change-me}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET:-your-secret-change-me}
+      FILE_TOKEN_SECRET: ${FILE_TOKEN_SECRET:-your-secret-change-me}
+      
+      # Storage
+      STORAGE_TYPE: local
+      STORAGE_LOCAL_PATH: /app/storage
+      
+      # Email (optional - configure later)
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-noreply@orengen.io}
+      EMAIL_FROM_NAME: ${EMAIL_FROM_NAME:-OrenGen CRM}
+      
+      # Features
+      SIGN_IN_PREFILLED: false
+      
+    volumes:
+      - twenty-storage:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
+  redis-data:
+  twenty-storage:
