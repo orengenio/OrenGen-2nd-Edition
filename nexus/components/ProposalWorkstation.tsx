@@ -115,7 +115,7 @@ const ProposalWorkstation: React.FC<Props> = ({ opportunity, onBack, defaultTab 
                     <div className="space-y-4 mb-8">
                         <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
                             <div className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase mb-1">Weighting</div>
-                            <div className="font-medium text-sm">Technical (40%) > Past Performance (30%) > Price (30%)</div>
+                            <div className="font-medium text-sm">Technical (40%) {'>'} Past Performance (30%) {'>'} Price (30%)</div>
                         </div>
                         <div className="space-y-2">
                             {['Technical Approach', 'Management Plan', 'Key Personnel', 'Transition Plan'].map((factor, i) => (

@@ -20,7 +20,7 @@ export interface ClaudeResponse {
 /**
  * Send a message to Claude and get a response
  */
-export async function sendToC laude(
+export async function sendToClaude(
   messages: ClaudeMessage[],
   model: string = 'claude-sonnet-4-20250514',
   options?: {
