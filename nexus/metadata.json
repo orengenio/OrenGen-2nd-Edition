@@ -1,0 +1,8 @@
+{
+  "name": "OrenGen Nexus",
+  "description": "The control room where intent becomes infrastructure. AI Studios for centralized growth orchestration.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}

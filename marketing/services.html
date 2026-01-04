@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>AI Services & Solutions | OrenGen.io - Enterprise AI Automation</title>
+    <meta name="title" content="AI Services & Solutions | OrenGen.io - Enterprise AI Automation">
+    <meta name="description" content="Explore OrenGen's comprehensive AI services: Buy-Lingual™ AI Agents, AI Call Centers, Lead Generation, CRM Automation, Web Development, and more. Enterprise-grade solutions with 24/7 support and 300% average ROI.">
+    <meta name="keywords" content="AI services, AI agents, AI call center, lead generation, marketing automation, CRM systems, web development, AI chatbots, business automation, SMTP services">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orengen.io/services">
+    <meta property="og:title" content="AI Services & Solutions | OrenGen.io">
+    <meta property="og:description" content="Explore OrenGen's comprehensive AI services with 300% average ROI and enterprise-grade support.">
+    <meta property="og:image" content="https://storage.googleapis.com/msgsndr/5sXsH3sSRgLPVUOIw303/media/6883df10979e8300a2e23e8e.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://orengen.io/services">
+    <meta property="twitter:title" content="AI Services & Solutions | OrenGen.io">
+    <meta property="twitter:description" content="Explore OrenGen's comprehensive AI services with 300% average ROI and enterprise-grade support.">
+    <meta property="twitter:image" content="https://storage.googleapis.com/msgsndr/5sXsH3sSRgLPVUOIw303/media/6883df10979e8300a2e23e8e.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://orengen.io/services">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://storage.googleapis.com/msgsndr/5sXsH3sSRgLPVUOIw303/media/693a7415eac0a8081aefa328.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "OrenGen AI Services",
+        "provider": {
+            "@type": "Organization",
+            "name": "OrenGen Worldwide"
+        },
+        "serviceType": "AI Business Automation",
+        "areaServed": "Worldwide",
+        "offers": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Buy-Lingual™ AI Agents",
+                    "description": "Multilingual AI voice agents for sales and support"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI Call Center",
+                    "description": "24/7 automated call handling and customer support"
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --orange: #C85A3D;
+            --orange-light: #E67E5F;
+            --blue: #1A4D7A;
+            --bg-dark: #0d0d0d;
+            --bg-sidebar: #111111;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-orange: rgba(204, 85, 0, 0.4);
+            --text: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.4);
+        }
+
+        [data-theme="light"] {
+            --bg-dark: #fafafa;
+            --bg-sidebar: #ffffff;
+            --bg-card: rgba(0, 0, 0, 0.03);
+            --bg-card-hover: rgba(0, 0, 0, 0.06);
+            --border: rgba(0, 0, 0, 0.1);
+            --text: #0d0d0d;
+            --text-secondary: rgba(0, 0, 0, 0.6);
+            --text-muted: rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-section {
+            padding: 16px 12px;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.15s;
+            margin-bottom: 4px;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-card);
+            color: var(--text);
+        }
+
+        .nav-item.active {
+            background: rgba(204, 85, 0, 0.1);
+            color: var(--orange);
+        }
+
+        .nav-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .sidebar-footer {
+            padding: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .control-btn {
+            flex: 1;
+            padding: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--orange);
+            color: var(--text);
+        }
+
+        .control-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+        }
+
+        .main {
+            margin-left: 240px;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--orange);
+        }
+
+        .breadcrumb span {
+            color: var(--orange);
+            font-weight: 600;
+        }
+
+        .hero {
+            padding: 80px 40px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(90deg, var(--orange) 0%, #ff8c42 50%, var(--text) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .category-section {
+            padding: 60px 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .category-header {
+            margin-bottom: 40px;
+        }
+
+        .category-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .category-header p {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            border-color: var(--border-orange);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(200, 90, 61, 0.15);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--orange), var(--blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .service-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .service-feature svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--orange);
+            flex-shrink: 0;
+        }
+
+        .service-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--orange);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .service-cta svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--orange);
+        }
+
+        .footer {
+            padding: 50px 40px 30px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="orengen-homepage-v3.html">
+                <img src="https://storage.googleapis.com/msgsndr/5sXsH3sSRgLPVUOIw303/media/6883df10979e8300a2e23e8e.png" alt="OrenGen.io" style="max-width: 180px; height: auto;">
+            </a>
+        </div>
+
+        <nav class="nav-section">
+            <a href="orengen-homepage-v3.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Home
+            </a>
+            <a href="about.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                About Us
+            </a>
+            <a href="services.html" class="nav-item active">
+                <svg viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg>
+                Services
+            </a>
+            <a href="pricing.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><line x1="12" x2="12" y1="2" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                Pricing
+            </a>
+            <a href="contact.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                Contact
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div style="display: flex; gap: 8px;">
+                <button class="control-btn" onclick="toggleTheme()" title="Toggle Theme">
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        <header class="topbar">
+            <div class="breadcrumb">
+                <a href="orengen-homepage-v3.html">Home</a>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+                <span>Services</span>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>
+                    AI-Powered Solutions
+                    <span class="gradient">For Every Business Need</span>
+                </h1>
+                <p>From intelligent automation to enterprise infrastructure, explore our comprehensive suite of AI services designed to transform your operations and accelerate growth.</p>
+            </section>
+
+            <!-- AI Systems (AIOps) -->
+            <section class="category-section" style="background: var(--bg-dark);">
+                <div class="category-header">
+                    <h2>🤖 AI Systems (AIOps)</h2>
+                    <p>Deploy intelligent AI agents that work 24/7, handling sales, support, and operations autonomously</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            </svg>
+                        </div>
+                        <h3>Buy-Lingual™ AI Agents</h3>
+                        <p>Our flagship multilingual AI voice agents handle inbound and outbound calls with human-like fluency in 25+ languages.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Real-time language switching</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>99.9% voice accuracy</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>24/7 availability</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                            </svg>
+                        </div>
+                        <h3>Custom AI Systems</h3>
+                        <p>Bespoke AI solutions tailored to your specific business processes, workflows, and objectives.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Custom training & models</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Full integration support</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Dedicated engineering team</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3>AI Chatbots</h3>
+                        <p>Intelligent conversational AI for websites, apps, and messaging platforms. Instant responses, 24/7.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Multi-platform deployment</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Natural language processing</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>CRM integration</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"></path>
+                            </svg>
+                        </div>
+                        <h3>AI Call Center</h3>
+                        <p>Complete call center automation with intelligent routing, sentiment analysis, and quality monitoring.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Unlimited concurrent calls</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Real-time analytics</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Quality assurance AI</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Revenue & Marketing (RevOps / MarOps) -->
+            <section class="category-section">
+                <div class="category-header">
+                    <h2>📈 Revenue & Marketing (RevOps)</h2>
+                    <p>Unify sales, marketing, and customer success to drive predictable revenue growth</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M2 12h20"></path>
+                            </svg>
+                        </div>
+                        <h3>Advertising</h3>
+                        <p>AI-optimized ad campaigns across Google, Meta, LinkedIn, and more. Maximize ROAS with intelligent bidding.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Multi-platform management</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>AI-powered optimization</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Performance tracking</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3>Lead Generation</h3>
+                        <p>Automated lead capture, qualification, and nurturing. Convert more prospects into customers.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Multi-channel acquisition</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>AI qualification scoring</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Automated follow-ups</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <h3>Marketing Automation</h3>
+                        <p>End-to-end marketing automation including email, SMS, social media, and personalized campaigns.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Workflow automation</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Personalization engine</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>A/B testing</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                        <h3>SEO Services</h3>
+                        <p>AI-driven SEO strategies to dominate search rankings. Technical SEO, content optimization, and link building.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Keyword research & strategy</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Technical optimization</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Content creation</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Infrastructure & Operations -->
+            <section class="category-section" style="background: var(--bg-dark);">
+                <div class="category-header">
+                    <h2>🔒 Infrastructure & Security (InfraOps)</h2>
+                    <p>Enterprise-grade infrastructure and security solutions for mission-critical operations</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                        </div>
+                        <h3>SMTP Infrastructure</h3>
+                        <p>Enterprise email infrastructure with 99.9% deliverability, DKIM, SPF, and DMARC configuration.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>High deliverability rates</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Dedicated IP pools</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Reputation management</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h3>Web Security</h3>
+                        <p>Comprehensive security solutions including SSL/TLS, DDoS protection, and vulnerability assessments.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>24/7 threat monitoring</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Penetration testing</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Compliance auditing</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v6m0 6v6"></path>
+                            </svg>
+                        </div>
+                        <h3>Business Automation</h3>
+                        <p>Workflow automation across departments. Eliminate manual tasks and boost productivity.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Process mapping</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Custom integrations</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>ROI tracking</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3>CRM Systems</h3>
+                        <p>Custom CRM implementation and optimization. Salesforce, HubSpot, and custom solutions.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Platform selection</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Custom workflows</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Data migration</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Web & Digital -->
+            <section class="category-section">
+                <div class="category-header">
+                    <h2>🌐 Web & Digital (WebOps)</h2>
+                    <p>Modern web solutions built for performance, scalability, and conversions</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                                <line x1="3" x2="21" y1="9" y2="9"></line>
+                            </svg>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Custom websites and web applications. Built for speed, SEO, and conversion optimization.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Modern frameworks (React, Next.js)</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Mobile-first responsive design</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Performance optimization</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advisory -->
+            <section class="category-section" style="background: var(--bg-dark);">
+                <div class="category-header">
+                    <h2>💡 AI & Tech Consulting (StrategyOps)</h2>
+                    <p>Strategic guidance to navigate digital transformation and AI adoption</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                        </div>
+                        <h3>AI & Tech Consulting</h3>
+                        <p>Expert guidance on AI strategy, technology stack selection, and digital transformation roadmaps.</p>
+                        <div class="service-features">
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>AI readiness assessment</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Technology roadmap</span>
+                            </div>
+                            <div class="service-feature">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Implementation support</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="service-cta">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section style="padding: 80px 40px; background: linear-gradient(135deg, rgba(200, 90, 61, 0.1), rgba(26, 77, 122, 0.1)); border-top: 1px solid var(--border);">
+                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <h2 style="font-size: 42px; margin-bottom: 24px;">Ready to Get Started?</h2>
+                    <p style="font-size: 18px; color: var(--text-secondary); margin-bottom: 40px;">Schedule a consultation to discuss your specific needs and discover how our AI solutions can transform your business operations.</p>
+                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="contact.html" style="padding: 16px 32px; background: var(--orange); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='var(--orange-light)'" onmouseout="this.style.background='var(--orange)'">Talk to Sales</a>
+                        <a href="pricing.html" style="padding: 16px 32px; background: transparent; color: var(--text); border: 1px solid var(--border); text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">View Pricing</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-bottom">
+                    <span>© Copyright 2025. OrenGen Worldwide. All Rights Reserved.</span>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

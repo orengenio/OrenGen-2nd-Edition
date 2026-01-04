@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Privacy Policy - OrenGen.io | GDPR & SOC2 Compliant</title>
+    <meta name="title" content="Privacy Policy - OrenGen.io | GDPR & SOC2 Compliant">
+    <meta name="description" content="OrenGen.io Privacy Policy. Learn how we protect your data with GDPR compliance, SOC2 Type II certification, and enterprise-grade security.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #C85A3D;
+            --secondary: #1A4D7A;
+            --accent: #4ade80;
+            --text: #1a1a1a;
+            --bg: #ffffff;
+            --bg-dark: #f8f9fa;
+            --border: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] {
+            --text: #ffffff;
+            --bg: #0a0a0a;
+            --bg-dark: #1a1a1a;
+            --border: #2a2a2a;
+            --shadow: rgba(255, 255, 255, 0.05);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .sidebar-controls {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .topbar {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .topbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        .breadcrumb {
+            padding: 2rem 0 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.7;
+        }
+        
+        .breadcrumb span {
+            margin: 0 0.5rem;
+            opacity: 0.5;
+        }
+        
+        .hero {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .last-updated {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+        
+        .content {
+            padding: 3rem 0;
+        }
+        
+        .content h2 {
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--primary);
+        }
+        
+        .content h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--secondary);
+        }
+        
+        .content p {
+            margin-bottom: 1rem;
+        }
+        
+        .content ul, .content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .contact-box {
+            background: var(--bg-dark);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+        }
+        
+        .contact-box h3 {
+            margin-top: 0;
+        }
+        
+        footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .sidebar-controls {
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar-controls">
+        <button class="control-btn" id="themeToggle" aria-label="Toggle theme">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+            </svg>
+        </button>
+    </div>
+
+    <div class="topbar">
+        <div class="topbar-content">
+            <a href="index.html" class="logo">OrenGen.io</a>
+            <a href="contact.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Contact Us</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <strong>Privacy Policy</strong>
+        </div>
+
+        <div class="hero">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated"><strong>Last Updated:</strong> January 4, 2026</p>
+            <p>At OrenGen.io, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI solutions and services.</p>
+        </div>
+
+        <div class="content">
+            <div class="highlight-box">
+                <strong>🔒 Our Commitment:</strong> We are SOC2 Type II certified, GDPR compliant, and ISO 27001 certified. Your data security is our top priority.
+            </div>
+
+            <h2>1. Information We Collect</h2>
+            
+            <h3>1.1 Information You Provide</h3>
+            <p>We collect information you directly provide to us:</p>
+            <ul>
+                <li><strong>Account Information:</strong> Name, email address, company name, phone number, job title</li>
+                <li><strong>Billing Information:</strong> Payment card details (processed securely via third-party providers), billing address</li>
+                <li><strong>Communications:</strong> Information you provide when contacting customer support or participating in surveys</li>
+                <li><strong>Content Data:</strong> Information you input into our AI systems for processing (training data, queries, documents)</li>
+            </ul>
+
+            <h3>1.2 Information Automatically Collected</h3>
+            <p>When you use our services, we automatically collect:</p>
+            <ul>
+                <li><strong>Usage Data:</strong> Features used, interaction patterns, session duration, error logs</li>
+                <li><strong>Device Information:</strong> IP address, browser type, operating system, device identifiers</li>
+                <li><strong>Cookies & Similar Technologies:</strong> Session cookies, analytics cookies, preference cookies</li>
+                <li><strong>AI Interaction Data:</strong> Conversation logs, query patterns, response times (for improving our AI models)</li>
+            </ul>
+
+            <h2>2. How We Use Your Information</h2>
+            
+            <p>We use the collected information for:</p>
+            <ul>
+                <li><strong>Service Delivery:</strong> Providing and maintaining our AI solutions, processing transactions, fulfilling requests</li>
+                <li><strong>Product Improvement:</strong> Analyzing usage patterns, developing new features, improving AI model accuracy</li>
+                <li><strong>Customer Support:</strong> Responding to inquiries, troubleshooting issues, providing technical assistance</li>
+                <li><strong>Security:</strong> Detecting and preventing fraud, abuse, and security threats</li>
+                <li><strong>Communications:</strong> Sending service updates, security alerts, marketing communications (with your consent)</li>
+                <li><strong>Compliance:</strong> Meeting legal obligations, enforcing our terms, protecting our rights</li>
+            </ul>
+
+            <h2>3. AI Model Training & Data Processing</h2>
+            
+            <div class="highlight-box">
+                <strong>Important:</strong> We use your interaction data to improve our AI models. However, you have control over this process.
+            </div>
+
+            <h3>3.1 Training Data Usage</h3>
+            <ul>
+                <li>We may use de-identified conversation logs to train and improve our AI models</li>
+                <li>Personal information is removed or anonymized before use in training data</li>
+                <li>Enterprise clients can opt-out of having their data used for model training</li>
+                <li>Sensitive data (health information, financial details, trade secrets) is never used for training without explicit consent</li>
+            </ul>
+
+            <h3>3.2 Data Isolation</h3>
+            <ul>
+                <li>Each client's data is logically separated in our systems</li>
+                <li>AI models trained on one client's data are not shared with other clients (unless explicitly contracted)</li>
+                <li>Enterprise plans include dedicated model instances for maximum data privacy</li>
+            </ul>
+
+            <h2>4. Data Sharing & Disclosure</h2>
+            
+            <p>We do not sell your personal information. We may share your information with:</p>
+
+            <h3>4.1 Service Providers</h3>
+            <p>Third-party vendors who perform services on our behalf:</p>
+            <ul>
+                <li>Cloud hosting providers (AWS, Google Cloud Platform)</li>
+                <li>Payment processors (Stripe, PayPal)</li>
+                <li>Analytics providers (Google Analytics, Mixpanel)</li>
+                <li>Customer support tools (Zendesk, Intercom)</li>
+            </ul>
+
+            <h3>4.2 Business Transfers</h3>
+            <p>In connection with a merger, acquisition, or sale of assets, your information may be transferred. You will be notified of any such change.</p>
+
+            <h3>4.3 Legal Requirements</h3>
+            <p>We may disclose information when required by law or to:</p>
+            <ul>
+                <li>Comply with legal obligations or valid legal requests</li>
+                <li>Protect our rights, property, or safety</li>
+                <li>Prevent fraud or security threats</li>
+                <li>Enforce our Terms of Service</li>
+            </ul>
+
+            <h2>5. Data Security</h2>
+            
+            <p>We implement industry-leading security measures:</p>
+            <ul>
+                <li><strong>Encryption:</strong> AES-256 encryption at rest, TLS 1.3 encryption in transit</li>
+                <li><strong>Access Controls:</strong> Role-based access control (RBAC), multi-factor authentication (MFA)</li>
+                <li><strong>Monitoring:</strong> 24/7 security monitoring, intrusion detection systems</li>
+                <li><strong>Compliance:</strong> SOC2 Type II, GDPR, ISO 27001, HIPAA (for healthcare clients)</li>
+                <li><strong>Regular Audits:</strong> Quarterly security audits, annual penetration testing</li>
+                <li><strong>Data Backups:</strong> Automated daily backups with 30-day retention</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>⚠️ Important:</strong> While we implement robust security measures, no system is 100% secure. You are responsible for maintaining the security of your account credentials.
+            </div>
+
+            <h2>6. Your Privacy Rights</h2>
+
+            <h3>6.1 GDPR Rights (EU/EEA Residents)</h3>
+            <p>If you are in the European Union or European Economic Area, you have the following rights:</p>
+            <ul>
+                <li><strong>Right to Access:</strong> Request a copy of your personal data</li>
+                <li><strong>Right to Rectification:</strong> Correct inaccurate or incomplete data</li>
+                <li><strong>Right to Erasure:</strong> Request deletion of your personal data ("right to be forgotten")</li>
+                <li><strong>Right to Restriction:</strong> Limit how we process your data</li>
+                <li><strong>Right to Data Portability:</strong> Receive your data in a machine-readable format</li>
+                <li><strong>Right to Object:</strong> Object to processing based on legitimate interests</li>
+                <li><strong>Right to Withdraw Consent:</strong> Withdraw consent for data processing at any time</li>
+            </ul>
+
+            <h3>6.2 CCPA Rights (California Residents)</h3>
+            <p>California residents have additional rights under the California Consumer Privacy Act (CCPA):</p>
+            <ul>
+                <li>Right to know what personal information is collected</li>
+                <li>Right to know if personal information is sold or disclosed</li>
+                <li>Right to opt-out of the sale of personal information (we do not sell data)</li>
+                <li>Right to deletion of personal information</li>
+                <li>Right to non-discrimination for exercising CCPA rights</li>
+            </ul>
+
+            <h3>6.3 Exercising Your Rights</h3>
+            <p>To exercise any of these rights, contact us at <strong>privacy@orengen.io</strong> or use our <a href="contact.html">contact form</a>. We will respond within 30 days.</p>
+
+            <h2>7. Data Retention</h2>
+            
+            <p>We retain your information for as long as necessary to:</p>
+            <ul>
+                <li>Provide our services to you</li>
+                <li>Comply with legal obligations (typically 7 years for financial records)</li>
+                <li>Resolve disputes and enforce agreements</li>
+            </ul>
+
+            <p><strong>Retention Periods:</strong></p>
+            <ul>
+                <li>Account data: Duration of account + 90 days after closure</li>
+                <li>Conversation logs: 2 years (enterprise clients can request custom retention)</li>
+                <li>Billing records: 7 years for tax and accounting purposes</li>
+                <li>Marketing data: Until you opt-out or request deletion</li>
+            </ul>
+
+            <h2>8. International Data Transfers</h2>
+            
+            <p>OrenGen.io is based in the United States. If you access our services from outside the U.S., your information may be transferred to, stored, and processed in the U.S. We use:</p>
+            <ul>
+                <li>Standard Contractual Clauses (SCCs) for GDPR compliance</li>
+                <li>Data Processing Agreements (DPAs) with all service providers</li>
+                <li>Regional data centers where required by enterprise clients</li>
+            </ul>
+
+            <h2>9. Cookies & Tracking Technologies</h2>
+            
+            <p>We use cookies and similar technologies to:</p>
+            <ul>
+                <li><strong>Essential Cookies:</strong> Required for service functionality (cannot be disabled)</li>
+                <li><strong>Analytics Cookies:</strong> Track usage patterns and performance</li>
+                <li><strong>Preference Cookies:</strong> Remember your settings (theme, language)</li>
+                <li><strong>Marketing Cookies:</strong> Deliver relevant advertisements (requires consent)</li>
+            </ul>
+
+            <p>You can control cookies through your browser settings. Note that disabling certain cookies may limit functionality.</p>
+
+            <h2>10. Children's Privacy</h2>
+            
+            <p>Our services are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children. If you believe we have collected information from a child, contact us immediately at <strong>privacy@orengen.io</strong>.</p>
+
+            <h2>11. Third-Party Links</h2>
+            
+            <p>Our services may contain links to third-party websites or services. We are not responsible for the privacy practices of these third parties. We encourage you to review their privacy policies.</p>
+
+            <h2>12. Changes to This Policy</h2>
+            
+            <p>We may update this Privacy Policy to reflect changes in our practices or legal requirements. We will notify you of material changes via:</p>
+            <ul>
+                <li>Email notification (for registered users)</li>
+                <li>Prominent notice on our website</li>
+                <li>In-app notifications</li>
+            </ul>
+
+            <p>Continued use of our services after changes constitutes acceptance of the updated policy.</p>
+
+            <h2>13. Contact Us</h2>
+            
+            <div class="contact-box">
+                <h3>Privacy Questions or Concerns?</h3>
+                <p>If you have questions about this Privacy Policy or how we handle your data, please contact:</p>
+                <p>
+                    <strong>OrenGen.io - Data Protection Officer</strong><br>
+                    Email: <a href="mailto:privacy@orengen.io" style="color: var(--primary);">privacy@orengen.io</a><br>
+                    Phone: +1 (817) 555-0102<br>
+                    Mail: 1234 Innovation Drive, Suite 100, Mansfield, TX 76063, USA
+                </p>
+                <p style="margin-top: 1rem;">
+                    <strong>For GDPR inquiries:</strong> <a href="mailto:dpo@orengen.io" style="color: var(--primary);">dpo@orengen.io</a><br>
+                    <strong>For CCPA requests:</strong> <a href="mailto:ccpa@orengen.io" style="color: var(--primary);">ccpa@orengen.io</a>
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Effective Date:</strong> This Privacy Policy is effective as of January 4, 2026 and applies to all information collected on or after this date.
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 OrenGen.io. All rights reserved. | <a href="privacy.html" style="color: var(--primary);">Privacy Policy</a> | <a href="terms.html" style="color: var(--primary);">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+    </script>
+</body>
+</html>

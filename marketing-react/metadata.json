@@ -1,0 +1,7 @@
+{
+  "name": "OrenGen.io - 2nd Edition",
+  "description": "High-end landing page for Orengen.io featuring Buy-Lingual™ AI Agents, Digital Asset Store, and Strategic Automation.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

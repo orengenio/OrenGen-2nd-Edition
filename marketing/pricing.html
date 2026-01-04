@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Pricing - OrenGen.io | Transparent AI Solutions Pricing</title>
+    <meta name="title" content="Pricing - OrenGen.io | Transparent AI Solutions Pricing">
+    <meta name="description" content="Clear, transparent pricing for enterprise-grade AI solutions. From Buy-Lingual™ AI agents to custom development. No hidden fees. Flexible payment options.">
+    <meta name="keywords" content="AI pricing, Buy-Lingual pricing, AI agent cost, enterprise AI pricing, AI solutions packages, custom AI development pricing">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="OrenGen.io">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orengen.io/pricing">
+    <meta property="og:title" content="Pricing - OrenGen.io | Transparent AI Solutions Pricing">
+    <meta property="og:description" content="Clear, transparent pricing for enterprise-grade AI solutions. From Buy-Lingual™ AI agents to custom development.">
+    <meta property="og:image" content="https://orengen.io/assets/og-pricing.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://orengen.io/pricing">
+    <meta property="twitter:title" content="Pricing - OrenGen.io | Transparent AI Solutions Pricing">
+    <meta property="twitter:description" content="Clear, transparent pricing for enterprise-grade AI solutions. From Buy-Lingual™ AI agents to custom development.">
+    <meta property="twitter:image" content="https://orengen.io/assets/og-pricing.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "OrenGen AI Solutions",
+      "description": "Enterprise-grade AI solutions including Buy-Lingual™ AI agents, custom AI development, and AI consulting services",
+      "brand": {
+        "@type": "Brand",
+        "name": "OrenGen.io"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Starter Plan",
+          "description": "Perfect for small businesses getting started with AI",
+          "price": "997",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2025-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://orengen.io/pricing#starter"
+        },
+        {
+          "@type": "Offer",
+          "name": "Professional Plan",
+          "description": "Advanced AI solutions for growing enterprises",
+          "price": "2997",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2025-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://orengen.io/pricing#professional"
+        },
+        {
+          "@type": "Offer",
+          "name": "Enterprise Plan",
+          "description": "Custom AI solutions with dedicated support",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://orengen.io/pricing#enterprise"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "247"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #C85A3D;
+            --secondary: #1A4D7A;
+            --accent: #4ade80;
+            --text: #1a1a1a;
+            --bg: #ffffff;
+            --bg-dark: #f8f9fa;
+            --border: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] {
+            --text: #ffffff;
+            --bg: #0a0a0a;
+            --bg-dark: #1a1a1a;
+            --border: #2a2a2a;
+            --shadow: rgba(255, 255, 255, 0.05);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Sidebar Controls */
+        .sidebar-controls {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .control-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+        
+        /* Top Bar */
+        .topbar {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .topbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+        
+        .cta-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 2rem 0 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+        
+        .breadcrumb span {
+            margin: 0 0.5rem;
+            opacity: 0.5;
+        }
+        
+        /* Hero Section */
+        .pricing-hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+        
+        .pricing-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .pricing-hero p {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Billing Toggle */
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .toggle-label {
+            font-weight: 600;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+        
+        .toggle-label.active {
+            opacity: 1;
+            color: var(--primary);
+        }
+        
+        .toggle-switch {
+            width: 60px;
+            height: 32px;
+            background: var(--border);
+            border-radius: 16px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle-switch.annual {
+            background: var(--primary);
+        }
+        
+        .toggle-slider {
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-switch.annual .toggle-slider {
+            transform: translateX(28px);
+        }
+        
+        .save-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .pricing-card {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px var(--shadow);
+            border-color: var(--primary);
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 2rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .plan-description {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            min-height: 48px;
+        }
+        
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-price span {
+            font-size: 1.25rem;
+            opacity: 0.6;
+        }
+        
+        .price-period {
+            opacity: 0.6;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features {
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .plan-cta {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        
+        .plan-cta.primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .plan-cta.secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .plan-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            padding: 4rem 0;
+            background: var(--bg-dark);
+        }
+        
+        .comparison-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .comparison-table {
+            background: var(--bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background: var(--bg-dark);
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .comparison-table td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table .feature-name {
+            font-weight: 600;
+        }
+        
+        .check-icon {
+            color: var(--accent);
+        }
+        
+        .close-icon {
+            color: var(--border);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0;
+        }
+        
+        .faq-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-grid {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--bg-dark);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(200, 90, 61, 0.1), rgba(26, 77, 122, 0.1));
+        }
+        
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar-controls {
+                right: 1rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .comparison-table {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Controls -->
+    <div class="sidebar-controls">
+        <button class="control-btn" id="themeToggle" aria-label="Toggle theme">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </button>
+        
+        <div id="google_translate_element" style="display: none;"></div>
+        <button class="control-btn" id="translateToggle" aria-label="Translate page">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M12 8v4l2 2"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-content">
+                <a href="index.html" class="logo">
+                    <img src="https://orengen.io/assets/logo.png" alt="OrenGen.io" onerror="this.style.display='none'">
+                    <span class="logo-text">OrenGen.io</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html" class="active">Pricing</a></li>
+                        <li><a href="contact.html" class="cta-btn">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <strong>Pricing</strong>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pricing-hero">
+        <div class="container">
+            <h1>Simple, Transparent Pricing</h1>
+            <p>Choose the perfect plan for your business. No hidden fees. Cancel anytime. Enterprise-grade AI solutions at every tier.</p>
+            
+            <!-- Billing Toggle -->
+            <div class="billing-toggle">
+                <span class="toggle-label monthly-label active">Monthly</span>
+                <div class="toggle-switch" id="billingToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="toggle-label annual-label">Annual</span>
+                <span class="save-badge">Save 20%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Grid -->
+    <section class="container">
+        <div class="pricing-grid">
+            <!-- Starter Plan -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Starter</h3>
+                <p class="plan-description">Perfect for small businesses getting started with AI automation</p>
+                <div class="plan-price">
+                    <span class="monthly-price">$997</span>
+                    <span class="annual-price" style="display: none;">$797</span>
+                    <span>/mo</span>
+                </div>
+                <p class="price-period">Billed <span class="monthly-text">monthly</span><span class="annual-text" style="display: none;">annually ($9,564/year)</span></p>
+                
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Up to 2 Buy-Lingual™ AI agents</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>10,000 AI interactions/month</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Basic analytics dashboard</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Email support (48h response)</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Standard integrations (5+)</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Knowledge base access</span>
+                    </div>
+                </div>
+                
+                <a href="contact.html?plan=starter" class="plan-cta secondary">Get Started</a>
+            </div>
+
+            <!-- Professional Plan (Featured) -->
+            <div class="pricing-card featured">
+                <div class="popular-badge">Most Popular</div>
+                <h3 class="plan-name">Professional</h3>
+                <p class="plan-description">Advanced AI solutions for growing enterprises with higher demands</p>
+                <div class="plan-price">
+                    <span class="monthly-price">$2,997</span>
+                    <span class="annual-price" style="display: none;">$2,397</span>
+                    <span>/mo</span>
+                </div>
+                <p class="price-period">Billed <span class="monthly-text">monthly</span><span class="annual-text" style="display: none;">annually ($28,764/year)</span></p>
+                
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span><strong>Up to 10 Buy-Lingual™ AI agents</strong></span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span><strong>100,000 AI interactions/month</strong></span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Advanced analytics & reporting</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Priority support (4h response)</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Premium integrations (25+)</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Custom AI training</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Multi-language support (25+ languages)</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Monthly strategy sessions</span>
+                    </div>
+                </div>
+                
+                <a href="contact.html?plan=professional" class="plan-cta primary">Get Started</a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Enterprise</h3>
+                <p class="plan-description">Custom AI solutions with dedicated support and unlimited scalability</p>
+                <div class="plan-price">
+                    Custom
+                </div>
+                <p class="price-period">Tailored to your business needs</p>
+                
+                <div class="plan-features">
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span><strong>Unlimited Buy-Lingual™ AI agents</strong></span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span><strong>Unlimited AI interactions</strong></span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Enterprise analytics & BI integration</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>24/7 dedicated support team</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Custom integrations & APIs</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>White-label solutions</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Dedicated account manager</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>SLA guarantees & uptime monitoring</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Custom AI model development</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>On-premise deployment options</span>
+                    </div>
+                </div>
+                
+                <a href="contact.html?plan=enterprise" class="plan-cta secondary">Talk to Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section">
+        <div class="container">
+            <h2>Detailed Feature Comparison</h2>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Starter</th>
+                            <th>Professional</th>
+                            <th>Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Buy-Lingual™ AI Agents</td>
+                            <td>Up to 2</td>
+                            <td>Up to 10</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Monthly AI Interactions</td>
+                            <td>10,000</td>
+                            <td>100,000</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Supported Languages</td>
+                            <td>English + 5</td>
+                            <td>25+</td>
+                            <td>All available</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Response Time SLA</td>
+                            <td>
+                                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </td>
+                            <td>4 hours</td>
+                            <td>1 hour (24/7)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Custom AI Training</td>
+                            <td>
+                                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </td>
+                            <td>
+                                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </td>
+                            <td>
+                                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Advanced Analytics</td>
+                            <td>Basic</td>
+                            <td>Advanced</td>
+                            <td>Enterprise + BI</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Integrations</td>
+                            <td>5 Standard</td>
+                            <td>25 Premium</td>
+                            <td>Unlimited Custom</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">White-Label Options</td>
+                            <td>
+                                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </td>
+                            <td>
+                                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </td>
+                            <td>
+                                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Dedicated Account Manager</td>
+                            <td>
+                                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </td>
+                            <td>
+                                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </td>
+                            <td>
+                                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">On-Premise Deployment</td>
+                            <td>
+                                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </td>
+                            <td>
+                                <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </td>
+                            <td>
+                                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I change plans later?</h3>
+                    <p class="faq-answer">Absolutely! You can upgrade or downgrade your plan at any time. When upgrading, you'll get immediate access to new features. When downgrading, changes take effect at the start of your next billing cycle.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">What payment methods do you accept?</h3>
+                    <p class="faq-answer">We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, bank transfers (ACH/wire), and cryptocurrency for annual plans. Enterprise clients can also request invoice billing.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Is there a free trial available?</h3>
+                    <p class="faq-answer">Yes! We offer a 14-day free trial on both Starter and Professional plans. No credit card required. You'll get full access to all features to ensure our solution is the right fit for your business.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">What happens if I exceed my plan limits?</h3>
+                    <p class="faq-answer">We'll notify you when you reach 80% and 100% of your limits. You can either upgrade to a higher tier or purchase additional interaction packs. We never shut off your service unexpectedly.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Do you offer refunds?</h3>
+                    <p class="faq-answer">Yes, we offer a 30-day money-back guarantee on all annual plans. If you're not completely satisfied, we'll provide a full refund—no questions asked. Monthly plans are non-refundable but can be cancelled anytime.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Are there any setup fees or hidden costs?</h3>
+                    <p class="faq-answer">No hidden fees. The price you see is the price you pay. Enterprise plans may include optional professional services for custom development, but these are always discussed and agreed upon upfront.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">How does support work for each plan?</h3>
+                    <p class="faq-answer">Starter plans get email support with 48-hour response times. Professional plans get priority email support with 4-hour response times during business hours. Enterprise plans get 24/7 dedicated support with 1-hour response times and a dedicated account manager.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I get a custom plan?</h3>
+                    <p class="faq-answer">Yes! If our standard plans don't fit your needs, we can create a custom package. This is common for enterprises with specific requirements, regulatory needs, or unique use cases. Contact our sales team to discuss your needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Business with AI?</h2>
+            <p>Join 500+ companies already using OrenGen.io to automate operations and drive growth</p>
+            <div class="cta-buttons">
+                <a href="contact.html?plan=trial" class="cta-btn">Start Free Trial</a>
+                <a href="contact.html?plan=demo" class="cta-btn" style="background: transparent; border: 2px solid var(--primary); color: var(--primary);">Schedule a Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>OrenGen.io</h3>
+                    <p>Enterprise-grade AI solutions that speak your language and automate your operations.</p>
+                    <div class="social-icons">
+                        <a href="https://twitter.com/OrenGenAI" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg></a>
+                        <a href="https://linkedin.com/company/orengen" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg></a>
+                        <a href="https://facebook.com/OrenGenAI" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="services.html#buylingual">Buy-Lingual™ AI Agents</a></li>
+                        <li><a href="services.html#custom-ai">Custom AI Development</a></li>
+                        <li><a href="services.html#consulting">AI Consulting</a></li>
+                        <li><a href="services.html#automation">Business Automation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html#careers">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="index.html#refund">Refund Policy</a></li>
+                        <li><a href="index.html#security">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 OrenGen.io. All rights reserved. HUB Certified Minority Business Enterprise.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh-CN,ja,ko,ar,hi,bn,pa,te,mr,ta,ur,gu,kn,ml,th,vi,id,ms,fil',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Main JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        });
+        
+        // Translate Toggle
+        const translateToggle = document.getElementById('translateToggle');
+        const translateElement = document.getElementById('google_translate_element');
+        
+        translateToggle.addEventListener('click', () => {
+            if (translateElement.style.display === 'none') {
+                translateElement.style.display = 'block';
+            } else {
+                translateElement.style.display = 'none';
+            }
+        });
+        
+        // Billing Toggle
+        const billingToggle = document.getElementById('billingToggle');
+        const monthlyLabels = document.querySelectorAll('.monthly-label, .monthly-price, .monthly-text');
+        const annualLabels = document.querySelectorAll('.annual-label, .annual-price, .annual-text');
+        
+        billingToggle.addEventListener('click', () => {
+            billingToggle.classList.toggle('annual');
+            
+            if (billingToggle.classList.contains('annual')) {
+                monthlyLabels.forEach(el => {
+                    if (el.classList.contains('monthly-label')) {
+                        el.classList.remove('active');
+                    } else {
+                        el.style.display = 'none';
+                    }
+                });
+                annualLabels.forEach(el => {
+                    if (el.classList.contains('annual-label')) {
+                        el.classList.add('active');
+                    } else {
+                        el.style.display = 'inline';
+                    }
+                });
+            } else {
+                monthlyLabels.forEach(el => {
+                    if (el.classList.contains('monthly-label')) {
+                        el.classList.add('active');
+                    } else {
+                        el.style.display = 'inline';
+                    }
+                });
+                annualLabels.forEach(el => {
+                    if (el.classList.contains('annual-label')) {
+                        el.classList.remove('active');
+                    } else {
+                        el.style.display = 'none';
+                    }
+                });
+            }
+        });
+        
+        // URL Parameter Handling for Plan Selection
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedPlan = urlParams.get('plan');
+        
+        if (selectedPlan) {
+            const planCard = document.querySelector(`[href*="plan=${selectedPlan}"]`)?.closest('.pricing-card');
+            if (planCard) {
+                planCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                planCard.style.animation = 'pulse 1s ease-in-out 3';
+            }
+        }
+    </script>
+</body>
+</html>
