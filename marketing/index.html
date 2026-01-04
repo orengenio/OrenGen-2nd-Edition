@@ -453,8 +453,80 @@
         .content {
             max-width: 1400px;
             margin: 0 auto;
-            padding-top: 64px;
+            padding-top: 130px;
             width: 100%;
+        }
+
+        /* Demo Bar */
+        .demo-bar {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: #cc5500;
+            padding: 12px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .demo-bar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 0 20px;
+        }
+
+        .demo-bar-label {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .demo-bar-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        .demo-phone-input {
+            padding: 8px 12px;
+            border: 2px solid white;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 14px;
+            width: 180px;
+            outline: none;
+        }
+
+        .demo-phone-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .demo-call-btn {
+            padding: 8px 20px;
+            background: white;
+            color: #cc5500;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .demo-call-btn:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
         }
 
         /* Navigation Bar */
@@ -543,6 +615,29 @@
         .navbar-login svg {
             width: 16px;
             height: 16px;
+        }
+
+        .navbar-icon-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .navbar-icon-btn:hover {
+            background: var(--bg-hover);
+            border-color: var(--orange);
+        }
+
+        .navbar-icon-btn svg {
+            width: 18px;
+            height: 18px;
         }
 
         /* Remove mega menu complexity for now */
@@ -1832,6 +1927,43 @@
         }
 
         @media (max-width: 768px) {
+            .demo-bar {
+                top: 60px;
+                padding: 10px 0;
+            }
+
+            .demo-bar-container {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .demo-bar-label {
+                font-size: 13px;
+            }
+
+            .demo-phone-input {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .demo-call-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .content {
+                padding-top: 180px;
+            }
+
+            .navbar-icon-btn {
+                padding: 6px;
+            }
+
+            .navbar-icon-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+
             .hero {
                 padding: 40px 20px !important;
                 min-height: auto !important;
@@ -1957,6 +2089,27 @@
                 </div>
 
                 <div class="navbar-actions">
+                    <button class="navbar-icon-btn" onclick="toggleTheme()" title="Toggle Theme">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                        </svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+                    <button class="navbar-icon-btn" onclick="toggleTranslate()" title="Translate" id="translate-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 8h14M9 3L5 8l4 5"></path>
+                            <path d="M13 21l4-5-4-5M13 21h6"></path>
+                            <path d="M12 3v18"></path>
+                        </svg>
+                    </button>
                     <a href="https://app.orengen.io" class="navbar-login">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -1974,6 +2127,15 @@
                 </div>
             </div>
         </nav>
+
+        <!-- Demo Bar -->
+        <div class="demo-bar">
+            <div class="demo-bar-container">
+                <div class="demo-bar-label">Live AI Voice Demo</div>
+                <input type="tel" class="demo-phone-input" placeholder="Enter phone number">
+                <button class="demo-call-btn">Call Me</button>
+            </div>
+        </div>
 
         <!-- Mobile Menu -->
         <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
@@ -2011,7 +2173,7 @@
         <div class="content">
             <!-- Hero Section -->
             <section class="hero">
-                <div class="hero-badge">HUB Certified Minority Business Enterprise</div>
+                <div class="hero-badge">HUB Certified Minority Business</div>
                 <h1>
                     Our Systems.
                     <span class="line2">Your Growth.</span>
@@ -2630,46 +2792,8 @@
                     <div class="footer-brand">
                         <img src="./assets/images/logo.png" alt="OrenGen.io" style="max-width: 160px; height: auto; margin-bottom: 16px;">
                         <p>OrenGen.io is a premier AI & Technology firm dedicated to disrupting traditional workflows through intelligent automation.</p>
-                        <div style="display: flex; align-items: center; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
-                            <!-- Stripe -->
-                            <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 6px 12px; height: 36px; display: flex; align-items: center; justify-content: center;">
-                                <svg viewBox="0 0 60 25" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13.3 11.8c0-.9-.6-1.3-1.6-1.3-.9 0-2 .3-3 .8V7.1c1.1-.5 2.3-.8 3.5-.8 2.9 0 4.8 1.5 4.8 4.5v6.7h-3.7v-.9c-.8.8-1.9 1.2-3.1 1.2-2.1 0-3.8-1.4-3.8-3.5 0-2.2 1.7-3.4 4.3-3.4h1.6v-.1zm0 2.9h-1.2c-1 0-1.5.4-1.5 1.1 0 .6.5 1 1.3 1 .7 0 1.4-.4 1.4-1.1v-1zm16.2-7.9c-1.1-.5-2.3-.8-3.5-.8-3.5 0-6 2.5-6 6.5s2.5 6.5 6 6.5c1.2 0 2.4-.3 3.5-.8v3.6c-1.1.4-2.4.7-3.7.7-5.4 0-9.5-3.8-9.5-9.5S21.4 3.5 26.8 3.5c1.3 0 2.6.2 3.7.7v3.6zm5.5.4h-3.7v-3h11.1v3h-3.7v10.3h-3.7V7.2zm8.5 10.3V3.8h8.9v3.2h-5.2v2.1h4.9v3.1h-4.9v2.3h5.2v3.2h-8.9z" fill="#6772E5"/>
-                                </svg>
-                            </div>
-                            <!-- PayPal -->
-                            <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 6px 12px; height: 36px; display: flex; align-items: center; justify-content: center;">
-                                <svg viewBox="0 0 100 25" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19.8 5.8c-.4 2.5-2.3 5.4-5.8 5.4h-1.5l-1 6.3c-.1.3-.3.5-.6.5h-2.5c-.3 0-.5-.3-.4-.6l2.9-18.3c.1-.3.3-.5.6-.5h5.5c3.6 0 5.7 1.7 5.7 4.5 0 .9-.3 1.9-.9 2.7zm-7.5 5.4h1.5c2.4 0 3.9-1.9 4.2-3.8.4-2.3-1.1-3.8-3.5-3.8h-3.3l-1.4 7.6h.3z" fill="#003087"/>
-                                    <path d="M28.4 17.5h-2.5c-.3 0-.5-.3-.4-.6l2.9-18.3c.1-.3.3-.5.6-.5h2.4c.3 0 .5.3.4.6l-2.8 18.3c-.1.3-.3.5-.6.5z" fill="#003087"/>
-                                    <path d="M41.2 5.8c-.4 2.5-2.3 5.4-5.8 5.4h-1.5l-1 6.3c-.1.3-.3.5-.6.5h-2.5c-.3 0-.5-.3-.4-.6l2.9-18.3c.1-.3.3-.5.6-.5h5.5c3.6 0 5.7 1.7 5.7 4.5 0 .9-.3 1.9-.9 2.7zm-7.5 5.4h1.5c2.4 0 3.9-1.9 4.2-3.8.4-2.3-1.1-3.8-3.5-3.8h-3.3l-1.4 7.6h.3z" fill="#009CDE"/>
-                                </svg>
-                            </div>
-                            <!-- MasterCard -->
-                            <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 6px 12px; height: 36px; display: flex; align-items: center; justify-content: center;">
-                                <svg viewBox="0 0 48 30" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="18" cy="15" r="12" fill="#EB001B"/>
-                                    <circle cx="30" cy="15" r="12" fill="#F79E1B"/>
-                                    <path d="M24 6.5c2.1 1.8 3.5 4.5 3.5 7.5s-1.4 5.7-3.5 7.5c-2.1-1.8-3.5-4.5-3.5-7.5s1.4-5.7 3.5-7.5z" fill="#FF5F00"/>
-                                </svg>
-                            </div>
-                            <!-- Apple Pay -->
-                            <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 6px 12px; height: 36px; display: flex; align-items: center; justify-content: center;">
-                                <svg viewBox="0 0 48 20" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.9 3.8c.6-.7 1-1.7.9-2.8-1 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.8 1.1 0 2.1-.6 2.9-1.4zm1 1.7c-1.6-.1-3 1-3.8 1-.8 0-2-.9-3.3-.9C1.2 5.7 0 7.4 0 10.7c0 2 .8 4.1 1.7 5.4.8 1.2 1.5 2.2 2.7 2.2 1.2 0 1.7-.8 3.2-.8 1.5 0 1.8.8 3.3.8 1.4 0 2.1-1.1 2.9-2.2 1-1.4 1.4-2.7 1.4-2.8 0-.1-2.7-1-2.7-4.1 0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2z" fill="black"/>
-                                    <path d="M23.5 4.8h1.8c1.7 0 2.9 1.2 2.9 2.9 0 1.8-1.2 3-3 3h-1.8V4.8zm1.7 5c1.1 0 1.8-.7 1.8-2.1 0-1.3-.7-2-1.8-2h-.7v4.1h.7zm5.5-1c0-1.1.8-1.8 2.2-1.9l1.6-.1v-.5c0-.6-.4-1-.9-1-.6 0-1 .3-1.1.7h-1c0-1 .9-1.7 2.1-1.7 1.3 0 2 .7 2 1.9v3.9h-1V9.9c-.4.5-1 .8-1.8.8-1.1 0-2.1-.7-2.1-1.9zm3.8-.5v-.5l-1.4.1c-.7 0-1.1.3-1.1.8 0 .5.4.8 1 .8.9 0 1.5-.5 1.5-1.2zm2.8 3.9l.9-.8c.3.4.8.6 1.3.6.7 0 1.1-.4 1.1-1.2V9.5c-.4.5-1 .8-1.8.8-1.4 0-2.4-1.1-2.4-2.7 0-1.6 1-2.7 2.4-2.7.8 0 1.4.3 1.8.9v-.8h1V10c0 1.4-.9 2.3-2.2 2.3-.9 0-1.6-.3-2.1-.9z" fill="black"/>
-                                </svg>
-                            </div>
-                            <!-- Google Pay -->
-                            <div style="background: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 6px 12px; height: 36px; display: flex; align-items: center; justify-content: center;">
-                                <svg viewBox="0 0 48 20" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M22.7 9.9v5.4h-1.4V.8h3.7c.9 0 1.8.4 2.4 1 .6.6 1 1.5 1 2.4 0 1-.4 1.8-1 2.4-.6.6-1.5 1-2.4 1h-2.3zm0-7.8v6.5h2.3c.6 0 1.1-.2 1.5-.6.4-.4.6-.9.6-1.5s-.2-1.1-.6-1.5c-.4-.4-.9-.6-1.5-.6h-2.3zm10.8 5.5c1 0 1.9.4 2.5 1l-.9.9c-.4-.5-1-.7-1.6-.7-1.3 0-2.3 1-2.3 2.3s1 2.3 2.3 2.3c.7 0 1.2-.3 1.6-.7v-.7H33v-1.2h3v2.1c-.6.8-1.6 1.3-2.7 1.3-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.7-3.5zm7.7.1c1.4 0 2.4 1.1 2.4 2.8v.3h-4.4c.1.9.9 1.5 1.8 1.5.6 0 1.2-.3 1.5-.7l.8.8c-.5.6-1.3 1-2.3 1-1.7 0-3-1.3-3-3.2 0-1.8 1.2-3.5 3.2-3.5zm-2 2.5h3.2c-.1-.8-.7-1.4-1.6-1.4-.9 0-1.5.6-1.6 1.4z" fill="#5F6368"/>
-                                    <path d="M19.3 8.4c0-.4 0-.7-.1-1.1h-5.5v2h3.2c-.1.6-.5 1.1-1.1 1.5v1.4h1.8c1-.9 1.7-2.4 1.7-3.8z" fill="#4285F4"/>
-                                    <path d="M13.7 14.8c1.5 0 2.7-.5 3.6-1.3l-1.8-1.4c-.5.3-1.1.5-1.8.5-1.4 0-2.6-.9-3-2.2H8.9v1.4c.9 1.8 2.7 3 4.8 3z" fill="#34A853"/>
-                                    <path d="M10.7 10.4c-.1-.3-.2-.7-.2-1s.1-.7.2-1V6.9H8.9c-.4.7-.6 1.6-.6 2.5s.2 1.8.6 2.5l1.8-1.5z" fill="#FBBC04"/>
-                                    <path d="M13.7 5.4c.8 0 1.5.3 2.1.8l1.5-1.5C16.4 3.9 15.2 3.3 13.7 3.3c-2.1 0-3.9 1.2-4.8 3l1.8 1.4c.4-1.2 1.6-2.3 3-2.3z" fill="#EA4335"/>
-                                </svg>
-                            </div>
+                        <div style="margin-top: 24px;">
+                            <img src="./assets/images/payment-methods.png" alt="Accepted Payment Methods" style="max-width: 100%; height: auto; opacity: 0.9;">
                         </div>
                     </div>
                     <div class="footer-col">
@@ -2969,6 +3093,41 @@
     </style>
 
     <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        // Load saved theme on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'light') {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        });
+
         // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
