@@ -55,6 +55,12 @@ services:
       - "traefik.http.routers.crm.tls=true"
       - "traefik.http.routers.crm.tls.certresolver=letsencrypt"
       - "traefik.http.services.crm.loadbalancer.server.port=3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
     deploy:
       resources:
         limits:
