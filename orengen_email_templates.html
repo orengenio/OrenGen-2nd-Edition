@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrenGen Email Templates</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f5f5f5;
+            color: #2c2c2c;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .template-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .template-header {
+            background: linear-gradient(135deg, #1E9BD8, #D2691E);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .template-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .template-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 40px;
+        }
+        
+        .email-template {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .email-template:hover {
+            border-color: #1E9BD8;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(30, 155, 216, 0.15);
+        }
+        
+        .template-preview {
+            padding: 20px;
+            background: white;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .template-info {
+            padding: 20px;
+            background: #fafafa;
+        }
+        
+        .template-title {
+            font-size: 1.3em;
+            color: #1E9BD8;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .template-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        
+        .template-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .template-features li {
+            font-size: 0.8em;
+            color: #D2691E;
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .template-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* Email Template Styles */
+        .email-container {
+            max-width: 300px;
+            margin: 0 auto;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .email-header {
+            background: linear-gradient(135deg, #1E9BD8, #4FC3F7);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .email-logo {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto 8px;
+            position: relative;
+        }
+        
+        .email-circle-segment {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+        }
+        
+        .email-circle-blue {
+            border-top-color: white;
+            border-left-color: white;
+            border-bottom-color: white;
+            transform: rotate(-45deg);
+        }
+        
+        .email-circle-orange {
+            border-top-color: #D2691E;
+            border-right-color: #D2691E;
+            border-bottom-color: #D2691E;
+            transform: rotate(135deg);
+        }
+        
+        .email-company-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .email-tagline {
+            font-size: 8px;
+            opacity: 0.9;
+        }
+        
+        .email-content {
+            padding: 15px;
+            background: white;
+        }
+        
+        .email-subject {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 10px;
+        }
+        
+        .email-body {
+            color: #2c2c2c;
+            margin-bottom: 15px;
+        }
+        
+        .email-cta {
+            background: linear-gradient(135deg, #D2691E, #FF8A50);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .email-footer {
+            background: #f8f8f8;
+            padding: 10px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        /* Newsletter Template */
+        .newsletter-header {
+            background: linear-gradient(135deg, #D2691E, #FF8A50);
+        }
+        
+        .newsletter-content {
+            padding: 15px;
+        }
+        
+        .news-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 5px;
+        }
+        
+        .news-excerpt {
+            font-size: 10px;
+            color: #666;
+        }
+        
+        /* Product Launch Template */
+        .product-hero {
+            background: linear-gradient(135deg, rgba(30, 155, 216, 0.1), rgba(210, 105, 30, 0.1));
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #1E9BD8;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 5px;
+        }
+        
+        .product-description {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        
+        .feature-list li {
+            font-size: 10px;
+            color: #2c2c2c;
+            margin-bottom: 5px;
+            padding-left: 12px;
+            position: relative;
+        }
+        
+        .feature-list li::before {
+            content: "🚀";
+            position: absolute;
+            left: 0;
+            font-size: 8px;
+        }
+        
+        /* Welcome Series Template */
+        .welcome-banner {
+            background: linear-gradient(135deg, #1E9BD8, #D2691E);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .welcome-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .step-item {
+            background: rgba(30, 155, 216, 0.05);
+            border: 1px solid rgba(30, 155, 216, 0.2);
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .step-number {
+            background: #D2691E;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .step-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 3px;
+        }
+        
+        .step-description {
+            font-size: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="template-container">
+        <div class="template-header">
+            <h1>OrenGen Email Templates</h1>
+            <p>Professional email marketing templates with your exact branding</p>
+        </div>
+        
+        <div class="templates-grid">
+            <!-- Sales Email Template -->
+            <div class="email-template">
+                <div class="template-preview">
+                    <div class="email-container">
+                        <div class="email-header">
+                            <div class="email-logo">
+                                <div class="email-circle-segment email-circle-blue"></div>
+                                <div class="email-circle-segment email-circle-orange"></div>
+                            </div>
+                            <div class="email-company-name">ORENGEN.iO</div>
+                            <div class="email-tagline">BUILT TO DISRUPT. DESIGNED TO DELIVER.</div>
+                        </div>
+                        <div class="email-content">
+                            <div class="email-subject">Transform Your Business with AI</div>
+                            <div class="email-body">
+                                Hi [Name],<br><br>
+                                Ready to automate 85% of your customer service? Our AI Virtual Employees are helping companies like yours save $2.4M annually.<br><br>
+                                ✅ 24/7 customer support<br>
+                                ✅ 98% accuracy rate<br>
+                                ✅ 60% cost reduction
+                            </div>
+                            <a href="#" class="email-cta">Schedule Free Demo</a>
+                        </div>
+                        <div class="email-footer">
+                            OrenGen Worldwide LLC | hello@orengen.io<br>
+                            Unsubscribe | Privacy Policy
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">AI Sales Outreach</h3>
+                    <p class="template-description">Convert prospects with AI-focused value propositions and clear CTAs.</p>
+                    <ul class="template-features">
+                        <li>Personalization tokens</li>
+                        <li>Benefit-focused messaging</li>
+                        <li>Strong CTA placement</li>
+                        <li>Mobile-optimized</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Newsletter Template -->
+            <div class="email-template">
+                <div class="template-preview">
+                    <div class="email-container">
+                        <div class="email-header newsletter-header">
+                            <div class="email-logo">
+                                <div class="email-circle-segment email-circle-blue"></div>
+                                <div class="email-circle-segment email-circle-orange"></div>
+                            </div>
+                            <div class="email-company-name">AI Innovation Weekly</div>
+                            <div class="email-tagline">Your Weekly AI Business Update</div>
+                        </div>
+                        <div class="newsletter-content">
+                            <div class="news-item">
+                                <div class="news-title">🤖 New AI Agent Features Released</div>
+                                <div class="news-excerpt">Enhanced natural language processing now supports 12 additional languages...</div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-title">📊 Case Study: 300% ROI in 6 Months</div>
+                                <div class="news-excerpt">Manufacturing client achieves remarkable results with our automation platform...</div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-title">🏛️ Government Solutions Update</div>
+                                <div class="news-excerpt">New FedRAMP compliance features now available for all enterprise clients...</div>
+                            </div>
+                        </div>
+                        <div class="email-footer">
+                            OrenGen Worldwide LLC | orengen.io<br>
+                            © 2025 All rights reserved
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">AI Newsletter</h3>
+                    <p class="template-description">Keep clients informed about AI innovations and company updates.</p>
+                    <ul class="template-features">
+                        <li>News sections layout</li>
+                        <li>Engaging headlines</li>
+                        <li>Industry insights</li>
+                        <li>Client success stories</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Product Launch Template -->
+            <div class="email-template">
+                <div class="template-preview">
+                    <div class="email-container">
+                        <div class="email-header">
+                            <div class="email-logo">
+                                <div class="email-circle-segment email-circle-blue"></div>
+                                <div class="email-circle-segment email-circle-orange"></div>
+                            </div>
+                            <div class="email-company-name">ORENGEN.iO</div>
+                            <div class="email-tagline">INNOVATION LAUNCH</div>
+                        </div>
+                        <div class="email-content">
+                            <div class="product-hero">
+                                <div class="product-name">AI Agent 3.0</div>
+                                <div class="product-description">Next-generation virtual employees with advanced reasoning capabilities</div>
+                            </div>
+                            <ul class="feature-list">
+                                <li>Advanced conversation memory</li>
+                                <li>Complex task automation</li>
+                                <li>Real-time learning</li>
+                                <li>Enterprise security</li>
+                            </ul>
+                            <a href="#" class="email-cta">Early Access</a>
+                        </div>
+                        <div class="email-footer">
+                            Limited time offer • Terms apply<br>
+                            OrenGen Worldwide LLC
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Product Launch</h3>
+                    <p class="template-description">Announce new AI solutions with excitement and clear value props.</p>
+                    <ul class="template-features">
+                        <li>Product spotlight design</li>
+                        <li>Feature highlighting</li>
+                        <li>Launch urgency</li>
+                        <li>Early access CTA</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Welcome Series Template -->
+            <div class="email-template">
+                <div class="template-preview">
+                    <div class="email-container">
+                        <div class="welcome-banner">
+                            <div class="welcome-title">Welcome to OrenGen!</div>
+                            <div style="font-size: 10px; opacity: 0.9;">Let's get you started with AI automation</div>
+                        </div>
+                        <div class="email-content">
+                            <div class="step-item">
+                                <span class="step-number">1</span>
+                                <div style="display: inline-block; vertical-align: top; width: calc(100% - 30px);">
+                                    <div class="step-title">Complete Your Profile</div>
+                                    <div class="step-description">Help us customize your AI solutions</div>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">2</span>
+                                <div style="display: inline-block; vertical-align: top; width: calc(100% - 30px);">
+                                    <div class="step-title">Schedule Discovery Call</div>
+                                    <div class="step-description">30-minute consultation with our AI experts</div>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-number">3</span>
+                                <div style="display: inline-block; vertical-align: top; width: calc(100% - 30px);">
+                                    <div class="step-title">Review Custom Proposal</div>
+                                    <div class="step-description">Tailored AI solution for your business</div>
+                                </div>
+                            </div>
+                            <a href="#" class="email-cta">Get Started</a>
+                        </div>
+                        <div class="email-footer">
+                            Questions? Reply to this email<br>
+                            OrenGen Worldwide LLC
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Welcome Series</h3>
+                    <p class="template-description">Onboard new prospects with clear next steps and value demonstration.</p>
+                    <ul class="template-features">
+                        <li>Step-by-step guidance</li>
+                        <li>Progress visualization</li>
+                        <li>Clear next actions</li>
+                        <li>Support accessibility</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Government Outreach Template -->
+            <div class="email-template">
+                <div class="template-preview">
+                    <div class="email-container">
+                        <div class="email-header" style="background: linear-gradient(135deg, #2c2c2c, #1E9BD8);">
+                            <div class="email-logo">
+                                <div class="email-circle-segment email-circle-blue"></div>
+                                <div class="email-circle-segment email-circle-orange"></div>
+                            </div>
+                            <div class="email-company-name">ORENGEN.iO</div>
+                            <div class="email-tagline">HUB CERTIFIED • GOVERNMENT READY</div>
+                        </div>
+                        <div class="email-content">
+                            <div class="email-subject">AI Solutions for Government Operations</div>
+                            <div class="email-body">
+                                Dear [Title] [Name],<br><br>
+                                As a HUB-certified minority business enterprise, OrenGen provides government-grade AI solutions that meet federal compliance standards.<br><br>
+                                🏛️ FedRAMP ready infrastructure<br>
+                                🔒 FISMA compliant security<br>
+                                📊 $2.4M annual cost savings<br>
+                                ⚡ 85% process automation
+                            </div>
+                            <a href="#" class="email-cta">Request Proposal</a>
+                        </div>
+                        <div class="email-footer">
+                            HUB Certified MBE | SAM.gov Registered<br>
+                            gov@orengen.io | orengen.io/government
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Government Outreach</h3>
+                    <p class="template-description">Professional government communication highlighting certifications and compliance.</p>
+                    <ul class="template-features">
+                        <li>Compliance emphasis</li>
+                        <li>Certification badges</li>
+                        <li>Federal messaging tone</li>
+                        <li>Security focus</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Follow-up Template -->
+            <div class="email-template">
+                <div class="template-preview">
+                    <div class="email-container">
+                        <div class="email-header" style="background: linear-gradient(135deg, #D2691E, #1E9BD8);">
+                            <div class="email-logo">
+                                <div class="email-circle-segment email-circle-blue"></div>
+                                <div class="email-circle-segment email-circle-orange"></div>
+                            </div>
+                            <div class="email-company-name">ORENGEN.iO</div>
+                            <div class="email-tagline">FOLLOWING UP ON YOUR AI JOURNEY</div>
+                        </div>
+                        <div class="email-content">
+                            <div class="email-subject">Still Interested in AI Automation?</div>
+                            <div class="email-body">
+                                Hi [Name],<br><br>
+                                I wanted to follow up on our AI automation discussion. Many companies are seeing incredible results:<br><br>
+                                • Manufacturing Co: 85% cost reduction<br>
+                                • Tech Startup: 300% efficiency gain<br>
+                                • Gov Agency: 24/7 citizen support<br><br>
+                                Ready to explore what's possible for [Company]?
+                            </div>
+                            <a href="#" class="email-cta">Book 15-Min Call</a>
+                        </div>
+                        <div class="email-footer">
+                            No obligation • Just insights<br>
+                            OrenGen Worldwide LLC
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Follow-up Sequence</h3>
+                    <p class="template-description">Re-engage prospects with social proof and low-pressure CTAs.</p>
+                    <ul class="template-features">
+                        <li>Social proof integration</li>
+                        <li>Personalization options</li>
+                        <li>Low-pressure approach</li>
+                        <li>Multiple CTA options</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

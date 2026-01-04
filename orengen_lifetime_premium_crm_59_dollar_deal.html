@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 SPECIAL OFFER: Premium Enterprise AI CRM - $59/Month for LIFE | OrenGen Worldwide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #FF0000, #CC5500, #0092E2);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(-20px) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(20px) rotate(360deg); }
+        }
+
+        /* Urgent header banner */
+        .urgent-banner {
+            background: linear-gradient(45deg, #FF0000, #FF4500);
+            text-align: center;
+            padding: 0.8rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .urgent-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.8); }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 40px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #0092E2;
+            margin-left: 1rem;
+            font-weight: 300;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10rem 2rem 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            z-index: 10;
+        }
+
+        .special-offer-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF0000, #FF4500);
+            border: 2px solid #FFD700;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            animation: glow 2s infinite alternate;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 0, 0, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 0, 0, 0.5); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #FFD700 0%, #FF4500 30%, #0092E2 70%, #CC5500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-comparison {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            backdrop-filter: blur(20px);
+        }
+
+        .original-price {
+            font-size: 2rem;
+            color: #FF4444;
+            text-decoration: line-through;
+            font-weight: 700;
+            opacity: 0.7;
+        }
+
+        .special-price {
+            font-size: 3.5rem;
+            color: #00FF00;
+            font-weight: 900;
+            margin: 0.5rem 0;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .lifetime-badge {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            color: #cccccc;
+            margin: 2rem auto;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .cta-button-mega {
+            display: inline-block;
+            background: linear-gradient(45deg, #FF4500, #FFD700, #FF4500);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            padding: 1.5rem 4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 900;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            border: 3px solid #FFD700;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cta-button-mega:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Timer section */
+        .countdown-section {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 69, 0, 0.1));
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 2px solid rgba(255, 215, 0, 0.5);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-width: 100px;
+        }
+
+        .time-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #FFD700;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            text-transform: uppercase;
+        }
+
+        /* Value proposition */
+        .value-prop {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .value-prop h2 {
+            text-align: center;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FFD700, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .savings-highlight {
+            text-align: center;
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(255, 215, 0, 0.1));
+            border: 2px solid rgba(0, 255, 0, 0.5);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+        }
+
+        .savings-amount {
+            font-size: 3rem;
+            color: #00FF00;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 215, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #FFD700, #FF4500);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.8);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #FFD700, #FF4500);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 69, 0, 0.05));
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #ffffff, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .testimonial-stars {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        /* Risk reversal */
+        .guarantee {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(255, 215, 0, 0.1));
+            border: 2px solid rgba(0, 255, 0, 0.5);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 4rem auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .guarantee-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .guarantee h3 {
+            font-size: 2rem;
+            color: #00FF00;
+            margin-bottom: 1rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 6rem 2rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 215, 0, 0.1));
+            border-radius: 30px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #FFD700, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .urgency-text {
+            color: #FF4444;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            color: #888888;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .countdown-timer {
+                gap: 1rem;
+            }
+            
+            .time-unit {
+                min-width: 80px;
+                padding: 1rem;
+            }
+            
+            .time-number {
+                font-size: 2rem;
+            }
+            
+            .cta-button-mega {
+                padding: 1.2rem 2.5rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Urgent Banner -->
+    <div class="urgent-banner">
+        🚨 EXCLUSIVE LIFETIME DEAL: Only 48 Hours Left! Premium Enterprise Plan - 76% OFF! 🚨
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particle" style="left: 5%; width: 6px; height: 6px; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 15%; width: 8px; height: 8px; animation-delay: 1s;"></div>
+        <div class="particle" style="left: 25%; width: 4px; height: 4px; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 35%; width: 7px; height: 7px; animation-delay: 3s;"></div>
+        <div class="particle" style="left: 45%; width: 5px; height: 5px; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 55%; width: 6px; height: 6px; animation-delay: 5s;"></div>
+        <div class="particle" style="left: 65%; width: 4px; height: 4px; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 75%; width: 8px; height: 8px; animation-delay: 7s;"></div>
+        <div class="particle" style="left: 85%; width: 5px; height: 5px; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 95%; width: 6px; height: 6px; animation-delay: 9s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div style="display: flex; align-items: center;">
+                <div class="logo">OrenGen</div>
+                <div class="tagline">Built To Disrupt. Designed To Deliver.</div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="special-offer-badge">⚡ EXCLUSIVE LIFETIME DEAL ⚡</div>
+            <h1>Premium Enterprise AI CRM</h1>
+            
+            <div class="price-comparison">
+                <div style="font-size: 1.2rem; color: #ccc; margin-bottom: 1rem;">Regular Price:</div>
+                <div class="original-price">$249.99/month</div>
+                <div style="font-size: 1.5rem; color: #FFD700; margin: 1rem 0; font-weight: 700;">YOUR EXCLUSIVE PRICE:</div>
+                <div class="special-price">$59/month</div>
+                <div class="lifetime-badge">🔒 LOCKED FOR LIFE!</div>
+            </div>
+
+            <p class="hero-description">
+                Get our complete Premium Enterprise AI CRM suite that normally costs $249.99/month 
+                for just $59/month - FOREVER! This is the same powerful platform used by Fortune 500 companies.
+            </p>
+            <a href="#" class="cta-button-mega">Claim Your Lifetime Deal Now</a>
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="countdown-section">
+        <h2 style="font-size: 2.5rem; color: #FF4444; margin-bottom: 1rem;">⏰ OFFER EXPIRES IN:</h2>
+        <div class="countdown-timer">
+            <div class="time-unit">
+                <span class="time-number" id="hours">47</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="minutes">23</span>
+                <span class="time-label">Minutes</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="seconds">45</span>
+                <span class="time-label">Seconds</span>
+            </div>
+        </div>
+        <p style="font-size: 1.2rem; color: #FF4444; font-weight: 700;">Don't lose this opportunity - only 97 spots remaining!</p>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="value-prop">
+        <h2>What You're Getting Today</h2>
+        
+        <div class="savings-highlight">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: #FFD700;">YOUR TOTAL SAVINGS:</h3>
+            <div class="savings-amount">$2,279.88</div>
+            <p style="font-size: 1.2rem; margin-top: 1rem; color: #ccc;">Per year compared to regular pricing!</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Virtual Employees</h3>
+                <p>Deploy unlimited AI call agents that handle sales, support, and customer service 24/7. Each agent can handle thousands of conversations simultaneously with human-like intelligence and personality.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📞</div>
+                <h3>Advanced Lead Capture</h3>
+                <p>Never miss another lead with our intelligent missed call text-back system, smart forms, and automated lead scoring. Convert 40% more prospects into paying customers.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Enterprise Website Builder</h3>
+                <p>Create unlimited high-converting websites with our AI-powered design engine. Includes advanced analytics, A/B testing, and conversion optimization tools worth $197/month alone.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3>Payment Processing Suite</h3>
+                <p>Accept payments globally with integrated Stripe, PayPal, and 50+ payment gateways. Includes subscription management, invoicing, and automated dunning management.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Omnichannel Communication</h3>
+                <p>Manage all customer conversations from one unified inbox: SMS, WhatsApp, Facebook, Instagram, Email, and live chat. Includes team collaboration and automated responses.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Advanced Automation Engine</h3>
+                <p>Build sophisticated workflows that handle appointment scheduling, follow-ups, review requests, and customer journeys. Save 20+ hours per week on manual tasks.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Enterprise Analytics Dashboard</h3>
+                <p>Get real-time insights with advanced reporting, conversion tracking, ROI analysis, and predictive analytics. Make data-driven decisions that grow your business faster.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Enterprise Security & Compliance</h3>
+                <p>Bank-level security with SOC 2 compliance, GDPR compliance, encrypted data storage, and white-label options for agencies. Perfect for government and enterprise clients.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>What Our Enterprise Clients Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"We replaced 6 different software tools with OrenGen's platform. The AI agents alone saved us $180k per year in customer service costs."</p>
+                <p class="testimonial-author">- Sarah Chen, CEO TechFlow Solutions</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Our conversion rates increased by 340% after implementing their AI CRM. The automation handles everything while we focus on strategy."</p>
+                <p class="testimonial-author">- Marcus Rodriguez, CMO Digital Dynamics</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"The lifetime deal paid for itself in the first month. We're saving $2,000+ monthly compared to our old software stack."</p>
+                <p class="testimonial-author">- Jennifer Walsh, Founder ScaleUp Inc</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee -->
+    <div class="guarantee">
+        <div class="guarantee-icon">🛡️</div>
+        <h3>100% Risk-Free Guarantee</h3>
+        <p style="font-size: 1.2rem; color: #ccc; line-height: 1.6;">
+            Try our Premium Enterprise CRM for 30 days. If you're not completely satisfied, 
+            we'll refund every penny. No questions asked. Plus, keep all the bonuses as our gift.
+        </p>
+    </div>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <h2>Last Chance!</h2>
+        <div class="urgency-text">⚠️ Only 97 Lifetime Spots Remaining ⚠️</div>
+        <p style="font-size: 1.3rem; color: #cccccc; margin-bottom: 3rem; line-height: 1.6;">
+            This exclusive pricing will NEVER be offered again. When the timer hits zero, 
+            this deal disappears forever and the price goes back to $249.99/month.
+        </p>
+        <a href="#" class="cta-button-mega">Secure My Lifetime Deal - $59/Month Forever</a>
+        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255,215,0,0.1); border-radius: 15px; border: 1px solid rgba(255,215,0,0.3);">
+            <p style="color: #FFD700; font-size: 1.1rem; font-weight: 700;">
+                ✅ Instant Access - Setup in 5 Minutes<br>
+                ✅ 30-Day Money-Back Guarantee<br>
+                ✅ Free Migration from Current CRM<br>
+                ✅ Dedicated Success Manager Included
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 OrenGen Worldwide LLC. All rights reserved.</p>
+            <p class="footer-tagline">Built To Disrupt. Designed To Deliver.</p>
+            <p style="color: #555; font-size: 0.9rem; margin-top: 1rem;">
+                Hub Certified Minority Business | Secure Payment Processing | Enterprise-Grade Security
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown timer functionality
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const countdownDate = now + (47 * 60 * 60 * 1000) + (23 * 60 * 1000) + (45 * 1000); // 47h 23m 45s from now
+            
+            const interval = setInterval(function() {
+                const currentTime = new Date().getTime();
+                const distance = countdownDate - currentTime;
+                
+                const hours = Math.floor(distance / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+                
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById("hours").innerHTML = "00";
+                    document.getElementById("minutes").innerHTML = "00";
+                    document.getElementById("seconds").innerHTML = "00";
+                }
+            }, 1000);
+        }
+        
+        updateCountdown();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.98)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            }
+        });
+
+        // Entrance animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Add click tracking (replace with your actual tracking)
+        document.querySelectorAll('.cta-button-mega').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Add your conversion tracking here
+                console.log('CTA clicked - Lifetime Deal');
+                // Example: gtag('event', 'purchase', { value: 59 });
+            });
+        });
+    </script>
+</body>
+</html>

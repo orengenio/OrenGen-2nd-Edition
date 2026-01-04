@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrenGen AI Services Pricing</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #2c2c2c;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 11in;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid #1E9BD8;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+        
+        .circle-segment {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 8px solid transparent;
+        }
+        
+        .circle-blue {
+            border-top-color: #1E9BD8;
+            border-left-color: #1E9BD8;
+            border-bottom-color: #1E9BD8;
+            transform: rotate(-45deg);
+        }
+        
+        .circle-orange {
+            border-top-color: #D2691E;
+            border-right-color: #D2691E;
+            border-bottom-color: #D2691E;
+            transform: rotate(135deg);
+        }
+        
+        .company-info h1 {
+            font-size: 2.2em;
+            color: #1E9BD8;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .company-info .tagline {
+            font-size: 0.9em;
+            color: #D2691E;
+            font-weight: bold;
+        }
+        
+        .pricing-badge {
+            background: linear-gradient(135deg, #D2691E, #FF8A50);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .pricing-badge .large {
+            font-size: 1.2em;
+            display: block;
+        }
+        
+        .pricing-badge .small {
+            font-size: 0.8em;
+            opacity: 0.9;
+        }
+        
+        /* Title Section */
+        .title-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(30, 155, 216, 0.05), rgba(210, 105, 30, 0.05));
+            border-radius: 15px;
+            border: 1px solid rgba(30, 155, 216, 0.2);
+        }
+        
+        .title-section h2 {
+            font-size: 2.5em;
+            color: #1E9BD8;
+            margin-bottom: 15px;
+        }
+        
+        .title-section p {
+            font-size: 1.1em;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .service-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:nth-child(odd) {
+            border-color: rgba(30, 155, 216, 0.3);
+        }
+        
+        .service-card:nth-child(even) {
+            border-color: rgba(210, 105, 30, 0.3);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1E9BD8, #4FC3F7);
+        }
+        
+        .service-card:nth-child(even)::before {
+            background: linear-gradient(90deg, #D2691E, #FF8A50);
+        }
+        
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+            color: white;
+        }
+        
+        .service-card:nth-child(odd) .service-icon {
+            background: linear-gradient(135deg, #1E9BD8, #4FC3F7);
+        }
+        
+        .service-card:nth-child(even) .service-icon {
+            background: linear-gradient(135deg, #D2691E, #FF8A50);
+        }
+        
+        .service-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #1E9BD8;
+        }
+        
+        .service-card:nth-child(even) .service-title {
+            color: #D2691E;
+        }
+        
+        .service-description {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95em;
+        }
+        
+        .pricing-tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-tier {
+            background: rgba(248, 249, 250, 0.8);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-tier:hover {
+            background: rgba(30, 155, 216, 0.05);
+            border-color: #1E9BD8;
+        }
+        
+        .tier-name {
+            font-size: 0.8em;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .tier-price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 5px;
+        }
+        
+        .service-card:nth-child(even) .tier-price {
+            color: #D2691E;
+        }
+        
+        .tier-period {
+            font-size: 0.7em;
+            color: #999;
+        }
+        
+        .tier-feature {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .service-features li {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .service-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #1E9BD8;
+            font-weight: bold;
+        }
+        
+        .service-card:nth-child(even) .service-features li::before {
+            color: #D2691E;
+        }
+        
+        .service-cta {
+            background: linear-gradient(135deg, #1E9BD8, #4FC3F7);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .service-card:nth-child(even) .service-cta {
+            background: linear-gradient(135deg, #D2691E, #FF8A50);
+        }
+        
+        .service-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 155, 216, 0.3);
+        }
+        
+        /* Enterprise Section */
+        .enterprise-section {
+            background: linear-gradient(135deg, rgba(30, 155, 216, 0.1), rgba(210, 105, 30, 0.1));
+            border: 2px solid #1E9BD8;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .enterprise-title {
+            font-size: 2em;
+            color: #1E9BD8;
+            margin-bottom: 15px;
+        }
+        
+        .enterprise-subtitle {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .enterprise-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .enterprise-feature {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(30, 155, 216, 0.2);
+        }
+        
+        .enterprise-feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .enterprise-feature-title {
+            font-size: 1em;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 8px;
+        }
+        
+        .enterprise-feature-desc {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        .enterprise-cta {
+            background: linear-gradient(135deg, #D2691E, #FF8A50);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .enterprise-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(210, 105, 30, 0.3);
+        }
+        
+        /* Terms Section */
+        .terms-section {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .terms-title {
+            font-size: 1.3em;
+            color: #1E9BD8;
+            margin-bottom: 15px;
+        }
+        
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .terms-item {
+            font-size: 0.9em;
+            color: #555;
+        }
+        
+        .terms-item strong {
+            color: #D2691E;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: rgba(30, 155, 216, 0.05);
+            border: 1px solid rgba(30, 155, 216, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .contact-title {
+            font-size: 1.5em;
+            color: #1E9BD8;
+            margin-bottom: 15px;
+        }
+        
+        .contact-subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .contact-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(30, 155, 216, 0.2);
+        }
+        
+        .contact-label {
+            font-size: 0.8em;
+            color: #D2691E;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .contact-value {
+            font-size: 1.1em;
+            color: #1E9BD8;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-section">
+                <div class="logo-circle">
+                    <div class="circle-segment circle-blue"></div>
+                    <div class="circle-segment circle-orange"></div>
+                </div>
+                <div class="company-info">
+                    <h1>ORENGEN.iO</h1>
+                    <p class="tagline">BUILT TO DISRUPT. DESIGNED TO DELIVER.</p>
+                </div>
+            </div>
+            <div class="pricing-badge">
+                <span class="large">2025 PRICING</span>
+                <span class="small">AI Services & Solutions</span>
+            </div>
+        </header>
+        
+        <div class="title-section">
+            <h2>AI Services Pricing</h2>
+            <p>Transparent pricing for enterprise-grade AI solutions that automate your business operations and drive measurable results.</p>
+        </div>
+        
+        <div class="services-grid">
+            <!-- AI Virtual Employees -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">🤖</div>
+                    <div class="service-title">AI Virtual Employees</div>
+                </div>
+                <p class="service-description">
+                    Intelligent AI agents that handle customer service, sales calls, and support operations 24/7 with human-like conversation capabilities.
+                </p>
+                
+                <div class="pricing-tiers">
+                    <div class="pricing-tier">
+                        <div class="tier-name">Starter</div>
+                        <div class="tier-price">$2,500</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">Up to 1,000 conversations</div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="tier-name">Growth</div>
+                        <div class="tier-price">$7,500</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">Up to 5,000 conversations</div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="tier-name">Scale</div>
+                        <div class="tier-price">$15,000</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">Unlimited conversations</div>
+                    </div>
+                </div>
+                
+                <ul class="service-features">
+                    <li>Multi-channel support (phone, chat, email)</li>
+                    <li>Natural language processing</li>
+                    <li>CRM integration included</li>
+                    <li>Real-time analytics dashboard</li>
+                    <li>24/7 monitoring & support</li>
+                </ul>
+                
+                <button class="service-cta">Start Free Trial</button>
+            </div>
+            
+            <!-- Email Systems -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">📧</div>
+                    <div class="service-title">Enterprise Email Systems</div>
+                </div>
+                <p class="service-description">
+                    High-deliverability email infrastructure that safely reaches millions of inboxes with advanced security and compliance features.
+                </p>
+                
+                <div class="pricing-tiers">
+                    <div class="pricing-tier">
+                        <div class="tier-name">Professional</div>
+                        <div class="tier-price">$1,200</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">100K emails/month</div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="tier-name">Business</div>
+                        <div class="tier-price">$3,500</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">500K emails/month</div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="tier-name">Enterprise</div>
+                        <div class="tier-price">$8,500</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">Unlimited volume</div>
+                    </div>
+                </div>
+                
+                <ul class="service-features">
+                    <li>99.9% deliverability guarantee</li>
+                    <li>Advanced spam protection</li>
+                    <li>Real-time delivery tracking</li>
+                    <li>A/B testing & optimization</li>
+                    <li>GDPR & CAN-SPAM compliance</li>
+                </ul>
+                
+                <button class="service-cta">Get Quote</button>
+            </div>
+            
+            <!-- Smart Automation -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">⚡</div>
+                    <div class="service-title">Smart Automation Platform</div>
+                </div>
+                <p class="service-description">
+                    Comprehensive automation suite for marketing, lead management, and operational workflows with AI-powered optimization.
+                </p>
+                
+                <div class="pricing-tiers">
+                    <div class="pricing-tier">
+                        <div class="tier-name">Essential</div>
+                        <div class="tier-price">$1,800</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">10 automated workflows</div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="tier-name">Advanced</div>
+                        <div class="tier-price">$4,200</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">50 automated workflows</div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="tier-name">Premium</div>
+                        <div class="tier-price">$9,500</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">Unlimited workflows</div>
+                    </div>
+                </div>
+                
+                <ul class="service-features">
+                    <li>Visual workflow builder</li>
+                    <li>Lead scoring & nurturing</li>
+                    <li>Multi-channel campaigns</li>
+                    <li>Advanced analytics</li>
+                    <li>API integrations</li>
+                </ul>
+                
+                <button class="service-cta">Schedule Demo</button>
+            </div>
+            
+            <!-- Government Solutions -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">🏛️</div>
+                    <div class="service-title">Government Solutions</div>
+                </div>
+                <p class="service-description">
+                    Secure, compliant AI solutions designed for government operations with FedRAMP readiness and mission-critical reliability.
+                </p>
+                
+                <div class="pricing-tiers">
+                    <div class="pricing-tier">
+                        <div class="tier-name">Agency</div>
+                        <div class="tier-price">$15,000</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">Single department</div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="tier-name">Multi-Agency</div>
+                        <div class="tier-price">$35,000</div>
+                        <div class="tier-period">per month</div>
+                        <div class="tier-feature">Multiple departments</div>
+                    </div>
+                    <div class="pricing-tier">
+                        <div class="tier-name">Federal</div>
+                        <div class="tier-price">Custom</div>
+                        <div class="tier-period">pricing</div>
+                        <div class="tier-feature">Enterprise scale</div>
+                    </div>
+                </div>
+                
+                <ul class="service-features">
+                    <li>FedRAMP compliance ready</li>
+                    <li>FISMA security standards</li>
+                    <li>On-premise deployment options</li>
+                    <li>Dedicated support team</li>
+                    <li>Custom security auditing</li>
+                </ul>
+                
+                <button class="service-cta">Request Proposal</button>
+            </div>
+        </div>
+        
+        <div class="enterprise-section">
+            <h3 class="enterprise-title">🚀 Enterprise & Custom Solutions</h3>
+            <p class="enterprise-subtitle">Tailored AI solutions for large organizations with specific requirements and advanced integration needs.</p>
+            
+            <div class="enterprise-features">
+                <div class="enterprise-feature">
+                    <div class="enterprise-feature-icon">🔧</div>
+                    <div class="enterprise-feature-title">Custom Development</div>
+                    <div class="enterprise-feature-desc">Bespoke AI solutions built for your unique business requirements</div>
+                </div>
+                <div class="enterprise-feature">
+                    <div class="enterprise-feature-icon">🔒</div>
+                    <div class="enterprise-feature-title">Advanced Security</div>
+                    <div class="enterprise-feature-desc">Enterprise-grade security with custom compliance requirements</div>
+                </div>
+                <div class="enterprise-feature">
+                    <div class="enterprise-feature-icon">🎯</div>
+                    <div class="enterprise-feature-title">Dedicated Support</div>
+                    <div class="enterprise-feature-desc">24/7 dedicated account management and technical support</div>
+                </div>
+                <div class="enterprise-feature">
+                    <div class="enterprise-feature-icon">📈</div>
+                    <div class="enterprise-feature-title">Unlimited Scale</div>
+                    <div class="enterprise-feature-desc">No limits on usage, users, or deployment complexity</div>
+                </div>
+            </div>
+            
+            <button class="enterprise-cta">Discuss Enterprise Needs</button>
+        </div>
+        
+        <div class="terms-section">
+            <h4 class="terms-title">📋 Terms & Implementation</h4>
+            <div class="terms-grid">
+                <div class="terms-item">
+                    <strong>Setup & Onboarding:</strong> All plans include complete setup, training, and onboarding at no additional cost.
+                </div>
+                <div class="terms-item">
+                    <strong>Contract Terms:</strong> Flexible month-to-month or annual contracts available with volume discounts.
+                </div>
+                <div class="terms-item">
+                    <strong>Implementation Timeline:</strong> Standard deployment within 2-4 weeks, custom solutions 6-12 weeks.
+                </div>
+                <div class="terms-item">
+                    <strong>Support Included:</strong> All plans include 24/7 technical support and regular system updates.
+                </div>
+                <div class="terms-item">
+                    <strong>Data Security:</strong> SOC 2 Type II certified with enterprise-grade encryption and backup.
+                </div>
+                <div class="terms-item">
+                    <strong>Money-Back Guarantee:</strong> 30-day satisfaction guarantee on all new implementations.
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <h4 class="contact-title">Ready to Get Started?</h4>
+            <p class="contact-subtitle">Our AI specialists are ready to help you choose the perfect solution for your business needs.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-label">Sales Team</div>
+                    <div class="contact-value">hello@orengen.io</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Phone Consultation</div>
+                    <div class="contact-value">Schedule Call</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label">Website</div>
+                    <div class="contact-value">orengen.io</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

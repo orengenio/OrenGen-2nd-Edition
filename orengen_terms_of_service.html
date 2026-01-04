@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - OrenGen Worldwide | Built To Disrupt. Designed To Deliver.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(-10px) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(10px) rotate(360deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://orengen.io/wp-content/uploads/2025/07/OrenGen-Hero-Image-1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            width: 100%;
+            z-index: 10;
+            padding: 0 1rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(0, 146, 226, 0.2), rgba(204, 85, 0, 0.2));
+            border: 1px solid rgba(0, 146, 226, 0.5);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+            font-weight: 600;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 146, 226, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 146, 226, 0.6); }
+        }
+
+        .terms-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            text-align: left;
+            max-width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 146, 226, 0.1);
+        }
+
+        .effective-date {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #0092E2;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .terms-intro {
+            font-size: 1.1rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.1) 0%, rgba(204, 85, 0, 0.1) 100%);
+            border: 1px solid rgba(0, 146, 226, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #CC5500;
+            margin: 2rem 0 1rem 0;
+            font-weight: 700;
+            background: linear-gradient(45deg, #CC5500, #0092E2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            color: #0092E2;
+            margin: 1.5rem 0 0.75rem 0;
+            font-weight: 600;
+        }
+
+        .content-text {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.1) 0%, rgba(204, 85, 0, 0.1) 100%);
+            border: 1px solid rgba(0, 146, 226, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(204, 85, 0, 0.15) 0%, rgba(204, 85, 0, 0.05) 100%);
+            border: 1px solid rgba(204, 85, 0, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-title {
+            color: #CC5500;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .ai-box {
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.15) 0%, rgba(0, 146, 226, 0.05) 100%);
+            border: 1px solid rgba(0, 146, 226, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .ai-title {
+            color: #0092E2;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .service-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .service-list li::before {
+            content: '🤖';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .rights-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .rights-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .rights-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #0092E2;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .prohibited-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .prohibited-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .prohibited-list li::before {
+            content: '🚫';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .legal-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .legal-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .legal-list li::before {
+            content: '⚖️';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .liability-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .liability-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .liability-list li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .legal-reference {
+            color: #0092E2;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, rgba(204, 85, 0, 0.1) 0%, rgba(0, 146, 226, 0.1) 100%);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            color: #CC5500;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-email {
+            color: #0092E2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .contact-email:hover {
+            color: #CC5500;
+            transition: color 0.3s ease;
+        }
+
+        .acceptance-box {
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.2) 0%, rgba(204, 85, 0, 0.2) 100%);
+            border: 2px solid rgba(0, 146, 226, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(0, 146, 226, 0.5); }
+            to { box-shadow: 0 0 40px rgba(0, 146, 226, 0.8); }
+        }
+
+        .table-of-contents {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .toc-title {
+            color: #0092E2;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+            color: #cccccc;
+            break-inside: avoid;
+        }
+
+        .toc-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #CC5500;
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 1rem 0.5rem;
+                min-height: auto;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            .hero-content {
+                padding: 0 0.5rem;
+            }
+            
+            .terms-container {
+                padding: 1.5rem 1rem;
+                margin: 0 0.5rem;
+            }
+            
+            .hero-badge {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .effective-date {
+                font-size: 1rem;
+            }
+            
+            .terms-intro {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+                margin: 1.5rem 0 0.75rem 0;
+            }
+            
+            .subsection-title {
+                font-size: 1.1rem;
+            }
+            
+            .content-text {
+                font-size: 0.95rem;
+            }
+            
+            .ai-title {
+                font-size: 1.1rem;
+            }
+            
+            .highlight-box, .warning-box, .ai-box, .acceptance-box, .table-of-contents {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .contact-info {
+                padding: 1rem;
+            }
+            
+            .contact-info h3 {
+                font-size: 1.1rem;
+            }
+            
+            .contact-email {
+                font-size: 1rem;
+            }
+            
+            .toc-list {
+                columns: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 1rem 0.25rem;
+            }
+            
+            .terms-container {
+                padding: 1rem 0.75rem;
+                margin: 0 0.25rem;
+                border-radius: 15px;
+            }
+            
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .effective-date {
+                font-size: 0.9rem;
+            }
+            
+            .terms-intro {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+                padding: 0.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+            }
+            
+            .subsection-title {
+                font-size: 1rem;
+            }
+            
+            .content-text {
+                font-size: 0.9rem;
+            }
+            
+            .service-list li, .rights-list li, .prohibited-list li, .legal-list li, .liability-list li {
+                font-size: 0.9rem;
+                margin-bottom: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particle" style="left: 5%; width: 3px; height: 3px; animation-delay: 0s; animation-duration: 25s;"></div>
+        <div class="particle" style="left: 15%; width: 5px; height: 5px; animation-delay: 3s; animation-duration: 20s;"></div>
+        <div class="particle" style="left: 25%; width: 4px; height: 4px; animation-delay: 6s; animation-duration: 22s;"></div>
+        <div class="particle" style="left: 35%; width: 6px; height: 6px; animation-delay: 9s; animation-duration: 18s;"></div>
+        <div class="particle" style="left: 45%; width: 3px; height: 3px; animation-delay: 12s; animation-duration: 24s;"></div>
+        <div class="particle" style="left: 55%; width: 5px; height: 5px; animation-delay: 15s; animation-duration: 19s;"></div>
+        <div class="particle" style="left: 65%; width: 4px; height: 4px; animation-delay: 18s; animation-duration: 21s;"></div>
+        <div class="particle" style="left: 75%; width: 6px; height: 6px; animation-delay: 21s; animation-duration: 17s;"></div>
+        <div class="particle" style="left: 85%; width: 3px; height: 3px; animation-delay: 24s; animation-duration: 23s;"></div>
+        <div class="particle" style="left: 95%; width: 5px; height: 5px; animation-delay: 27s; animation-duration: 20s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">📄 TERMS OF SERVICE</div>
+            
+            <div class="terms-container">
+                <div class="effective-date">Effective Date: January 1, 2025</div>
+                
+                <div class="terms-intro">
+                    <strong>Welcome to OrenGen Worldwide LLC.</strong> These Terms of Service govern your use of our AI-powered digital solutions and services. By accessing or using any OrenGen service, you agree to be bound by these terms.
+                </div>
+
+                <div class="table-of-contents">
+                    <div class="toc-title">📋 Table of Contents</div>
+                    <ul class="toc-list">
+                        <li>Acceptance of Terms</li>
+                        <li>Service Description</li>
+                        <li>AI Communications Policy</li>
+                        <li>User Account & Registration</li>
+                        <li>Acceptable Use Policy</li>
+                        <li>Payment Terms</li>
+                        <li>Intellectual Property Rights</li>
+                        <li>Privacy & Data Protection</li>
+                        <li>Service Availability</li>
+                        <li>Limitation of Liability</li>
+                        <li>Indemnification</li>
+                        <li>Termination</li>
+                        <li>Dispute Resolution</li>
+                        <li>Governing Law</li>
+                        <li>Changes to Terms</li>
+                        <li>Contact Information</li>
+                    </ul>
+                </div>
+
+                <h2 class="section-title">1. Acceptance of Terms</h2>
+                
+                <div class="acceptance-box">
+                    By using any OrenGen service, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and all applicable laws and regulations.
+                </div>
+
+                <p class="content-text">Your continued use of our services constitutes acceptance of these terms and any future modifications. If you do not agree to these terms, you must immediately cease using all OrenGen services.</p>
+
+                <h2 class="section-title">2. Service Description</h2>
+                
+                <p class="content-text">OrenGen Worldwide LLC provides AI-powered digital solutions including:</p>
+                
+                <ul class="service-list">
+                    <li><strong>AI Infinite CRM:</strong> Customer relationship management platform</li>
+                    <li><strong>AI Agents & Chatbots:</strong> Intelligent virtual assistants and conversational AI</li>
+                    <li><strong>AI Call Center:</strong> Automated phone and communication systems</li>
+                    <li><strong>Bulk Email Validation:</strong> Email verification and list cleaning services</li>
+                    <li><strong>Marketing Automation:</strong> Automated marketing campaigns and workflows</li>
+                    <li><strong>Website Development:</strong> Custom web design and development services</li>
+                    <li><strong>SEO Services:</strong> Search engine optimization and digital marketing</li>
+                    <li><strong>SMTP Systems:</strong> Email delivery infrastructure and services</li>
+                    <li><strong>Digital Downloads:</strong> Software, templates, and digital products</li>
+                    <li><strong>Consulting Services:</strong> AI strategy and technology consulting</li>
+                    <li><strong>Custom AI Development:</strong> Bespoke artificial intelligence solutions</li>
+                </ul>
+
+                <h2 class="section-title">3. AI Communications Policy</h2>
+                
+                <div class="ai-box">
+                    <div class="ai-title">🤖 100% AI-Powered Communications</div>
+                    <p class="content-text">All communications from OrenGen Worldwide are powered by artificial intelligence systems. By using our services, you automatically consent to receive AI-generated communications including:</p>
+                    <ul class="service-list">
+                        <li>Customer support responses and assistance</li>
+                        <li>Sales and marketing communications</li>
+                        <li>Service notifications and updates</li>
+                        <li>Account management communications</li>
+                        <li>Technical support and troubleshooting</li>
+                    </ul>
+                    <p class="content-text">You may opt out of AI communications at any time by contacting <a href="mailto:support@orengen.io" class="contact-email">support@orengen.io</a>.</p>
+                </div>
+
+                <h2 class="section-title">4. User Account & Registration</h2>
+                
+                <h3 class="subsection-title">Account Requirements</h3>
+                <ul class="rights-list">
+                    <li>You must be at least 18 years old to create an account</li>
+                    <li>You must provide accurate and complete registration information</li>
+                    <li>You are responsible for maintaining account security and confidentiality</li>
+                    <li>One person or entity per account (no sharing accounts)</li>
+                    <li>You must notify us immediately of any unauthorized use</li>
+                </ul>
+
+                <h3 class="subsection-title">Account Verification</h3>
+                <p class="content-text">OrenGen reserves the right to verify account information and may require additional documentation for:</p>
+                <ul class="rights-list">
+                    <li>Business verification and compliance</li>
+                    <li>Payment method validation</li>
+                    <li>Identity confirmation for high-value services</li>
+                    <li>Regulatory compliance requirements</li>
+                </ul>
+
+                <h2 class="section-title">5. Acceptable Use Policy</h2>
+                
+                <h3 class="subsection-title">Permitted Uses</h3>
+                <ul class="rights-list">
+                    <li>Commercial use for legitimate business purposes</li>
+                    <li>Educational and research applications</li>
+                    <li>Personal use in accordance with service limitations</li>
+                    <li>Integration with third-party platforms and systems</li>
+                </ul>
+
+                <h3 class="subsection-title">Prohibited Activities</h3>
+                <div class="warning-box">
+                    <div class="warning-title">Strictly Prohibited:</div>
+                    <ul class="prohibited-list">
+                        <li>Illegal activities, fraud, or deceptive practices</li>
+                        <li>Spam, unsolicited communications, or email abuse</li>
+                        <li>Hacking, reverse engineering, or system exploitation</li>
+                        <li>Distributing malware, viruses, or harmful code</li>
+                        <li>Violating intellectual property rights</li>
+                        <li>Harassment, hate speech, or discriminatory content</li>
+                        <li>Adult content, gambling, or illegal substances</li>
+                        <li>Cryptocurrency mining or blockchain abuse</li>
+                        <li>Competing services or benchmarking without permission</li>
+                        <li>Reselling or redistributing services without authorization</li>
+                    </ul>
+                </div>
+
+                <h2 class="section-title">6. Payment Terms</h2>
+                
+                <h3 class="subsection-title">Billing and Payments</h3>
+                <ul class="rights-list">
+                    <li><strong>Payment Due:</strong> All fees are due in advance</li>
+                    <li><strong>Auto-Renewal:</strong> Subscriptions automatically renew unless cancelled</li>
+                    <li><strong>Payment Methods:</strong> Credit cards, PayPal, bank transfers, cryptocurrency</li>
+                    <li><strong>Currency:</strong> All prices in USD unless otherwise specified</li>
+                    <li><strong>Taxes:</strong> Customer responsible for applicable taxes and fees</li>
+                </ul>
+
+                <h3 class="subsection-title">No Refund Policy</h3>
+                <div class="warning-box">
+                    <div class="warning-title">Important:</div>
+                    <p class="content-text">All sales are final. OrenGen does not offer refunds except where legally required under applicable rights of rescission. See our <span class="legal-reference">No Refund Policy</span> for complete details.</p>
+                </div>
+
+                <h3 class="subsection-title">Overdue Payments</h3>
+                <ul class="liability-list">
+                    <li>Late fees of 1.5% per month on overdue amounts</li>
+                    <li>Service suspension after 7 days past due</li>
+                    <li>Account termination after 30 days past due</li>
+                    <li>Collection actions and legal remedies</li>
+                </ul>
+
+                <h2 class="section-title">7. Intellectual Property Rights</h2>
+                
+                <h3 class="subsection-title">OrenGen Intellectual Property</h3>
+                <div class="highlight-box">
+                    <p class="content-text">All OrenGen services, content, and materials are protected by copyright, trademark, and other intellectual property laws:</p>
+                    <ul class="legal-list">
+                        <li>Software, algorithms, and AI systems</li>
+                        <li>Trademarks: "OrenGen," "When Digital Met AI," logos</li>
+                        <li>Website content, documentation, and materials</li>
+                        <li>Proprietary data, analytics, and insights</li>
+                        <li>Training data, models, and methodologies</li>
+                    </ul>
+                </div>
+
+                <h3 class="subsection-title">User Content License</h3>
+                <p class="content-text">By uploading content to OrenGen services, you grant us a non-exclusive, worldwide, royalty-free license to use, modify, and process your content solely for providing services to you.</p>
+
+                <h2 class="section-title">8. Privacy & Data Protection</h2>
+                
+                <p class="content-text">Your privacy is important to us. Our data practices are governed by our <span class="legal-reference">Privacy Policy</span>, which forms part of these Terms of Service.</p>
+
+                <h3 class="subsection-title">Data Processing</h3>
+                <ul class="rights-list">
+                    <li>We process data in accordance with applicable privacy laws</li>
+                    <li>AI systems may use anonymized data for improvements</li>
+                    <li>We implement enterprise-grade security measures</li>
+                    <li>Data retention policies apply to all stored information</li>
+                </ul>
+
+                <h2 class="section-title">9. Service Availability & Performance</h2>
+                
+                <h3 class="subsection-title">Service Level Commitment</h3>
+                <div class="highlight-box">
+                    <ul class="rights-list">
+                        <li><strong>Uptime Target:</strong> 99.9% monthly uptime (excluding maintenance)</li>
+                        <li><strong>Scheduled Maintenance:</strong> With 24-hour advance notice</li>
+                        <li><strong>Emergency Maintenance:</strong> As needed for security or stability</li>
+                        <li><strong>Support Response:</strong> 24-hour response time for subscribers</li>
+                    </ul>
+                </div>
+
+                <h3 class="subsection-title">Service Modifications</h3>
+                <p class="content-text">OrenGen reserves the right to modify, suspend, or discontinue services with reasonable notice, except in cases of emergency maintenance or security concerns.</p>
+
+                <h2 class="section-title">10. Limitation of Liability</h2>
+                
+                <div class="warning-box">
+                    <div class="warning-title">IMPORTANT LEGAL NOTICE:</div>
+                    <p class="content-text">TO THE MAXIMUM EXTENT PERMITTED BY LAW:</p>
+                    <ul class="liability-list">
+                        <li>OrenGen's total liability is limited to amounts paid in the 12 months prior to the claim</li>
+                        <li>We are not liable for indirect, incidental, or consequential damages</li>
+                        <li>We disclaim warranties except as required by law</li>
+                        <li>Services are provided "as is" and "as available"</li>
+                        <li>No liability for third-party integrations or services</li>
+                        <li>Business interruption, data loss, or profit loss not covered</li>
+                    </ul>
+                </div>
+
+                <h2 class="section-title">11. Indemnification</h2>
+                
+                <p class="content-text">You agree to indemnify and hold harmless OrenGen Worldwide LLC from any claims, damages, losses, or expenses arising from:</p>
+                <ul class="legal-list">
+                    <li>Your violation of these Terms of Service</li>
+                    <li>Your use of services in violation of applicable laws</li>
+                    <li>Content you submit or transmit through our services</li>
+                    <li>Your breach of third-party rights or agreements</li>
+                    <li>Any negligent or wrongful acts or omissions</li>
+                </ul>
+
+                <h2 class="section-title">12. Termination</h2>
+                
+                <h3 class="subsection-title">Termination by User</h3>
+                <ul class="rights-list">
+                    <li>You may cancel subscriptions at any time</li>
+                    <li>No refunds for early termination</li>
+                    <li>Access continues through current billing period</li>
+                    <li>Data export available for 30 days post-termination</li>
+                </ul>
+
+                <h3 class="subsection-title">Termination by OrenGen</h3>
+                <div class="warning-box">
+                    <div class="warning-title">We may terminate accounts for:</div>
+                    <ul class="prohibited-list">
+                        <li>Violation of Terms of Service or Acceptable Use Policy</li>
+                        <li>Non-payment or fraudulent payment activity</li>
+                        <li>Illegal activities or regulatory violations</li>
+                        <li>Abuse of services or systems</li>
+                        <li>Threatening or harassing behavior toward staff</li>
+                    </ul>
+                </div>
+
+                <h2 class="section-title">13. Dispute Resolution</h2>
+                
+                <h3 class="subsection-title">Informal Resolution</h3>
+                <p class="content-text">Before pursuing formal legal action, parties agree to attempt good-faith resolution through direct communication.</p>
+
+                <h3 class="subsection-title">Binding Arbitration</h3>
+                <div class="highlight-box">
+                    <p class="content-text">Any disputes will be resolved through binding arbitration under the rules of the American Arbitration Association, except:</p>
+                    <ul class="legal-list">
+                        <li>Intellectual property disputes</li>
+                        <li>Small claims court matters</li>
+                        <li>Injunctive relief requests</li>
+                        <li>Collection actions for unpaid fees</li>
+                    </ul>
+                </div>
+
+                <h2 class="section-title">14. Governing Law</h2>
+                
+                <p class="content-text">These Terms of Service are governed by the laws of the State of Texas, United States, without regard to conflict of law principles. Any legal actions must be brought in the courts of Fort Worth, Texas.</p>
+
+                <h2 class="section-title">15. Changes to Terms</h2>
+                
+                <p class="content-text">OrenGen reserves the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting. Continued use of services constitutes acceptance of modified terms.</p>
+
+                <h3 class="subsection-title">Notification of Changes</h3>
+                <ul class="rights-list">
+                    <li>Email notification to registered users</li>
+                    <li>Prominent website notice</li>
+                    <li>In-app notifications where applicable</li>
+                    <li>30-day notice for material changes affecting rights or obligations</li>
+                </ul>
+
+                <h2 class="section-title">16. Additional Legal Provisions</h2>
+                
+                <h3 class="subsection-title">Severability</h3>
+                <p class="content-text">If any provision of these Terms is found unenforceable, the remaining provisions will continue in full force and effect.</p>
+
+                <h3 class="subsection-title">Entire Agreement</h3>
+                <p class="content-text">These Terms, together with our Privacy Policy and other referenced policies, constitute the complete agreement between you and OrenGen Worldwide LLC.</p>
+
+                <h3 class="subsection-title">Assignment</h3>
+                <p class="content-text">You may not assign these Terms without our written consent. OrenGen may assign these Terms in connection with a merger, acquisition, or sale of assets.</p>
+
+                <div class="contact-info">
+                    <h3>Legal Questions & Support</h3>
+                    <p class="content-text">For questions about these Terms of Service, legal matters, or general support:</p>
+                    <p class="content-text"><strong>OrenGen Worldwide LLC</strong></p>
+                    <p class="content-text">Legal Department: <a href="mailto:legal@orengen.io" class="contact-email">legal@orengen.io</a></p>
+                    <p class="content-text">Customer Support: <a href="mailto:support@orengen.io" class="contact-email">support@orengen.io</a></p>
+                    <p class="content-text" style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                        All communications may be handled by AI systems in accordance with our AI Communications Policy.
+                    </p>
+                </div>
+
+                <div class="acceptance-box">
+                    By using OrenGen services, you acknowledge acceptance of these Terms of Service.<br>
+                    <span style="font-size: 0.9rem; opacity: 0.8;">Last updated: January 1, 2025</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

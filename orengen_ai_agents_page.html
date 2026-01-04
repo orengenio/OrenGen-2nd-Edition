@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agents - OrenGen Worldwide | Built To Disrupt. Designed To Deliver.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(-10px) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(10px) rotate(360deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://orengen.io/wp-content/uploads/2025/07/OrenGen-Hero-Image-1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            z-index: 10;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(0, 146, 226, 0.2), rgba(204, 85, 0, 0.2));
+            border: 1px solid rgba(0, 146, 226, 0.5);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 146, 226, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 146, 226, 0.6); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #0092E2 50%, #CC5500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #cccccc;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            color: #888888;
+            margin-bottom: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 146, 226, 0.3);
+            margin-right: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 146, 226, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid rgba(0, 146, 226, 0.5);
+            color: #0092E2;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(0, 146, 226, 0.1);
+            border-color: #0092E2;
+        }
+
+        /* Agent Types Section */
+        .agent-types {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ffffff, #0092E2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: #cccccc;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .agent-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 146, 226, 0.6);
+            box-shadow: 0 25px 50px rgba(0, 146, 226, 0.15);
+        }
+
+        .agent-card:hover::before {
+            opacity: 1;
+        }
+
+        .agent-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+        }
+
+        .agent-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .agent-card .agent-description {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .agent-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .agent-features li {
+            color: #0092E2;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .agent-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #CC5500;
+            font-weight: bold;
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.05) 0%, rgba(204, 85, 0, 0.05) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .comparison-title {
+            text-align: center;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #CC5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .comparison-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #888888;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 1000px;
+        }
+
+        th, td {
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            vertical-align: middle;
+        }
+
+        th {
+            background: linear-gradient(45deg, rgba(0, 146, 226, 0.2), rgba(204, 85, 0, 0.2));
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .feature-column {
+            text-align: left;
+            font-weight: 600;
+            color: #cccccc;
+        }
+
+        .orengen-column {
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.15), rgba(204, 85, 0, 0.15));
+            border-left: 3px solid #0092E2;
+            border-right: 3px solid #CC5500;
+            position: relative;
+        }
+
+        .orengen-column::before {
+            content: '👑';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .checkmark {
+            color: #00ff88;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .x-mark {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .partial {
+            color: #ffa500;
+            font-size: 1rem;
+        }
+
+        .orengen-highlight {
+            color: #0092E2;
+            font-weight: bold;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(204, 85, 0, 0.5);
+            box-shadow: 0 15px 30px rgba(204, 85, 0, 0.1);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #CC5500, #0092E2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .benefit-card p {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(204, 85, 0, 0.05) 0%, rgba(0, 146, 226, 0.05) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 146, 226, 0.5);
+            box-shadow: 0 15px 30px rgba(0, 146, 226, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #cccccc;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 6rem 2rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ffffff, #CC5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-cta p {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .agents-badge {
+            background: linear-gradient(45deg, rgba(0, 146, 226, 0.2), rgba(204, 85, 0, 0.2));
+            border: 1px solid rgba(0, 146, 226, 0.5);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .agents-grid, .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .agent-card, .benefit-card {
+                padding: 2rem;
+            }
+            
+            .table-container {
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 1rem 0.5rem;
+            }
+            
+            .cta-button {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                display: block;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .agents-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particle" style="left: 5%; width: 3px; height: 3px; animation-delay: 0s; animation-duration: 25s;"></div>
+        <div class="particle" style="left: 15%; width: 5px; height: 5px; animation-delay: 3s; animation-duration: 20s;"></div>
+        <div class="particle" style="left: 25%; width: 4px; height: 4px; animation-delay: 6s; animation-duration: 22s;"></div>
+        <div class="particle" style="left: 35%; width: 6px; height: 6px; animation-delay: 9s; animation-duration: 18s;"></div>
+        <div class="particle" style="left: 45%; width: 3px; height: 3px; animation-delay: 12s; animation-duration: 24s;"></div>
+        <div class="particle" style="left: 55%; width: 5px; height: 5px; animation-delay: 15s; animation-duration: 19s;"></div>
+        <div class="particle" style="left: 65%; width: 4px; height: 4px; animation-delay: 18s; animation-duration: 21s;"></div>
+        <div class="particle" style="left: 75%; width: 6px; height: 6px; animation-delay: 21s; animation-duration: 17s;"></div>
+        <div class="particle" style="left: 85%; width: 3px; height: 3px; animation-delay: 24s; animation-duration: 23s;"></div>
+        <div class="particle" style="left: 95%; width: 5px; height: 5px; animation-delay: 27s; animation-duration: 20s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🤖 AI EMPLOYEES THAT NEVER SLEEP</div>
+            <h1>AI AGENTS THAT<br>WORK WHILE YOU WIN</h1>
+            <div class="hero-subtitle">24/7 VIRTUAL EMPLOYEES WITH HUMAN-LEVEL INTELLIGENCE</div>
+            <p class="hero-description">
+                Deploy intelligent AI agents that handle customer service, sales, support, and lead qualification 
+                around the clock. While your competitors sleep, your AI workforce delivers results, converts prospects, 
+                and scales your business automatically.
+            </p>
+            <a href="#agent-types" class="cta-button">Explore AI Agents</a>
+            <a href="#comparison" class="cta-button cta-secondary">See Comparison</a>
+        </div>
+    </section>
+
+    <!-- Agent Types Section -->
+    <section class="agent-types" id="agent-types">
+        <div class="section-header">
+            <h2 class="section-title">8 Types of AI Agents</h2>
+            <p class="section-subtitle">
+                Each AI agent is specialized for specific business functions, trained on industry best practices, 
+                and designed to deliver human-level performance at machine scale.
+            </p>
+        </div>
+        
+        <div class="agents-grid">
+            <div class="agent-card">
+                <div class="agent-icon">💬</div>
+                <h3>Customer Service Agent</h3>
+                <p class="agent-description">Handle support tickets, answer FAQs, and resolve customer issues instantly with empathy and accuracy.</p>
+                <ul class="agent-features">
+                    <li>24/7 customer support coverage</li>
+                    <li>Multi-language conversation abilities</li>
+                    <li>Sentiment analysis and emotional intelligence</li>
+                    <li>Seamless human handoff when needed</li>
+                    <li>Knowledge base integration</li>
+                </ul>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-icon">💰</div>
+                <h3>Sales Agent</h3>
+                <p class="agent-description">Qualify prospects, conduct sales conversations, handle objections, and close deals using proven sales methodologies.</p>
+                <ul class="agent-features">
+                    <li>Lead qualification and scoring</li>
+                    <li>Objection handling expertise</li>
+                    <li>Product knowledge and recommendations</li>
+                    <li>Pipeline management integration</li>
+                    <li>Follow-up sequence automation</li>
+                </ul>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-icon">🎯</div>
+                <h3>Lead Qualification Agent</h3>
+                <p class="agent-description">Screen and qualify incoming leads, gather prospect information, and route high-quality leads to your sales team.</p>
+                <ul class="agent-features">
+                    <li>Intelligent lead scoring</li>
+                    <li>BANT qualification framework</li>
+                    <li>Budget and timeline discovery</li>
+                    <li>Decision maker identification</li>
+                    <li>CRM integration and data enrichment</li>
+                </ul>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-icon">📅</div>
+                <h3>Appointment Booking Agent</h3>
+                <p class="agent-description">Schedule meetings, manage calendars, send reminders, and handle rescheduling requests automatically.</p>
+                <ul class="agent-features">
+                    <li>Calendar integration and management</li>
+                    <li>Time zone coordination</li>
+                    <li>Automated reminder sequences</li>
+                    <li>Rescheduling and cancellation handling</li>
+                    <li>Meeting preparation and briefings</li>
+                </ul>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-icon">🛠️</div>
+                <h3>Technical Support Agent</h3>
+                <p class="agent-description">Troubleshoot technical issues, provide step-by-step guidance, and escalate complex problems to specialists.</p>
+                <ul class="agent-features">
+                    <li>Technical documentation access</li>
+                    <li>Step-by-step troubleshooting guides</li>
+                    <li>Screen sharing and remote assistance</li>
+                    <li>Issue tracking and follow-up</li>
+                    <li>Specialist escalation protocols</li>
+                </ul>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-icon">🛍️</div>
+                <h3>E-commerce Agent</h3>
+                <p class="agent-description">Assist shoppers, recommend products, handle cart abandonment, and process orders with personalized service.</p>
+                <ul class="agent-features">
+                    <li>Product recommendation engine</li>
+                    <li>Cart abandonment recovery</li>
+                    <li>Order tracking and updates</li>
+                    <li>Return and refund processing</li>
+                    <li>Personalized shopping assistance</li>
+                </ul>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-icon">🏥</div>
+                <h3>Healthcare Agent</h3>
+                <p class="agent-description">Schedule appointments, answer health questions, manage patient communications with HIPAA compliance.</p>
+                <ul class="agent-features">
+                    <li>HIPAA-compliant communications</li>
+                    <li>Appointment scheduling and reminders</li>
+                    <li>Symptom assessment guidance</li>
+                    <li>Insurance verification assistance</li>
+                    <li>Medical records coordination</li>
+                </ul>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-icon">💳</div>
+                <h3>Financial Services Agent</h3>
+                <p class="agent-description">Handle account inquiries, process applications, provide financial guidance with bank-level security.</p>
+                <ul class="agent-features">
+                    <li>Account balance and transaction inquiries</li>
+                    <li>Loan and credit application processing</li>
+                    <li>Financial planning assistance</li>
+                    <li>Fraud detection and prevention</li>
+                    <li>Regulatory compliance adherence</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section" id="comparison">
+        <div class="comparison-content">
+            <h2 class="comparison-title">How OrenGen AI Agents Dominate the Competition</h2>
+            <p class="comparison-subtitle">
+                See why Fortune 500 companies choose OrenGen over basic chatbots and limited AI assistants
+            </p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="feature-column">Feature</th>
+                            <th class="orengen-column">OrenGen AI Agents</th>
+                            <th>ChatGPT/OpenAI</th>
+                            <th>Google Bard</th>
+                            <th>Microsoft Copilot</th>
+                            <th>Salesforce Einstein</th>
+                            <th>HubSpot AI</th>
+                            <th>Intercom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-column">24/7 Autonomous Operation</td>
+                            <td class="orengen-column orengen-highlight">✓ Full Autonomy</td>
+                            <td class="partial">⚠ Requires Setup</td>
+                            <td class="x-mark">✗</td>
+                            <td class="partial">⚠ Limited</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Human-Level Conversation</td>
+                            <td class="orengen-column orengen-highlight">✓ Advanced NLP</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="partial">⚠ Template-Based</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Industry-Specific Training</td>
+                            <td class="orengen-column orengen-highlight">✓ 8 Specializations</td>
+                            <td class="x-mark">✗</td>
+                            <td class="x-mark">✗</td>
+                            <td class="partial">⚠ Limited</td>
+                            <td class="checkmark">✓</td>
+                            <td class="partial">⚠ Sales Only</td>
+                            <td class="partial">⚠ Support Only</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Sales & Lead Qualification</td>
+                            <td class="orengen-column orengen-highlight">✓ Advanced BANT</td>
+                            <td class="x-mark">✗</td>
+                            <td class="x-mark">✗</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="partial">⚠ Basic</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">CRM Integration</td>
+                            <td class="orengen-column orengen-highlight">✓ Native Integration</td>
+                            <td class="partial">⚠ API Only</td>
+                            <td class="x-mark">✗</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Multi-Channel Support</td>
+                            <td class="orengen-column orengen-highlight">✓ 8+ Channels</td>
+                            <td class="partial">⚠ Web Only</td>
+                            <td class="partial">⚠ Web Only</td>
+                            <td class="partial">⚠ Limited</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Appointment Scheduling</td>
+                            <td class="orengen-column orengen-highlight">✓ Full Automation</td>
+                            <td class="x-mark">✗</td>
+                            <td class="x-mark">✗</td>
+                            <td class="checkmark">✓</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="checkmark">✓</td>
+                            <td class="partial">⚠ Basic</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Sentiment Analysis</td>
+                            <td class="orengen-column orengen-highlight">✓ Advanced AI</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Custom Training Data</td>
+                            <td class="orengen-column orengen-highlight">✓ Your Data</td>
+                            <td class="partial">⚠ Limited</td>
+                            <td class="x-mark">✗</td>
+                            <td class="partial">⚠ Limited</td>
+                            <td class="checkmark">✓</td>
+                            <td class="partial">⚠ Limited</td>
+                            <td class="partial">⚠ Limited</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Government-Ready Security</td>
+                            <td class="orengen-column orengen-highlight">✓ Enterprise Grade</td>
+                            <td class="partial">⚠ Standard</td>
+                            <td class="partial">⚠ Standard</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Real-Time Learning</td>
+                            <td class="orengen-column orengen-highlight">✓ Continuous</td>
+                            <td class="x-mark">✗</td>
+                            <td class="x-mark">✗</td>
+                            <td class="partial">⚠ Limited</td>
+                            <td class="checkmark">✓</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="partial">⚠ Basic</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-column">Human Handoff</td>
+                            <td class="orengen-column orengen-highlight">✓ Intelligent Routing</td>
+                            <td class="x-mark">✗</td>
+                            <td class="x-mark">✗</td>
+                            <td class="partial">⚠ Basic</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                            <td class="checkmark">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="section-header">
+            <h2 class="section-title">Why Businesses Choose OrenGen AI Agents</h2>
+            <p class="section-subtitle">
+                Transform your customer experience and scale your operations with AI agents that deliver measurable results
+            </p>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Reduce Costs by 70%</h3>
+                <p>Replace expensive human agents with AI that works 24/7 without salaries, benefits, or time off. Scale infinitely without increasing headcount.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Instant Response Times</h3>
+                <p>Respond to customers in milliseconds, not minutes. Eliminate wait times and improve satisfaction with immediate, accurate assistance.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>100% Consistency</h3>
+                <p>Every customer receives the same high-quality experience. No bad days, no human error, no inconsistent messaging across your brand.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">📈</div>
+                <h3>Scale Without Limits</h3>
+                <p>Handle 1,000 or 100,000 conversations simultaneously. Your AI agents never get overwhelmed, never need breaks, never call in sick.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🧠</div>
+                <h3>Continuous Learning</h3>
+                <p>AI agents improve with every interaction, learning from conversations to become more effective and accurate over time.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🔒</div>
+                <h3>Enterprise Security</h3>
+                <p>Government-grade security ensures your customer data stays protected with encryption, compliance, and audit trails.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-content">
+            <h2 class="section-title">Performance That Speaks for Itself</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Always Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime Guarantee</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">&lt;1s</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Cost Reduction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Customer Satisfaction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Scalability</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Deploy Your AI Workforce Today</h2>
+        <p>
+            Stop losing money to missed calls, delayed responses, and human limitations. 
+            Deploy OrenGen AI Agents and transform your customer experience while your competitors 
+            struggle with outdated systems.
+        </p>
+        <a href="#" class="cta-button">Start Free Trial</a>
+        <div class="agents-badge">
+            🤖 AI AGENTS THAT WORK WHILE YOU WIN • AVAILABLE 24/7/365
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add entrance animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards and sections
+        document.querySelectorAll('.agent-card, .benefit-card, .stat-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Animate stats when visible
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const text = stat.textContent;
+                
+                if (text === '99.9%') {
+                    animatePercentage(stat, 99.9);
+                } else if (text === '70%') {
+                    animatePercentage(stat, 70);
+                } else if (text === '95%') {
+                    animatePercentage(stat, 95);
+                } else if (text.includes('s') && text !== '∞') {
+                    // Keep as is for time values
+                }
+            });
+        }
+
+        function animatePercentage(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = current.toFixed(1) + '%';
+            }, 50);
+        }
+
+        // Trigger stats animation when section comes into view
+        const statsSection = document.querySelector('.stats-section');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(animateStats, 500);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(statsSection);
+
+        // Table row hover effects
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.backgroundColor = 'rgba(0, 146, 226, 0.05)';
+            });
+            
+            row.addEventListener('mouseleave', () => {
+                row.style.backgroundColor = 'transparent';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copyright Notice - OrenGen Worldwide | Built To Disrupt. Designed To Deliver.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(-10px) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(10px) rotate(360deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://orengen.io/wp-content/uploads/2025/07/OrenGen-Hero-Image-1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            width: 100%;
+            z-index: 10;
+            padding: 0 1rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(0, 146, 226, 0.2), rgba(204, 85, 0, 0.2));
+            border: 1px solid rgba(0, 146, 226, 0.5);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+            font-weight: 600;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 146, 226, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 146, 226, 0.6); }
+        }
+
+        .copyright-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            text-align: left;
+            max-width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 146, 226, 0.1);
+        }
+
+        .effective-date {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #0092E2;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .copyright-intro {
+            font-size: 1.1rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(204, 85, 0, 0.15) 0%, rgba(204, 85, 0, 0.05) 100%);
+            border: 1px solid rgba(204, 85, 0, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .copyright-warning {
+            color: #CC5500;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #CC5500;
+            margin: 2rem 0 1rem 0;
+            font-weight: 700;
+            background: linear-gradient(45deg, #CC5500, #0092E2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subsection-title {
+            font-size: 1.2rem;
+            color: #0092E2;
+            margin: 1.5rem 0 0.75rem 0;
+            font-weight: 600;
+        }
+
+        .content-text {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.1) 0%, rgba(204, 85, 0, 0.1) 100%);
+            border: 1px solid rgba(0, 146, 226, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(204, 85, 0, 0.15) 0%, rgba(204, 85, 0, 0.05) 100%);
+            border: 1px solid rgba(204, 85, 0, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-title {
+            color: #CC5500;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .protected-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .protected-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .protected-list li::before {
+            content: '©';
+            position: absolute;
+            left: 0;
+            color: #0092E2;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .trademark-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .trademark-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .trademark-list li::before {
+            content: '™';
+            position: absolute;
+            left: 0;
+            color: #CC5500;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .violation-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .violation-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .violation-list li::before {
+            content: '⚠';
+            position: absolute;
+            left: 0;
+            color: #CC5500;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .trademark-highlight {
+            color: #0092E2;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, rgba(204, 85, 0, 0.1) 0%, rgba(0, 146, 226, 0.1) 100%);
+            border: 1px solid rgba(204, 85, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-info h3 {
+            color: #CC5500;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-email {
+            color: #0092E2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .contact-email:hover {
+            color: #CC5500;
+            transition: color 0.3s ease;
+        }
+
+        .copyright-footer {
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.2) 0%, rgba(204, 85, 0, 0.2) 100%);
+            border: 2px solid rgba(0, 146, 226, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(0, 146, 226, 0.5); }
+            to { box-shadow: 0 0 40px rgba(0, 146, 226, 0.8); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 1rem 0.5rem;
+                min-height: auto;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            .hero-content {
+                padding: 0 0.5rem;
+            }
+            
+            .copyright-container {
+                padding: 1.5rem 1rem;
+                margin: 0 0.5rem;
+            }
+            
+            .hero-badge {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .effective-date {
+                font-size: 1rem;
+            }
+            
+            .copyright-intro {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+                margin: 1.5rem 0 0.75rem 0;
+            }
+            
+            .subsection-title {
+                font-size: 1.1rem;
+            }
+            
+            .content-text {
+                font-size: 0.95rem;
+            }
+            
+            .copyright-warning {
+                font-size: 1.1rem;
+            }
+            
+            .highlight-box, .warning-box {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .contact-info {
+                padding: 1rem;
+            }
+            
+            .contact-info h3 {
+                font-size: 1.1rem;
+            }
+            
+            .contact-email {
+                font-size: 1rem;
+            }
+            
+            .copyright-footer {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 1rem 0.25rem;
+            }
+            
+            .copyright-container {
+                padding: 1rem 0.75rem;
+                margin: 0 0.25rem;
+                border-radius: 15px;
+            }
+            
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .effective-date {
+                font-size: 0.9rem;
+            }
+            
+            .copyright-intro {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+                padding: 0.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+            }
+            
+            .subsection-title {
+                font-size: 1rem;
+            }
+            
+            .content-text {
+                font-size: 0.9rem;
+            }
+            
+            .protected-list li, .trademark-list li, .violation-list li {
+                font-size: 0.9rem;
+                margin-bottom: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particle" style="left: 5%; width: 3px; height: 3px; animation-delay: 0s; animation-duration: 25s;"></div>
+        <div class="particle" style="left: 15%; width: 5px; height: 5px; animation-delay: 3s; animation-duration: 20s;"></div>
+        <div class="particle" style="left: 25%; width: 4px; height: 4px; animation-delay: 6s; animation-duration: 22s;"></div>
+        <div class="particle" style="left: 35%; width: 6px; height: 6px; animation-delay: 9s; animation-duration: 18s;"></div>
+        <div class="particle" style="left: 45%; width: 3px; height: 3px; animation-delay: 12s; animation-duration: 24s;"></div>
+        <div class="particle" style="left: 55%; width: 5px; height: 5px; animation-delay: 15s; animation-duration: 19s;"></div>
+        <div class="particle" style="left: 65%; width: 4px; height: 4px; animation-delay: 18s; animation-duration: 21s;"></div>
+        <div class="particle" style="left: 75%; width: 6px; height: 6px; animation-delay: 21s; animation-duration: 17s;"></div>
+        <div class="particle" style="left: 85%; width: 3px; height: 3px; animation-delay: 24s; animation-duration: 23s;"></div>
+        <div class="particle" style="left: 95%; width: 5px; height: 5px; animation-delay: 27s; duration: 20s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">⚖️ COPYRIGHT NOTICE</div>
+            
+            <div class="copyright-container">
+                <div class="effective-date">Effective Date: January 1, 2025</div>
+                
+                <div class="copyright-intro">
+                    <div class="copyright-warning">⚠️ UNAUTHORIZED USE STRICTLY PROHIBITED</div>
+                    <p class="content-text">Unauthorized use, reproduction, or distribution of any content, materials, or intellectual property on this website is strictly prohibited without prior written permission from OrenGen Worldwide LLC.</p>
+                </div>
+
+                <h2 class="section-title">1. Protected Materials</h2>
+                
+                <p class="content-text">All content on this website is protected by copyright and other intellectual property laws, including:</p>
+                
+                <ul class="protected-list">
+                    <li>Original text, articles, blog posts, and written content</li>
+                    <li>Graphics, logos, images, photographs, and visual designs</li>
+                    <li>Software code, algorithms, and AI system architectures</li>
+                    <li>Videos, audio recordings, and multimedia presentations</li>
+                    <li>Website design, layout, and user interface elements</li>
+                    <li>Marketing materials, case studies, and whitepapers</li>
+                    <li>Product documentation and technical specifications</li>
+                    <li>AI training data, models, and proprietary methodologies</li>
+                </ul>
+
+                <h2 class="section-title">2. Permissions & Licensing</h2>
+                
+                <div class="highlight-box">
+                    <h3 class="subsection-title">How to Request Permission</h3>
+                    <p class="content-text">For inquiries regarding the use of our content, trademarks, or intellectual property, including:</p>
+                    <ul class="protected-list">
+                        <li>Commercial use of our materials or content</li>
+                        <li>Reproduction for educational or research purposes</li>
+                        <li>Integration with third-party systems or platforms</li>
+                        <li>Press kit materials and media usage</li>
+                        <li>Partnership and collaboration opportunities</li>
+                    </ul>
+                    <p class="content-text"><strong>Contact our legal team at:</strong> <a href="mailto:legal@orengen.io" class="contact-email">legal@orengen.io</a></p>
+                </div>
+
+                <h3 class="subsection-title">Fair Use Guidelines</h3>
+                <p class="content-text">Limited fair use may be permitted for:</p>
+                <ul class="protected-list">
+                    <li>Brief quotations for commentary, criticism, or news reporting</li>
+                    <li>Academic research with proper attribution</li>
+                    <li>Non-commercial educational purposes (with citation)</li>
+                </ul>
+
+                <h2 class="section-title">3. Trademarks & Brand Assets</h2>
+                
+                <p class="content-text">The following are trademarks or registered trademarks of OrenGen Worldwide LLC:</p>
+                
+                <ul class="trademark-list">
+                    <li><span class="trademark-highlight">"OrenGen"</span> - Our company name and primary brand identifier</li>
+                    <li><span class="trademark-highlight">"When Digital Met AI"</span> - Our brand slogan and positioning statement</li>
+                    <li><span class="trademark-highlight">"Built To Disrupt. Designed To Deliver."</span> - Our corporate tagline</li>
+                    <li><span class="trademark-highlight">"AI Infinite CRM"</span> - Our flagship CRM product name</li>
+                    <li><span class="trademark-highlight">"Speedracer Bulk Email Validation"</span> - Our email validation service</li>
+                    <li>All related logos, designs, icons, and visual brand elements</li>
+                    <li>Color schemes, typography, and brand style guidelines</li>
+                    <li>Product names, service marks, and marketing slogans</li>
+                </ul>
+
+                <div class="warning-box">
+                    <div class="warning-title">Trademark Usage Restrictions:</div>
+                    <p class="content-text">Use of OrenGen trademarks without permission may constitute trademark infringement and unfair competition under federal and state laws. All other trademarks referenced on this site are the property of their respective owners.</p>
+                </div>
+
+                <h2 class="section-title">4. Digital Millennium Copyright Act (DMCA)</h2>
+                
+                <p class="content-text">If you believe your copyrighted work has been used on our site without permission, please provide our DMCA agent with the following information:</p>
+                
+                <ul class="protected-list">
+                    <li>Identification of the copyrighted work claimed to be infringed</li>
+                    <li>Location of the allegedly infringing material on our site</li>
+                    <li>Your contact information (address, phone, email)</li>
+                    <li>A statement of good faith belief that use is not authorized</li>
+                    <li>A statement of accuracy and authorization to act on behalf of the owner</li>
+                    <li>Your physical or electronic signature</li>
+                </ul>
+
+                <h2 class="section-title">5. Enforcement & Violations</h2>
+                
+                <div class="warning-box">
+                    <div class="warning-title">Legal Consequences of Infringement:</div>
+                    <p class="content-text">OrenGen Worldwide LLC actively monitors and enforces its intellectual property rights. Violations may result in:</p>
+                    <ul class="violation-list">
+                        <li>Immediate cease and desist notifications</li>
+                        <li>Legal action for damages and injunctive relief</li>
+                        <li>Recovery of attorney fees and court costs</li>
+                        <li>Criminal prosecution for willful infringement</li>
+                        <li>Account termination and service suspension</li>
+                    </ul>
+                </div>
+
+                <h2 class="section-title">6. User-Generated Content</h2>
+                
+                <p class="content-text">By submitting content to our platforms (reviews, comments, feedback), you grant OrenGen Worldwide LLC a non-exclusive, royalty-free license to use, modify, and display such content for business purposes while retaining your original ownership rights.</p>
+
+                <h2 class="section-title">7. International Copyright Protection</h2>
+                
+                <p class="content-text">Our copyrights and trademarks are protected internationally under:</p>
+                <ul class="protected-list">
+                    <li>Berne Convention for the Protection of Literary and Artistic Works</li>
+                    <li>Universal Copyright Convention (UCC)</li>
+                    <li>Paris Convention for the Protection of Industrial Property</li>
+                    <li>Madrid Protocol for international trademark registration</li>
+                </ul>
+
+                <h2 class="section-title">8. AI & Technology Compliance</h2>
+                
+                <div class="highlight-box">
+                    <p class="content-text"><strong>AI-Powered Communications Notice:</strong> All communications on this site are AI-powered. By using this site, you agree to our Terms of Service and Privacy Policy. You may opt out of communications at any time by contacting <a href="mailto:support@orengen.io" class="contact-email">support@orengen.io</a>.</p>
+                </div>
+
+                <div class="contact-info">
+                    <h3>Legal Inquiries & Permissions</h3>
+                    <p class="content-text">For all intellectual property matters, licensing requests, and legal inquiries:</p>
+                    <p class="content-text"><strong>OrenGen Worldwide LLC - Legal Department</strong></p>
+                    <a href="mailto:legal@orengen.io" class="contact-email">legal@orengen.io</a>
+                    <p class="content-text" style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                        All requests will be reviewed within 5-7 business days. Commercial licensing available.
+                    </p>
+                </div>
+
+                <div class="copyright-footer">
+                    © 2025 OrenGen Worldwide LLC – AI-Driven Digital Solutions. All rights reserved.<br>
+                    <span style="font-size: 0.9rem; opacity: 0.8;">Unauthorized reproduction or distribution is prohibited by law.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

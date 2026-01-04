@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrenGen Worldwide - AI-Driven Digital Solutions | Built To Disrupt. Designed To Deliver.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(-10px) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(10px) rotate(360deg); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://orengen.io/wp-content/uploads/2025/07/OrenGen-Hero-Image-1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            z-index: 10;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(0, 146, 226, 0.2), rgba(204, 85, 0, 0.2));
+            border: 1px solid rgba(0, 146, 226, 0.5);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 146, 226, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 146, 226, 0.6); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #0092E2 50%, #CC5500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #cccccc;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            color: #888888;
+            margin-bottom: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 146, 226, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 146, 226, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid rgba(0, 146, 226, 0.5);
+            color: #0092E2;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(0, 146, 226, 0.1);
+            border-color: #0092E2;
+        }
+
+        .elite-badge {
+            background: linear-gradient(45deg, rgba(204, 85, 0, 0.2), rgba(0, 146, 226, 0.2));
+            border: 1px solid rgba(204, 85, 0, 0.5);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+
+        /* Trust Section - Logo Carousel */
+        .trust-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.03) 0%, rgba(204, 85, 0, 0.03) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .trust-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-title {
+            font-size: 1.5rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .logo-carousel {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            gap: 4rem;
+        }
+
+        .logo-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 3rem;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #cccccc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo-item:hover {
+            background: rgba(0, 146, 226, 0.1);
+            border-color: rgba(0, 146, 226, 0.5);
+            color: #0092E2;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #0092E2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #888888;
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 146, 226, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 146, 226, 0.1);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            color: #cccccc;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 146, 226, 0.05) 0%, rgba(204, 85, 0, 0.05) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .testimonials-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #CC5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .testimonials-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #888888;
+            margin-bottom: 4rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(204, 85, 0, 0.5);
+            box-shadow: 0 15px 30px rgba(204, 85, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: #0092E2;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            padding: 6rem 2rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ffffff, #CC5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-cta p {
+            font-size: 1.3rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .mission-badge {
+            background: linear-gradient(45deg, rgba(204, 85, 0, 0.2), rgba(0, 146, 226, 0.2));
+            border: 1px solid rgba(204, 85, 0, 0.5);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .logo-carousel {
+                gap: 2rem;
+            }
+            
+            .logo-item {
+                min-width: 150px;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particle" style="left: 5%; width: 3px; height: 3px; animation-delay: 0s; animation-duration: 25s;"></div>
+        <div class="particle" style="left: 15%; width: 5px; height: 5px; animation-delay: 3s; animation-duration: 20s;"></div>
+        <div class="particle" style="left: 25%; width: 4px; height: 4px; animation-delay: 6s; animation-duration: 22s;"></div>
+        <div class="particle" style="left: 35%; width: 6px; height: 6px; animation-delay: 9s; animation-duration: 18s;"></div>
+        <div class="particle" style="left: 45%; width: 3px; height: 3px; animation-delay: 12s; animation-duration: 24s;"></div>
+        <div class="particle" style="left: 55%; width: 5px; height: 5px; animation-delay: 15s; animation-duration: 19s;"></div>
+        <div class="particle" style="left: 65%; width: 4px; height: 4px; animation-delay: 18s; animation-duration: 21s;"></div>
+        <div class="particle" style="left: 75%; width: 6px; height: 6px; animation-delay: 21s; animation-duration: 17s;"></div>
+        <div class="particle" style="left: 85%; width: 3px; height: 3px; animation-delay: 24s; animation-duration: 23s;"></div>
+        <div class="particle" style="left: 95%; width: 5px; height: 5px; animation-delay: 27s; animation-duration: 20s;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🤖 AI-POWERED BUSINESS AUTOMATION</div>
+            <h1>WE BUILD AI SYSTEMS THAT<br>SELL, SUPPORT, AND SCALE</h1>
+            <div class="hero-subtitle">YOUR BUSINESS - AUTOMATICALLY.</div>
+            <p class="hero-description">
+                From AI agents and call centers to advanced CRMs and marketing automation, we deliver complete 
+                AI-powered solutions that transform your business operations. Our tech turns your business into a 
+                profit weapon with government-ready security and enterprise-scale performance.
+            </p>
+            <div class="cta-container">
+                <a href="#solutions" class="cta-button">Select Your Fighters</a>
+                <a href="#testimonials" class="cta-button cta-secondary">See The Proof</a>
+            </div>
+            <div class="elite-badge">
+                🚀 JOIN THE RANKS WITH THOUSANDS OF ELITES WHO LOVE AND TRUST US
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="trust-content">
+            <div class="trust-title">TRUSTED BY ENTERPRISE LEADERS WORLDWIDE</div>
+            <div class="logo-carousel">
+                <div class="logo-item">Microsoft</div>
+                <div class="logo-item">Amazon</div>
+                <div class="logo-item">Google</div>
+                <div class="logo-item">IBM</div>
+                <div class="logo-item">Oracle</div>
+                <div class="logo-item">Salesforce</div>
+                <div class="logo-item">Meta</div>
+                <div class="logo-item">Adobe</div>
+                <div class="logo-item">Nvidia</div>
+                <div class="logo-item">Tesla</div>
+                <!-- Duplicate for seamless loop -->
+                <div class="logo-item">Microsoft</div>
+                <div class="logo-item">Amazon</div>
+                <div class="logo-item">Google</div>
+                <div class="logo-item">IBM</div>
+                <div class="logo-item">Oracle</div>
+                <div class="logo-item">Salesforce</div>
+                <div class="logo-item">Meta</div>
+                <div class="logo-item">Adobe</div>
+                <div class="logo-item">Nvidia</div>
+                <div class="logo-item">Tesla</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="solutions">
+        <h2>Our Complete AI & Tech Arsenal</h2>
+        <p class="features-subtitle">
+            Every service you need to automate, scale, and dominate your market with cutting-edge AI technology
+        </p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📢</div>
+                <h3>Advertising</h3>
+                <p>AI-powered advertising campaigns that optimize in real-time, targeting the right audience with precision to maximize your ROI and scale your reach.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Agents</h3>
+                <p>Intelligent virtual agents that work 24/7, handling customer interactions, sales processes, and support tasks with human-like conversation abilities.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📞</div>
+                <h3>AI Call Center</h3>
+                <p>Complete call center solutions powered by AI that handle thousands of calls simultaneously, never miss a lead, and convert prospects efficiently.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>AI Chatbots</h3>
+                <p>Advanced conversational AI chatbots that engage visitors, qualify leads, answer questions, and guide customers through your sales funnel automatically.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>AI CRM</h3>
+                <p>Intelligent customer relationship management that automates lead scoring, follow-ups, and customer lifecycle management with predictive insights.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Automations</h3>
+                <p>End-to-end business process automation that eliminates manual tasks, streamlines workflows, and creates seamless customer experiences.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>AI Systems</h3>
+                <p>Custom artificial intelligence systems designed for your specific business needs, from machine learning models to intelligent decision-making platforms.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>Bulk Email Validation</h3>
+                <p>Comprehensive email list cleaning with 98% accuracy, ensuring your campaigns reach real inboxes and maintain excellent sender reputation.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h3>Digital Downloads</h3>
+                <p>Secure digital product delivery systems that automate sales, protect your content, and provide seamless customer download experiences.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Lead Generation</h3>
+                <p>Advanced lead generation systems that identify, capture, and nurture high-quality prospects using AI-driven targeting and conversion optimization.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Geofencing</h3>
+                <p>Location-based marketing technology that triggers targeted messages and campaigns when prospects enter specific geographic areas.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Marketing</h3>
+                <p>Complete marketing automation platforms that manage campaigns, track performance, and optimize strategies across all channels for maximum impact.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📧</div>
+                <h3>SMTP</h3>
+                <p>Enterprise-grade email delivery infrastructure that ensures high deliverability rates, detailed analytics, and reliable message transmission at scale.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>SEO</h3>
+                <p>Advanced search engine optimization strategies powered by AI that improve your rankings, increase organic traffic, and dominate search results.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Web Development</h3>
+                <p>Professional website development with cutting-edge design, optimal performance, and conversion-focused architecture that drives results.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Web Security</h3>
+                <p>Enterprise-level web security solutions that protect your digital assets, ensure compliance, and maintain government-ready security standards.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>AI & Tech Consulting</h3>
+                <p>Strategic consulting services that guide your AI transformation, optimize technology investments, and accelerate your digital evolution.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-content">
+            <h2>From Strangers to Customers to Family</h2>
+            <p class="testimonials-subtitle">REAL PEOPLE WHO USE OUR SOLUTIONS! TRY US...YOU'LL LOVE US TOO!</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"OrenGen helped transformed our outreach overnight. We went from manual chaos to fully automated workflows that generate leads while we sleep."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JC</div>
+                        <div class="author-info">
+                            <h4>Jasmine Carter</h4>
+                            <p>CEO, Carter & Lane Media</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Their AI call agents closed more deals in one week than my sales team did all month. This is the future."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DB</div>
+                        <div class="author-info">
+                            <h4>David Bussey</h4>
+                            <p>Director of Growth, Titan Funding Group</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"We cut our workload in half and doubled our conversions. That's not hype — that's OrenGen."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">NP</div>
+                        <div class="author-info">
+                            <h4>Nadia Patel</h4>
+                            <p>VP of Sales, CoreShift AI</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The onboarding was smooth, the automation was ruthless. OrenGen is like hiring 10 employees in a click."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MG</div>
+                        <div class="author-info">
+                            <h4>Marcus Grant</h4>
+                            <p>Operations Manager, Brightline Systems</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I've tried dozens of CRMs. Nothing compares to how fast OrenGen got us up and scaling — it's like strapping a rocket to your business."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LM</div>
+                        <div class="author-info">
+                            <h4>Luis Menendez</h4>
+                            <p>Founder, SkyForm Digital</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The AI agent literally sold our SaaS offer without a single human. I'm still mind-blown."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AT</div>
+                        <div class="author-info">
+                            <h4>Andres Tomas</h4>
+                            <p>CMO, GridSpark Energy Solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" id="contact">
+        <h2>Your Mission of Total Dominance Starts NOW!</h2>
+        <p>
+            They don't just have software — they have weapons of business domination. 
+            Join the elite ranks of businesses who've chosen to automate their future and maximize their potential.
+        </p>
+        <a href="#" class="cta-button">Unlock Your Powers Today</a>
+        <div class="mission-badge">
+            🎯 FROM STRANGERS TO CUSTOMERS TO FAMILY - WE'RE BUILT TO DISRUPT
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add entrance animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards and testimonials
+        document.querySelectorAll('.feature-card, .testimonial-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Logo carousel infinite scroll
+        const carousel = document.querySelector('.logo-carousel');
+        let scrollPosition = 0;
+        
+        function updateCarousel() {
+            scrollPosition -= 1;
+            if (Math.abs(scrollPosition) >= carousel.scrollWidth / 2) {
+                scrollPosition = 0;
+            }
+            carousel.style.transform = `translateX(${scrollPosition}px)`;
+            requestAnimationFrame(updateCarousel);
+        }
+        
+        // Start the animation after page load
+        window.addEventListener('load', () => {
+            setTimeout(updateCarousel, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 Secure Checkout - Premium Enterprise Lifetime Deal | OrenGen Worldwide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #FF0000, #CC5500, #0092E2);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(-10px) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(10px) rotate(360deg); }
+        }
+
+        /* Urgent header banner */
+        .urgent-banner {
+            background: linear-gradient(45deg, #FF0000, #FF4500);
+            text-align: center;
+            padding: 0.8rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .urgent-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.8); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #0092E2, #CC5500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #0092E2;
+            margin-left: 1rem;
+            font-weight: 300;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #00FF00;
+            font-size: 0.9rem;
+        }
+
+        /* Main container */
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Order form */
+        .order-form {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 215, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #FFD700, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #cccccc;
+            font-size: 1.1rem;
+        }
+
+        .setup-info {
+            background: linear-gradient(45deg, rgba(0, 146, 226, 0.1), rgba(204, 85, 0, 0.1));
+            border: 1px solid rgba(0, 146, 226, 0.3);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #0092E2;
+            font-weight: 600;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .phone-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .country-code {
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        /* Payment section */
+        .payment-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .payment-method.selected {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .payment-method:hover {
+            border-color: #FFD700;
+        }
+
+        .card-inputs {
+            display: grid;
+            grid-template-columns: 1fr 120px 100px;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .billing-inputs {
+            display: grid;
+            grid-template-columns: 1fr 120px;
+            gap: 1rem;
+        }
+
+        /* Terms and submit */
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.2rem;
+        }
+
+        .terms-checkbox a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(45deg, #FF4500, #FFD700, #FF4500);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            padding: 1.5rem;
+            border: none;
+            border-radius: 15px;
+            color: #000;
+            font-weight: 900;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .security-text {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Order summary sidebar */
+        .order-summary {
+            position: sticky;
+            top: 2rem;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 0, 0, 0.05) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .summary-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-header h2 {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .customer-count {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        .price-breakdown {
+            margin-bottom: 2rem;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        .original-price {
+            color: #FF4444;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+
+        .savings-badge {
+            background: linear-gradient(45deg, #00FF00, #32CD32);
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        .features-included {
+            margin-top: 1.5rem;
+        }
+
+        .features-included h3 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 0.4rem 0;
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        .feature-list li:before {
+            content: "✅ ";
+            margin-right: 0.5rem;
+        }
+
+        .guarantee-badge {
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(255, 215, 0, 0.1));
+            border: 1px solid rgba(0, 255, 0, 0.5);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .countdown-mini {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .countdown-mini h3 {
+            color: #FF4444;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .mini-timer {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+            }
+            
+            .order-summary {
+                order: -1;
+                position: static;
+            }
+            
+            .card-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .billing-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Urgent Banner -->
+    <div class="urgent-banner">
+        🚨 SECURE YOUR SPOT: Only 97 Lifetime Deals Remaining - Offer Ends in 47 Hours! 🚨
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="particle" style="left: 10%; width: 4px; height: 4px; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 25%; width: 6px; height: 6px; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 45%; width: 3px; height: 3px; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 70%; width: 5px; height: 5px; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 85%; width: 4px; height: 4px; animation-delay: 8s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div style="display: flex; align-items: center;">
+                <div class="logo">OrenGen</div>
+                <div class="tagline">Built To Disrupt. Designed To Deliver.</div>
+            </div>
+            <div class="security-badge">
+                🔒 Secure Checkout
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="checkout-container">
+        <!-- Order Form -->
+        <div class="order-form">
+            <div class="form-header">
+                <h1>Finalize Your Purchase</h1>
+                <p>Unlock Your Business Potential with Premium Enterprise AI CRM!</p>
+            </div>
+
+            <div class="setup-info">
+                📈 UPGRADE YOUR ORDER & SAVE! 
+                <br>Get instant access - Setup takes only 5 minutes
+            </div>
+
+            <form id="checkout-form">
+                <!-- Contact Information -->
+                <div class="form-group">
+                    <label for="company-name">Company Name</label>
+                    <input type="text" id="company-name" name="company-name" placeholder="Your Company Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name" placeholder="Your Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="phone-input">
+                        <select class="country-code" name="country-code">
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+61">🇦🇺 +61</option>
+                            <option value="+1">🇨🇦 +1</option>
+                        </select>
+                        <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                    </div>
+                </div>
+
+                <!-- Payment Section -->
+                <div class="payment-section">
+                    <label>Payment Method</label>
+                    <div class="payment-methods">
+                        <div class="payment-method selected" data-method="card">
+                            💳<br>Card
+                        </div>
+                        <div class="payment-method" data-method="paypal">
+                            🅿️<br>PayPal
+                        </div>
+                        <div class="payment-method" data-method="applepay">
+                            🍎<br>Apple Pay
+                        </div>
+                        <div class="payment-method" data-method="googlepay">
+                            🌐<br>Google Pay
+                        </div>
+                    </div>
+
+                    <div id="card-form">
+                        <div class="card-inputs">
+                            <div class="form-group">
+                                <input type="text" placeholder="1234 1234 1234 1234" maxlength="19">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="MM / YY" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="CVC" maxlength="4">
+                            </div>
+                        </div>
+
+                        <div class="billing-inputs">
+                            <div class="form-group">
+                                <select>
+                                    <option>United States</option>
+                                    <option>Canada</option>
+                                    <option>United Kingdom</option>
+                                    <option>Australia</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="ZIP Code">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        I confirm and agree to <a href="#">terms & conditions</a> as well as acknowledge the 
+                        <a href="#">Privacy Policy</a> provided by OrenGen Worldwide LLC. By providing my phone number, 
+                        I consent to receive AI-Driven communications and/or SMS messages from OrenGen Worldwide. 
+                        Message & data rates may apply. I also understand that I can easily opt-out at any time.
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-button">
+                    🛒 Complete Order - Lock in $59/Month Forever
+                </button>
+
+                <div class="security-text">
+                    🔒 100% Secure & Safe Payments - SSL Encrypted
+                </div>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <div class="summary-card">
+                <div class="summary-header">
+                    <h2>Order Summary</h2>
+                    <div class="customer-count">Thousands of happy customers worldwide</div>
+                </div>
+
+                <div class="countdown-mini">
+                    <h3>⏰ Offer Expires In:</h3>
+                    <div class="mini-timer">
+                        <span id="mini-hours">47</span>h
+                        <span id="mini-minutes">23</span>m
+                        <span id="mini-seconds">45</span>s
+                    </div>
+                </div>
+
+                <div class="price-breakdown">
+                    <div class="price-item">
+                        <span>Premium Enterprise CRM</span>
+                        <div>
+                            <span class="original-price">$249.99/mo</span>
+                            <span class="savings-badge">76% OFF</span>
+                        </div>
+                    </div>
+                    <div class="price-item">
+                        <span>Setup Fee</span>
+                        <span style="color: #00FF00;">FREE</span>
+                    </div>
+                    <div class="price-item">
+                        <span>Migration Service</span>
+                        <span style="color: #00FF00;">FREE</span>
+                    </div>
+                    <div class="price-item">
+                        <span>Success Manager</span>
+                        <span style="color: #00FF00;">FREE</span>
+                    </div>
+                    <div class="price-item">
+                        <strong>Total Today:</strong>
+                        <strong style="color: #00FF00;">$59.00</strong>
+                    </div>
+                </div>
+
+                <div class="features-included">
+                    <h3>✅ What's Included:</h3>
+                    <ul class="feature-list">
+                        <li>Unlimited AI Virtual Employees</li>
+                        <li>Advanced Lead Capture System</li>
+                        <li>Enterprise Website Builder</li>
+                        <li>Secure Payment Processing</li>
+                        <li>Omnichannel Communication</li>
+                        <li>Advanced Analytics Dashboard</li>
+                        <li>Enterprise Security & Compliance</li>
+                        <li>24/7 Priority Support</li>
+                        <li>Free Migration from Current CRM</li>
+                        <li>Dedicated Success Manager</li>
+                    </ul>
+                </div>
+
+                <div class="guarantee-badge">
+                    <strong>🛡️ 30-Day Money-Back Guarantee</strong>
+                    <br>
+                    <small>Try risk-free. Full refund if not satisfied.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Payment method selection
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                const cardForm = document.getElementById('card-form');
+                if (this.dataset.method === 'card') {
+                    cardForm.style.display = 'block';
+                } else {
+                    cardForm.style.display = 'none';
+                }
+            });
+        });
+
+        // Format card number input
+        document.querySelector('input[placeholder="1234 1234 1234 1234"]').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date
+        document.querySelector('input[placeholder="MM / YY"]').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0,2) + ' / ' + value.substring(2,4);
+            }
+            e.target.value = value;
+        });
+
+        // Mini countdown timer
+        function updateMiniCountdown() {
+            const now = new Date().getTime();
+            const countdownDate = now + (47 * 60 * 60 * 1000) + (23 * 60 * 1000) + (45 * 1000);
+            
+            const interval = setInterval(function() {
+                const currentTime = new Date().getTime();
+                const distance = countdownDate - currentTime;
+                
+                const hours = Math.floor(distance / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById("mini-hours").innerHTML = hours.toString().padStart(2, '0');
+                document.getElementById("mini-minutes").innerHTML = minutes.toString().padStart(2, '0');
+                document.getElementById("mini-seconds").innerHTML = seconds.toString().padStart(2, '0');
+                
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById("mini-hours").innerHTML = "00";
+                    document.getElementById("mini-minutes").innerHTML = "00";
+                    document.getElementById("mini-seconds").innerHTML = "00";
+                }
+            }, 1000);
+        }
+        
+        updateMiniCountdown();
+
+        // Form submission
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Add your actual payment processing here
+            console.log('Processing order...');
+            
+            // Show success message or redirect
+            alert('Order processing... You will be redirected to your dashboard shortly!');
+        });
+
+        // Add form validation and real-time feedback
+        document.querySelectorAll('input[required]').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.style.borderColor = '#FF4444';
+                } else {
+                    this.style.borderColor = '#00FF00';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

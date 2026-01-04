@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrenGen Social Media Templates</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e4e6ea 100%);
+            color: #2c2c2c;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1E9BD8, #D2691E);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            padding: 40px;
+        }
+        
+        .template-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .template-card:hover {
+            border-color: #1E9BD8;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(30, 155, 216, 0.15);
+        }
+        
+        .template-preview {
+            position: relative;
+            background: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+        }
+        
+        .template-info {
+            padding: 25px;
+            background: white;
+        }
+        
+        .template-title {
+            font-size: 1.4em;
+            color: #1E9BD8;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .template-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+        .template-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .spec-item {
+            background: rgba(30, 155, 216, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            text-align: center;
+        }
+        
+        .spec-label {
+            color: #D2691E;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .spec-value {
+            color: #1E9BD8;
+            font-weight: bold;
+        }
+        
+        /* Social Media Post Styles */
+        .social-post {
+            width: 350px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .post-header {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-circle {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+        
+        .profile-segment {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 5px solid transparent;
+        }
+        
+        .profile-blue {
+            border-top-color: #1E9BD8;
+            border-left-color: #1E9BD8;
+            border-bottom-color: #1E9BD8;
+            transform: rotate(-45deg);
+        }
+        
+        .profile-orange {
+            border-top-color: #D2691E;
+            border-right-color: #D2691E;
+            border-bottom-color: #D2691E;
+            transform: rotate(135deg);
+        }
+        
+        .post-info h4 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 2px;
+        }
+        
+        .post-info .handle {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .post-time {
+            font-size: 11px;
+            color: #999;
+            margin-left: auto;
+        }
+        
+        .post-content {
+            padding: 15px;
+        }
+        
+        .post-text {
+            font-size: 14px;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .post-hashtags {
+            color: #1E9BD8;
+            font-weight: bold;
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #1E9BD8, #D2691E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .post-stats {
+            padding: 15px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            color: #1E9BD8;
+        }
+        
+        /* Instagram Story Style */
+        .instagram-story {
+            width: 200px;
+            height: 350px;
+            background: linear-gradient(135deg, #1E9BD8, #D2691E);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .story-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .story-profile {
+            width: 30px;
+            height: 30px;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .story-username {
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .story-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .story-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .story-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .story-cta {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* LinkedIn Post Style */
+        .linkedin-post {
+            width: 360px;
+            background: white;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .linkedin-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .linkedin-profile {
+            width: 48px;
+            height: 48px;
+            position: relative;
+        }
+        
+        .linkedin-info h4 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 2px;
+        }
+        
+        .linkedin-info .title {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+        
+        .linkedin-info .time {
+            font-size: 11px;
+            color: #999;
+        }
+        
+        .linkedin-content {
+            padding: 0 15px 15px;
+        }
+        
+        .linkedin-text {
+            font-size: 14px;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .linkedin-image {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, rgba(30, 155, 216, 0.1), rgba(210, 105, 30, 0.1));
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #1E9BD8;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .linkedin-stats {
+            padding: 12px 15px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Twitter/X Style */
+        .twitter-post {
+            width: 340px;
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 12px;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .twitter-header {
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .twitter-profile {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+        
+        .twitter-info {
+            flex: 1;
+        }
+        
+        .twitter-info h4 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1E9BD8;
+            margin-bottom: 2px;
+        }
+        
+        .twitter-info .handle {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .twitter-text {
+            font-size: 15px;
+            color: #2c2c2c;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .twitter-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #1E9BD8, #D2691E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .twitter-stats {
+            padding: 8px 15px 15px;
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        /* Facebook Cover Style */
+        .facebook-cover {
+            width: 360px;
+            height: 140px;
+            background: linear-gradient(135deg, #1E9BD8, #D2691E);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .cover-content {
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .cover-logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+            position: relative;
+        }
+        
+        .cover-segment {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 8px solid transparent;
+        }
+        
+        .cover-blue {
+            border-top-color: white;
+            border-left-color: white;
+            border-bottom-color: white;
+            transform: rotate(-45deg);
+        }
+        
+        .cover-orange {
+            border-top-color: rgba(255,255,255,0.8);
+            border-right-color: rgba(255,255,255,0.8);
+            border-bottom-color: rgba(255,255,255,0.8);
+            transform: rotate(135deg);
+        }
+        
+        .cover-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cover-tagline {
+            font-size: 12px;
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .cover-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>OrenGen Social Media Templates</h1>
+            <p>Professional social media templates with your exact branding for maximum engagement and brand consistency</p>
+        </div>
+        
+        <div class="templates-grid">
+            <!-- LinkedIn Thought Leadership Post -->
+            <div class="template-card">
+                <div class="template-preview">
+                    <div class="linkedin-post">
+                        <div class="linkedin-header">
+                            <div class="linkedin-profile">
+                                <div class="profile-segment profile-blue"></div>
+                                <div class="profile-segment profile-orange"></div>
+                            </div>
+                            <div class="linkedin-info">
+                                <h4>OrenGen Worldwide</h4>
+                                <div class="title">AI Solutions Provider • HUB Certified</div>
+                                <div class="time">2h • 🌐</div>
+                            </div>
+                        </div>
+                        <div class="linkedin-content">
+                            <div class="linkedin-text">
+                                🚀 Just helped another manufacturing company automate 85% of their customer service operations.<br><br>
+                                The results? $2.4M in annual savings and 24/7 customer support.<br><br>
+                                AI isn't the future anymore - it's happening right now. The question is: are you ready to disrupt your industry?<br><br>
+                                <span style="color: #1E9BD8;">#AIAutomation #DigitalTransformation #ManufacturingInnovation</span>
+                            </div>
+                            <div class="linkedin-image">
+                                🤖 AI Success Story
+                            </div>
+                        </div>
+                        <div class="linkedin-stats">
+                            <span>👍 127 • 💬 23 • 🔄 45</span>
+                            <span>💾 Save</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">LinkedIn Thought Leadership</h3>
+                    <p class="template-description">Professional posts showcasing client success stories and industry insights to establish OrenGen as an AI thought leader.</p>
+                    <div class="template-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Platform</div>
+                            <div class="spec-value">LinkedIn</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Type</div>
+                            <div class="spec-value">Business Post</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Focus</div>
+                            <div class="spec-value">Case Studies</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">CTA</div>
+                            <div class="spec-value">Engagement</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Twitter/X Tech Announcement -->
+            <div class="template-card">
+                <div class="template-preview">
+                    <div class="twitter-post">
+                        <div class="twitter-header">
+                            <div class="twitter-profile">
+                                <div class="profile-segment profile-blue"></div>
+                                <div class="profile-segment profile-orange"></div>
+                            </div>
+                            <div class="twitter-info">
+                                <h4>OrenGen.iO</h4>
+                                <div class="handle">@OrenGenAI • 3h</div>
+                                <div class="twitter-text">
+                                    🎯 BREAKING: Our AI Virtual Employees just got even smarter!<br><br>
+                                    ✅ Advanced reasoning capabilities<br>
+                                    ✅ 15+ new language models<br>
+                                    ✅ Real-time learning<br><br>
+                                    Early access starts Monday. Who's ready to automate the future?<br><br>
+                                    <span class="post-hashtags">#AI #Automation #TechNews #Innovation</span>
+                                </div>
+                                <div class="twitter-image">
+                                    🚀 AI Agent 3.0
+                                </div>
+                            </div>
+                        </div>
+                        <div class="twitter-stats">
+                            <span>🔄 89</span>
+                            <span>❤️ 234</span>
+                            <span>💬 45</span>
+                            <span>📊 1.2K</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Twitter Tech Announcements</h3>
+                    <p class="template-description">Quick, engaging posts for product launches and tech updates with clear value propositions and strong CTAs.</p>
+                    <div class="template-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Platform</div>
+                            <div class="spec-value">Twitter/X</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Type</div>
+                            <div class="spec-value">Announcement</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Focus</div>
+                            <div class="spec-value">Product Launch</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">CTA</div>
+                            <div class="spec-value">Early Access</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Instagram Story -->
+            <div class="template-card">
+                <div class="template-preview">
+                    <div class="instagram-story">
+                        <div class="story-header">
+                            <div class="story-profile">
+                                <div class="profile-segment" style="border-color: white; transform: rotate(-45deg);"></div>
+                                <div class="profile-segment" style="border-color: rgba(255,255,255,0.8); transform: rotate(135deg);"></div>
+                            </div>
+                            <div class="story-username">@orengen.io</div>
+                        </div>
+                        <div class="story-content">
+                            <div class="story-title">Behind the Scenes</div>
+                            <div class="story-subtitle">Building the future of AI automation, one algorithm at a time</div>
+                            <div class="story-cta">Swipe Up</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Instagram Stories</h3>
+                    <p class="template-description">Behind-the-scenes content and company culture posts to humanize the OrenGen brand and build authentic connections.</p>
+                    <div class="template-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Platform</div>
+                            <div class="spec-value">Instagram</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Type</div>
+                            <div class="spec-value">Story</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Focus</div>
+                            <div class="spec-value">Culture</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Size</div>
+                            <div class="spec-value">1080x1920</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Facebook Cover -->
+            <div class="template-card">
+                <div class="template-preview">
+                    <div class="facebook-cover">
+                        <div class="cover-pattern"></div>
+                        <div class="cover-content">
+                            <div class="cover-logo">
+                                <div class="cover-segment cover-blue"></div>
+                                <div class="cover-segment cover-orange"></div>
+                            </div>
+                            <div class="cover-title">ORENGEN.iO</div>
+                            <div class="cover-tagline">BUILT TO DISRUPT. DESIGNED TO DELIVER.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Facebook Cover Photo</h3>
+                    <p class="template-description">Professional cover photo design that reinforces brand identity and communicates core value proposition at first glance.</p>
+                    <div class="template-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Platform</div>
+                            <div class="spec-value">Facebook</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Type</div>
+                            <div class="spec-value">Cover Photo</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Size</div>
+                            <div class="spec-value">820x312px</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Focus</div>
+                            <div class="spec-value">Branding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Educational Post -->
+            <div class="template-card">
+                <div class="template-preview">
+                    <div class="social-post">
+                        <div class="post-header">
+                            <div class="profile-pic">
+                                <div class="profile-circle">
+                                    <div class="profile-segment profile-blue"></div>
+                                    <div class="profile-segment profile-orange"></div>
+                                </div>
+                            </div>
+                            <div class="post-info">
+                                <h4>OrenGen Worldwide</h4>
+                                <div class="handle">AI Education Series</div>
+                            </div>
+                            <div class="post-time">5h</div>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-text">
+                                📚 AI Education Series: What is a Virtual Employee?<br><br>
+                                Unlike chatbots, AI Virtual Employees can:<br>
+                                • Handle complex conversations<br>
+                                • Learn from interactions<br>
+                                • Integrate with your existing systems<br>
+                                • Work 24/7 without breaks<br><br>
+                                Ready to meet your new digital workforce?<br><br>
+                                <span class="post-hashtags">#AIEducation #VirtualEmployees #BusinessAutomation #FutureOfWork</span>
+                            </div>
+                        </div>
+                        <div class="post-stats">
+                            <div class="stat-item">👍 158</div>
+                            <div class="stat-item">💬 42</div>
+                            <div class="stat-item">🔄 73</div>
+                            <div class="stat-item">📤 Share</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Educational Content</h3>
+                    <p class="template-description">Informative posts that educate audience about AI concepts while positioning OrenGen as the expert solution provider.</p>
+                    <div class="template-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Platform</div>
+                            <div class="spec-value">Multi-Platform</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Type</div>
+                            <div class="spec-value">Educational</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Focus</div>
+                            <div class="spec-value">AI Literacy</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">CTA</div>
+                            <div class="spec-value">Learn More</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Government Sector Post -->
+            <div class="template-card">
+                <div class="template-preview">
+                    <div class="linkedin-post">
+                        <div class="linkedin-header">
+                            <div class="linkedin-profile">
+                                <div class="profile-segment profile-blue"></div>
+                                <div class="profile-segment profile-orange"></div>
+                            </div>
+                            <div class="linkedin-info">
+                                <h4>OrenGen Worldwide</h4>
+                                <div class="title">HUB Certified • Government AI Solutions</div>
+                                <div class="time">1d • 🏛️</div>
+                            </div>
+                        </div>
+                        <div class="linkedin-content">
+                            <div class="linkedin-text">
+                                🏛️ Proud to support government agencies in their digital transformation journey.<br><br>
+                                Our FedRAMP-ready AI solutions are helping agencies:<br>
+                                ✅ Reduce citizen response times by 90%<br>
+                                ✅ Automate 85% of routine inquiries<br>
+                                ✅ Maintain highest security standards<br><br>
+                                As a HUB-certified minority business enterprise, we're committed to delivering mission-critical AI solutions that serve the public good.<br><br>
+                                <span style="color: #1E9BD8;">#GovTech #FedRAMP #AIGovernance #PublicService</span>
+                            </div>
+                            <div class="linkedin-image">
+                                🇺🇸 Government AI Solutions
+                            </div>
+                        </div>
+                        <div class="linkedin-stats">
+                            <span>👍 89 • 💬 12 • 🔄 34</span>
+                            <span>💾 Save</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3 class="template-title">Government Sector Content</h3>
+                    <p class="template-description">Professional posts targeting government agencies, emphasizing security, compliance, and public service impact.</p>
+                    <div class="template-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Platform</div>
+                            <div class="spec-value">LinkedIn</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Type</div>
+                            <div class="spec-value">Government</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Focus</div>
+                            <div class="spec-value">Public Sector</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Tone</div>
+                            <div class="spec-value">Professional</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
