@@ -2,7 +2,10 @@
 FROM nginx:alpine
 
 # Copy all HTML files to nginx web root
-COPY *.html /usr/share/nginx/html/
+COPY marketing/*.html /usr/share/nginx/html/
+
+# Copy assets folder with images
+COPY marketing/assets /usr/share/nginx/html/assets
 
 # Expose port 80
 EXPOSE 80
