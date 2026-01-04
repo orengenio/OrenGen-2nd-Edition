@@ -1,6 +1,9 @@
 # Use nginx to serve static files
 FROM nginx:alpine
 
+# Copy custom nginx config
+COPY marketing/nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy all HTML files to nginx web root
 COPY marketing/*.html /usr/share/nginx/html/
 
