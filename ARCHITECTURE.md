@@ -1,85 +1,123 @@
 # OrenGen.io - System Architecture
 
-Complete infrastructure for AI-powered automation platform.
+Complete 3-layer infrastructure for AI-powered automation platform.
 
-## 🏗️ System Overview
+## 🏗️ System Overview - 3 LAYERS
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    ORENGEN.IO PLATFORM                       │
-├─────────────────────────────────────────────────────────────┤
+│                    LAYER 1: PUBLIC                           │
+│  📱 orengen.io (Marketing Site) - Lead Generation           │
+│     ├─ Static HTML/CSS/JS                                    │
+│     ├─ Demo bar, lead capture forms                          │
+│     └─ Webhook to n8n → CRM                                  │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│                  LAYER 2: CLIENT PORTAL                      │
+│  🎯 app.orengen.io - White-Label Client Services            │
+│     ├─ AI Agents (voice, chat, automation)                   │
+│     ├─ Automations & Workflows                               │
+│     ├─ Websites & Funnels                                    │
+│     ├─ CRM (Twenty) - Client's contacts/deals               │
+│     ├─ Ads & Marketing campaigns                             │
+│     └─ Multi-tenant, branded per client                      │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│               LAYER 3: NEXUS ADMIN (YOU ONLY)                │
+│  ⚡ nexus.orengen.io - Mission Control Center                │
 │                                                               │
-│  📱 Frontend Layer                                           │
-│  ├─ orengen.io          → Marketing Site (Static HTML)      │
-│  ├─ crm.orengen.io      → Twenty CRM (Client Management)    │
-│  ├─ app.orengen.io      → Client Dashboard (Coming Soon)    │
-│  └─ admin.orengen.io    → Admin Portal (Coming Soon)        │
+│  📊 CONTROL ROOM                                             │
+│     ├─ CRM Database (all clients, contacts, deals)           │
+│     ├─ Universal Calendar (integrations)                     │
+│     └─ Knowledge Wiki                                        │
 │                                                               │
-│  ⚙️  Backend Services                                        │
-│  ├─ n8n.orengen.io      → Workflow Automation (Deployed)    │
-│  ├─ PostgreSQL          → Database (CRM + n8n)              │
-│  ├─ Redis               → Caching & Sessions                 │
-│  └─ API Gateway         → Custom Business Logic (TBD)       │
+│  📈 GROWTH                                                   │
+│     ├─ New Project wizard                                    │
+│     ├─ Brand & Press kit generator                           │
+│     ├─ UGC / Creator management                              │
+│     ├─ Web & Funnel builder                                  │
+│     ├─ Form Generator                                        │
+│     ├─ Omni-Channel Ops                                      │
+│     └─ Community & Courses                                   │
 │                                                               │
-│  🔌 External Integrations                                    │
-│  ├─ Twilio              → Voice & SMS                        │
-│  ├─ OpenAI              → GPT-4, Whisper, TTS               │
-│  ├─ Stripe              → Payment Processing                 │
-│  └─ Custom APIs         → Your integrations                  │
+│  🏛️ FEDERAL                                                  │
+│     ├─ Opportunity Studio (SAM.gov scouting)                 │
+│     ├─ RFP Intelligence                                      │
+│     ├─ Proposal Studio                                       │
+│     ├─ Grant Studio                                          │
+│     └─ Compliance & Risk                                     │
+│                                                               │
+│  🔧 INFRASTRUCTURE                                           │
+│     ├─ Integrations Hub (Twilio, OpenAI, etc)               │
+│     ├─ FOSS Registry                                         │
+│     ├─ Vault (Secrets management)                            │
+│     ├─ Automation (n8n workflows)                            │
+│     └─ Data & Sheets                                         │
+│                                                               │
+│  ⚙️ SYSTEM                                                   │
+│     ├─ Agent Studio (create/manage AI agents)                │
+│     ├─ API & Developers tools                                │
+│     └─ Settings                                              │
 │                                                               │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## 🖥️ Server Resources
-
-**Current Server:** 15.204.243.95
-
-### Recommended Allocation
-
-| Service          | Min RAM | Recommended | Production |
-|-----------------|---------|-------------|------------|
-| Marketing Site  | 256MB   | 512MB       | 1GB        |
-| Twenty CRM      | 2GB     | 4GB         | 8GB        |
-| n8n             | 1GB     | 2GB         | 4GB        |
-| PostgreSQL      | 512MB   | 2GB         | 4GB        |
-| Redis           | 256MB   | 512MB       | 1GB        |
-| **Total**       | **4GB** | **9GB**     | **18GB**   |
-
-**Note:** Start with 8-12GB server, scale up as needed.
-
 ## 🌐 Domain Configuration
 
-| Domain              | Service        | SSL | Status    |
-|---------------------|----------------|-----|-----------|
-| orengen.io          | Marketing      | ✅  | Live      |
-| crm.orengen.io      | Twenty CRM     | ⏳  | Setup     |
-| n8n.orengen.io      | n8n Workflows  | ⏳  | Deployed  |
-| app.orengen.io      | Client Portal  | ⏳  | Planned   |
-| admin.orengen.io    | Admin Panel    | ⏳  | Planned   |
+| Domain              | Layer          | Purpose                    | Status    |
+|---------------------|----------------|----------------------------|-----------|
+| orengen.io          | Public         | Marketing & Lead Gen       | ✅ Live   |
+| app.orengen.io      | Client Portal  | White-label client tools   | 📋 Build  |
+| nexus.orengen.io    | Admin Only     | Your control center        | ⏳ Deploy |
+| crm.orengen.io      | Backend        | Twenty CRM (internal)      | ⏳ Deploy |
+| n8n.orengen.io      | Backend        | Workflow automation        | ✅ Live   |
 
 ## 📂 Repository Structure
 
 ```
 /workspaces/home/
-├── marketing/              # Marketing website (orengen.io)
-│   ├── index.html         # Homepage
-│   ├── services.html      # Services page
-│   ├── pricing.html       # Pricing page
-│   ├── assets/            # Images, CSS, JS
-│   │   └── images/        # Local image storage
-│   ├── nginx.conf         # Web server config
-│   └── Dockerfile         # Container image
+├── marketing/              # ✅ LAYER 1 - Public Marketing (orengen.io)
+│   ├── index.html         # Homepage with demo bar, forms
+│   ├── services.html      # Services showcase
+│   ├── pricing.html       # Pricing tiers
+│   ├── case-studies.html  # Portfolio/case studies
+│   ├── about.html         # Company info, HUB certification
+│   ├── contact.html       # Contact forms
+│   ├── assets/images/     # Local images (11MB)
+│   ├── nginx.conf         # Custom nginx config
+│   └── Dockerfile         # Container build
 │
-├── crm/                   # Twenty CRM (crm.orengen.io)
+├── nexus/                 # ✅ LAYER 3 - Admin Platform (nexus.orengen.io)
+│   ├── App.tsx           # Main TanStack Router app
+│   ├── components/
+│   │   ├── NexusContext.tsx      # State management
+│   │   ├── Dashboard.tsx         # Control room
+│   │   ├── FederalDashboard.tsx  # Gov contracting
+│   │   ├── ProposalWorkstation.tsx
+│   │   ├── Settings.tsx          # Federal profile, integrations
+│   │   └── [...all Nexus components]
+│   ├── types.ts          # TypeScript definitions
+│   ├── constants.ts      # Initial data, configs
+│   └── package.json      # Dependencies (TanStack, Recharts, etc)
+│
+├── nexus-platform/        # ⚠️ DUPLICATE? (needs cleanup)
+│   └── [same structure as nexus/]
+│
+├── marketing-react/       # 🔄 React Marketing (optional alternative)
+│   └── [React version of marketing site]
+│
+├── crm/                   # ⏳ LAYER 2 Backend - Twenty CRM
 │   ├── docker-compose.yml # CRM stack
-│   ├── .env.example       # Configuration template
+│   ├── .env.example       # Configuration
 │   └── README.md          # Setup guide
 │
-├── wordpress/             # Legacy files (archived)
-│   └── WORDPRESS-INTEGRATION-GUIDE.md
-│
-├── Dockerfile             # Marketing site Docker image
-└── ARCHITECTURE.md        # This file
+├── ARCHITECTURE.md        # ✅ This file
+├── README.md             # ✅ Project status & checklist
+├── setup.sh              # ✅ Secret generation script
+├── Dockerfile            # ✅ Marketing site image
+└── docker-compose.yaml   # Root compose (if needed)
 ```
 
 ## 🔄 Data Flow Examples
@@ -133,37 +171,71 @@ for i in {1..4}; do openssl rand -base64 32; done
 
 ## 🚀 Deployment Steps
 
-### 1. Marketing Site (DONE ✅)
-- Deployed via Coolify
-- Dockerfile builds nginx container
-- Custom nginx.conf for clean URLs
-- SSL via Coolify/Traefik
+### Phase 1: Nexus Admin Platform (PRIORITY)
 
-### 2. Twenty CRM (IN PROGRESS ⏳)
+**Deploy your control center first:**
+
+1. **Prepare Nexus for production:**
+   ```bash
+   cd nexus
+   npm install
+   npm run build
+   ```
+
+2. **Create Nexus Dockerfile:**
+   - Build optimized production bundle
+   - Nginx to serve React app
+   - Environment variable injection
+
+3. **Deploy to Coolify:**
+   - Domain: `nexus.orengen.io`
+   - Enable authentication/password protection
+   - SSL via Coolify
+
+4. **Configure integrations:**
+   - Connect to Twenty CRM API
+   - Link n8n webhooks
+   - Set up API keys (Twilio, OpenAI, etc)
+
+### Phase 2: Twenty CRM (Backend)
+
+**Already configured, ready to deploy:**
+
 ```bash
+# Generate secrets
+./setup.sh
+
 # In Coolify:
-1. Create new "Docker Compose" service
+1. Create Docker Compose service
 2. Repository: orengenio/OrenGen-2nd-Edition
 3. Base directory: crm
-4. Add environment variables from .env.example
+4. Add environment variables
 5. Domain: crm.orengen.io
-6. Enable SSL
-7. Deploy!
+6. Deploy
 ```
 
-### 3. n8n Workflows (NEXT STEP)
-- Already running
-- Create integration workflows:
-  - Lead capture from marketing site
-  - CRM contact sync
-  - AI voice call triggers
-  - SMS automation
+### Phase 3: Client Portal (Future)
 
-### 4. Client Dashboard (FUTURE)
-- Next.js/React application
-- Authentication via Supabase or Twenty
-- White-label multi-tenant architecture
-- Real-time updates from n8n
+**Build white-label client interface:**
+
+- Option A: Clone Nexus, strip to client features only
+- Option B: Build fresh with Next.js/React
+- Features: Agents, Automations, Websites, CRM access, Marketing tools
+- Multi-tenant architecture
+- Domain: app.orengen.io
+
+### Phase 4: Integration & Testing
+
+1. **Connect layers:**
+   - Marketing forms → n8n → Twenty CRM
+   - Nexus → CRM API for client management
+   - Client Portal → CRM for their data
+
+2. **Test flows:**
+   - Lead capture end-to-end
+   - Client onboarding automation
+   - Federal opportunity scouting
+   - AI agent deployment
 
 ## 🔗 Integration Points
 
