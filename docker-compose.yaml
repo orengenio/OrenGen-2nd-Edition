@@ -4,3 +4,9 @@ services:
     expose:
       - "80"
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.orengen.rule=Host(`orengen.io`) || Host(`www.orengen.io`)"
+      - "traefik.http.routers.orengen.entrypoints=websecure"
+      - "traefik.http.routers.orengen.tls.certresolver=letsencrypt"
+      - "traefik.http.services.orengen.loadbalancer.server.port=80"
