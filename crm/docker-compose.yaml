@@ -6,7 +6,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_in_production}
+      POSTGRES_PASSWORD: OnjjPD1RSZxse6+3TnXjK5WBff5ACwUv
       POSTGRES_USER: twenty
       POSTGRES_DB: twenty
       # Performance tuning
@@ -69,21 +69,21 @@ services:
           memory: 1G
     environment:
       # Database
-      PG_DATABASE_URL: postgres://twenty:${POSTGRES_PASSWORD:-change_me_in_production}@postgres:5432/twenty
+      PG_DATABASE_URL: postgres://twenty:OnjjPD1RSZxse6+3TnXjK5WBff5ACwUv@postgres:5432/twenty
       
       # Redis
       REDIS_HOST: redis
       REDIS_PORT: 6379
       
       # App Config
-      SERVER_URL: ${SERVER_URL:-http://localhost:3000}
-      FRONT_BASE_URL: ${FRONT_BASE_URL:-http://localhost:3000}
+      SERVER_URL: https://crm.orengen.io
+      FRONT_BASE_URL: https://crm.orengen.io
       
-      # Auth - CHANGE THESE
-      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET:-your-secret-change-me}
-      LOGIN_TOKEN_SECRET: ${LOGIN_TOKEN_SECRET:-your-secret-change-me}
-      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET:-your-secret-change-me}
-      FILE_TOKEN_SECRET: ${FILE_TOKEN_SECRET:-your-secret-change-me}
+      # Auth
+      ACCESS_TOKEN_SECRET: ihnh0FZkBNYv5ZtXU7NOEE0CgyD8wbu3FgxsHKxWpzA=
+      LOGIN_TOKEN_SECRET: TFeAreiCoCoEDJe0MICuF41n/+cIOOqvdoRLCsiPAak=
+      REFRESH_TOKEN_SECRET: PLzacYuLg6M1LSwH6rNBi7wD6hu2o2x5xQoK88PQ0EE=
+      FILE_TOKEN_SECRET: kWHmZE5mpT5SidgyM+6fndAqAE5vFZzk8I1K3Dz1kEg=
       
       # Storage
       STORAGE_TYPE: local
