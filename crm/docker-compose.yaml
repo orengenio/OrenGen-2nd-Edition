@@ -48,6 +48,9 @@ services:
     image: twentycrm/twenty:latest
     expose:
       - 3000
+    networks:
+      - default
+      - coolify
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.crm.rule=Host(`crm.orengen.io`)"
@@ -55,6 +58,7 @@ services:
       - "traefik.http.routers.crm.tls=true"
       - "traefik.http.routers.crm.tls.certresolver=letsencrypt"
       - "traefik.http.services.crm.loadbalancer.server.port=3000"
+      - "traefik.docker.network=coolify"
     depends_on:
       postgres:
         condition: service_healthy
@@ -107,3 +111,8 @@ volumes:
   postgres-data:
   redis-data:
   twenty-storage:
+
+networks:
+  coolify:
+    external: true
+    name: coolify
