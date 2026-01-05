@@ -701,6 +701,14 @@
             border-bottom: 1px solid var(--border);
         }
 
+        .mobile-menu-header img {
+            filter: brightness(0) invert(1);
+        }
+
+        [data-theme="light"] .mobile-menu-header img {
+            filter: brightness(0) invert(0);
+        }
+
         .mobile-menu-close {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -1881,7 +1889,7 @@
             }
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .sidebar {
                 display: none !important;
             }
