@@ -65,8 +65,7 @@ services:
       PG_DATABASE_URL: postgres://twenty:OnjjPD1RSZxse6+3TnXjK5WBff5ACwUv@postgres:5432/twenty
       
       # Redis
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+      REDIS_URL: redis://redis:6379
       
       # App Config
       SERVER_URL: https://crm.orengen.io
