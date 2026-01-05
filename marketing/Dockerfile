@@ -4,8 +4,11 @@ FROM nginx:alpine
 # Copy all HTML files to nginx web root
 COPY *.html /usr/share/nginx/html/
 
-# Copy wordpress folder for assets if needed
-COPY wordpress /usr/share/nginx/html/wordpress/ 2>/dev/null || true
+# Copy assets folder
+COPY assets /usr/share/nginx/html/assets/
+
+# Copy nginx configuration if exists
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
