@@ -148,82 +148,85 @@ const DevicePreview = ({ project }: { project: ProjectState }) => {
   return (
     <div className="flex flex-col h-full w-full">
       {/* Canvas */}
-      <div className="flex-grow flex flex-col xl:flex-row items-center justify-center gap-6 bg-slate-800/50 rounded-2xl border border-slate-800 p-8 relative overflow-y-auto min-h-[400px]">
+      <div className="flex-grow flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 bg-slate-800/50 rounded-2xl border border-slate-800 p-4 md:p-8 relative overflow-y-auto min-h-[400px]">
         {/* Background Grid */}
         <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#475569 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
 
-        {/* Mobile View */}
-        <div className="w-[280px] shrink-0 bg-white rounded-3xl overflow-hidden shadow-2xl relative z-10 animate-in zoom-in duration-300 border-4 border-slate-700">
-          <div className="bg-gray-100 p-3 border-b border-gray-200 flex justify-between items-center">
-            <span className="text-[10px] font-bold text-gray-400">Mobile</span>
-            <div className="w-8 h-1 bg-gray-300 rounded-full"></div>
-          </div>
-          <div className="p-3 bg-blue-50/50 flex gap-2 border-l-4 border-brand-blue">
-              <div className="w-8 h-8 flex-shrink-0"><Logo /></div>
-              <div className="flex-1 min-w-0">
-                <div className="flex justify-between items-baseline">
-                  <h4 className="font-bold text-xs text-gray-900 truncate pr-1">{project.brandName || 'Brand'}</h4>
-                  <span className="text-[8px] text-gray-400">Now</span>
-                </div>
-                <p className="text-[10px] text-gray-900 font-medium truncate">Welcome...</p>
-              </div>
-          </div>
-          {[1,2,3,4].map(i => (
-            <div key={i} className="p-3 flex gap-2 opacity-40">
-                <div className="w-8 h-8 rounded-full bg-gray-200" />
-                <div className="flex-1 space-y-2">
-                  <div className="h-2 bg-gray-200 rounded w-16" />
-                  <div className="h-1.5 bg-gray-100 rounded w-full" />
+        {/* Mobile & Tablet (Stacked) */}
+        <div className="flex flex-col gap-4 shrink-0">
+          {/* Mobile View */}
+          <div className="w-[220px] shrink-0 bg-white rounded-3xl overflow-hidden shadow-2xl relative z-10 animate-in zoom-in duration-300 border-4 border-slate-700">
+            <div className="bg-gray-100 p-2 border-b border-gray-200 flex justify-between items-center">
+              <span className="text-[9px] font-bold text-gray-400">Mobile</span>
+              <div className="w-6 h-1 bg-gray-300 rounded-full"></div>
+            </div>
+            <div className="p-2 bg-blue-50/50 flex gap-2 border-l-4 border-brand-blue">
+                <div className="w-6 h-6 flex-shrink-0"><Logo /></div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex justify-between items-baseline">
+                    <h4 className="font-bold text-[10px] text-gray-900 truncate pr-1">{project.brandName || 'Brand'}</h4>
+                    <span className="text-[7px] text-gray-400">Now</span>
+                  </div>
+                  <p className="text-[9px] text-gray-900 font-medium truncate">Welcome...</p>
                 </div>
             </div>
-          ))}
-        </div>
-
-        {/* Tablet View */}
-        <div className="w-[320px] shrink-0 bg-white rounded-xl overflow-hidden shadow-2xl relative z-10 flex h-[240px] animate-in zoom-in duration-300 border-4 border-slate-700">
-            <div className="w-1/3 border-r border-gray-100 bg-gray-50 p-2 space-y-2">
-              <div className="p-2 bg-white rounded shadow-sm flex items-center gap-2">
-                  <div className="w-6 h-6 flex-shrink-0"><Logo /></div>
-                  <div className="flex-1 min-w-0">
-                    <div className="h-1.5 bg-gray-800 rounded w-8 mb-1" />
+            {[1,2].map(i => (
+              <div key={i} className="p-2 flex gap-2 opacity-40">
+                  <div className="w-6 h-6 rounded-full bg-gray-200" />
+                  <div className="flex-1 space-y-1">
+                    <div className="h-1.5 bg-gray-200 rounded w-12" />
+                    <div className="h-1 bg-gray-100 rounded w-full" />
                   </div>
               </div>
-              {[1,2].map(i => (
-                <div key={i} className="flex gap-2 p-2 opacity-40">
-                    <div className="w-6 h-6 rounded-full bg-gray-200" />
-                    <div className="flex-1 space-y-1">
-                      <div className="h-1.5 bg-gray-300 rounded w-8" />
+            ))}
+          </div>
+
+          {/* Tablet View */}
+          <div className="w-[220px] shrink-0 bg-white rounded-xl overflow-hidden shadow-2xl relative z-10 flex h-[140px] animate-in zoom-in duration-300 border-4 border-slate-700">
+              <div className="w-1/3 border-r border-gray-100 bg-gray-50 p-1.5 space-y-1.5">
+                <div className="p-1.5 bg-white rounded shadow-sm flex items-center gap-1.5">
+                    <div className="w-5 h-5 flex-shrink-0"><Logo /></div>
+                    <div className="flex-1 min-w-0">
+                      <div className="h-1 bg-gray-800 rounded w-6 mb-0.5" />
                     </div>
                 </div>
-              ))}
-            </div>
-            <div className="flex-1 p-4">
-              <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 flex-shrink-0"><Logo /></div>
-                  <div>
-                    <h3 className="font-bold text-sm text-gray-900">{project.brandName || 'Brand'}</h3>
+                {[1].map(i => (
+                  <div key={i} className="flex gap-1.5 p-1.5 opacity-40">
+                      <div className="w-5 h-5 rounded-full bg-gray-200" />
+                      <div className="flex-1 space-y-0.5">
+                        <div className="h-1 bg-gray-300 rounded w-6" />
+                      </div>
                   </div>
+                ))}
               </div>
-              <div className="space-y-2">
-                  <div className="h-1.5 bg-gray-200 rounded w-full" />
-                  <div className="h-1.5 bg-gray-200 rounded w-11/12" />
-                  <div className="h-1.5 bg-gray-200 rounded w-3/4" />
+              <div className="flex-1 p-2">
+                <div className="flex items-center gap-2 mb-2">
+                    <div className="w-7 h-7 flex-shrink-0"><Logo /></div>
+                    <div>
+                      <h3 className="font-bold text-[10px] text-gray-900">{project.brandName || 'Brand'}</h3>
+                    </div>
+                </div>
+                <div className="space-y-1">
+                    <div className="h-1 bg-gray-200 rounded w-full" />
+                    <div className="h-1 bg-gray-200 rounded w-11/12" />
+                    <div className="h-1 bg-gray-200 rounded w-3/4" />
+                </div>
               </div>
-            </div>
+          </div>
         </div>
 
-        {/* Desktop View */}
-        <div className="w-[360px] shrink-0 bg-white rounded-lg shadow-2xl relative z-10 animate-in zoom-in duration-300 border border-gray-200">
+        {/* Desktop View - Larger */}
+        <div className="w-[380px] md:w-[420px] shrink-0 bg-white rounded-lg shadow-2xl relative z-10 animate-in zoom-in duration-300 border border-gray-200">
             <div className="bg-gray-100 px-3 py-2 flex gap-1.5 border-b border-gray-200">
                 <div className="w-2 h-2 rounded-full bg-red-400" />
                 <div className="w-2 h-2 rounded-full bg-yellow-400" />
                 <div className="w-2 h-2 rounded-full bg-green-400" />
             </div>
-            <div className="bg-white p-2">
-                <div className="flex items-center gap-3 py-2 border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer group px-2">
-                  <div className="w-3 h-3 border border-gray-300 rounded" />
-                  <div className="w-6 h-6 flex-shrink-0"><Logo /></div>
-                  <span className="font-bold text-xs text-gray-900 w-24 truncate">{project.brandName || 'Brand'}</span>
+            <div className="bg-white p-3">
+                <div className="flex items-center gap-3 py-2.5 border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer group px-2">
+                  <div className="w-3.5 h-3.5 border border-gray-300 rounded" />
+                  <div className="w-7 h-7 flex-shrink-0"><Logo /></div>
+                  <span className="font-bold text-sm text-gray-900 w-28 truncate">{project.brandName || 'Brand'}</span>
                   <span className="text-xs text-gray-600 flex-1 truncate">
                       <span className="font-semibold text-gray-900">Valid:</span> BIMI Checked
                   </span>
