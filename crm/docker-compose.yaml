@@ -54,7 +54,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.crm.rule=Host(`crm.orengen.io`)"
-      - "traefik.http.routers.crm.entrypoints=websecure"
+      - "traefik.http.routers.crm.entrypoints=https"
       - "traefik.http.routers.crm.tls=true"
       - "traefik.http.routers.crm.tls.certresolver=letsencrypt"
       - "traefik.http.services.crm.loadbalancer.server.port=3000"
