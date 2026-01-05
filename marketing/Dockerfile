@@ -7,9 +7,6 @@ COPY *.html /usr/share/nginx/html/
 # Copy assets folder
 COPY assets /usr/share/nginx/html/assets/
 
-# Copy nginx configuration if exists
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 # Expose port 80
 EXPOSE 80
 
