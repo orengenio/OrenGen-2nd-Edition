@@ -72,6 +72,7 @@ services:
       FRONT_BASE_URL: https://crm.orengen.io
       
       # Auth
+      APP_SECRET: ihnh0FZkBNYv5ZtXU7NOEE0CgyD8wbu3FgxsHKxWpzA=
       ACCESS_TOKEN_SECRET: ihnh0FZkBNYv5ZtXU7NOEE0CgyD8wbu3FgxsHKxWpzA=
       LOGIN_TOKEN_SECRET: TFeAreiCoCoEDJe0MICuF41n/+cIOOqvdoRLCsiPAak=
       REFRESH_TOKEN_SECRET: PLzacYuLg6M1LSwH6rNBi7wD6hu2o2x5xQoK88PQ0EE=
