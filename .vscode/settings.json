@@ -1,0 +1,24 @@
+{
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": true,
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.git": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bimiforge-files": true,
+    "/workspaces/bimiforge": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/bimiforge-files/**": true
+  },
+  "eslint.workingDirectories": [
+    "./nexus",
+    "./nexus-platform",
+    "./marketing-react"
+  ],
+  "typescript.disableAutomaticTypeAcquisition": false
+}
