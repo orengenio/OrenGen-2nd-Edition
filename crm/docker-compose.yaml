@@ -60,13 +60,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          memory: 2G
-        reservations:
-          memory: 1G
     environment:
       # Database
       PG_DATABASE_URL: postgres://twenty:OnjjPD1RSZxse6+3TnXjK5WBff5ACwUv@postgres:5432/twenty
@@ -90,20 +83,20 @@ services:
       STORAGE_LOCAL_PATH: /app/storage
       
       # Email (optional - configure later)
-      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-noreply@orengen.io}
-      EMAIL_FROM_NAME: ${EMAIL_FROM_NAME:-OrenGen CRM}
+      EMAIL_FROM_ADDRESS: noreply@orengen.io
+      EMAIL_FROM_NAME: OrenGen CRM
       
       # Features
       SIGN_IN_PREFILLED: false
-      
     volumes:
       - twenty-storage:/app/storage
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
       interval: 10s
