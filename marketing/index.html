@@ -572,7 +572,7 @@
 
         .navbar-item {
             position: relative;
-            color: #ffffff;
+            color: var(--text);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
@@ -581,7 +581,7 @@
         }
 
         .navbar-item:hover {
-            color: #ffffff;
+            color: var(--text);
             opacity: 0.8;
         }
 
@@ -1589,6 +1589,37 @@
             margin-top: 8px;
         }
 
+        .stat-growth {
+            color: #22c55e;
+        }
+
+        [data-theme="light"] .stat-growth {
+            color: #16a34a;
+        }
+
+        /* Featured Solutions Grid */
+        .featured-solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .solution-card:hover {
+            border-color: var(--border-orange);
+            transform: translateY(-4px);
+        }
+
         /* Workforce */
         .workforce-section {
             padding: 60px 40px;
@@ -1921,6 +1952,15 @@
 
             .feature-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .featured-solutions-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .solution-card {
+                padding: 24px;
             }
 
             .stats-section {
@@ -2436,10 +2476,9 @@
                     <p>Explore our most popular AI-powered services</p>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto;">
+                <div class="featured-solutions-grid">
                     <!-- AI Systems Card -->
-                    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--border-orange)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)'">
+                    <div class="solution-card">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; color: var(--orange); margin-bottom: 20px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                         <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">AI Systems (AIOps)</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Deploy intelligent AI agents that work 24/7, handling sales, support, and operations autonomously.</p>
@@ -2452,7 +2491,7 @@
                     </div>
 
                     <!-- Revenue & Marketing Card -->
-                    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--border-orange)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)'">
+                    <div class="solution-card">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; color: var(--orange); margin-bottom: 20px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Revenue & Marketing</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Unify sales, marketing, and customer success to drive predictable revenue growth.</p>
@@ -2465,7 +2504,7 @@
                     </div>
 
                     <!-- Infrastructure Card -->
-                    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--border-orange)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)'">
+                    <div class="solution-card">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; color: var(--orange); margin-bottom: 20px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                         <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Infrastructure & Security</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Enterprise-grade infrastructure and security solutions for your business.</p>
@@ -2484,22 +2523,22 @@
                 <div class="stat-item">
                     <div class="stat-value">1.2M<span>+</span></div>
                     <div class="stat-label">Calls Handled</div>
-                    <div class="stat-growth" style="color: #4ade80; font-size: 12px; margin-top: 8px;">↑ 127% YoY</div>
+                    <div class="stat-growth" style="font-size: 12px; margin-top: 8px;">↑ 127% YoY</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">850<span>k</span></div>
                     <div class="stat-label">Leads Generated</div>
-                    <div class="stat-growth" style="color: #4ade80; font-size: 12px; margin-top: 8px;">↑ 215% YoY</div>
+                    <div class="stat-growth" style="font-size: 12px; margin-top: 8px;">↑ 215% YoY</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">300<span>%</span></div>
                     <div class="stat-label">Average Client ROI</div>
-                    <div class="stat-growth" style="color: #4ade80; font-size: 12px; margin-top: 8px;">Industry avg: 180%</div>
+                    <div class="stat-growth" style="font-size: 12px; margin-top: 8px;">Industry avg: 180%</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">99.9<span>%</span></div>
                     <div class="stat-label">System Uptime SLA</div>
-                    <div class="stat-growth" style="color: #4ade80; font-size: 12px; margin-top: 8px;">Enterprise guaranteed</div>
+                    <div class="stat-growth" style="font-size: 12px; margin-top: 8px;">Enterprise guaranteed</div>
                 </div>
             </section>
 
@@ -2724,7 +2763,7 @@
                         transition: opacity 300ms;
                         content: " ";
                         display: block;
-                        background: #fff5;
+                        background: var(--text);
                         width: 50px;
                         height: 50px;
                         position: absolute;
