@@ -1615,6 +1615,10 @@
             cursor: pointer;
         }
 
+        .solution-card h3 {
+            color: var(--text);
+        }
+
         .solution-card:hover {
             border-color: var(--border-orange);
             transform: translateY(-4px);
@@ -1918,6 +1922,12 @@
         @media (max-width: 1200px) {
             .workforce-grid {
                 grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .featured-solutions-grid {
+                grid-template-columns: 1fr;
             }
         }
 
