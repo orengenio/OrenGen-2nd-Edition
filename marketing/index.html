@@ -1399,6 +1399,7 @@
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 12px;
+            color: var(--text);
         }
 
         .section-header p {
@@ -2490,16 +2491,23 @@
 
             <!-- Featured Solutions Section -->
             <section class="tabs-section">
+                <style>
+                    @media (max-width: 1024px) {
+                        .featured-solutions-grid {
+                            grid-template-columns: 1fr !important;
+                        }
+                    }
+                </style>
                 <div class="section-header">
                     <h2>Featured Solutions</h2>
                     <p>Explore our most popular AI-powered services</p>
                 </div>
 
-                <div class="featured-solutions-grid">
+                <div class="featured-solutions-grid" style="display: grid; gap: 24px;">
                     <!-- AI Systems Card -->
                     <div class="solution-card">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; color: var(--orange); margin-bottom: 20px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">AI Systems (AIOps)</h3>
+                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; color: var(--text);">AI Systems (AIOps)</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Deploy intelligent AI agents that work 24/7, handling sales, support, and operations autonomously.</p>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <div style="font-size: 14px; color: var(--text-muted);">• AI Agents (Employees)</div>
@@ -2512,7 +2520,7 @@
                     <!-- Revenue & Marketing Card -->
                     <div class="solution-card">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; color: var(--orange); margin-bottom: 20px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Revenue & Marketing</h3>
+                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; color: var(--text);">Revenue & Marketing</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Unify sales, marketing, and customer success to drive predictable revenue growth.</p>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <div style="font-size: 14px; color: var(--text-muted);">• Advertising</div>
@@ -2525,7 +2533,7 @@
                     <!-- Infrastructure Card -->
                     <div class="solution-card">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; color: var(--orange); margin-bottom: 20px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Infrastructure & Security</h3>
+                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; color: var(--text);">Infrastructure & Security</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">Enterprise-grade infrastructure and security solutions for your business.</p>
                         <div style="display: flex; flex-direction: column; gap: 8px;">
                             <div style="font-size: 14px; color: var(--text-muted);">• SMTP Infrastructure</div>
