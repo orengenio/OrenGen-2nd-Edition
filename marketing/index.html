@@ -168,8 +168,8 @@
             --border: rgba(255, 255, 255, 0.08);
             --border-orange: rgba(204, 85, 0, 0.4);
             --text: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.6);
-            --text-muted: rgba(255, 255, 255, 0.4);
+            --text-secondary: #ffffff;
+            --text-muted: #ffffff;
         }
 
         [data-theme="light"] {
@@ -178,15 +178,20 @@
             --bg-card: rgba(0, 0, 0, 0.03);
             --bg-card-hover: rgba(0, 0, 0, 0.06);
             --border: rgba(0, 0, 0, 0.1);
-            --text: #0d0d0d;
-            --text-secondary: rgba(0, 0, 0, 0.6);
-            --text-muted: rgba(0, 0, 0, 0.4);
+            --text: #cc5500;
+            --text-secondary: #ffffff;
+            --text-muted: #ffffff;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* Global heading color fix for light/dark themes */
+        h1, h2, h3, h4, h5, h6 {
+            color: #cc5500;
         }
 
         body {
@@ -928,7 +933,7 @@
             margin-bottom: 24px;
             position: relative;
             letter-spacing: -1px;
-            color: white;
+            color: var(--text);
         }
 
         .hero h1 .line2 {
@@ -1189,6 +1194,7 @@
             font-size: 15px;
             font-weight: 600;
             margin-bottom: 4px;
+            color: var(--text);
         }
 
         .feature-item p {
@@ -1751,6 +1757,7 @@
         .testimonial-author {
             font-weight: 600;
             font-size: 14px;
+            color: var(--text);
         }
 
         .testimonial-role {
@@ -1776,6 +1783,7 @@
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 8px;
+            color: var(--text);
         }
 
         .newsletter-content p {
@@ -1884,6 +1892,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 16px;
+            color: var(--text);
         }
 
         .footer-col a {
@@ -2292,7 +2301,7 @@
                 <div class="feature-grid">
                     <div class="feature-content">
                         <span class="feature-badge">Flagship Technology</span>
-                        <h2 style="font-size: 42px; margin-bottom: 24px; font-family: 'Outfit', sans-serif;">Buy-Lingual™ <span style="color: var(--orange);">AI Agents</span></h2>
+                        <h2 style="font-size: 42px; margin-bottom: 24px; font-family: 'Outfit', sans-serif; color: var(--text);">Buy-Lingual™ <span style="color: var(--orange);">AI Agents</span></h2>
                         <p style="font-size: 18px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 32px;">Stop losing leads to language barriers and missed calls. Our proprietary Buy-Lingual™ AI Agents handle both <strong style="color: var(--text);">Inbound Support</strong> and <strong style="color: var(--text);">Outbound Sales</strong> with human-like fluency in multiple languages.</p>
                         
                         <div class="feature-list">
@@ -2382,7 +2391,7 @@
                 <!-- Agent Showcase -->
                 <div style="margin-top: 80px;">
                     <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-                        <h2 style="font-size: 36px; margin-bottom: 16px;">Meet Your New Workforce</h2>
+                        <h2 style="font-size: 36px; margin-bottom: 16px; color: var(--text);">Meet Your New Workforce</h2>
                         <p style="font-size: 18px; color: var(--text-secondary);">Deploy these specialized agents instantly. No training required.</p>
                     </div>
                     <div class="workforce-grid">
@@ -2573,7 +2582,7 @@
             <!-- Case Studies Section -->
             <section class="case-studies-section" style="padding: 80px 40px; border-top: 1px solid var(--border); background: var(--bg-dark);">
                 <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-                    <h2 style="font-size: 42px; margin-bottom: 16px;">Client Success Stories</h2>
+                    <h2 style="font-size: 42px; margin-bottom: 16px; color: var(--text);">Client Success Stories</h2>
                     <p style="font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Real results from organizations leveraging our AI-powered platform</p>
                 </div>
 
@@ -2581,7 +2590,7 @@
                     <!-- Case Study 1 -->
                     <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--border-orange)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)'">
                         <img src="https://via.placeholder.com/80x80/1a1a1a/C85A3D?text=Logo" alt="Client Logo" style="width: 80px; height: 80px; border-radius: 12px; margin-bottom: 24px;">
-                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Enterprise SaaS Company</h3>
+                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; color: var(--text);">Enterprise SaaS Company</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">How we helped a Fortune 500 SaaS company reduce customer acquisition cost by 67% while tripling qualified lead volume.</p>
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 24px;">
                             <div>
@@ -2602,7 +2611,7 @@
                     <!-- Case Study 2 -->
                     <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--border-orange)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)'">
                         <img src="https://via.placeholder.com/80x80/1a1a1a/C85A3D?text=Logo" alt="Client Logo" style="width: 80px; height: 80px; border-radius: 12px; margin-bottom: 24px;">
-                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Healthcare Technology Leader</h3>
+                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; color: var(--text);">Healthcare Technology Leader</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">Automated 1.2M patient interactions annually with 99.4% satisfaction rate using our AI voice agents.</p>
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 24px;">
                             <div>
@@ -2623,7 +2632,7 @@
                     <!-- Case Study 3 -->
                     <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--border-orange)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)'">
                         <img src="https://via.placeholder.com/80x80/1a1a1a/C85A3D?text=Logo" alt="Client Logo" style="width: 80px; height: 80px; border-radius: 12px; margin-bottom: 24px;">
-                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Financial Services Firm</h3>
+                        <h3 style="font-size: 24px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; color: var(--text);">Financial Services Firm</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">Achieved 450% ROI in 8 months by deploying our intelligent automation platform across 12 departments.</p>
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 24px;">
                             <div>
@@ -2646,7 +2655,7 @@
             <!-- Testimonials Section -->
             <section class="testimonials-section" style="padding: 80px 40px; border-top: 1px solid var(--border); background: linear-gradient(to bottom, var(--bg-dark), var(--bg-sidebar));">
                 <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-                    <h2 style="font-size: 42px; margin-bottom: 16px;">What Our Clients Say</h2>
+                    <h2 style="font-size: 42px; margin-bottom: 16px; color: var(--text);">What Our Clients Say</h2>
                     <p style="font-size: 18px; color: var(--text-secondary);">Trusted by industry leaders worldwide</p>
                 </div>
 
@@ -2704,7 +2713,7 @@
             <!-- Trust & Security Section -->
             <section class="security-section" style="padding: 60px 40px; border-top: 1px solid var(--border); background: var(--bg-dark);">
                 <div class="section-header" style="text-align: center; margin-bottom: 48px;">
-                    <h2 style="font-size: 32px; margin-bottom: 12px;">Enterprise-Grade Security & Compliance</h2>
+                    <h2 style="font-size: 32px; margin-bottom: 12px; color: var(--text);">Enterprise-Grade Security & Compliance</h2>
                     <p style="font-size: 16px; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Your data security is our top priority. We maintain the highest industry standards.</p>
                 </div>
 
@@ -2962,7 +2971,7 @@
             <!-- Review Platforms Section -->
             <section style="padding: 60px 40px; border-top: 1px solid var(--border);">
                 <div class="section-header" style="text-align: center; margin-bottom: 32px;">
-                    <h2 style="font-size: 32px; margin-bottom: 12px;">Review Us On Any of the Following Platforms</h2>
+                    <h2 style="font-size: 32px; margin-bottom: 12px; color: var(--text);">Review Us On Any of the Following Platforms</h2>
                     <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 24px;">Your feedback helps us improve and serve you better</p>
                     <!-- 5-Star Rating Image -->
                     <div style="margin: 20px 0;">
@@ -3088,12 +3097,7 @@
                         <a href="#">Why Choose Us</a>
                     </div>
                     <div class="footer-col">
-                        <h4>Marketplace</h4>
-                        <a href="#">Browse All Assets</a>
-                        <a href="#">Top Sellers</a>
-                        <a href="#">Automation Templates</a>
-                        <a href="#">AI Scripts & Prompts</a>
-                    </div>
+                    <!-- Marketplace column removed -->
                     <div class="footer-col">
                         <h4>Support</h4>
                         <a href="#">Work From Home Programs</a>
@@ -3154,7 +3158,7 @@
                     </div>
                 </div>
             </footer>
-        </div>
+                            <span>© Copyright 2026. OrenGen Worldwide. All Rights Reserved.</span>
     </main>
 
     <script>
