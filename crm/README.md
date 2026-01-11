@@ -1,10 +1,11 @@
-# B2B CRM with Role-Based Access Control
+# B2B CRM with Role-Based Access Control + Lead Generation
 
 ## Overview
-Enterprise-grade B2B CRM system built for OrenGen.io with comprehensive role-based access control.
+Enterprise-grade B2B CRM system built for OrenGen.io with comprehensive role-based access control and automated lead generation (Foylo/Cyberleads clone).
 
 ## Features
 - **Multi-level Access Control**: 6 role types (Super Admin, Admin, Sales Manager, Sales Rep, Account Manager, Viewer)
+- **Automated Lead Generation**: Domain scraping, tech stack detection, enrichment ($0-20/mo)
 - **Company Management**: Track prospects, customers, and partners
 - **Deal Pipeline**: Visual pipeline with customizable stages
 - **Activity Tracking**: Calls, emails, meetings, notes, tasks

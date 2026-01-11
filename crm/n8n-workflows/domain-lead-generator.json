@@ -1,0 +1,365 @@
+{
+  "name": "Domain Lead Generator (Foylo Clone)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 2 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule: Daily 2 AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://czds.icann.org/czds/downloads/{{$json.zone}}.zone.gz",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          },
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "name": "Download Zone File",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [450, 300],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "1",
+          "name": "ICANN CZDS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "// Parse zone file and extract newly registered domains\nconst zoneData = $input.item.binary.data.toString('utf-8');\nconst lines = zoneData.split('\\n');\nconst domains = [];\nconst today = new Date().toISOString().split('T')[0];\n\nfor (const line of lines) {\n  const parts = line.trim().split(/\\s+/);\n  if (parts.length >= 3 && parts[1] === 'A') {\n    const domain = parts[0].replace(/\\.$/, '');\n    domains.push({\n      domain: domain,\n      registeredDate: today,\n      scrapedDate: new Date().toISOString()\n    });\n  }\n}\n\nreturn domains.slice(0, 1000).map(d => ({ json: d }));"
+      },
+      "name": "Parse Zone File",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.domain}}",
+              "operation": "notContains",
+              "value2": "casino"
+            },
+            {
+              "value1": "={{$json.domain}}",
+              "operation": "notContains",
+              "value2": "porn"
+            },
+            {
+              "value1": "={{$json.domain}}",
+              "operation": "notContains",
+              "value2": "xxx"
+            }
+          ]
+        }
+      },
+      "name": "Filter Spam Domains",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.whoxy.com/?key={{$credentials.whoxyApi.key}}&whois={{$json.domain}}",
+        "options": {}
+      },
+      "name": "Get WHOIS Data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1050, 300],
+      "credentials": {
+        "whoxyApi": {
+          "id": "2",
+          "name": "Whoxy API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=webanalyze -host {{$json.domain}} -output json"
+      },
+      "name": "Detect Tech Stack",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "// Lead scoring algorithm\nconst domain = $json.domain;\nconst whois = $json.whoisData;\nconst tech = $json.techStack;\nlet score = 0;\n\n// Domain age (newer = better)\nconst regDate = new Date(whois.registration_date);\nconst daysSince = (Date.now() - regDate) / (1000 * 60 * 60 * 24);\nif (daysSince < 7) score += 30;\nelse if (daysSince < 30) score += 20;\nelse if (daysSince < 90) score += 10;\n\n// Tech stack matches\nif (tech.cms === 'WordPress') score += 15;\nif (tech.cms === 'Shopify') score += 20;\nif (tech.cms === 'Wix') score += 10;\nif (tech.frameworks && tech.frameworks.includes('React')) score += 10;\n\n// Contact forms\nif (tech.hasContactForm) score += 15;\nelse score -= 10;\n\n// Email found\nif (whois.registrant_email) score += 20;\n\n// Organization info\nif (whois.registrant_organization) score += 10;\n\n// Target country\nif (whois.registrant_country === 'US') score += 10;\n\n// Clamp to 0-100\nscore = Math.max(0, Math.min(100, score));\n\nreturn [{\n  json: {\n    ...domain,\n    whoisData: whois,\n    techStack: tech,\n    leadScore: score\n  }\n}];"
+      },
+      "name": "Calculate Lead Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO domain_leads (domain, registered_date, scraped_date, whois_data, tech_stack, lead_score, status)\nVALUES ($1, $2, $3, $4::jsonb, $5::jsonb, $6, 'enriched')\nON CONFLICT (domain) DO UPDATE SET\n  whois_data = EXCLUDED.whois_data,\n  tech_stack = EXCLUDED.tech_stack,\n  lead_score = EXCLUDED.lead_score,\n  status = EXCLUDED.status,\n  updated_at = NOW()",
+        "additionalFields": {
+          "mode": "values",
+          "values": {
+            "values": [
+              {
+                "column": "$1",
+                "value": "={{$json.domain}}"
+              },
+              {
+                "column": "$2",
+                "value": "={{$json.registeredDate}}"
+              },
+              {
+                "column": "$3",
+                "value": "={{$json.scrapedDate}}"
+              },
+              {
+                "column": "$4",
+                "value": "={{JSON.stringify($json.whoisData)}}"
+              },
+              {
+                "column": "$5",
+                "value": "={{JSON.stringify($json.techStack)}}"
+              },
+              {
+                "column": "$6",
+                "value": "={{$json.leadScore}}"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Save to PostgreSQL",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1650, 300],
+      "credentials": {
+        "postgres": {
+          "id": "3",
+          "name": "OrenGen CRM DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.leadScore}}",
+              "operation": "largerEqual",
+              "value2": 80
+            }
+          ]
+        }
+      },
+      "name": "High-Value Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1850, 300]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.hunter.io/v2/domain-search?domain={{$json.domain}}&api_key={{$credentials.hunterApi.key}}",
+        "options": {}
+      },
+      "name": "Find Emails (Hunter.io)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [2050, 200],
+      "credentials": {
+        "hunterApi": {
+          "id": "4",
+          "name": "Hunter.io API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE domain_leads SET enrichment_data = $1::jsonb WHERE domain = $2",
+        "additionalFields": {
+          "mode": "values",
+          "values": {
+            "values": [
+              {
+                "column": "$1",
+                "value": "={{JSON.stringify($json.hunterData)}}"
+              },
+              {
+                "column": "$2",
+                "value": "={{$json.domain}}"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Update Enrichment Data",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [2250, 200]
+    },
+    {
+      "parameters": {
+        "channel": "#lead-generation",
+        "text": "=🎯 New high-value lead found!\n\nDomain: {{$json.domain}}\nScore: {{$json.leadScore}}/100\nCMS: {{$json.techStack.cms}}\nCountry: {{$json.whoisData.registrant_country}}\nEmails: {{$json.enrichmentData?.emails?.length || 0}}\n\nView in CRM: https://app.orengen.io/crm/leads/{{$json.id}}",
+        "otherOptions": {}
+      },
+      "name": "Notify Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2450, 200],
+      "credentials": {
+        "slackApi": {
+          "id": "5",
+          "name": "OrenGen Slack"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule: Daily 2 AM": {
+      "main": [
+        [
+          {
+            "node": "Download Zone File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Zone File": {
+      "main": [
+        [
+          {
+            "node": "Parse Zone File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Zone File": {
+      "main": [
+        [
+          {
+            "node": "Filter Spam Domains",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Spam Domains": {
+      "main": [
+        [
+          {
+            "node": "Get WHOIS Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get WHOIS Data": {
+      "main": [
+        [
+          {
+            "node": "Detect Tech Stack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect Tech Stack": {
+      "main": [
+        [
+          {
+            "node": "Calculate Lead Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Lead Score": {
+      "main": [
+        [
+          {
+            "node": "Save to PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to PostgreSQL": {
+      "main": [
+        [
+          {
+            "node": "High-Value Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "High-Value Lead?": {
+      "main": [
+        [
+          {
+            "node": "Find Emails (Hunter.io)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Emails (Hunter.io)": {
+      "main": [
+        [
+          {
+            "node": "Update Enrichment Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Enrichment Data": {
+      "main": [
+        [
+          {
+            "node": "Notify Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

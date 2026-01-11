@@ -206,3 +206,109 @@ export interface SalesMetrics {
   averageSalesCycle: number; // days
   forecastedRevenue: number;
 }
+
+// Lead Generation System (Foylo/Cyberleads Clone)
+export interface LeadSource {
+  id: string;
+  type: 'domain_scrape' | 'manual' | 'referral' | 'inbound' | 'purchased';
+  name: string;
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface DomainLead {
+  id: string;
+  domain: string;
+  registeredDate: string;
+  scrapedDate: string;
+  whoisData?: WhoisData;
+  techStack?: TechStack;
+  enrichmentData?: EnrichmentData;
+  leadScore: number; // 0-100
+  status: 'new' | 'enriched' | 'qualified' | 'contacted' | 'converted' | 'rejected';
+  assignedTo?: string;
+  companyId?: string; // If converted to CRM company
+  contactId?: string;  // If converted to CRM contact
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WhoisData {
+  registrar: string;
+  registrationDate: string;
+  expirationDate: string;
+  nameServers: string[];
+  registrantEmail?: string;
+  registrantOrg?: string;
+  registrantCountry?: string;
+}
+
+export interface TechStack {
+  cms?: string; // WordPress, Shopify, Wix, etc.
+  frameworks: string[]; // React, Vue, Laravel, etc.
+  analytics: string[]; // Google Analytics, Plausible, etc.
+  marketing: string[]; // Mailchimp, HubSpot, etc.
+  ecommerce?: string; // WooCommerce, Shopify, etc.
+  hosting?: string;
+  cdn?: string;
+  hasContactForm: boolean;
+  hasLiveChat: boolean;
+  detectedAt: string;
+}
+
+export interface EnrichmentData {
+  emails: string[];
+  phones: string[];
+  socialMedia?: {
+    linkedin?: string;
+    facebook?: string;
+    twitter?: string;
+    instagram?: string;
+  };
+  estimatedTraffic?: number;
+  companySize?: string;
+  industry?: string;
+  enrichedAt: string;
+  source: 'hunter' | 'snov' | 'manual' | 'whoxy';
+}
+
+export interface LeadGenCampaign {
+  id: string;
+  name: string;
+  filters: LeadFilter;
+  status: 'draft' | 'active' | 'paused' | 'completed';
+  leadsGenerated: number;
+  leadsQualified: number;
+  leadsContacted: number;
+  leadsConverted: number;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LeadFilter {
+  tlds?: string[]; // .com, .io, .ai, etc.
+  technologies?: string[]; // WordPress, Shopify, etc.
+  excludeTechnologies?: string[]; // Filter out sites with these
+  hasContactForm?: boolean;
+  hasLiveChat?: boolean;
+  registeredAfter?: string;
+  registeredBefore?: string;
+  countries?: string[];
+  minLeadScore?: number;
+  keywords?: string[]; // In domain name or page content
+}
+
+export interface LeadGenConfig {
+  icannCzdsEnabled: boolean;
+  icannCzdsUsername?: string;
+  icannCzdsPassword?: string;
+  whoxyApiKey?: string;
+  hunterApiKey?: string;
+  snovApiKey?: string;
+  scanFrequency: 'hourly' | 'daily' | 'weekly';
+  maxDomainsPerRun: number;
+  autoEnrichment: boolean;
+  autoScoring: boolean;
+}
