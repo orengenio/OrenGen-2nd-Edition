@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orengen.io/case-studies">
     <meta property="og:title" content="Case Studies | OrenGen Success Stories">
-    <meta property="og:description" content="Discover how leading companies achieved 300%+ ROI with OrenGen.io AI solutions. Real metrics and proven results from Buy-Lingual™ AI Agents.">
+    <meta property="og:description" content="Discover how leading companies achieved 300%+ ROI with OrenGen.io AI solutions. Real metrics, proven results: 65% cost reduction, 89% faster response, 156% revenue growth with Buy-Lingual™ AI Agents.">
     <meta property="og:image" content="./assets/images/logo.png">
     <meta property="og:site_name" content="OrenGen.io">
     <meta property="og:locale" content="en_US">
@@ -27,7 +27,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://orengen.io/case-studies">
     <meta property="twitter:title" content="Case Studies | OrenGen Success Stories">
-    <meta property="twitter:description" content="Discover how leading companies achieved 300%+ ROI with OrenGen.io AI solutions. Real metrics and proven results from Buy-Lingual™ AI Agents.">
+    <meta property="twitter:description" content="Discover how leading companies achieved 300%+ ROI with OrenGen.io AI solutions. Real metrics, proven results: 65% cost reduction, 89% faster response, 156% revenue growth with Buy-Lingual™ AI Agents.">
     <meta property="twitter:image" content="./assets/images/logo.png">
     <meta name="twitter:site" content="@orengenio">
     <meta name="twitter:creator" content="@orengenio">
@@ -38,9 +38,17 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/images/favicon.png">
     <link rel="apple-touch-icon" href="./assets/images/favicon.png">
-    
-    <!-- Fonts -->
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://blog.orengen.io">
+
+    <!-- Fonts with optimized loading -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -92,1188 +100,575 @@
     }
     </script>
     
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "AI Business Automation",
-        "provider": {
-            "@type": "Organization",
-            "name": "OrenGen Worldwide"
-        },
-        "areaServed": "Worldwide",
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "AI Solutions",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Buy-Lingual™ AI Agents",
-                        "description": "24/7 multilingual AI voice agents for sales and support"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "AI Call Center",
-                        "description": "Automated inbound and outbound call handling"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Lead Generation",
-                        "description": "AI-powered lead generation and qualification"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
-    
+    <!-- Page-specific Styles -->
     <style>
-        :root {
-            --primary: #C85A3D;
-            --secondary: #1A4D7A;
-            --accent: #4ade80;
-            --text: #1a1a1a;
-            --bg: #ffffff;
-            --bg-dark: #f8f9fa;
-            --border: #e0e0e0;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-        
-        [data-theme="dark"] {
-            --text: #ffffff;
-            --bg: #0a0a0a;
-            --bg-dark: #1a1a1a;
-            --border: #2a2a2a;
-            --shadow: rgba(255, 255, 255, 0.05);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-        
-        .container {
-            max-width: 1400px;
+        .page-container {
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
-        /* Sidebar Controls */
-        .sidebar-controls {
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .control-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 2px solid var(--border);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-        
-        .control-btn:hover {
-            transform: scale(1.1);
-            border-color: var(--primary);
-        }
-        
-        /* Top Bar */
-        .topbar {
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-        
-        .topbar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text);
-        }
-        
-        .logo img {
-            height: 40px;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-        }
-        
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        nav a:hover, nav a.active {
-            color: var(--primary);
-        }
-        
-        .cta-btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease;
-        }
-        
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            color: white;
-        }
-        
-        /* Breadcrumb */
+
         .breadcrumb {
             padding: 2rem 0 1rem;
             font-size: 0.9rem;
+            margin-top: 80px;
         }
-        
+
         .breadcrumb a {
             color: var(--text);
             text-decoration: none;
             opacity: 0.7;
-            transition: opacity 0.3s ease;
+            transition: color 0.2s;
         }
-        
+
         .breadcrumb a:hover {
+            color: var(--orange);
             opacity: 1;
-            color: var(--primary);
         }
-        
+
         .breadcrumb span {
             margin: 0 0.5rem;
             opacity: 0.5;
         }
-        
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));
-        }
-        
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero p {
-            font-size: 1.25rem;
-            opacity: 0.8;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Stats Banner */
-        .stats-banner {
-            background: var(--primary);
-            color: white;
-            padding: 2rem 0;
-            margin: 2rem 0;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        
-        .stat-item h3 {
-            font-size: 2.5rem;
-            font-family: 'Outfit', sans-serif;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-item p {
-            opacity: 0.9;
-            font-size: 0.95rem;
-        }
-        
-        /* Case Study Cards */
-        .case-studies-section {
-            padding: 4rem 0;
-        }
-        
-        .case-study {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 4rem;
-            transition: all 0.3s ease;
-        }
-        
-        .case-study:hover {
-            box-shadow: 0 12px 40px var(--shadow);
-            transform: translateY(-4px);
-        }
-        
-        .case-header {
-            background: linear-gradient(135deg, rgba(200, 90, 61, 0.1), rgba(26, 77, 122, 0.1));
-            padding: 3rem;
+
+        .page-hero {
+            padding: 3rem 0;
             border-bottom: 1px solid var(--border);
         }
-        
-        .case-meta {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-            opacity: 0.8;
-        }
-        
-        .meta-icon {
-            width: 20px;
-            height: 20px;
-            color: var(--primary);
-        }
-        
-        .case-header h2 {
+
+        .page-hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--primary);
+            color: var(--orange);
         }
-        
-        .case-header p {
-            font-size: 1.125rem;
-            opacity: 0.8;
+
+        .page-content {
+            padding: 3rem 0;
         }
-        
-        .case-content {
-            padding: 3rem;
+
+        .page-content h2 {
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--orange);
         }
-        
-        .case-section {
-            margin-bottom: 3rem;
+
+        .page-content h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--text);
         }
-        
-        .case-section h3 {
-            font-size: 1.5rem;
+
+        .page-content p {
             margin-bottom: 1rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .section-icon {
-            width: 28px;
-            height: 28px;
-        }
-        
-        .case-section p {
             line-height: 1.8;
-            margin-bottom: 1rem;
         }
-        
-        .case-section ul {
-            list-style: none;
-            margin-left: 0;
+
+        .page-content ul, .page-content ol {
+            margin: 1rem 0 1rem 2rem;
+            line-height: 1.8;
         }
-        
-        .case-section li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
-            position: relative;
+
+        .page-content li {
+            margin-bottom: 0.75rem;
         }
-        
-        .case-section li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        /* Results Grid */
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .result-card {
-            background: var(--bg-dark);
+
+        .contact-box {
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 12px;
-            text-align: center;
-            border: 2px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        
-        .result-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-        }
-        
-        .result-value {
-            font-size: 3rem;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-label {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-        
-        .result-description {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-        
-        /* Quote Block */
-        .quote-block {
-            background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));
-            padding: 2.5rem;
-            border-left: 4px solid var(--primary);
-            border-radius: 8px;
             margin: 2rem 0;
-        }
-        
-        .quote-text {
-            font-size: 1.25rem;
-            font-style: italic;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-        
-        .quote-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-        
-        .author-info strong {
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-        
-        .author-info span {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-        
-        /* Technologies Used */
-        .tech-stack {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-        
-        .tech-badge {
-            background: var(--bg-dark);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
             border: 1px solid var(--border);
-            font-size: 0.9rem;
-            font-weight: 500;
         }
-        
-        /* CTA Section */
-        .cta-section {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(200, 90, 61, 0.1), rgba(26, 77, 122, 0.1));
-            margin: 4rem 0 0;
+
+        .contact-box h3 {
+            margin-top: 0;
         }
-        
-        .cta-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-section p {
-            font-size: 1.25rem;
-            opacity: 0.8;
-            margin-bottom: 2rem;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--bg-dark);
-            border-top: 1px solid var(--border);
-            padding: 3rem 0 2rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.125rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        
-        .footer-section ul {
-            list-style: none;
-        }
-        
-        .footer-section li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-section a {
-            color: var(--text);
+
+        .contact-box a {
+            color: var(--orange);
             text-decoration: none;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
         }
-        
-        .footer-section a:hover {
-            opacity: 1;
-            color: var(--primary);
+
+        .contact-box a:hover {
+            text-decoration: underline;
         }
-        
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .social-icons a {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        
-        .social-icons a:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            opacity: 0.7;
-        }
-        
+
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .sidebar-controls {
-                right: 1rem;
-            }
-            
-            nav ul {
-                display: none;
-            }
-            
-            .case-header, .case-content {
-                padding: 2rem;
-            }
-            
-            .case-header h2 {
+            .page-hero h1 {
                 font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar Controls -->
-    <div class="sidebar-controls">
-        <button class="control-btn" id="themeToggle" aria-label="Toggle theme">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-        </button>
-        
-        <div id="google_translate_element" style="display: none;"></div>
-        <button class="control-btn" id="translateToggle" aria-label="Translate page">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="M12 8v4l2 2"></path>
-            </svg>
-        </button>
-    </div>
-
-    <!-- Top Bar -->
-    <div class="topbar">
-        <div class="container">
-            <div class="topbar-content">
-                <a href="index.html" class="logo">
-                    <img src="https://orengen.io/assets/logo.png" alt="OrenGen.io" onerror="this.style.display='none'">
-                    <span class="logo-text">OrenGen.io</span>
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="mainNavbar">
+            <div class="navbar-container">
+                <a href="index.html" class="navbar-logo">
+                    <img src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" class="logo-dark" fetchpriority="high">
                 </a>
+
+                <div class="navbar-menu">
+                    <a href="index.html" class="navbar-item">Home</a>
+
+                    <!-- Solutions Mega Menu -->
+                    <div class="mega-menu-wrapper">
+                        <a href="#" class="navbar-item">
+                            Solutions
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Buy-Lingual™ AI Agents</h4>
+                                        <p>24/7 multilingual voice AI for sales & support</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Call Center</h4>
+                                        <p>Automated inbound & outbound calling</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Lead Generation</h4>
+                                        <p>AI-powered lead capture & qualification</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>CRM Automation</h4>
+                                        <p>Streamline your customer relationships</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Chatbots</h4>
+                                        <p>Intelligent customer conversations</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Analytics Dashboard</h4>
+                                        <p>Real-time insights & reporting</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mega-menu-divider"></div>
+                            <div class="mega-menu-footer">
+                                <div class="mega-menu-footer-text">
+                                    Need help choosing? <strong>Talk to our team</strong>
+                                </div>
+                                <a href="index.html#contact" class="mega-menu-cta">Contact Sales</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services Mega Menu -->
+                    <div class="mega-menu-wrapper">
+                        <a href="#" class="navbar-item">
+                            Services
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="16 18 22 12 16 6"></polyline>
+                                            <polyline points="8 6 2 12 8 18"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Web Development</h4>
+                                        <p>Custom websites & web applications</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>UI/UX Design</h4>
+                                        <p>Beautiful, user-centered interfaces</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <circle cx="12" cy="12" r="6"></circle>
+                                            <circle cx="12" cy="12" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Consulting</h4>
+                                        <p>Strategic AI implementation guidance</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                            <path d="M2 17l10 5 10-5"></path>
+                                            <path d="M2 12l10 5 10-5"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>API Integration</h4>
+                                        <p>Connect your existing systems</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Documentation</h4>
+                                        <p>Technical writing & API docs</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>24/7 Support</h4>
+                                        <p>Round-the-clock technical assistance</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mega-menu-divider"></div>
+                            <div class="mega-menu-footer">
+                                <div class="mega-menu-footer-text">
+                                    Looking for something specific? <strong>We're here to help</strong>
+                                </div>
+                                <a href="index.html#contact" class="mega-menu-cta">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="index.html#pricing" class="navbar-item">Pricing</a>
+                    <a href="index.html#about" class="navbar-item">About</a>
+                    <a href="contact.html" class="navbar-item">Contact</a>
+                </div>
+
+                <div class="navbar-actions">
+                    <a href="contact.html" class="navbar-login">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        Get Started
+                    </a>
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <img loading="lazy" src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" class="logo-dark" style="height: 32px;">
+                <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="mobile-menu-items">
+                <a href="index.html" class="mobile-menu-item">Home</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">Solutions</div>
+                </div>
+                <a href="#" class="mobile-menu-item">Buy-Lingual™ AI Agents</a>
+                <a href="#" class="mobile-menu-item">AI Call Center</a>
+                <a href="#" class="mobile-menu-item">Lead Generation</a>
+                <a href="#" class="mobile-menu-item">CRM Automation</a>
+                <a href="#" class="mobile-menu-item">AI Chatbots</a>
+                <a href="#" class="mobile-menu-item">Analytics Dashboard</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">Services</div>
+                </div>
+                <a href="#" class="mobile-menu-item">Web Development</a>
+                <a href="#" class="mobile-menu-item">UI/UX Design</a>
+                <a href="#" class="mobile-menu-item">AI Consulting</a>
+                <a href="#" class="mobile-menu-item">API Integration</a>
+                <a href="#" class="mobile-menu-item">Documentation</a>
+                <a href="#" class="mobile-menu-item">24/7 Support</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">More</div>
+                </div>
+                <a href="index.html#pricing" class="mobile-menu-item">Pricing</a>
+                <a href="index.html#about" class="mobile-menu-item">About</a>
+                <a href="contact.html" class="mobile-menu-item">Contact</a>
+                <a href="privacy.html" class="mobile-menu-item">Privacy Policy</a>
+                <a href="terms.html" class="mobile-menu-item">Terms of Service</a>
+            </div>
+        </div>
+
+        <div class="page-container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <strong>Case Studies</strong>
+            </div>
+
+            <div class="page-hero">
+                <h1>Customer Success Stories</h1>
+                <p>Real businesses. Real results. See how OrenGen's AI solutions have transformed companies across industries.</p>
+            </div>
+
+            <div class="page-content">
+
+                <h2>Proven Results Across Industries</h2>
+                <p>Our clients have achieved remarkable outcomes with OrenGen's AI solutions. Here are just a few examples of how we've helped businesses transform their operations.</p>
                 
-                <nav>
+                <div class="contact-box" style="margin: 2rem 0;">
+                    <h3>📊 E-Commerce: 156% Revenue Growth</h3>
+                    <p><strong>Challenge:</strong> A mid-sized e-commerce retailer struggled with international customer support across multiple languages, leading to lost sales and poor customer satisfaction.</p>
+                    <p><strong>Solution:</strong> Implemented Buy-Lingual™ AI Agents to provide 24/7 multilingual support in 12 languages.</p>
+                    <p><strong>Results:</strong></p>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="contact.html" class="cta-btn">Contact Us</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-
-    <!-- Breadcrumb -->
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="index.html">Home</a>
-            <span>/</span>
-            <strong>Case Studies</strong>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Real Results, Real Impact</h1>
-            <p>Discover how leading companies across industries transformed their operations and achieved measurable ROI with OrenGen.io AI solutions. These are not hypothetical scenarios—these are documented outcomes from actual client implementations.</p>
-        </div>
-    </section>
-
-    <!-- Stats Banner -->
-    <section class="stats-banner">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>300%+</h3>
-                    <p>Average ROI Across All Clients</p>
-                </div>
-                <div class="stat-item">
-                    <h3>65%</h3>
-                    <p>Average Cost Reduction</p>
-                </div>
-                <div class="stat-item">
-                    <h3>89%</h3>
-                    <p>Faster Response Times</p>
-                </div>
-                <div class="stat-item">
-                    <h3>156%</h3>
-                    <p>Revenue Growth</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Case Studies -->
-    <section class="case-studies-section">
-        <div class="container">
-            
-            <!-- Case Study 1: TechFlow SaaS -->
-            <div class="case-study">
-                <div class="case-header">
-                    <div class="case-meta">
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path>
-                            </svg>
-                            <span>SaaS / Technology</span>
-                        </div>
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
-                            </svg>
-                            <span>250-500 Employees</span>
-                        </div>
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>6 Month Implementation</span>
-                        </div>
-                    </div>
-                    <h2>TechFlow SaaS: Scaling Customer Support Without Scaling Headcount</h2>
-                    <p>How a mid-market SaaS company handled 312% customer growth with zero additional support hires</p>
-                </div>
-                
-                <div class="case-content">
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg>
-                            The Challenge
-                        </h3>
-                        <p>TechFlow, a rapidly growing project management SaaS platform, was experiencing explosive customer growth. Their support team of 12 agents was drowning in tickets, with response times ballooning from 4 hours to 36+ hours. Customer satisfaction scores dropped from 92% to 67% in just 3 months.</p>
-                        <ul>
-                            <li>Support ticket volume increased 312% in 6 months</li>
-                            <li>Average response time: 36 hours (target: 4 hours)</li>
-                            <li>Customer churn rate increased 23% due to poor support experience</li>
-                            <li>Support team burnout rate at 40%</li>
-                            <li>Hiring costs projected at $480K annually for 8 additional agents</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"></path>
-                            </svg>
-                            The Solution
-                        </h3>
-                        <p>We deployed Buy-Lingual™ AI agents trained on TechFlow's entire knowledge base, previous support tickets, and product documentation. The implementation included:</p>
-                        <ul>
-                            <li>5 specialized AI agents handling tier-1 support queries across all channels (email, chat, help center)</li>
-                            <li>Multi-language support (English, Spanish, Portuguese, French) with real-time translation</li>
-                            <li>Intelligent ticket routing based on complexity and sentiment analysis</li>
-                            <li>Automated follow-ups and proactive outreach for common issues</li>
-                            <li>Seamless handoff to human agents for complex scenarios</li>
-                            <li>Continuous learning from human agent interactions</li>
-                        </ul>
-                        
-                        <div class="tech-stack">
-                            <span class="tech-badge">🤖 Buy-Lingual™ AI Agents</span>
-                            <span class="tech-badge">💬 AI Chat Integration</span>
-                            <span class="tech-badge">📧 Email Automation</span>
-                            <span class="tech-badge">🌐 Multi-Language NLP</span>
-                            <span class="tech-badge">📊 Sentiment Analysis</span>
-                        </div>
-                    </div>
-                    
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
-                            The Results
-                        </h3>
-                        <p>Within 6 months of deployment, TechFlow achieved remarkable improvements:</p>
-                        
-                        <div class="results-grid">
-                            <div class="result-card">
-                                <div class="result-value">78%</div>
-                                <div class="result-label">Tickets Auto-Resolved</div>
-                                <p class="result-description">No human intervention needed</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">2.3 min</div>
-                                <div class="result-label">Avg Response Time</div>
-                                <p class="result-description">From 36 hours to sub-3 minutes</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">94%</div>
-                                <div class="result-label">CSAT Score</div>
-                                <p class="result-description">Up from 67%</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">$420K</div>
-                                <div class="result-label">Annual Savings</div>
-                                <p class="result-description">Avoided hiring costs</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">-41%</div>
-                                <div class="result-label">Churn Reduction</div>
-                                <p class="result-description">Retained high-value customers</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">345%</div>
-                                <div class="result-label">ROI</div>
-                                <p class="result-description">Within first year</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="quote-block">
-                        <p class="quote-text">"OrenGen's AI agents didn't just solve our support crisis—they transformed how we think about customer service. Our human agents now focus on complex issues and relationship building, while AI handles the routine queries. The best part? Our customers can't tell the difference, and our CSAT scores are at an all-time high."</p>
-                        <div class="quote-author">
-                            <div class="author-avatar">SM</div>
-                            <div class="author-info">
-                                <strong>Sarah Mitchell</strong>
-                                <span>VP of Customer Success, TechFlow</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Case Study 2: MediCare Plus -->
-            <div class="case-study">
-                <div class="case-header">
-                    <div class="case-meta">
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                            </svg>
-                            <span>Healthcare</span>
-                        </div>
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
-                            </svg>
-                            <span>1,000+ Employees</span>
-                        </div>
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>9 Month Implementation</span>
-                        </div>
-                    </div>
-                    <h2>MediCare Plus: HIPAA-Compliant Patient Communication at Scale</h2>
-                    <p>How a healthcare network automated 180K+ patient interactions while maintaining compliance and improving satisfaction</p>
-                </div>
-                
-                <div class="case-content">
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg>
-                            The Challenge
-                        </h3>
-                        <p>MediCare Plus, a network of 47 healthcare facilities, struggled with patient communication. Their call center received 15,000+ calls daily for appointment scheduling, prescription refills, billing questions, and general inquiries. Wait times averaged 18 minutes, and 32% of callers abandoned before reaching an agent.</p>
-                        <ul>
-                            <li>15,000+ daily inbound calls overwhelming 85-person call center</li>
-                            <li>18-minute average wait time (target: under 2 minutes)</li>
-                            <li>32% call abandonment rate</li>
-                            <li>HIPAA compliance requirements limiting automation options</li>
-                            <li>Multilingual patient base (English, Spanish, Vietnamese, Chinese)</li>
-                            <li>After-hours coverage gaps affecting patient care</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"></path>
-                            </svg>
-                            The Solution
-                        </h3>
-                        <p>We implemented a HIPAA-compliant AI call center powered by Buy-Lingual™ agents with specialized healthcare training:</p>
-                        <ul>
-                            <li>10 specialized AI voice agents handling appointment scheduling, prescription refills, billing inquiries, and general questions</li>
-                            <li>HIPAA-compliant data handling with end-to-end encryption</li>
-                            <li>Real-time language detection and translation (4 primary languages)</li>
-                            <li>Integration with EHR systems (Epic, Cerner) for real-time patient data</li>
-                            <li>24/7 availability including weekends and holidays</li>
-                            <li>Intelligent escalation to human agents for medical emergencies or complex cases</li>
-                            <li>Automated follow-ups for missed appointments and medication adherence</li>
-                        </ul>
-                        
-                        <div class="tech-stack">
-                            <span class="tech-badge">🤖 Buy-Lingual™ Voice AI</span>
-                            <span class="tech-badge">☎️ AI Call Center</span>
-                            <span class="tech-badge">🔒 HIPAA Compliance</span>
-                            <span class="tech-badge">🏥 EHR Integration</span>
-                            <span class="tech-badge">🌐 Multi-Language NLP</span>
-                            <span class="tech-badge">📅 Smart Scheduling</span>
-                        </div>
-                    </div>
-                    
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
-                            The Results
-                        </h3>
-                        <p>After 9 months, MediCare Plus transformed their patient communication:</p>
-                        
-                        <div class="results-grid">
-                            <div class="result-card">
-                                <div class="result-value">73%</div>
-                                <div class="result-label">Calls Auto-Handled</div>
-                                <p class="result-description">180K+ monthly interactions</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">47 sec</div>
-                                <div class="result-label">Avg Wait Time</div>
-                                <p class="result-description">Down from 18 minutes</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">3%</div>
-                                <div class="result-label">Abandonment Rate</div>
-                                <p class="result-description">Down from 32%</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">$2.1M</div>
-                                <div class="result-label">Annual Savings</div>
-                                <p class="result-description">Reduced staffing needs</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">89%</div>
-                                <div class="result-label">Patient Satisfaction</div>
-                                <p class="result-description">Up from 71%</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">-67%</div>
-                                <div class="result-label">Missed Appointments</div>
-                                <p class="result-description">Automated reminders</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="quote-block">
-                        <p class="quote-text">"We were skeptical that AI could handle the nuance and empathy required in healthcare communication. OrenGen proved us wrong. Their AI agents are indistinguishable from our human staff, they never have a bad day, and they're available 24/7. Most importantly, our patients love the immediate response and the ability to get help in their native language."</p>
-                        <div class="quote-author">
-                            <div class="author-avatar">DR</div>
-                            <div class="author-info">
-                                <strong>Dr. Robert Chen</strong>
-                                <span>Chief Operating Officer, MediCare Plus</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Case Study 3: Titan Financial -->
-            <div class="case-study">
-                <div class="case-header">
-                    <div class="case-meta">
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="1" x2="12" y2="23"></line>
-                                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"></path>
-                            </svg>
-                            <span>Financial Services</span>
-                        </div>
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
-                            </svg>
-                            <span>500-1000 Employees</span>
-                        </div>
-                        <div class="meta-item">
-                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>12 Month Implementation</span>
-                        </div>
-                    </div>
-                    <h2>Titan Financial: AI-Powered Lead Qualification & Conversion</h2>
-                    <p>How an investment firm increased qualified lead conversion by 156% while reducing acquisition costs by 62%</p>
-                </div>
-                
-                <div class="case-content">
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg>
-                            The Challenge
-                        </h3>
-                        <p>Titan Financial, a wealth management firm managing $4.2B in assets, was struggling with lead qualification. Their sales team spent 60% of their time on unqualified leads, and their lead-to-client conversion rate was stuck at 3.2%. Marketing spend was increasing, but ROI was declining.</p>
-                        <ul>
-                            <li>8,500+ monthly leads, but only 3.2% conversion rate</li>
-                            <li>Sales team spending 60% of time on unqualified prospects</li>
-                            <li>Average lead qualification time: 4-7 days</li>
-                            <li>$1.2M annual marketing spend with declining ROI</li>
-                            <li>Inconsistent lead follow-up and nurturing</li>
-                            <li>Limited multilingual capabilities in high-net-worth international markets</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"></path>
-                            </svg>
-                            The Solution
-                        </h3>
-                        <p>We deployed an AI-powered lead qualification and nurturing system:</p>
-                        <ul>
-                            <li>Buy-Lingual™ AI agents conducting initial prospect conversations via phone, chat, and email</li>
-                            <li>Intelligent lead scoring based on financial goals, assets, investment timeline, and engagement</li>
-                            <li>Automated multi-touch nurture campaigns personalized to prospect interests</li>
-                            <li>CRM integration (Salesforce) with real-time lead enrichment</li>
-                            <li>Multilingual support for high-net-worth international prospects (8 languages)</li>
-                            <li>Appointment scheduling directly with appropriate advisors</li>
-                            <li>Compliance-approved scripting and conversation tracking</li>
-                        </ul>
-                        
-                        <div class="tech-stack">
-                            <span class="tech-badge">🤖 Buy-Lingual™ AI Agents</span>
-                            <span class="tech-badge">📊 AI Lead Scoring</span>
-                            <span class="tech-badge">📧 Marketing Automation</span>
-                            <span class="tech-badge">💼 CRM Integration</span>
-                            <span class="tech-badge">🌐 Multi-Language</span>
-                            <span class="tech-badge">⚖️ Compliance Engine</span>
-                        </div>
-                    </div>
-                    
-                    <div class="case-section">
-                        <h3>
-                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
-                            The Results
-                        </h3>
-                        <p>Within 12 months, Titan Financial achieved dramatic improvements in lead conversion and sales efficiency:</p>
-                        
-                        <div class="results-grid">
-                            <div class="result-card">
-                                <div class="result-value">8.2%</div>
-                                <div class="result-label">Conversion Rate</div>
-                                <p class="result-description">Up from 3.2% (+156%)</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">4 hours</div>
-                                <div class="result-label">Lead Qualification</div>
-                                <p class="result-description">Down from 4-7 days</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">92%</div>
-                                <div class="result-label">Sales Time on Qualified Leads</div>
-                                <p class="result-description">Up from 40%</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">-62%</div>
-                                <div class="result-label">Cost Per Acquisition</div>
-                                <p class="result-description">$740K annual savings</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">$18.6M</div>
-                                <div class="result-label">New AUM</div>
-                                <p class="result-description">From improved conversions</p>
-                            </div>
-                            <div class="result-card">
-                                <div class="result-value">420%</div>
-                                <div class="result-label">Marketing ROI</div>
-                                <p class="result-description">Up from 180%</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="quote-block">
-                        <p class="quote-text">"OrenGen's AI didn't just improve our lead qualification—it fundamentally changed our business model. Our advisors now spend their time building relationships with qualified prospects instead of chasing dead ends. The multilingual capability has opened up entire new markets we couldn't serve before. This is the most impactful technology investment we've made in a decade."</p>
-                        <div class="quote-author">
-                            <div class="author-avatar">MJ</div>
-                            <div class="author-info">
-                                <strong>Michael Jensen</strong>
-                                <span>Chief Revenue Officer, Titan Financial</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Write Your Success Story?</h2>
-            <p>Join these industry leaders and transform your business with OrenGen.io AI solutions</p>
-            <div class="cta-buttons">
-                <a href="contact.html?plan=demo" class="cta-btn">Schedule a Demo</a>
-                <a href="pricing.html" class="cta-btn" style="background: transparent; border: 2px solid var(--primary); color: var(--primary);">View Pricing</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>OrenGen.io</h3>
-                    <p>Enterprise-grade AI solutions that speak your language and automate your operations.</p>
-                    <div class="social-icons">
-                        <a href="https://twitter.com/OrenGenAI" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg></a>
-                        <a href="https://linkedin.com/company/orengen" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg></a>
-                        <a href="https://facebook.com/OrenGenAI" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Solutions</h3>
-                    <ul>
-                        <li><a href="services.html#buylingual">Buy-Lingual™ AI Agents</a></li>
-                        <li><a href="services.html#custom-ai">Custom AI Development</a></li>
-                        <li><a href="services.html#consulting">AI Consulting</a></li>
-                        <li><a href="services.html#automation">Business Automation</a></li>
+                        <li>156% increase in international revenue</li>
+                        <li>89% faster response times</li>
+                        <li>92% customer satisfaction score</li>
+                        <li>65% reduction in support costs</li>
                     </ul>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Company</h3>
+                <div class="contact-box" style="margin: 2rem 0;">
+                    <h3>🏥 Healthcare: 73% Efficiency Improvement</h3>
+                    <p><strong>Challenge:</strong> A healthcare network needed to automate appointment scheduling and patient inquiries while maintaining HIPAA compliance.</p>
+                    <p><strong>Solution:</strong> Deployed HIPAA-compliant AI Call Center with intelligent routing and automated scheduling.</p>
+                    <p><strong>Results:</strong></p>
                     <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="case-studies.html">Case Studies</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="index.html#careers">Careers</a></li>
+                        <li>73% improvement in scheduling efficiency</li>
+                        <li>94% reduction in no-shows</li>
+                        <li>85% of calls handled without human intervention</li>
+                        <li>$450K annual cost savings</li>
                     </ul>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Legal</h3>
+                <div class="contact-box" style="margin: 2rem 0;">
+                    <h3>🏢 B2B SaaS: 312% ROI in 6 Months</h3>
+                    <p><strong>Challenge:</strong> A B2B SaaS company wanted to scale lead generation without proportionally increasing headcount.</p>
+                    <p><strong>Solution:</strong> Implemented AI-powered lead generation and qualification system integrated with their CRM.</p>
+                    <p><strong>Results:</strong></p>
                     <ul>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                        <li><a href="index.html#refund">Refund Policy</a></li>
-                        <li><a href="index.html#security">Security</a></li>
+                        <li>312% ROI in first 6 months</li>
+                        <li>4x increase in qualified leads</li>
+                        <li>68% reduction in cost per lead</li>
+                        <li>45% improvement in conversion rates</li>
                     </ul>
                 </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 OrenGen.io. All rights reserved. HUB Certified Minority Business Enterprise.</p>
-            </div>
-        </div>
-    </footer>
-        <p>&copy; 2026 OrenGen.io. All rights reserved. HUB Certified Minority Business Enterprise.</p>
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,es,fr,de,it,pt,ru,zh-CN,ja,ko,ar,hi,bn,pa,te,mr,ta,ur,gu,kn,ml,th,vi,id,ms,fil',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                
+                <div class="contact-box" style="margin: 2rem 0;">
+                    <h3>🏦 Financial Services: $2.3M Annual Savings</h3>
+                    <p><strong>Challenge:</strong> A financial services firm needed to handle high call volumes while maintaining compliance and security standards.</p>
+                    <p><strong>Solution:</strong> Deployed secure AI Call Center with fraud detection and compliance monitoring.</p>
+                    <p><strong>Results:</strong></p>
+                    <ul>
+                        <li>$2.3M in annual operational savings</li>
+                        <li>91% of calls fully automated</li>
+                        <li>99.7% compliance rate</li>
+                        <li>76% reduction in average handling time</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-box" style="margin: 2rem 0;">
+                    <h3>🛍️ Retail: 24/7 Global Customer Service</h3>
+                    <p><strong>Challenge:</strong> A luxury retail brand wanted to provide premium customer service across global markets 24/7.</p>
+                    <p><strong>Solution:</strong> Implemented Buy-Lingual™ AI Agents with brand-specific personality and voice customization.</p>
+                    <p><strong>Results:</strong></p>
+                    <ul>
+                        <li>100% coverage across 18 time zones</li>
+                        <li>96% customer satisfaction rating</li>
+                        <li>42% increase in customer lifetime value</li>
+                        <li>58% reduction in support overhead</li>
+                    </ul>
+                </div>
+                
+                <h2>Industry Metrics</h2>
+                <div class="contact-box" style="margin: 2rem 0; background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));">
+                    <h3>📈 Average Performance Across All Clients</h3>
+                    <ul>
+                        <li><strong>300%+</strong> Average ROI</li>
+                        <li><strong>65%</strong> Cost reduction</li>
+                        <li><strong>89%</strong> Faster response times</li>
+                        <li><strong>92%</strong> Customer satisfaction</li>
+                        <li><strong>247+</strong> Successful implementations</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-box" style="margin: 2rem 0; background: linear-gradient(135deg, rgba(200, 90, 61, 0.1), rgba(26, 77, 122, 0.1));">
+                    <h3>Ready to Write Your Success Story?</h3>
+                    <p>Join hundreds of businesses achieving exceptional results with OrenGen's AI solutions.</p>
+                    <p style="margin-top: 1rem;"><a href="contact.html" style="background: var(--orange); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: 600;">Schedule a Consultation →</a></p>
+                </div>
+        
+            </div></div>
 
-    <!-- Main JavaScript -->
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', currentTheme);
-        
-        themeToggle.addEventListener('click', () => {
-            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-        });
-        
-        // Translate Toggle
-        const translateToggle = document.getElementById('translateToggle');
-        const translateElement = document.getElementById('google_translate_element');
-        
-        translateToggle.addEventListener('click', () => {
-            if (translateElement.style.display === 'none') {
-                translateElement.style.display = 'block';
-            } else {
-                translateElement.style.display = 'none';
-            }
-        });
-    </script>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <div class="footer-logo">
+                            <img loading="lazy" src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" style="max-width: 200px; height: auto;">
+                        </div>
+                        <p class="footer-description">
+                            Premier AI & Technology firm disrupting traditional workflows through intelligent automation and Buy-Lingual™ AI Agents.
+                        </p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/orengenio" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            </a>
+                            <a href="https://x.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            </a>
+                            <a href="https://www.instagram.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                            </a>
+                            <a href="https://www.facebook.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <a href="https://github.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                            <a href="https://www.youtube.com/@orengenio" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="#">Buy-Lingual™ AI Agents</a></li>
+                            <li><a href="#">AI Call Center</a></li>
+                            <li><a href="#">Lead Generation</a></li>
+                            <li><a href="#">CRM Automation</a></li>
+                            <li><a href="#">AI Chatbots</a></li>
+                            <li><a href="#">Analytics Dashboard</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">UI/UX Design</a></li>
+                            <li><a href="#">AI Consulting</a></li>
+                            <li><a href="#">API Integration</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">24/7 Support</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="case-studies.html">Case Studies</a></li>
+                            <li><a href="index.html#pricing">Pricing</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="https://blog.orengen.io" target="_blank" rel="noopener">Blog</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="knowledge-base.html">Knowledge Base</a></li>
+                            <li><a href="ai-agent-guides.html">AI Agent Guides</a></li>
+                            <li><a href="getting-started.html">Getting Started</a></li>
+                            <li><a href="#">API Documentation</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2026 OrenGen Worldwide. All rights reserved. | HUB Certified Minority Business Enterprise</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- External JavaScript -->
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>

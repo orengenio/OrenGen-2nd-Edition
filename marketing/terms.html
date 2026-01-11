@@ -38,9 +38,17 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/images/favicon.png">
     <link rel="apple-touch-icon" href="./assets/images/favicon.png">
-    
-    <!-- Fonts -->
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://blog.orengen.io">
+
+    <!-- Fonts with optimized loading -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -135,215 +143,399 @@
     }
     </script>
     
+    <!-- Page-specific Styles -->
     <style>
-        :root {
-            --primary: #C85A3D;
-            --secondary: #1A4D7A;
-            --accent: #4ade80;
-            --text: #1a1a1a;
-            --bg: #ffffff;
-            --bg-dark: #f8f9fa;
-            --border: #e0e0e0;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-        
-        [data-theme="dark"] {
-            --text: #ffffff;
-            --bg: #0a0a0a;
-            --bg-dark: #1a1a1a;
-            --border: #2a2a2a;
-            --shadow: rgba(255, 255, 255, 0.05);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.8;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-        
-        .container {
+        .page-container {
             max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
-        .sidebar-controls {
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .control-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 2px solid var(--border);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-        
-        .topbar {
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .topbar-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-        }
-        
+
         .breadcrumb {
             padding: 2rem 0 1rem;
             font-size: 0.9rem;
+            margin-top: 80px;
         }
-        
+
         .breadcrumb a {
             color: var(--text);
             text-decoration: none;
             opacity: 0.7;
+            transition: color 0.2s;
         }
-        
+
+        .breadcrumb a:hover {
+            color: var(--orange);
+            opacity: 1;
+        }
+
         .breadcrumb span {
             margin: 0 0.5rem;
             opacity: 0.5;
         }
-        
-        .hero {
+
+        .page-hero {
             padding: 3rem 0;
             border-bottom: 1px solid var(--border);
         }
-        
-        .hero h1 {
+
+        .page-hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--primary);
+            color: var(--orange);
         }
-        
+
         .last-updated {
             font-size: 0.95rem;
-            opacity: 0.7;
+            color: var(--text-secondary);
             margin-bottom: 1rem;
         }
-        
-        .content {
+
+        .page-content {
             padding: 3rem 0;
         }
-        
-        .content h2 {
+
+        .page-content h2 {
             font-size: 1.75rem;
             margin: 2.5rem 0 1rem;
-            color: var(--primary);
+            color: var(--orange);
         }
-        
-        .content h3 {
+
+        .page-content h3 {
             font-size: 1.25rem;
             margin: 1.5rem 0 0.75rem;
-            color: var(--secondary);
+            color: var(--text);
         }
-        
-        .content p {
+
+        .page-content p {
             margin-bottom: 1rem;
+            line-height: 1.8;
         }
-        
-        .content ul, .content ol {
+
+        .page-content ul, .page-content ol {
             margin: 1rem 0 1rem 2rem;
         }
-        
-        .content li {
+
+        .page-content li {
             margin-bottom: 0.5rem;
         }
-        
+
         .highlight-box {
             background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));
             padding: 1.5rem;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--orange);
             border-radius: 8px;
             margin: 1.5rem 0;
         }
-        
+
         .contact-box {
-            background: var(--bg-dark);
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 12px;
             margin: 2rem 0;
             border: 1px solid var(--border);
         }
-        
-        footer {
-            background: var(--bg-dark);
-            border-top: 1px solid var(--border);
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 4rem;
+
+        .contact-box h3 {
+            margin-top: 0;
         }
-        
+
+        .contact-box a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
+            .page-hero h1 {
                 font-size: 2rem;
-            }
-            .sidebar-controls {
-                right: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar-controls">
-        <button class="control-btn" id="themeToggle" aria-label="Toggle theme">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-            </svg>
-        </button>
-    </div>
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="mainNavbar">
+            <div class="navbar-container">
+                <a href="index.html" class="navbar-logo">
+                    <img src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" class="logo-dark" fetchpriority="high">
+                </a>
 
-    <div class="topbar">
-        <div class="topbar-content">
-            <a href="index.html" class="logo">OrenGen.io</a>
-            <a href="contact.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Contact Us</a>
+                <div class="navbar-menu">
+                    <a href="index.html" class="navbar-item">Home</a>
+
+                    <!-- Solutions Mega Menu -->
+                    <div class="mega-menu-wrapper">
+                        <a href="#" class="navbar-item">
+                            Solutions
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Buy-Lingual™ AI Agents</h4>
+                                        <p>24/7 multilingual voice AI for sales & support</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Call Center</h4>
+                                        <p>Automated inbound & outbound calling</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Lead Generation</h4>
+                                        <p>AI-powered lead capture & qualification</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>CRM Automation</h4>
+                                        <p>Streamline your customer relationships</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Chatbots</h4>
+                                        <p>Intelligent customer conversations</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Analytics Dashboard</h4>
+                                        <p>Real-time insights & reporting</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mega-menu-divider"></div>
+                            <div class="mega-menu-footer">
+                                <div class="mega-menu-footer-text">
+                                    Need help choosing? <strong>Talk to our team</strong>
+                                </div>
+                                <a href="index.html#contact" class="mega-menu-cta">Contact Sales</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services Mega Menu -->
+                    <div class="mega-menu-wrapper">
+                        <a href="#" class="navbar-item">
+                            Services
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="16 18 22 12 16 6"></polyline>
+                                            <polyline points="8 6 2 12 8 18"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Web Development</h4>
+                                        <p>Custom websites & web applications</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>UI/UX Design</h4>
+                                        <p>Beautiful, user-centered interfaces</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <circle cx="12" cy="12" r="6"></circle>
+                                            <circle cx="12" cy="12" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Consulting</h4>
+                                        <p>Strategic AI implementation guidance</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                            <path d="M2 17l10 5 10-5"></path>
+                                            <path d="M2 12l10 5 10-5"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>API Integration</h4>
+                                        <p>Connect your existing systems</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Documentation</h4>
+                                        <p>Technical writing & API docs</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>24/7 Support</h4>
+                                        <p>Round-the-clock technical assistance</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mega-menu-divider"></div>
+                            <div class="mega-menu-footer">
+                                <div class="mega-menu-footer-text">
+                                    Looking for something specific? <strong>We're here to help</strong>
+                                </div>
+                                <a href="index.html#contact" class="mega-menu-cta">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="index.html#pricing" class="navbar-item">Pricing</a>
+                    <a href="index.html#about" class="navbar-item">About</a>
+                    <a href="contact.html" class="navbar-item">Contact</a>
+                </div>
+
+                <div class="navbar-actions">
+                    <a href="contact.html" class="navbar-login">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        Get Started
+                    </a>
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <img loading="lazy" src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" class="logo-dark" style="height: 32px;">
+                <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="mobile-menu-items">
+                <a href="index.html" class="mobile-menu-item">Home</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">Solutions</div>
+                </div>
+                <a href="#" class="mobile-menu-item">Buy-Lingual™ AI Agents</a>
+                <a href="#" class="mobile-menu-item">AI Call Center</a>
+                <a href="#" class="mobile-menu-item">Lead Generation</a>
+                <a href="#" class="mobile-menu-item">CRM Automation</a>
+                <a href="#" class="mobile-menu-item">AI Chatbots</a>
+                <a href="#" class="mobile-menu-item">Analytics Dashboard</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">Services</div>
+                </div>
+                <a href="#" class="mobile-menu-item">Web Development</a>
+                <a href="#" class="mobile-menu-item">UI/UX Design</a>
+                <a href="#" class="mobile-menu-item">AI Consulting</a>
+                <a href="#" class="mobile-menu-item">API Integration</a>
+                <a href="#" class="mobile-menu-item">Documentation</a>
+                <a href="#" class="mobile-menu-item">24/7 Support</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">More</div>
+                </div>
+                <a href="index.html#pricing" class="mobile-menu-item">Pricing</a>
+                <a href="index.html#about" class="mobile-menu-item">About</a>
+                <a href="contact.html" class="mobile-menu-item">Contact</a>
+                <a href="privacy.html" class="mobile-menu-item">Privacy Policy</a>
+                <a href="terms.html" class="mobile-menu-item">Terms of Service</a>
+            </div>
         </div>
-    </div>
 
-    <div class="container">
+    
+    <div class="page-container">
+<div class="container">
         <div class="breadcrumb">
             <a href="index.html">Home</a>
             <span>/</span>
@@ -670,98 +862,6 @@
             </div>
         </div>
     </div>
+    </div>
 
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <img src="./assets/images/logo.png" alt="OrenGen.io" style="max-width: 160px; height: auto; margin-bottom: 16px;">
-                <p>OrenGen.io is a premier AI & Technology firm dedicated to disrupting traditional workflows through intelligent automation.</p>
-                <div style="margin-top: 24px;">
-                    <img src="./assets/images/payment-methods.png" alt="Accepted Payment Methods" style="max-width: 100%; height: auto; opacity: 0.9;">
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Company</h4>
-                <a href="#">Our Portfolio</a>
-                <a href="#">Team</a>
-                <a href="#">In The News</a>
-                <a href="#">Why Choose Us</a>
-            </div>
-            <div class="footer-col">
-            <!-- Marketplace column removed -->
-            <div class="footer-col">
-                <h4>Support</h4>
-                <a href="#">Work From Home Programs</a>
-                <a href="#">Knowledge Base</a>
-                <a href="#">Getting Started</a>
-                <a href="#">AI Agent Guides</a>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="#">Compliance</a>
-                <a href="#">Copyright Notice</a>
-                <a href="#">Trademark Policy</a>
-                <a href="#">Cookie Policy</a>
-                <a href="#">Refund Policy</a>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div>
-                <div class="footer-links">
-                    <a href="#">AI-Communications Opt-In</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                </div>
-                <span>© Copyright 2026. OrenGen Worldwide. All Rights Reserved.</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                <a href="https://www.linkedin.com/company/orengenio" target="_blank" aria-label="LinkedIn" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="https://x.com/orengenio" target="_blank" aria-label="X (Twitter)" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </a>
-                <a href="https://www.instagram.com/orengenio" target="_blank" aria-label="Instagram" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </a>
-                <a href="https://www.facebook.com/orengenio" target="_blank" aria-label="Facebook" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                </a>
-                <a href="https://github.com/orengenio" target="_blank" aria-label="GitHub" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>
-                <a href="https://www.youtube.com/@orengenio" target="_blank" aria-label="YouTube" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                </a>
-                <a href="https://tiktok.com/@orengenio" target="_blank" aria-label="TikTok" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-                </a>
-                <a href="https://www.pinterest.com/orengenio" target="_blank" aria-label="Pinterest" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
-                </a>
-                <a href="https://discord.gg/orengenio" target="_blank" aria-label="Discord" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-                </a>
-                <a href="https://t.me/orengenio" target="_blank" aria-label="Telegram" style="color: var(--text-secondary); transition: color 0.3s;" onmouseover="this.style.color='var(--orange)'" onmouseout="this.style.color='var(--text-secondary)'">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                </a>
-            </div>
-        </div>
-    </footer>
-        <span>© Copyright 2026. OrenGen Worldwide. All Rights Reserved.</span>
-    <script>
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', currentTheme);
-        
-        themeToggle.addEventListener('click', () => {
-            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-        });
-    </script>
-</body>
-</html>
+

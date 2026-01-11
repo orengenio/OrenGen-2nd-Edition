@@ -7,7 +7,7 @@
     <!-- Primary Meta Tags -->
     <title>Contact Us | OrenGen Worldwide</title>
     <meta name="title" content="Contact Us | OrenGen Worldwide">
-    <meta name="description" content="Ready to transform your business with AI? Contact OrenGen.io for a free consultation. Email, phone, or visit us in Mansfield, TX. 24/7 support available for Buy-Lingual™ AI Agents.">
+    <meta name="description" content="Ready to transform your business with AI? Contact OrenGen.io for a free consultation. Email, phone, or visit us in Mansfield, TX. 24/7 support available.">
     <meta name="keywords" content="AI agents, business automation, multilingual AI, Buy-Lingual AI, voice AI, AI call center, lead generation, AI chatbots, CRM automation, AI technology, enterprise AI, HUB certified, minority business">
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orengen.io/contact">
     <meta property="og:title" content="Contact Us | OrenGen Worldwide">
-    <meta property="og:description" content="Ready to transform your business with AI? Contact OrenGen.io for a free consultation. 24/7 support available.">
+    <meta property="og:description" content="Ready to transform your business with AI? Contact OrenGen.io for a free consultation. Email, phone, or visit us in Mansfield, TX. 24/7 support available.">
     <meta property="og:image" content="./assets/images/logo.png">
     <meta property="og:site_name" content="OrenGen.io">
     <meta property="og:locale" content="en_US">
@@ -27,7 +27,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://orengen.io/contact">
     <meta property="twitter:title" content="Contact Us | OrenGen Worldwide">
-    <meta property="twitter:description" content="Ready to transform your business with AI? Contact OrenGen.io for a free consultation. 24/7 support available.">
+    <meta property="twitter:description" content="Ready to transform your business with AI? Contact OrenGen.io for a free consultation. Email, phone, or visit us in Mansfield, TX. 24/7 support available.">
     <meta property="twitter:image" content="./assets/images/logo.png">
     <meta name="twitter:site" content="@orengenio">
     <meta name="twitter:creator" content="@orengenio">
@@ -38,9 +38,17 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/images/favicon.png">
     <link rel="apple-touch-icon" href="./assets/images/favicon.png">
-    
-    <!-- Fonts -->
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://blog.orengen.io">
+
+    <!-- Fonts with optimized loading -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -92,994 +100,567 @@
     }
     </script>
     
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "AI Business Automation",
-        "provider": {
-            "@type": "Organization",
-            "name": "OrenGen Worldwide"
-        },
-        "areaServed": "Worldwide",
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "AI Solutions",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Buy-Lingual™ AI Agents",
-                        "description": "24/7 multilingual AI voice agents for sales and support"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "AI Call Center",
-                        "description": "Automated inbound and outbound call handling"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Lead Generation",
-                        "description": "AI-powered lead generation and qualification"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
-    
+    <!-- Page-specific Styles -->
     <style>
-        :root {
-            --primary: #C85A3D;
-            --secondary: #1A4D7A;
-            --accent: #4ade80;
-            --text: #1a1a1a;
-            --bg: #ffffff;
-            --bg-dark: #f8f9fa;
-            --border: #e0e0e0;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-        
-        [data-theme="dark"] {
-            --text: #ffffff;
-            --bg: #0a0a0a;
-            --bg-dark: #1a1a1a;
-            --border: #2a2a2a;
-            --shadow: rgba(255, 255, 255, 0.05);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-        
-        .container {
-            max-width: 1400px;
+        .page-container {
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
-        /* Sidebar Controls */
-        .sidebar-controls {
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .control-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg);
-            border: 2px solid var(--border);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-        
-        .control-btn:hover {
-            transform: scale(1.1);
-            border-color: var(--primary);
-        }
-        
-        /* Top Bar */
-        .topbar {
-            background: var(--bg);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-        
-        .topbar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text);
-        }
-        
-        .logo img {
-            height: 40px;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-        }
-        
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        nav a:hover, nav a.active {
-            color: var(--primary);
-        }
-        
-        .cta-btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s ease;
-        }
-        
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            color: white;
-        }
-        
-        /* Breadcrumb */
+
         .breadcrumb {
             padding: 2rem 0 1rem;
             font-size: 0.9rem;
+            margin-top: 80px;
         }
-        
+
         .breadcrumb a {
             color: var(--text);
             text-decoration: none;
             opacity: 0.7;
-            transition: opacity 0.3s ease;
+            transition: color 0.2s;
         }
-        
+
         .breadcrumb a:hover {
+            color: var(--orange);
             opacity: 1;
-            color: var(--primary);
         }
-        
+
         .breadcrumb span {
             margin: 0 0.5rem;
             opacity: 0.5;
         }
-        
-        /* Hero Section */
-        .contact-hero {
-            text-align: center;
-            padding: 4rem 0 3rem;
-            background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));
-        }
-        
-        .contact-hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .contact-hero p {
-            font-size: 1.25rem;
-            opacity: 0.8;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        /* Contact Grid */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            padding: 4rem 0;
-        }
-        
-        /* Contact Form */
-        .contact-form {
-            background: var(--bg);
-            padding: 3rem;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-        
-        .contact-form h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.875rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(200, 90, 61, 0.1);
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-        
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.125rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(200, 90, 61, 0.3);
-        }
-        
-        .form-note {
-            margin-top: 1rem;
-            font-size: 0.875rem;
-            opacity: 0.7;
-            text-align: center;
-        }
-        
-        /* Contact Info */
-        .contact-info h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--primary);
-        }
-        
-        .info-card {
-            background: var(--bg-dark);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--border);
-        }
-        
-        .info-card h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
-        
-        .info-card p {
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-        }
-        
-        .info-card a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.3s ease;
-        }
-        
-        .info-card a:hover {
-            opacity: 0.8;
-        }
-        
-        .info-icon {
-            width: 24px;
-            height: 24px;
-            color: var(--primary);
-        }
-        
-        /* Office Hours */
-        .hours-list {
-            list-style: none;
-        }
-        
-        .hours-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
+
+        .page-hero {
+            padding: 3rem 0;
             border-bottom: 1px solid var(--border);
         }
-        
-        .hours-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .hours-list .day {
-            font-weight: 600;
-        }
-        
-        /* Map Section */
-        .map-section {
-            padding: 4rem 0;
-            background: var(--bg-dark);
-        }
-        
-        .map-section h2 {
+
+        .page-hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--orange);
         }
-        
-        .map-container {
-            width: 100%;
-            height: 450px;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            background: var(--bg);
+
+        .page-content {
+            padding: 3rem 0;
         }
-        
-        .map-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 1rem;
-            background: linear-gradient(135deg, rgba(200, 90, 61, 0.05), rgba(26, 77, 122, 0.05));
+
+        .page-content h2 {
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--orange);
         }
-        
-        .map-placeholder svg {
-            width: 64px;
-            height: 64px;
-            opacity: 0.5;
-        }
-        
-        /* Support Channels */
-        .support-section {
-            padding: 4rem 0;
-        }
-        
-        .support-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .support-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .support-card {
-            text-align: center;
-            padding: 2rem;
-            background: var(--bg);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .support-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: 0 8px 24px var(--shadow);
-        }
-        
-        .support-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 1rem;
-            color: var(--primary);
-        }
-        
-        .support-card h3 {
-            margin-bottom: 0.5rem;
+
+        .page-content h3 {
             font-size: 1.25rem;
-        }
-        
-        .support-card p {
-            opacity: 0.8;
-            margin-bottom: 1rem;
-        }
-        
-        .support-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: gap 0.3s ease;
-        }
-        
-        .support-link:hover {
-            gap: 0.75rem;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--bg-dark);
-            border-top: 1px solid var(--border);
-            padding: 3rem 0 2rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .footer-section h3 {
-            font-size: 1.125rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        
-        .footer-section ul {
-            list-style: none;
-        }
-        
-        .footer-section li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-section a {
+            margin: 1.5rem 0 0.75rem;
             color: var(--text);
-            text-decoration: none;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
         }
-        
-        .footer-section a:hover {
-            opacity: 1;
-            color: var(--primary);
+
+        .page-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
         }
-        
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+
+        .page-content ul, .page-content ol {
+            margin: 1rem 0 1rem 2rem;
+            line-height: 1.8;
         }
-        
-        .social-icons a {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: var(--bg);
+
+        .page-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-box {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
             border: 1px solid var(--border);
-            transition: all 0.3s ease;
         }
-        
-        .social-icons a:hover {
-            background: var(--primary);
-            border-color: var(--primary);
+
+        .contact-box h3 {
+            margin-top: 0;
         }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            opacity: 0.7;
+
+        .contact-box a {
+            color: var(--orange);
+            text-decoration: none;
         }
-        
-        @media (max-width: 968px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+
+        .contact-box a:hover {
+            text-decoration: underline;
         }
-        
+
         @media (max-width: 768px) {
-            .contact-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .sidebar-controls {
-                right: 1rem;
-            }
-            
-            nav ul {
-                display: none;
-            }
-            
-            .contact-form {
-                padding: 2rem;
+            .page-hero h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar Controls -->
-    <div class="sidebar-controls">
-        <button class="control-btn" id="themeToggle" aria-label="Toggle theme">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-        </button>
-        
-        <div id="google_translate_element" style="display: none;"></div>
-        <button class="control-btn" id="translateToggle" aria-label="Translate page">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                <path d="M12 8v4l2 2"></path>
-            </svg>
-        </button>
-    </div>
-
-    <!-- Top Bar -->
-    <div class="topbar">
-        <div class="container">
-            <div class="topbar-content">
-                <a href="index.html" class="logo">
-                    <img src="https://orengen.io/assets/logo.png" alt="OrenGen.io" onerror="this.style.display='none'">
-                    <span class="logo-text">OrenGen.io</span>
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="mainNavbar">
+            <div class="navbar-container">
+                <a href="index.html" class="navbar-logo">
+                    <img src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" class="logo-dark" fetchpriority="high">
                 </a>
-                
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="contact.html" class="cta-btn active">Contact Us</a></li>
-                    </ul>
-                </nav>
+
+                <div class="navbar-menu">
+                    <a href="index.html" class="navbar-item">Home</a>
+
+                    <!-- Solutions Mega Menu -->
+                    <div class="mega-menu-wrapper">
+                        <a href="#" class="navbar-item">
+                            Solutions
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Buy-Lingual™ AI Agents</h4>
+                                        <p>24/7 multilingual voice AI for sales & support</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Call Center</h4>
+                                        <p>Automated inbound & outbound calling</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Lead Generation</h4>
+                                        <p>AI-powered lead capture & qualification</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>CRM Automation</h4>
+                                        <p>Streamline your customer relationships</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Chatbots</h4>
+                                        <p>Intelligent customer conversations</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Analytics Dashboard</h4>
+                                        <p>Real-time insights & reporting</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mega-menu-divider"></div>
+                            <div class="mega-menu-footer">
+                                <div class="mega-menu-footer-text">
+                                    Need help choosing? <strong>Talk to our team</strong>
+                                </div>
+                                <a href="index.html#contact" class="mega-menu-cta">Contact Sales</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services Mega Menu -->
+                    <div class="mega-menu-wrapper">
+                        <a href="#" class="navbar-item">
+                            Services
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="16 18 22 12 16 6"></polyline>
+                                            <polyline points="8 6 2 12 8 18"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Web Development</h4>
+                                        <p>Custom websites & web applications</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>UI/UX Design</h4>
+                                        <p>Beautiful, user-centered interfaces</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <circle cx="12" cy="12" r="6"></circle>
+                                            <circle cx="12" cy="12" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Consulting</h4>
+                                        <p>Strategic AI implementation guidance</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                            <path d="M2 17l10 5 10-5"></path>
+                                            <path d="M2 12l10 5 10-5"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>API Integration</h4>
+                                        <p>Connect your existing systems</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Documentation</h4>
+                                        <p>Technical writing & API docs</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>24/7 Support</h4>
+                                        <p>Round-the-clock technical assistance</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mega-menu-divider"></div>
+                            <div class="mega-menu-footer">
+                                <div class="mega-menu-footer-text">
+                                    Looking for something specific? <strong>We're here to help</strong>
+                                </div>
+                                <a href="index.html#contact" class="mega-menu-cta">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="index.html#pricing" class="navbar-item">Pricing</a>
+                    <a href="index.html#about" class="navbar-item">About</a>
+                    <a href="contact.html" class="navbar-item">Contact</a>
+                </div>
+
+                <div class="navbar-actions">
+                    <a href="contact.html" class="navbar-login">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        Get Started
+                    </a>
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>
+        </nav>
 
-    <!-- Breadcrumb -->
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="index.html">Home</a>
-            <span>/</span>
-            <strong>Contact</strong>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="contact-hero">
-        <div class="container">
-            <h1>Let's Build Something Amazing</h1>
-            <p>Ready to transform your business with AI? We're here to help. Get in touch with our team for a free consultation and discover how OrenGen.io can drive your growth.</p>
-        </div>
-    </section>
-
-    <!-- Contact Grid -->
-    <section class="container">
-        <div class="contact-grid">
-            <!-- Contact Form -->
-            <div class="contact-form">
-                <h2>Send Us a Message</h2>
-                <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="company">Company Name</label>
-                        <input type="text" id="company" name="company">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="interest">I'm interested in *</label>
-                        <select id="interest" name="interest" required>
-                            <option value="">Select an option...</option>
-                            <option value="buy-lingual">Buy-Lingual™ AI Agents</option>
-                            <option value="custom-ai">Custom AI Development</option>
-                            <option value="consulting">AI Consulting</option>
-                            <option value="automation">Business Automation</option>
-                            <option value="chatbots">AI Chatbots</option>
-                            <option value="call-center">AI Call Center</option>
-                            <option value="marketing">Marketing & Lead Gen</option>
-                            <option value="other">Other Services</option>
-                            <option value="demo">Schedule a Demo</option>
-                            <option value="trial">Free Trial</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your project, goals, and how we can help..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Send Message</button>
-                    
-                    <p class="form-note">We'll get back to you within 24 hours. For urgent inquiries, please call us directly.</p>
-                </form>
-            </div>
-
-            <!-- Contact Information -->
-            <div class="contact-info">
-                <h2>Get in Touch</h2>
-                
-                <div class="info-card">
-                    <h3>
-                        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        Email Us
-                    </h3>
-                    <p><strong>General Inquiries:</strong></p>
-                    <p><a href="mailto:hello@orengen.io">hello@orengen.io</a></p>
-                    <p><strong>Sales:</strong></p>
-                    <p><a href="mailto:sales@orengen.io">sales@orengen.io</a></p>
-                    <p><strong>Support:</strong></p>
-                    <p><a href="mailto:support@orengen.io">support@orengen.io</a></p>
-                </div>
-                
-                <div class="info-card">
-                    <h3>
-                        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path>
-                        </svg>
-                        Call Us
-                    </h3>
-                    <p><strong>Sales:</strong> <a href="tel:+18175550100">+1 (817) 555-0100</a></p>
-                    <p><strong>Support:</strong> <a href="tel:+18175550101">+1 (817) 555-0101</a></p>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.7;">24/7 Support for Enterprise clients</p>
-                </div>
-                
-                <div class="info-card">
-                    <h3>
-                        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                        Visit Us
-                    </h3>
-                    <p><strong>OrenGen.io Headquarters</strong></p>
-                    <p>1234 Innovation Drive, Suite 100</p>
-                    <p>Mansfield, TX 76063</p>
-                    <p>United States</p>
-                    <p style="margin-top: 0.5rem;"><a href="https://maps.google.com/?q=Mansfield+TX" target="_blank">Get Directions →</a></p>
-                </div>
-                
-                <div class="info-card">
-                    <h3>
-                        <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        Office Hours
-                    </h3>
-                    <ul class="hours-list">
-                        <li><span class="day">Monday - Friday</span> <span>9:00 AM - 6:00 PM CST</span></li>
-                        <li><span class="day">Saturday</span> <span>10:00 AM - 4:00 PM CST</span></li>
-                        <li><span class="day">Sunday</span> <span>Closed</span></li>
-                    </ul>
-                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">*Enterprise support available 24/7</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="map-section">
-        <div class="container">
-            <h2>Find Us on the Map</h2>
-            <div class="map-container">
-                <!-- Replace with actual Google Maps embed -->
-                <div class="map-placeholder">
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <img loading="lazy" src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" class="logo-dark" style="height: 32px;">
+                <button class="mobile-menu-close" onclick="toggleMobileMenu()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
-                    <p>1234 Innovation Drive, Suite 100 • Mansfield, TX 76063</p>
-                    <a href="https://maps.google.com/?q=Mansfield+TX" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600;">Open in Google Maps →</a>
+                </button>
+            </div>
+            <div class="mobile-menu-items">
+                <a href="index.html" class="mobile-menu-item">Home</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">Solutions</div>
                 </div>
-                <!-- 
-                To add Google Maps:
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE" 
-                    width="100%" 
-                    height="450" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-                -->
+                <a href="#" class="mobile-menu-item">Buy-Lingual™ AI Agents</a>
+                <a href="#" class="mobile-menu-item">AI Call Center</a>
+                <a href="#" class="mobile-menu-item">Lead Generation</a>
+                <a href="#" class="mobile-menu-item">CRM Automation</a>
+                <a href="#" class="mobile-menu-item">AI Chatbots</a>
+                <a href="#" class="mobile-menu-item">Analytics Dashboard</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">Services</div>
+                </div>
+                <a href="#" class="mobile-menu-item">Web Development</a>
+                <a href="#" class="mobile-menu-item">UI/UX Design</a>
+                <a href="#" class="mobile-menu-item">AI Consulting</a>
+                <a href="#" class="mobile-menu-item">API Integration</a>
+                <a href="#" class="mobile-menu-item">Documentation</a>
+                <a href="#" class="mobile-menu-item">24/7 Support</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">More</div>
+                </div>
+                <a href="index.html#pricing" class="mobile-menu-item">Pricing</a>
+                <a href="index.html#about" class="mobile-menu-item">About</a>
+                <a href="contact.html" class="mobile-menu-item">Contact</a>
+                <a href="privacy.html" class="mobile-menu-item">Privacy Policy</a>
+                <a href="terms.html" class="mobile-menu-item">Terms of Service</a>
             </div>
         </div>
-    </section>
 
-    <!-- Support Channels -->
-    <section class="support-section">
-        <div class="container">
-            <h2>More Ways to Connect</h2>
-            
-            <div class="support-grid">
-                <div class="support-card">
-                    <svg class="support-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                    </svg>
-                    <h3>Live Chat</h3>
-                    <p>Chat with our team in real-time</p>
-                    <a href="#" class="support-link">Start Chat →</a>
-                </div>
-                
-                <div class="support-card">
-                    <svg class="support-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
-                    </svg>
-                    <h3>Book a Meeting</h3>
-                    <p>Schedule a 1-on-1 consultation</p>
-                    <a href="https://calendly.com/orengen" class="support-link" target="_blank">View Calendar →</a>
-                </div>
-                
-                <div class="support-card">
-                    <svg class="support-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"></path>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                    </svg>
-                    <h3>Help Center</h3>
-                    <p>Browse our knowledge base</p>
-                    <a href="index.html#faq" class="support-link">Visit Help Center →</a>
-                </div>
-                
-                <div class="support-card">
-                    <svg class="support-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    <h3>Newsletter</h3>
-                    <p>Stay updated with AI insights</p>
-                    <a href="index.html#newsletter" class="support-link">Subscribe →</a>
-                </div>
+        <div class="page-container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <strong>Contact</strong>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>OrenGen.io</h3>
-                    <p>Enterprise-grade AI solutions that speak your language and automate your operations.</p>
-                    <div class="social-icons">
-                        <a href="https://twitter.com/OrenGenAI" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg></a>
-                        <a href="https://linkedin.com/company/orengen" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path><circle cx="4" cy="4" r="2"></circle></svg></a>
-                        <a href="https://facebook.com/OrenGenAI" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg></a>
+            <div class="page-hero">
+                <h1>Contact Us</h1>
+                <p>Ready to transform your business with AI? We're here to help. Get in touch with our team for a free consultation.</p>
+            </div>
+
+            <div class="page-content">
+
+                <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 2rem 0;">
+                    <div class="contact-form" style="background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border);">
+                        <h2 style="color: var(--orange); margin-bottom: 1.5rem;">Send Us a Message</h2>
+                        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name *</label>
+                                <input type="text" name="name" required style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email *</label>
+                                <input type="email" name="email" required style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Phone</label>
+                                <input type="tel" name="phone" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Interest *</label>
+                                <select name="interest" required style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);">
+                                    <option value="">Select...</option>
+                                    <option value="buy-lingual">Buy-Lingual™ AI Agents</option>
+                                    <option value="ai-call-center">AI Call Center</option>
+                                    <option value="lead-generation">Lead Generation</option>
+                                    <option value="consulting">AI Consulting</option>
+                                    <option value="demo">Schedule a Demo</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Message *</label>
+                                <textarea name="message" required rows="5" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text);"></textarea>
+                            </div>
+                            <button type="submit" style="width: 100%; padding: 1rem; background: var(--orange); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h2 style="color: var(--orange); margin-bottom: 1.5rem;">Get in Touch</h2>
+                        
+                        <div class="contact-box" style="margin-bottom: 1.5rem;">
+                            <h3>📧 Email Us</h3>
+                            <p><strong>General:</strong> <a href="mailto:hello@orengen.io">hello@orengen.io</a></p>
+                            <p><strong>Sales:</strong> <a href="mailto:sales@orengen.io">sales@orengen.io</a></p>
+                            <p><strong>Support:</strong> <a href="mailto:support@orengen.io">support@orengen.io</a></p>
+                        </div>
+                        
+                        <div class="contact-box" style="margin-bottom: 1.5rem;">
+                            <h3>📞 Call Us</h3>
+                            <p><strong>Sales:</strong> <a href="tel:+18175550100">+1 (817) 555-0100</a></p>
+                            <p><strong>Support:</strong> <a href="tel:+18175550101">+1 (817) 555-0101</a></p>
+                            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">24/7 Support for Enterprise clients</p>
+                        </div>
+                        
+                        <div class="contact-box" style="margin-bottom: 1.5rem;">
+                            <h3>📍 Visit Us</h3>
+                            <p><strong>OrenGen Worldwide HQ</strong></p>
+                            <p>1234 Innovation Drive, Suite 100</p>
+                            <p>Mansfield, TX 76063</p>
+                            <p>United States</p>
+                        </div>
+                        
+                        <div class="contact-box">
+                            <h3>🕒 Office Hours</h3>
+                            <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM CST</p>
+                            <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM CST</p>
+                            <p><strong>Sunday:</strong> Closed</p>
+                            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">*Enterprise support available 24/7</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Solutions</h3>
-                    <ul>
-                        <li><a href="services.html#buylingual">Buy-Lingual™ AI Agents</a></li>
-                        <li><a href="services.html#custom-ai">Custom AI Development</a></li>
-                        <li><a href="services.html#consulting">AI Consulting</a></li>
-                        <li><a href="services.html#automation">Business Automation</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="case-studies.html">Case Studies</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="index.html#careers">Careers</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                        <li><a href="index.html#refund">Refund Policy</a></li>
-                        <li><a href="index.html#security">Security</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 OrenGen.io. All rights reserved. HUB Certified Minority Business Enterprise.</p>
-            </div>
-        </div>
-    </footer>
-        <p>&copy; 2026 OrenGen.io. All rights reserved. HUB Certified Minority Business Enterprise.</p>
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,es,fr,de,it,pt,ru,zh-CN,ja,ko,ar,hi,bn,pa,te,mr,ta,ur,gu,kn,ml,th,vi,id,ms,fil',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                <style>
+                    @media (max-width: 968px) {
+                        .contact-grid {
+                            grid-template-columns: 1fr !important;
+                        }
+                    }
+                </style>
+        
+            </div></div>
 
-    <!-- Main JavaScript -->
-    <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', currentTheme);
-        
-        themeToggle.addEventListener('click', () => {
-            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-        });
-        
-        // Translate Toggle
-        const translateToggle = document.getElementById('translateToggle');
-        const translateElement = document.getElementById('google_translate_element');
-        
-        translateToggle.addEventListener('click', () => {
-            if (translateElement.style.display === 'none') {
-                translateElement.style.display = 'block';
-            } else {
-                translateElement.style.display = 'none';
-            }
-        });
-        
-        // Form Submission
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', (e) => {
-            // You can add custom validation or tracking here
-            console.log('Form submitted');
-            // Form will submit normally to Formspree or your backend
-        });
-        
-        // URL Parameter Handling for Plan Pre-selection
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectedPlan = urlParams.get('plan');
-        
-        if (selectedPlan) {
-            const interestSelect = document.getElementById('interest');
-            
-            // Map plan names to interest values
-            const planMapping = {
-                'starter': 'buy-lingual',
-                'professional': 'buy-lingual',
-                'enterprise': 'custom-ai',
-                'trial': 'trial',
-                'demo': 'demo'
-            };
-            
-            const mappedValue = planMapping[selectedPlan] || selectedPlan;
-            
-            // Set the select value
-            for (let option of interestSelect.options) {
-                if (option.value === mappedValue) {
-                    option.selected = true;
-                    break;
-                }
-            }
-        }
-    </script>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <div class="footer-logo">
+                            <img loading="lazy" src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" style="max-width: 200px; height: auto;">
+                        </div>
+                        <p class="footer-description">
+                            Premier AI & Technology firm disrupting traditional workflows through intelligent automation and Buy-Lingual™ AI Agents.
+                        </p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/orengenio" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            </a>
+                            <a href="https://x.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            </a>
+                            <a href="https://www.instagram.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                            </a>
+                            <a href="https://www.facebook.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <a href="https://github.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                            <a href="https://www.youtube.com/@orengenio" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="#">Buy-Lingual™ AI Agents</a></li>
+                            <li><a href="#">AI Call Center</a></li>
+                            <li><a href="#">Lead Generation</a></li>
+                            <li><a href="#">CRM Automation</a></li>
+                            <li><a href="#">AI Chatbots</a></li>
+                            <li><a href="#">Analytics Dashboard</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">UI/UX Design</a></li>
+                            <li><a href="#">AI Consulting</a></li>
+                            <li><a href="#">API Integration</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">24/7 Support</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="case-studies.html">Case Studies</a></li>
+                            <li><a href="index.html#pricing">Pricing</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="https://blog.orengen.io" target="_blank" rel="noopener">Blog</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="knowledge-base.html">Knowledge Base</a></li>
+                            <li><a href="ai-agent-guides.html">AI Agent Guides</a></li>
+                            <li><a href="getting-started.html">Getting Started</a></li>
+                            <li><a href="#">API Documentation</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2026 OrenGen Worldwide. All rights reserved. | HUB Certified Minority Business Enterprise</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- External JavaScript -->
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>

@@ -3,31 +3,638 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
     <title>Knowledge Base | OrenGen</title>
-    <meta name="description" content="Browse the OrenGen Knowledge Base for answers, documentation, and best practices for AI automation.">
+    <meta name="title" content="Knowledge Base | OrenGen">
+    <meta name="description" content="Browse the OrenGen Knowledge Base for answers, documentation, and best practices for AI automation, Buy-Lingual™ AI Agents, and business transformation.">
+    <meta name="keywords" content="AI agents, business automation, multilingual AI, Buy-Lingual AI, voice AI, AI call center, lead generation, AI chatbots, CRM automation, AI technology, enterprise AI, HUB certified, minority business">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="OrenGen Worldwide">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orengen.io/knowledge-base">
+    <meta property="og:title" content="Knowledge Base | OrenGen">
+    <meta property="og:description" content="Browse the OrenGen Knowledge Base for answers, documentation, and best practices for AI automation.">
+    <meta property="og:image" content="./assets/images/logo.png">
+    <meta property="og:site_name" content="OrenGen.io">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://orengen.io/knowledge-base">
+    <meta property="twitter:title" content="Knowledge Base | OrenGen">
+    <meta property="twitter:description" content="Browse the OrenGen Knowledge Base for answers, documentation, and best practices for AI automation.">
+    <meta property="twitter:image" content="./assets/images/logo.png">
+    <meta name="twitter:site" content="@orengenio">
+    <meta name="twitter:creator" content="@orengenio">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://orengen.io/knowledge-base">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/images/favicon.png">
     <link rel="apple-touch-icon" href="./assets/images/favicon.png">
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://blog.orengen.io">
+
+    <!-- Fonts with optimized loading -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "OrenGen Worldwide",
+        "url": "https://orengen.io",
+        "logo": "./assets/images/logo.png",
+        "description": "Premier AI & Technology firm dedicated to disrupting traditional workflows through intelligent automation and Buy-Lingual™ AI Agents.",
+        "sameAs": [
+            "https://www.linkedin.com/company/orengenio",
+            "https://x.com/orengenio",
+            "https://www.instagram.com/orengenio",
+            "https://www.facebook.com/orengenio",
+            "https://github.com/orengenio",
+            "https://www.youtube.com/@orengenio"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Sales",
+            "availableLanguage": ["English", "Spanish", "French", "German"]
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "247"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Mansfield",
+            "addressRegion": "TX",
+            "addressCountry": "US"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "OrenGen.io",
+        "url": "https://orengen.io",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://orengen.io/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Page-specific Styles -->
+    <style>
+        .page-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb {
+            padding: 2rem 0 1rem;
+            font-size: 0.9rem;
+            margin-top: 80px;
+        }
+
+        .breadcrumb a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--orange);
+            opacity: 1;
+        }
+
+        .breadcrumb span {
+            margin: 0 0.5rem;
+            opacity: 0.5;
+        }
+
+        .page-hero {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--orange);
+        }
+
+        .page-content {
+            padding: 3rem 0;
+        }
+
+        .page-content h2 {
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--orange);
+        }
+
+        .page-content h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--text);
+        }
+
+        .page-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .page-content ul, .page-content ol {
+            margin: 1rem 0 1rem 2rem;
+            line-height: 1.8;
+        }
+
+        .page-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .kb-category {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .kb-category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 90, 61, 0.2);
+        }
+
+        .kb-category h3 {
+            margin-top: 0;
+            color: var(--orange);
+        }
+
+        .contact-box {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .contact-box h3 {
+            margin-top: 0;
+        }
+
+        .contact-box a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <main class="container">
-        <div class="hero">
-            <h1>Knowledge Base</h1>
-            <p>Find answers, documentation, and best practices for OrenGen AI solutions.</p>
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="mainNavbar">
+            <div class="navbar-container">
+                <a href="index.html" class="navbar-logo">
+                    <img src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" class="logo-dark" fetchpriority="high">
+                </a>
+
+                <div class="navbar-menu">
+                    <a href="index.html" class="navbar-item">Home</a>
+
+                    <!-- Solutions Mega Menu -->
+                    <div class="mega-menu-wrapper">
+                        <a href="#" class="navbar-item">
+                            Solutions
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Buy-Lingual™ AI Agents</h4>
+                                        <p>24/7 multilingual voice AI for sales & support</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Call Center</h4>
+                                        <p>Automated inbound & outbound calling</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Lead Generation</h4>
+                                        <p>AI-powered lead capture & qualification</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>CRM Automation</h4>
+                                        <p>Streamline your customer relationships</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Chatbots</h4>
+                                        <p>Intelligent customer conversations</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Analytics Dashboard</h4>
+                                        <p>Real-time insights & reporting</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mega-menu-divider"></div>
+                            <div class="mega-menu-footer">
+                                <div class="mega-menu-footer-text">
+                                    Need help choosing? <strong>Talk to our team</strong>
+                                </div>
+                                <a href="index.html#contact" class="mega-menu-cta">Contact Sales</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services Mega Menu -->
+                    <div class="mega-menu-wrapper">
+                        <a href="#" class="navbar-item">
+                            Services
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-grid">
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="16 18 22 12 16 6"></polyline>
+                                            <polyline points="8 6 2 12 8 18"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Web Development</h4>
+                                        <p>Custom websites & web applications</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>UI/UX Design</h4>
+                                        <p>Beautiful, user-centered interfaces</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <circle cx="12" cy="12" r="6"></circle>
+                                            <circle cx="12" cy="12" r="2"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>AI Consulting</h4>
+                                        <p>Strategic AI implementation guidance</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                            <path d="M2 17l10 5 10-5"></path>
+                                            <path d="M2 12l10 5 10-5"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>API Integration</h4>
+                                        <p>Connect your existing systems</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>Documentation</h4>
+                                        <p>Technical writing & API docs</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="mega-menu-item">
+                                    <div class="mega-menu-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div class="mega-menu-content">
+                                        <h4>24/7 Support</h4>
+                                        <p>Round-the-clock technical assistance</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mega-menu-divider"></div>
+                            <div class="mega-menu-footer">
+                                <div class="mega-menu-footer-text">
+                                    Looking for something specific? <strong>We're here to help</strong>
+                                </div>
+                                <a href="index.html#contact" class="mega-menu-cta">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="index.html#pricing" class="navbar-item">Pricing</a>
+                    <a href="index.html#about" class="navbar-item">About</a>
+                    <a href="contact.html" class="navbar-item">Contact</a>
+                </div>
+
+                <div class="navbar-actions">
+                    <a href="contact.html" class="navbar-login">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10 17 15 12 10 7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        Get Started
+                    </a>
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <img loading="lazy" src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" class="logo-dark" style="height: 32px;">
+                <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="mobile-menu-items">
+                <a href="index.html" class="mobile-menu-item">Home</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">Solutions</div>
+                </div>
+                <a href="#" class="mobile-menu-item">Buy-Lingual™ AI Agents</a>
+                <a href="#" class="mobile-menu-item">AI Call Center</a>
+                <a href="#" class="mobile-menu-item">Lead Generation</a>
+                <a href="#" class="mobile-menu-item">CRM Automation</a>
+                <a href="#" class="mobile-menu-item">AI Chatbots</a>
+                <a href="#" class="mobile-menu-item">Analytics Dashboard</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">Services</div>
+                </div>
+                <a href="#" class="mobile-menu-item">Web Development</a>
+                <a href="#" class="mobile-menu-item">UI/UX Design</a>
+                <a href="#" class="mobile-menu-item">AI Consulting</a>
+                <a href="#" class="mobile-menu-item">API Integration</a>
+                <a href="#" class="mobile-menu-item">Documentation</a>
+                <a href="#" class="mobile-menu-item">24/7 Support</a>
+
+                <div class="mobile-menu-category">
+                    <div class="mobile-menu-category-title">More</div>
+                </div>
+                <a href="index.html#pricing" class="mobile-menu-item">Pricing</a>
+                <a href="index.html#about" class="mobile-menu-item">About</a>
+                <a href="contact.html" class="mobile-menu-item">Contact</a>
+                <a href="privacy.html" class="mobile-menu-item">Privacy Policy</a>
+                <a href="terms.html" class="mobile-menu-item">Terms of Service</a>
+            </div>
         </div>
-        <div class="content">
-            <ul>
-                <li>Getting Started with OrenGen</li>
-                <li>Account & Security</li>
-                <li>AI Agent Setup</li>
-                <li>Integrations</li>
-                <li>Troubleshooting</li>
-            </ul>
-            <p style="margin-top:2rem;">For further support, email <a href="mailto:support@orengen.io">support@orengen.io</a></p>
+
+        <div class="page-container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <strong>Knowledge Base</strong>
+            </div>
+
+            <div class="page-hero">
+                <h1>Knowledge Base</h1>
+                <p>Find answers, documentation, and best practices for OrenGen AI solutions.</p>
+            </div>
+
+            <div class="page-content">
+                <h2>Browse by Category</h2>
+
+                <div class="kb-category">
+                    <h3>Getting Started with OrenGen</h3>
+                    <p>Learn the basics of setting up and configuring your OrenGen AI solutions. From account creation to your first workflow, we'll guide you through every step.</p>
+                </div>
+
+                <div class="kb-category">
+                    <h3>Account & Security</h3>
+                    <p>Manage your account settings, user permissions, and security features. Learn about two-factor authentication, API keys, and access controls.</p>
+                </div>
+
+                <div class="kb-category">
+                    <h3>AI Agent Setup</h3>
+                    <p>Configure your Buy-Lingual™ AI Agents with custom personalities, languages, and workflows. Optimize performance for your specific use case.</p>
+                </div>
+
+                <div class="kb-category">
+                    <h3>Integrations</h3>
+                    <p>Connect OrenGen with your existing tools and systems. Documentation for CRM, phone systems, analytics platforms, and custom API integrations.</p>
+                </div>
+
+                <div class="kb-category">
+                    <h3>Troubleshooting</h3>
+                    <p>Find solutions to common issues and error messages. Step-by-step guides for resolving technical problems and optimizing your setup.</p>
+                </div>
+
+                <div class="contact-box">
+                    <h3>Can't Find What You're Looking For?</h3>
+                    <p>Our support team is available 24/7 to help you with any questions or issues.</p>
+                    <p>Email: <a href="mailto:support@orengen.io">support@orengen.io</a></p>
+                    <p>Or check out our <a href="ai-agent-guides.html">AI Agent Guides</a> for detailed technical documentation.</p>
+                </div>
+            </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <div class="footer-logo">
+                            <img loading="lazy" src="https://blog.orengen.io/wp-content/uploads/2026/01/OrenGen-Worldwide-Logo-White-Transparent-Rectangle.png" alt="OrenGen.io" style="max-width: 200px; height: auto;">
+                        </div>
+                        <p class="footer-description">
+                            Premier AI & Technology firm disrupting traditional workflows through intelligent automation and Buy-Lingual™ AI Agents.
+                        </p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/orengenio" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            </a>
+                            <a href="https://x.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            </a>
+                            <a href="https://www.instagram.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                            </a>
+                            <a href="https://www.facebook.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </a>
+                            <a href="https://github.com/orengenio" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            </a>
+                            <a href="https://www.youtube.com/@orengenio" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="#">Buy-Lingual™ AI Agents</a></li>
+                            <li><a href="#">AI Call Center</a></li>
+                            <li><a href="#">Lead Generation</a></li>
+                            <li><a href="#">CRM Automation</a></li>
+                            <li><a href="#">AI Chatbots</a></li>
+                            <li><a href="#">Analytics Dashboard</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">UI/UX Design</a></li>
+                            <li><a href="#">AI Consulting</a></li>
+                            <li><a href="#">API Integration</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">24/7 Support</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="case-studies.html">Case Studies</a></li>
+                            <li><a href="index.html#pricing">Pricing</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="https://blog.orengen.io" target="_blank" rel="noopener">Blog</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="knowledge-base.html">Knowledge Base</a></li>
+                            <li><a href="ai-agent-guides.html">AI Agent Guides</a></li>
+                            <li><a href="getting-started.html">Getting Started</a></li>
+                            <li><a href="#">API Documentation</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="terms.html">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2026 OrenGen Worldwide. All rights reserved. | HUB Certified Minority Business Enterprise</p>
+                </div>
+            </div>
+        </footer>
     </main>
-    <!-- Unified footer will be included here -->
-    <footer class="footer">...existing code...</footer>
+
+    <!-- External JavaScript -->
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>
