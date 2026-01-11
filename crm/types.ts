@@ -312,3 +312,172 @@ export interface LeadGenConfig {
   autoEnrichment: boolean;
   autoScoring: boolean;
 }
+
+// AI Website Builder (Claude Code + Gemini)
+export interface WebsiteProject {
+  id: string;
+  companyId?: string;
+  contactId?: string;
+  projectName: string;
+  status: 'questionnaire' | 'wireframing' | 'design' | 'development' | 'review' | 'completed' | 'delivered';
+  questionsAnswered: number;
+  totalQuestions: number;
+  responses: WebsiteResponse[];
+  wireframe?: Wireframe;
+  design?: Design;
+  generatedCode?: GeneratedCode;
+  domain?: string;
+  createdBy: string;
+  assignedTo?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WebsiteQuestion {
+  id: string;
+  category: 'business' | 'branding' | 'features' | 'content' | 'technical' | 'design';
+  question: string;
+  type: 'text' | 'select' | 'multiselect' | 'textarea' | 'color' | 'image';
+  options?: string[];
+  placeholder?: string;
+  required: boolean;
+  order: number;
+  conditionalOn?: {
+    questionId: string;
+    value: string;
+  };
+}
+
+export interface WebsiteResponse {
+  questionId: string;
+  question: string;
+  answer: string | string[];
+  answeredAt: string;
+}
+
+export interface Wireframe {
+  id: string;
+  projectId: string;
+  pages: WireframePage[];
+  navigation: NavigationStructure;
+  generatedBy: 'claude' | 'gemini';
+  prompt: string;
+  svg?: string;
+  image?: string;
+  createdAt: string;
+}
+
+export interface WireframePage {
+  name: string;
+  path: string;
+  sections: WireframeSection[];
+}
+
+export interface WireframeSection {
+  type: 'hero' | 'features' | 'about' | 'services' | 'testimonials' | 'cta' | 'contact' | 'footer' | 'gallery' | 'pricing' | 'faq';
+  layout: 'single-column' | 'two-column' | 'three-column' | 'grid' | 'masonry';
+  content: string;
+  position: number;
+}
+
+export interface NavigationStructure {
+  type: 'top' | 'side' | 'hamburger' | 'mega-menu';
+  items: NavItem[];
+  sticky: boolean;
+  transparent: boolean;
+}
+
+export interface NavItem {
+  label: string;
+  path: string;
+  children?: NavItem[];
+}
+
+export interface Design {
+  id: string;
+  projectId: string;
+  theme: DesignTheme;
+  colorPalette: ColorPalette;
+  typography: Typography;
+  components: DesignComponent[];
+  mockups: string[]; // URLs to generated mockup images
+  generatedBy: 'claude' | 'gemini';
+  createdAt: string;
+}
+
+export interface DesignTheme {
+  name: string;
+  style: 'modern' | 'classic' | 'minimal' | 'bold' | 'playful' | 'corporate' | 'creative';
+  mood: string[];
+}
+
+export interface ColorPalette {
+  primary: string;
+  secondary: string;
+  accent: string;
+  background: string;
+  text: string;
+  darkMode?: {
+    primary: string;
+    secondary: string;
+    accent: string;
+    background: string;
+    text: string;
+  };
+}
+
+export interface Typography {
+  headingFont: string;
+  bodyFont: string;
+  monoFont?: string;
+  scale: {
+    h1: string;
+    h2: string;
+    h3: string;
+    body: string;
+    small: string;
+  };
+}
+
+export interface DesignComponent {
+  name: string;
+  type: 'button' | 'card' | 'form' | 'nav' | 'footer' | 'hero';
+  styles: Record<string, string>;
+  variants: string[];
+}
+
+export interface GeneratedCode {
+  id: string;
+  projectId: string;
+  framework: 'react' | 'next' | 'html' | 'vue' | 'astro';
+  files: CodeFile[];
+  dependencies: PackageDependency[];
+  deploymentUrl?: string;
+  githubRepo?: string;
+  generatedBy: 'claude' | 'gemini';
+  buildStatus: 'pending' | 'building' | 'success' | 'failed';
+  buildLog?: string;
+  createdAt: string;
+}
+
+export interface CodeFile {
+  path: string;
+  content: string;
+  language: string;
+}
+
+export interface PackageDependency {
+  name: string;
+  version: string;
+  type: 'dependency' | 'devDependency';
+}
+
+export interface AIWebBuilderConfig {
+  claudeApiKey: string;
+  geminiApiKey: string;
+  defaultFramework: 'react' | 'next' | 'html' | 'vue' | 'astro';
+  autoWireframe: boolean;
+  autoDesign: boolean;
+  autoDeploy: boolean;
+  deploymentPlatform: 'vercel' | 'netlify' | 'cloudflare' | 'none';
+}
