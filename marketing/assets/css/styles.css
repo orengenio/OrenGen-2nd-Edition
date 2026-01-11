@@ -102,7 +102,7 @@
         }
 
         /* ========================================
-           NAVIGATION BAR - CREATIVE-TIM STYLE
+           NAVIGATION BAR - CREATIVE-TIM STYLE WITH FLOATING
            ======================================== */
         .navbar {
             position: fixed;
@@ -114,7 +114,32 @@
             border-bottom: 1px solid var(--border);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+        }
+
+        /* Floating navbar - hidden on scroll down */
+        .navbar.navbar-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Floating navbar - scrolled state with shadow */
+        .navbar.navbar-scrolled {
+            background: rgba(17, 17, 17, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom-color: rgba(200, 90, 61, 0.3);
+        }
+
+        [data-theme="light"] .navbar.navbar-scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.navbar-scrolled .navbar-container {
+            height: 64px;
+        }
+
+        .navbar.navbar-scrolled .navbar-logo img {
+            height: 36px;
         }
 
         .navbar-container {

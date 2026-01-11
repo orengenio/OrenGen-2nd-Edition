@@ -1,8 +1,42 @@
+        // ========================================
+        // FLOATING NAVBAR - SCROLL BEHAVIOR
+        // ========================================
+        let lastScrollTop = 0;
+        let scrollThreshold = 100;
+        const navbar = document.getElementById('mainNavbar');
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Add scrolled class for styling when past threshold
+            if (scrollTop > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+
+            // Hide/show navbar based on scroll direction
+            if (scrollTop > scrollThreshold) {
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down - hide navbar
+                    navbar.classList.add('navbar-hidden');
+                } else {
+                    // Scrolling up - show navbar
+                    navbar.classList.remove('navbar-hidden');
+                }
+            } else {
+                // Always show navbar at top of page
+                navbar.classList.remove('navbar-hidden');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, { passive: true });
+
         // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             const overlay = document.getElementById('mobileMenuOverlay');
-            
+
             if (menu.classList.contains('active')) {
                 menu.classList.remove('active');
                 overlay.style.display = 'none';
