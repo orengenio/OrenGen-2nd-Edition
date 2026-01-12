@@ -1,9 +1,9 @@
 import { ChecklistItem, ToolConnection, Contact, Opportunity, Post, Course, WikiArticle, TourStep, CalendarProvider, CalendarEvent, Workflow, SimulatedEmail } from './types';
-import { 
-  LayoutDashboard, PlusCircle, PenTool, Video, LayoutTemplate, 
+import {
+  LayoutDashboard, PlusCircle, PenTool, Video, LayoutTemplate,
   Megaphone, Workflow as WorkflowIcon, BarChart3, Bot, ShoppingBag, Settings, Users,
   Radar, FileSearch, ScrollText, ShieldCheck, Landmark, MessageSquare, Book, Database, Calendar as CalendarIcon, FormInput,
-  Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle
+  Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target
 } from 'lucide-react';
 
 export const INITIAL_TOOLS: ToolConnection[] = [
@@ -23,6 +23,7 @@ export const INITIAL_TOOLS: ToolConnection[] = [
 export const NAV_ITEMS = [
   { id: '/dashboard', label: 'Control Room', icon: LayoutDashboard, section: 'core' },
   { id: '/crm', label: 'CRM Database', icon: Users, section: 'core' },
+  { id: '/leadgen-studio', label: 'Lead Generation', icon: Target, section: 'core' },
   { id: '/calendar-studio', label: 'Universal Calendar', icon: CalendarIcon, section: 'core' },
   { id: '/wiki', label: 'Knowledge Wiki', icon: Book, section: 'core' },
   
