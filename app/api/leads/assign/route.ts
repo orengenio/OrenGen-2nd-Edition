@@ -16,51 +16,63 @@ import {
 // POST /api/leads/assign - Assign lead(s) to user
 export async function POST(request: NextRequest) {
   try {
-    const user = await getUserFromRequest(request);
-    if (!user) return unauthorizedResponse();
+    const currentUser = await getUserFromRequest(request);
+    if (!currentUser) return unauthorizedResponse();
 
-    if (!hasPermission(user.role, 'leads', 'update')) {
+    if (!hasPermission(currentUser.role, 'leads', 'update')) {
       return forbiddenResponse();
     }
 
-    const body = await request.json();
-    const { leadIds, assignTo, method = 'manual' } = body;
+    const requestBody = await request.json();
+    const { leadIds, assignTo, method = 'manual' } = requestBody;
 
     if (!leadIds || !Array.isArray(leadIds) || leadIds.length === 0) {
       return errorResponse('Lead IDs are required');
     }
 
-    let result;
+    let assignmentResult;
 
     if (method === 'round_robin') {
-      // Assign multiple leads using round robin
-      const assignments = [];
+      // Assign multiple leads using round robin distribution
+      const successfulAssignments = [];
       for (const leadId of leadIds) {
-        const assignedTo = await assignLeadRoundRobin(leadId, user.userId);
-        if (assignedTo) {
-          assignments.push({ leadId, assignedTo });
+        const assignedToUserId = await assignLeadRoundRobin(leadId, currentUser.userId);
+        if (assignedToUserId) {
+          successfulAssignments.push({ leadId, assignedToUserId });
         }
       }
-      result = { method: 'round_robin', assignments };
+      assignmentResult = {
+        method: 'round_robin',
+        assignments: successfulAssignments,
+        totalAssigned: successfulAssignments.length,
+      };
     } else if (method === 'workload') {
-      // Assign multiple leads based on workload
-      const assignments = [];
+      // Assign multiple leads based on current workload
+      const successfulAssignments = [];
       for (const leadId of leadIds) {
-        const assignedTo = await assignLeadByWorkload(leadId, user.userId);
-        if (assignedTo) {
-          assignments.push({ leadId, assignedTo });
+        const assignedToUserId = await assignLeadByWorkload(leadId, currentUser.userId);
+        if (assignedToUserId) {
+          successfulAssignments.push({ leadId, assignedToUserId });
         }
       }
-      result = { method: 'workload', assignments };
+      assignmentResult = {
+        method: 'workload',
+        assignments: successfulAssignments,
+        totalAssigned: successfulAssignments.length,
+      };
     } else if (method === 'manual' && assignTo) {
       // Manual assignment to specific user
-      const count = await bulkAssignLeads(leadIds, assignTo, user.userId);
-      result = { method: 'manual', assignedTo: assignTo, count };
+      const assignedLeadsCount = await bulkAssignLeads(leadIds, assignTo, currentUser.userId);
+      assignmentResult = {
+        method: 'manual',
+        assignedToUserId: assignTo,
+        totalAssigned: assignedLeadsCount,
+      };
     } else {
       return errorResponse('Invalid assignment method or missing assignTo parameter');
     }
 
-    return successResponse(result, 'Leads assigned successfully');
+    return successResponse(assignmentResult, 'Leads assigned successfully');
   } catch (error: any) {
     console.error('Lead assignment error:', error);
     return errorResponse(error.message || 'Failed to assign leads', 500);
@@ -70,31 +82,31 @@ export async function POST(request: NextRequest) {
 // GET /api/leads/assign/stats - Get assignment statistics
 export async function GET(request: NextRequest) {
   try {
-    const user = await getUserFromRequest(request);
-    if (!user) return unauthorizedResponse();
+    const currentUser = await getUserFromRequest(request);
+    if (!currentUser) return unauthorizedResponse();
 
     const { searchParams } = new URL(request.url);
-    const userId = searchParams.get('userId') || user.userId;
+    const requestedUserId = searchParams.get('userId') || currentUser.userId;
 
-    // Get assignment stats
-    const stats = await query(
+    // Get assignment statistics for the requested user
+    const assignmentStatistics = await query(
       `SELECT
-         u.id,
-         u.name,
-         u.email,
-         COUNT(dl.id) as total_assigned,
-         COUNT(CASE WHEN dl.status = 'contacted' THEN 1 END) as contacted,
-         COUNT(CASE WHEN dl.status = 'converted' THEN 1 END) as converted,
-         AVG(dl.lead_score) as avg_score,
-         MAX(dl.updated_at) as last_assignment
-       FROM users u
-       LEFT JOIN domain_leads dl ON dl.assigned_to = u.id
-       WHERE u.id = $1
-       GROUP BY u.id, u.name, u.email`,
-      [userId]
+         user.id,
+         user.name,
+         user.email,
+         COUNT(lead.id) as total_leads_assigned,
+         COUNT(CASE WHEN lead.status = 'contacted' THEN 1 END) as leads_contacted,
+         COUNT(CASE WHEN lead.status = 'converted' THEN 1 END) as leads_converted,
+         AVG(lead.lead_score) as average_lead_score,
+         MAX(lead.updated_at) as last_assignment_date
+       FROM users user
+       LEFT JOIN domain_leads lead ON lead.assigned_to = user.id
+       WHERE user.id = $1
+       GROUP BY user.id, user.name, user.email`,
+      [requestedUserId]
     );
 
-    return successResponse(stats[0] || {});
+    return successResponse(assignmentStatistics[0] || {});
   } catch (error: any) {
     console.error('Get assignment stats error:', error);
     return errorResponse(error.message || 'Failed to get stats', 500);

@@ -13,61 +13,61 @@ export interface ScoringCriteria {
 
 // Advanced lead scoring algorithm
 export function calculateLeadScore(lead: DomainLead, criteria?: ScoringCriteria): number {
-  let score = 0;
+  let totalScore = 0;
 
-  // Base score for having a domain
-  score += 10;
+  // Base score for having a valid domain
+  totalScore += 10;
 
-  // WHOIS data (20 points)
+  // WHOIS data contributes up to 20 points
   if (lead.whoisData) {
-    score += 20;
+    totalScore += 20;
 
-    // Domain age bonus
+    // Domain age bonus - older domains are more established
     if (lead.whoisData.registrationDate) {
-      const domainAge = getDomainAgeInYears(lead.whoisData.registrationDate);
-      if (domainAge > 5) score += 10; // Established domain
-      else if (domainAge > 2) score += 5;
+      const domainAgeInYears = getDomainAgeInYears(lead.whoisData.registrationDate);
+      if (domainAgeInYears > 5) totalScore += 10; // Well-established domain
+      else if (domainAgeInYears > 2) totalScore += 5; // Moderately established
     }
 
-    // Registrant organization
-    if (lead.whoisData.registrantOrg) score += 5;
+    // Has registered organization
+    if (lead.whoisData.registrantOrg) totalScore += 5;
   }
 
-  // Enrichment data (30 points)
+  // Enrichment data contributes up to 30 points
   if (lead.enrichmentData) {
-    score += 10;
+    totalScore += 10;
 
-    // Email addresses found
+    // Email addresses found - indicates reachability
     if (lead.enrichmentData.emails && lead.enrichmentData.emails.length > 0) {
-      score += 15;
-      if (lead.enrichmentData.emails.length >= 3) score += 5;
+      totalScore += 15; // At least one email
+      if (lead.enrichmentData.emails.length >= 3) totalScore += 5; // Multiple contact points
     }
 
-    // Social media presence
+    // Social media presence - indicates active business
     if (lead.enrichmentData.socialMedia) {
-      const socialCount = Object.keys(lead.enrichmentData.socialMedia).length;
-      score += Math.min(socialCount * 2, 10);
+      const socialMediaCount = Object.keys(lead.enrichmentData.socialMedia).length;
+      totalScore += Math.min(socialMediaCount * 2, 10);
     }
 
-    // Company size
+    // Company size - larger companies typically have bigger budgets
     if (lead.enrichmentData.companySize) {
-      const sizeScore = getCompanySizeScore(lead.enrichmentData.companySize);
-      score += sizeScore;
+      const companySizeScore = getCompanySizeScore(lead.enrichmentData.companySize);
+      totalScore += companySizeScore;
     }
 
-    // Traffic estimation
+    // Traffic estimation - higher traffic indicates established business
     if (lead.enrichmentData.estimatedTraffic) {
-      if (lead.enrichmentData.estimatedTraffic > 100000) score += 10;
-      else if (lead.enrichmentData.estimatedTraffic > 10000) score += 5;
+      if (lead.enrichmentData.estimatedTraffic > 100000) totalScore += 10; // High traffic
+      else if (lead.enrichmentData.estimatedTraffic > 10000) totalScore += 5; // Moderate traffic
     }
   }
 
-  // Tech stack (20 points)
+  // Tech stack contributes up to 20 points
   if (lead.techStack) {
-    score += 5;
+    totalScore += 5;
 
-    // Popular CMS/frameworks indicate active development
-    const valuableTech = [
+    // Popular CMS/frameworks indicate active development and technical capability
+    const valuableTechnologies = [
       'WordPress',
       'Shopify',
       'WooCommerce',
@@ -75,18 +75,20 @@ export function calculateLeadScore(lead: DomainLead, criteria?: ScoringCriteria)
       'Next.js',
       'Vue',
     ];
-    const hasValuableTech = lead.techStack.frameworks?.some((tech) =>
-      valuableTech.some((vt) => tech.toLowerCase().includes(vt.toLowerCase()))
+    const usesValuableTechnology = lead.techStack.frameworks?.some((technology) =>
+      valuableTechnologies.some((valuableTech) =>
+        technology.toLowerCase().includes(valuableTech.toLowerCase())
+      )
     );
-    if (hasValuableTech) score += 10;
+    if (usesValuableTechnology) totalScore += 10;
 
-    // Analytics indicates serious business
+    // Analytics tools indicate data-driven business
     if (lead.techStack.analytics && lead.techStack.analytics.length > 0) {
-      score += 5;
+      totalScore += 5;
     }
   }
 
-  // Industry-specific bonuses (10 points)
+  // Industry-specific bonuses contribute up to 10 points
   if (lead.enrichmentData?.industry) {
     const highValueIndustries = [
       'technology',
@@ -95,20 +97,19 @@ export function calculateLeadScore(lead: DomainLead, criteria?: ScoringCriteria)
       'saas',
       'e-commerce',
     ];
-    if (
-      highValueIndustries.some((industry) =>
-        lead.enrichmentData?.industry?.toLowerCase().includes(industry)
-      )
-    ) {
-      score += 10;
+    const isHighValueIndustry = highValueIndustries.some((highValueIndustry) =>
+      lead.enrichmentData?.industry?.toLowerCase().includes(highValueIndustry)
+    );
+    if (isHighValueIndustry) {
+      totalScore += 10;
     }
   }
 
-  // Engagement bonuses (if tracked)
-  // This would be added based on user behavior tracking
+  // Future: Engagement bonuses could be added based on user behavior tracking
+  // (website visits, email opens, content downloads, etc.)
 
-  // Cap at 100
-  return Math.min(score, 100);
+  // Cap maximum score at 100
+  return Math.min(totalScore, 100);
 }
 
 // Machine learning-based scoring (placeholder for future ML model)

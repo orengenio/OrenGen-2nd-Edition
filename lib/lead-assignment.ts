@@ -11,10 +11,13 @@ export interface AssignmentRule {
   };
 }
 
-// Round Robin Assignment
-export async function assignLeadRoundRobin(leadId: string, assignedBy: string): Promise<string | null> {
-  // Get active sales reps
-  const salesReps = await query(
+// Round Robin Assignment - Distributes leads evenly across sales team
+export async function assignLeadRoundRobin(
+  leadId: string,
+  assignedByUserId: string
+): Promise<string | null> {
+  // Get all active sales representatives
+  const availableSalesReps = await query(
     `SELECT id, name, email
      FROM users
      WHERE role IN ('sales_rep', 'sales_manager')
@@ -22,10 +25,10 @@ export async function assignLeadRoundRobin(leadId: string, assignedBy: string): 
      ORDER BY last_login DESC`
   );
 
-  if (salesReps.length === 0) return null;
+  if (availableSalesReps.length === 0) return null;
 
-  // Get last assigned rep
-  const lastAssignment = await query(
+  // Find who was assigned the last lead
+  const previousAssignments = await query(
     `SELECT assigned_to
      FROM domain_leads
      WHERE assigned_to IS NOT NULL
@@ -33,160 +36,184 @@ export async function assignLeadRoundRobin(leadId: string, assignedBy: string): 
      LIMIT 1`
   );
 
-  let nextRepIndex = 0;
+  let nextSalesRepIndex = 0;
 
-  if (lastAssignment.length > 0) {
-    const lastRepId = lastAssignment[0].assigned_to;
-    const lastRepIndex = salesReps.findIndex((rep: any) => rep.id === lastRepId);
-    nextRepIndex = (lastRepIndex + 1) % salesReps.length;
+  if (previousAssignments.length > 0) {
+    const previouslyAssignedUserId = previousAssignments[0].assigned_to;
+    const previousSalesRepIndex = availableSalesReps.findIndex(
+      (salesRep: any) => salesRep.id === previouslyAssignedUserId
+    );
+    // Move to next rep in rotation
+    nextSalesRepIndex = (previousSalesRepIndex + 1) % availableSalesReps.length;
   }
 
-  const assignedRep = salesReps[nextRepIndex];
+  const selectedSalesRep = availableSalesReps[nextSalesRepIndex];
 
-  // Update lead
+  // Assign lead to selected sales rep
   await query(
     'UPDATE domain_leads SET assigned_to = $1, status = $2 WHERE id = $3',
-    [assignedRep.id, 'qualified', leadId]
+    [selectedSalesRep.id, 'qualified', leadId]
   );
 
-  // Get lead details
-  const leads = await query('SELECT * FROM domain_leads WHERE id = $1', [leadId]);
+  // Get complete lead details for notification
+  const leadDetails = await query('SELECT * FROM domain_leads WHERE id = $1', [leadId]);
 
-  if (leads.length > 0) {
-    notifyLeadAssignment(leads[0], assignedRep.id, assignedBy);
+  if (leadDetails.length > 0) {
+    notifyLeadAssignment(leadDetails[0], selectedSalesRep.id, assignedByUserId);
   }
 
-  return assignedRep.id;
+  return selectedSalesRep.id;
 }
 
-// Territory-Based Assignment
+// Territory-Based Assignment - Assigns to sales rep covering specific territory
 export async function assignLeadByTerritory(
   leadId: string,
-  territory: string,
-  assignedBy: string
+  territoryName: string,
+  assignedByUserId: string
 ): Promise<string | null> {
-  // Get reps assigned to this territory
-  const reps = await query(
-    `SELECT u.id, u.name, u.email
-     FROM users u
-     WHERE u.role IN ('sales_rep', 'sales_manager')
-     AND u.is_active = true
-     -- Add territory matching logic here
+  // Get sales reps assigned to this territory
+  const salesRepsInTerritory = await query(
+    `SELECT user.id, user.name, user.email
+     FROM users user
+     WHERE user.role IN ('sales_rep', 'sales_manager')
+     AND user.is_active = true
+     -- TODO: Add territory matching logic when territories table is implemented
      LIMIT 1`
   );
 
-  if (reps.length === 0) {
-    // Fallback to round robin
-    return assignLeadRoundRobin(leadId, assignedBy);
+  if (salesRepsInTerritory.length === 0) {
+    // Fallback to round robin if no territory match found
+    return assignLeadRoundRobin(leadId, assignedByUserId);
   }
 
-  const assignedRep = reps[0];
+  const selectedSalesRep = salesRepsInTerritory[0];
 
+  // Assign lead to territory sales rep
   await query(
     'UPDATE domain_leads SET assigned_to = $1, status = $2 WHERE id = $3',
-    [assignedRep.id, 'qualified', leadId]
+    [selectedSalesRep.id, 'qualified', leadId]
   );
 
-  const leads = await query('SELECT * FROM domain_leads WHERE id = $1', [leadId]);
+  // Get complete lead details for notification
+  const leadDetails = await query('SELECT * FROM domain_leads WHERE id = $1', [leadId]);
 
-  if (leads.length > 0) {
-    notifyLeadAssignment(leads[0], assignedRep.id, assignedBy);
+  if (leadDetails.length > 0) {
+    notifyLeadAssignment(leadDetails[0], selectedSalesRep.id, assignedByUserId);
   }
 
-  return assignedRep.id;
+  return selectedSalesRep.id;
 }
 
-// Workload-Based Assignment (Assign to rep with fewest active leads)
-export async function assignLeadByWorkload(leadId: string, assignedBy: string): Promise<string | null> {
-  const repsWithWorkload = await query(
-    `SELECT u.id, u.name, u.email, COUNT(dl.id) as lead_count
-     FROM users u
-     LEFT JOIN domain_leads dl ON dl.assigned_to = u.id AND dl.status IN ('new', 'enriched', 'qualified', 'contacted')
-     WHERE u.role IN ('sales_rep', 'sales_manager')
-     AND u.is_active = true
-     GROUP BY u.id, u.name, u.email
-     ORDER BY lead_count ASC, RANDOM()
+// Workload-Based Assignment - Assigns to sales rep with fewest active leads
+export async function assignLeadByWorkload(
+  leadId: string,
+  assignedByUserId: string
+): Promise<string | null> {
+  const salesRepsWithCurrentWorkload = await query(
+    `SELECT user.id, user.name, user.email, COUNT(lead.id) as active_lead_count
+     FROM users user
+     LEFT JOIN domain_leads lead
+       ON lead.assigned_to = user.id
+       AND lead.status IN ('new', 'enriched', 'qualified', 'contacted')
+     WHERE user.role IN ('sales_rep', 'sales_manager')
+     AND user.is_active = true
+     GROUP BY user.id, user.name, user.email
+     ORDER BY active_lead_count ASC, RANDOM()
      LIMIT 1`
   );
 
-  if (repsWithWorkload.length === 0) return null;
+  if (salesRepsWithCurrentWorkload.length === 0) return null;
 
-  const assignedRep = repsWithWorkload[0];
+  const salesRepWithLeastWorkload = salesRepsWithCurrentWorkload[0];
 
+  // Assign lead to sales rep with lowest workload
   await query(
     'UPDATE domain_leads SET assigned_to = $1, status = $2 WHERE id = $3',
-    [assignedRep.id, 'qualified', leadId]
+    [salesRepWithLeastWorkload.id, 'qualified', leadId]
   );
 
-  const leads = await query('SELECT * FROM domain_leads WHERE id = $1', [leadId]);
+  // Get complete lead details for notification
+  const leadDetails = await query('SELECT * FROM domain_leads WHERE id = $1', [leadId]);
 
-  if (leads.length > 0) {
-    notifyLeadAssignment(leads[0], assignedRep.id, assignedBy);
+  if (leadDetails.length > 0) {
+    notifyLeadAssignment(leadDetails[0], salesRepWithLeastWorkload.id, assignedByUserId);
   }
 
-  return assignedRep.id;
+  return salesRepWithLeastWorkload.id;
 }
 
-// Auto-assign based on lead score
-export async function autoAssignLead(leadId: string, leadScore: number): Promise<string | null> {
-  // High-value leads (score >= 80) go to top performers
-  if (leadScore >= 80) {
-    const topPerformers = await query(
-      `SELECT u.id, u.name, u.email
-       FROM users u
-       WHERE u.role IN ('sales_manager', 'sales_rep')
-       AND u.is_active = true
-       -- Add performance metrics here
+// Auto-assign based on lead quality score
+export async function autoAssignLeadByScore(
+  leadId: string,
+  leadQualityScore: number
+): Promise<string | null> {
+  // High-value leads (score >= 80) should go to top-performing sales reps
+  if (leadQualityScore >= 80) {
+    const topPerformingSalesReps = await query(
+      `SELECT user.id, user.name, user.email
+       FROM users user
+       WHERE user.role IN ('sales_manager', 'sales_rep')
+       AND user.is_active = true
+       -- TODO: Add performance metrics when tracking is implemented
        ORDER BY RANDOM()
        LIMIT 1`
     );
 
-    if (topPerformers.length > 0) {
-      const rep = topPerformers[0];
+    if (topPerformingSalesReps.length > 0) {
+      const selectedTopPerformer = topPerformingSalesReps[0];
       await query(
         'UPDATE domain_leads SET assigned_to = $1, status = $2 WHERE id = $3',
-        [rep.id, 'qualified', leadId]
+        [selectedTopPerformer.id, 'qualified', leadId]
       );
-      return rep.id;
+      return selectedTopPerformer.id;
     }
   }
 
-  // Default to workload-based assignment
+  // For lower-scored leads, use workload-based assignment
   return assignLeadByWorkload(leadId, 'system');
 }
 
-// Bulk assignment
-export async function bulkAssignLeads(leadIds: string[], assignToUserId: string, assignedBy: string) {
+// Bulk assignment - Assigns multiple leads to one sales rep at once
+export async function bulkAssignLeads(
+  leadIds: string[],
+  assignToUserId: string,
+  assignedByUserId: string
+) {
+  // Update all leads in bulk
   await query(
     'UPDATE domain_leads SET assigned_to = $1, status = $2 WHERE id = ANY($3)',
     [assignToUserId, 'qualified', leadIds]
   );
 
-  // Notify assigned user
-  const leads = await query('SELECT * FROM domain_leads WHERE id = ANY($1)', [leadIds]);
-
-  leads.forEach((lead: any) => {
-    notifyLeadAssignment(lead, assignToUserId, assignedBy);
-  });
-
-  return leads.length;
-}
-
-// Get assignment statistics
-export async function getAssignmentStats(userId?: string) {
-  const whereClause = userId ? 'WHERE assigned_to = $1' : '';
-  const params = userId ? [userId] : [];
-
-  const stats = await query(
-    `SELECT
-       COUNT(*) as total_assigned,
-       COUNT(CASE WHEN status = 'contacted' THEN 1 END) as contacted,
-       COUNT(CASE WHEN status = 'converted' THEN 1 END) as converted,
-       AVG(lead_score) as avg_score
-     FROM domain_leads
-     ${whereClause}`,
-    params
+  // Get all assigned lead details for notifications
+  const assignedLeadDetails = await query(
+    'SELECT * FROM domain_leads WHERE id = ANY($1)',
+    [leadIds]
   );
 
-  return stats[0];
+  // Send notification for each assigned lead
+  assignedLeadDetails.forEach((leadDetail: any) => {
+    notifyLeadAssignment(leadDetail, assignToUserId, assignedByUserId);
+  });
+
+  return assignedLeadDetails.length;
+}
+
+// Get assignment statistics for a sales rep or entire team
+export async function getAssignmentStatistics(salesRepUserId?: string) {
+  const sqlWhereClause = salesRepUserId ? 'WHERE assigned_to = $1' : '';
+  const queryParameters = salesRepUserId ? [salesRepUserId] : [];
+
+  const assignmentStats = await query(
+    `SELECT
+       COUNT(*) as total_leads_assigned,
+       COUNT(CASE WHEN status = 'contacted' THEN 1 END) as leads_contacted,
+       COUNT(CASE WHEN status = 'converted' THEN 1 END) as leads_converted,
+       AVG(lead_score) as average_lead_score
+     FROM domain_leads
+     ${sqlWhereClause}`,
+    queryParameters
+  );
+
+  return assignmentStats[0];
 }

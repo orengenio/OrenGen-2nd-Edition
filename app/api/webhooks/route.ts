@@ -8,52 +8,53 @@ import {
   forbiddenResponse,
 } from '@/lib/api-response';
 
-// POST /api/webhooks - Create webhook
+// POST /api/webhooks - Create new webhook integration
 export async function POST(request: NextRequest) {
   try {
-    const user = await getUserFromRequest(request);
-    if (!user) return unauthorizedResponse();
+    const currentUser = await getUserFromRequest(request);
+    if (!currentUser) return unauthorizedResponse();
 
-    if (!hasPermission(user.role, 'settings', 'create')) {
+    if (!hasPermission(currentUser.role, 'settings', 'create')) {
       return forbiddenResponse();
     }
 
-    const body = await request.json();
-    const { url, events, name, isActive = true } = body;
+    const requestBody = await request.json();
+    const { url, events, name, isActive = true } = requestBody;
 
     if (!url || !events || events.length === 0) {
-      return errorResponse('URL and events are required');
+      return errorResponse('Webhook URL and event types are required');
     }
 
-    const webhook = await query(
+    const newWebhook = await query(
       `INSERT INTO webhooks (url, events, name, is_active, created_by)
        VALUES ($1, $2, $3, $4, $5)
        RETURNING *`,
-      [url, JSON.stringify(events), name, isActive, user.userId]
+      [url, JSON.stringify(events), name, isActive, currentUser.userId]
     );
 
-    return successResponse(webhook[0], 'Webhook created successfully', 201);
+    return successResponse(newWebhook[0], 'Webhook created successfully', 201);
   } catch (error: any) {
     console.error('Create webhook error:', error);
     return errorResponse(error.message || 'Failed to create webhook', 500);
   }
 }
 
-// GET /api/webhooks - List webhooks
+// GET /api/webhooks - List all webhooks for current user
 export async function GET(request: NextRequest) {
   try {
-    const user = await getUserFromRequest(request);
-    if (!user) return unauthorizedResponse();
+    const currentUser = await getUserFromRequest(request);
+    if (!currentUser) return unauthorizedResponse();
 
-    const webhooks = await query(
-      `SELECT id, url, events, name, is_active, created_at, last_triggered
+    const userWebhooks = await query(
+      `SELECT id, url, events, name, is_active, created_at, last_triggered,
+              total_triggers, total_successes, total_failures
        FROM webhooks
        WHERE created_by = $1
        ORDER BY created_at DESC`,
-      [user.userId]
+      [currentUser.userId]
     );
 
-    return successResponse({ webhooks });
+    return successResponse({ webhooks: userWebhooks });
   } catch (error: any) {
     console.error('Get webhooks error:', error);
     return errorResponse(error.message || 'Failed to get webhooks', 500);
