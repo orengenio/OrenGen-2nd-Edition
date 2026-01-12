@@ -48,6 +48,11 @@ import ReputationDashboard from './components/ReputationDashboard';
 import SocialCommenting from './components/SocialCommenting';
 import SIMIntegration from './components/SIMIntegration';
 import FreelanceHub from './components/FreelanceHub';
+import PlansBilling from './components/PlansBilling';
+import FeatureManagement from './components/FeatureManagement';
+import ClientManagement from './components/ClientManagement';
+import SystemHealth from './components/SystemHealth';
+import OnboardingWizard from './components/OnboardingWizard';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -194,6 +199,11 @@ const reputationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path
 const socialCommentingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/social-commenting', component: SocialCommenting });
 const simIntegrationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/sim-integration', component: SIMIntegration });
 const freelanceHubRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/freelance-hub', component: FreelanceHub });
+const plansBillingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/plans-billing', component: PlansBilling });
+const featureManagementRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/feature-management', component: FeatureManagement });
+const clientManagementRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/client-management', component: ClientManagement });
+const systemHealthRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/system-health', component: SystemHealth });
+const onboardingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/onboarding', component: OnboardingWizard });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -201,7 +211,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, plansBillingRoute, featureManagementRoute, clientManagementRoute, systemHealthRoute, onboardingRoute, settingsRoute
   ])
 ]);
 

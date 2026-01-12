@@ -3,7 +3,8 @@ import {
   LayoutDashboard, PlusCircle, PenTool, Video, LayoutTemplate,
   Megaphone, Workflow as WorkflowIcon, BarChart3, Bot, ShoppingBag, Settings, Users,
   Radar, FileSearch, ScrollText, ShieldCheck, Landmark, MessageSquare, Book, Database, Calendar as CalendarIcon, FormInput,
-  Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target, Star, AtSign, Smartphone, Briefcase
+  Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target, Star, AtSign, Smartphone, Briefcase,
+  CreditCard, Package, Building, Activity, Rocket
 } from 'lucide-react';
 
 export const INITIAL_TOOLS: ToolConnection[] = [
@@ -58,6 +59,13 @@ export const NAV_ITEMS = [
   { id: '/agent-studio', label: 'Agent Studio', icon: Bot, section: 'system' },
   { id: '/developer-portal', label: 'API & Developers', icon: Terminal, section: 'system' },
   { id: '/settings', label: 'Settings', icon: Settings, section: 'system' },
+
+  // Super Admin (hidden from regular users in production)
+  { id: '/plans-billing', label: 'Plans & Billing', icon: CreditCard, section: 'admin' },
+  { id: '/feature-management', label: 'Feature Management', icon: Package, section: 'admin' },
+  { id: '/client-management', label: 'Client Management', icon: Building, section: 'admin' },
+  { id: '/system-health', label: 'System Health', icon: Activity, section: 'admin' },
+  { id: '/onboarding', label: 'Onboarding Setup', icon: Rocket, section: 'admin' },
 ];
 
 export const MOCK_WORKFLOWS: Workflow[] = [];
