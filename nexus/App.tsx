@@ -41,6 +41,20 @@ import MarketplaceStudio from './components/MarketplaceStudio';
 import Settings from './components/Settings';
 import Wiki from './components/Wiki';
 import LeadGenStudio from './components/LeadGenStudio';
+import UGCStudio from './components/UGCStudio';
+import ReportingDashboard from './components/ReportingDashboard';
+import AgentStudio from './components/AgentStudio';
+import ReputationDashboard from './components/ReputationDashboard';
+import SocialCommenting from './components/SocialCommenting';
+import SIMIntegration from './components/SIMIntegration';
+import FreelanceHub from './components/FreelanceHub';
+import PlansBilling from './components/PlansBilling';
+import FeatureManagement from './components/FeatureManagement';
+import ClientManagement from './components/ClientManagement';
+import SystemHealth from './components/SystemHealth';
+import OnboardingWizard from './components/OnboardingWizard';
+import RFPIntelligence from './components/RFPIntelligence';
+import MCPHub from './components/MCPHub';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -170,18 +184,30 @@ const grantRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/g
 
 // Agent Studios & Tools
 const brandRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/brand-studio', component: BrandStudio });
-const ugcRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ugc-studio', component: () => <AgentRoute type="creator_manager" title="UGC Studio" desc="Synthesize creator archetypes." /> });
+const ugcRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ugc-studio', component: UGCStudio });
 const webRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/web-studio', component: WebStudio });
 const formRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/form-studio', component: FormStudio }); 
 const automationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/automation-studio', component: AutomationStudio }); 
 const dataRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/data-studio', component: DataStudio }); 
-const agentSettingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/agent-studio', component: () => <AgentRoute type="agent_supervisor" title="Agent Supervisor" desc="Manage workforce." /> });
+const agentSettingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/agent-studio', component: AgentStudio });
 const marketRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/marketplace-studio', component: MarketplaceStudio }); 
 const campaignRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/campaign-studio', component: CampaignStudio });
 const devPortalRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/developer-portal', component: DeveloperPortal }); 
 const vaultRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/vault-studio', component: VaultStudio });
 const fossRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/opensource-registry', component: OpenSourceRegistry });
 const leadGenRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/leadgen-studio', component: LeadGenStudio });
+const reportingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/reporting', component: ReportingDashboard });
+const reputationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/reputation', component: ReputationDashboard });
+const socialCommentingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/social-commenting', component: SocialCommenting });
+const simIntegrationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/sim-integration', component: SIMIntegration });
+const freelanceHubRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/freelance-hub', component: FreelanceHub });
+const plansBillingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/plans-billing', component: PlansBilling });
+const featureManagementRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/feature-management', component: FeatureManagement });
+const clientManagementRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/client-management', component: ClientManagement });
+const systemHealthRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/system-health', component: SystemHealth });
+const onboardingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/onboarding', component: OnboardingWizard });
+const rfpIntelligenceRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/rfp-intelligence', component: RFPIntelligence });
+const mcpHubRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/mcp-hub', component: MCPHub });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -189,7 +215,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, plansBillingRoute, featureManagementRoute, clientManagementRoute, systemHealthRoute, onboardingRoute, rfpIntelligenceRoute, mcpHubRoute, settingsRoute
   ])
 ]);
 

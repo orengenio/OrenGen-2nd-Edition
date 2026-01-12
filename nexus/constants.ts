@@ -3,7 +3,8 @@ import {
   LayoutDashboard, PlusCircle, PenTool, Video, LayoutTemplate,
   Megaphone, Workflow as WorkflowIcon, BarChart3, Bot, ShoppingBag, Settings, Users,
   Radar, FileSearch, ScrollText, ShieldCheck, Landmark, MessageSquare, Book, Database, Calendar as CalendarIcon, FormInput,
-  Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target
+  Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target, Star, AtSign, Smartphone, Briefcase,
+  CreditCard, Package, Building, Activity, Rocket, Brain, Plug
 } from 'lucide-react';
 
 export const INITIAL_TOOLS: ToolConnection[] = [
@@ -35,24 +36,38 @@ export const NAV_ITEMS = [
   { id: '/form-studio', label: 'Form Generator', icon: FormInput, section: 'growth' }, 
   { id: '/campaign-studio', label: 'Omni-Channel Ops', icon: Megaphone, section: 'growth' },
   { id: '/community-studio', label: 'Community & Courses', icon: MessageSquare, section: 'growth' },
-  
+  { id: '/reputation', label: 'Reputation Manager', icon: Star, section: 'growth' },
+  { id: '/social-commenting', label: 'Smart Commenting', icon: AtSign, section: 'growth' },
+  { id: '/sim-integration', label: 'SIM & Numbers', icon: Smartphone, section: 'growth' },
+  { id: '/freelance-hub', label: 'Freelance Hub', icon: Briefcase, section: 'growth' },
+
   // Federal Studios
   { id: '/opportunity-studio', label: 'Opportunity Studio', icon: Radar, section: 'federal' },
-  { id: '/rfp-studio', label: 'RFP Intelligence', icon: FileSearch, section: 'federal' },
+  { id: '/rfp-intelligence', label: 'RFP Intelligence', icon: Brain, section: 'federal' },
+  { id: '/rfp-studio', label: 'RFP Analysis', icon: FileSearch, section: 'federal' },
   { id: '/proposal-studio', label: 'Proposal Studio', icon: ScrollText, section: 'federal' },
   { id: '/grant-studio', label: 'Grant Studio', icon: Landmark, section: 'federal' },
   { id: '/compliance-studio', label: 'Compliance & Risk', icon: ShieldCheck, section: 'federal' },
 
   // System
   { id: '/marketplace-studio', label: 'Integrations Hub', icon: ShoppingBag, section: 'infrastructure' },
+  { id: '/mcp-hub', label: 'MCP Hub', icon: Plug, section: 'infrastructure' },
   { id: '/opensource-registry', label: 'FOSS Registry', icon: Box, section: 'infrastructure' },
   { id: '/vault-studio', label: 'Vault (Secrets)', icon: Lock, section: 'infrastructure' },
   { id: '/automation-studio', label: 'Automation (n8n)', icon: WorkflowIcon, section: 'infrastructure' },
   { id: '/data-studio', label: 'Data & Sheets', icon: BarChart3, section: 'infrastructure' },
-  
+  { id: '/reporting', label: 'Reports & Analytics', icon: BarChart3, section: 'infrastructure' },
+
   { id: '/agent-studio', label: 'Agent Studio', icon: Bot, section: 'system' },
   { id: '/developer-portal', label: 'API & Developers', icon: Terminal, section: 'system' },
   { id: '/settings', label: 'Settings', icon: Settings, section: 'system' },
+
+  // Super Admin (hidden from regular users in production)
+  { id: '/plans-billing', label: 'Plans & Billing', icon: CreditCard, section: 'admin' },
+  { id: '/feature-management', label: 'Feature Management', icon: Package, section: 'admin' },
+  { id: '/client-management', label: 'Client Management', icon: Building, section: 'admin' },
+  { id: '/system-health', label: 'System Health', icon: Activity, section: 'admin' },
+  { id: '/onboarding', label: 'Onboarding Setup', icon: Rocket, section: 'admin' },
 ];
 
 export const MOCK_WORKFLOWS: Workflow[] = [];
