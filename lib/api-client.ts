@@ -220,9 +220,14 @@ class APIClient {
     search?: string;
     status?: string;
     minScore?: number;
+    campaignId?: string;
   }) {
     const query = new URLSearchParams(params as any).toString();
     return this.request(`/leads/domains${query ? '?' + query : ''}`);
+  }
+
+  async getLead(id: string) {
+    return this.request(`/leads/domains/${id}`);
   }
 
   async createLead(domain: string, notes?: string) {
@@ -232,9 +237,167 @@ class APIClient {
     });
   }
 
-  async enrichLead(id: string) {
+  async updateLead(id: string, data: {
+    status?: string;
+    notes?: string;
+    assigned_to?: string;
+    lead_score?: number;
+  }) {
+    return this.request(`/leads/domains/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteLead(id: string) {
+    return this.request(`/leads/domains/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async enrichLead(id: string, options?: {
+    skipWhois?: boolean;
+    skipTechStack?: boolean;
+    skipEmailFinder?: boolean;
+    preferredEmailSource?: 'hunter' | 'snov' | 'both';
+  }) {
     return this.request(`/leads/domains/${id}/enrich`, {
       method: 'POST',
+      body: JSON.stringify(options || {}),
+    });
+  }
+
+  async assignLead(id: string, userId: string) {
+    return this.request(`/leads/domains/${id}/assign`, {
+      method: 'POST',
+      body: JSON.stringify({ user_id: userId }),
+    });
+  }
+
+  async convertLead(id: string, data: {
+    company_name?: string;
+    company_industry?: string;
+    company_size?: string;
+    contact_first_name?: string;
+    contact_last_name?: string;
+    contact_email?: string;
+    contact_job_title?: string;
+    create_contact?: boolean;
+  }) {
+    return this.request(`/leads/domains/${id}/convert`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  // Leads - Bulk Operations
+  async bulkImportLeads(data: {
+    domains: string[];
+    assign_to?: string;
+    campaign_id?: string;
+    auto_enrich?: boolean;
+  }) {
+    return this.request('/leads/domains/bulk', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async bulkUpdateLeads(data: {
+    ids: string[];
+    status?: string;
+    assigned_to?: string;
+    campaign_id?: string;
+  }) {
+    return this.request('/leads/domains/bulk', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async bulkDeleteLeads(ids: string[]) {
+    return this.request(`/leads/domains/bulk?ids=${ids.join(',')}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async exportLeads(params?: {
+    status?: string;
+    minScore?: number;
+    ids?: string[];
+    format?: 'csv' | 'json';
+  }) {
+    const query = new URLSearchParams();
+    if (params?.status) query.set('status', params.status);
+    if (params?.minScore) query.set('minScore', params.minScore.toString());
+    if (params?.ids) query.set('ids', params.ids.join(','));
+    if (params?.format) query.set('format', params.format);
+
+    // Return download URL for frontend to use
+    return `/api/leads/domains/export?${query.toString()}`;
+  }
+
+  // Leads - Stats
+  async getLeadStats(days?: number) {
+    const query = days ? `?days=${days}` : '';
+    return this.request(`/leads/stats${query}`);
+  }
+
+  async getEnrichmentStatus() {
+    return this.request('/leads/enrichment-status');
+  }
+
+  // Leads - Campaigns
+  async getCampaigns(params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+  }) {
+    const query = new URLSearchParams(params as any).toString();
+    return this.request(`/leads/campaigns${query ? '?' + query : ''}`);
+  }
+
+  async getCampaign(id: string) {
+    return this.request(`/leads/campaigns/${id}`);
+  }
+
+  async createCampaign(data: {
+    name: string;
+    description?: string;
+    filters?: {
+      tlds?: string[];
+      technologies?: string[];
+      excludeTechnologies?: string[];
+      hasContactForm?: boolean;
+      hasLiveChat?: boolean;
+      registeredAfter?: string;
+      registeredBefore?: string;
+      countries?: string[];
+      minLeadScore?: number;
+      keywords?: string[];
+    };
+  }) {
+    return this.request('/leads/campaigns', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateCampaign(id: string, data: {
+    name?: string;
+    description?: string;
+    status?: 'draft' | 'active' | 'paused' | 'completed';
+    filters?: any;
+  }) {
+    return this.request(`/leads/campaigns/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteCampaign(id: string) {
+    return this.request(`/leads/campaigns/${id}`, {
+      method: 'DELETE',
     });
   }
 

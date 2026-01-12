@@ -37,9 +37,10 @@ import AutomationStudio from './components/AutomationStudio';
 import DeveloperPortal from './components/DeveloperPortal'; 
 import VaultStudio from './components/VaultStudio'; 
 import OpenSourceRegistry from './components/OpenSourceRegistry'; 
-import MarketplaceStudio from './components/MarketplaceStudio'; 
-import Settings from './components/Settings'; 
+import MarketplaceStudio from './components/MarketplaceStudio';
+import Settings from './components/Settings';
 import Wiki from './components/Wiki';
+import LeadGenStudio from './components/LeadGenStudio';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -178,8 +179,9 @@ const agentSettingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, p
 const marketRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/marketplace-studio', component: MarketplaceStudio }); 
 const campaignRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/campaign-studio', component: CampaignStudio });
 const devPortalRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/developer-portal', component: DeveloperPortal }); 
-const vaultRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/vault-studio', component: VaultStudio }); 
-const fossRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/opensource-registry', component: OpenSourceRegistry }); 
+const vaultRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/vault-studio', component: VaultStudio });
+const fossRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/opensource-registry', component: OpenSourceRegistry });
+const leadGenRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/leadgen-studio', component: LeadGenStudio });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -187,7 +189,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, settingsRoute
   ])
 ]);
 
