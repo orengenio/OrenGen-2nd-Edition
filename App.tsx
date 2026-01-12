@@ -1,105 +1,62 @@
 import React, { useState } from 'react';
-import { Pipeline } from './components/Dashboard'; // Formerly Dashboard
-import { LeadFinder } from './components/LeadFinder';
-import { LiveAgent } from './components/LiveAgent';
-import { EmailAccounts } from './components/EmailAccounts';
-import { EmailCampaigns } from './components/EmailCampaigns';
-import { Onebox } from './components/Onebox';
-import { Analytics } from './components/Analytics';
-import { BlacklistMonitor } from './components/BlacklistMonitor';
-import { Settings } from './components/Settings';
-import { Sidebar } from './components/Sidebar';
-import { ViewState, Lead } from './types';
+import Sidebar from './components/Sidebar';
+import Dashboard from './components/Dashboard';
+import OpportunityFinder from './components/OpportunityFinder';
+import ProposalGenerator from './components/ProposalGenerator';
+import Pipeline from './components/Pipeline';
+import Profile from './components/Profile';
+import { Opportunity } from './types';
 
-export default function App() {
-  const [currentView, setCurrentView] = useState<ViewState>(ViewState.PIPELINE);
-  const [leads, setLeads] = useState<Lead[]>([]);
+const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [selectedOpportunity, setSelectedOpportunity] = useState<Opportunity | null>(null);
 
-  const handleUpdateLead = (updatedLead: Lead) => {
-    setLeads(prev => prev.map(l => l.id === updatedLead.id ? updatedLead : l));
+  const handleSelectOpportunity = (opp: Opportunity) => {
+    setSelectedOpportunity(opp);
+    setActiveTab('proposals');
   };
 
-  const handleAddLeads = (newLeads: Lead[]) => {
-    setLeads(prev => [...newLeads, ...prev]);
-    setCurrentView(ViewState.PIPELINE); // Redirect to pipeline after adding
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'opportunities':
+        return <OpportunityFinder onSelect={handleSelectOpportunity} />;
+      case 'pipeline':
+        return <Pipeline />;
+      case 'proposals':
+        if (selectedOpportunity) {
+            return <ProposalGenerator opportunity={selectedOpportunity} onBack={() => setSelectedOpportunity(null)} />;
+        }
+        return (
+            <div className="flex flex-col items-center justify-center h-full text-center">
+                <h2 className="text-2xl font-bold text-white mb-2">No Opportunity Selected</h2>
+                <p className="text-slate-400 mb-6">Select a contract from the Finder to generate a proposal.</p>
+                <button 
+                    onClick={() => setActiveTab('opportunities')}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                >
+                    Go to Finder
+                </button>
+            </div>
+        );
+      case 'profile':
+        return <Profile />;
+      default:
+        return <Dashboard />;
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#0f172a] text-slate-100 flex font-sans selection:bg-blue-500/30">
-      <Sidebar currentView={currentView} onNavigate={setCurrentView} />
-
-      {/* Main Content Area */}
-      <main className="flex-1 ml-64 p-8 overflow-y-auto h-screen relative">
-        
-        {/* Only show the top fade overlay if NOT in Onebox view (Onebox handles its own layout) */}
-        {currentView !== ViewState.ONEBOX && (
-           <div className="fixed top-0 left-64 right-0 h-8 bg-gradient-to-b from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
-        )}
-
-        <div className={currentView === ViewState.ONEBOX ? "h-full" : "max-w-7xl mx-auto pb-12"}>
-            {currentView === ViewState.FINDER && (
-                <LeadFinder onAddLeads={handleAddLeads} />
-            )}
-
-            {currentView === ViewState.PIPELINE && (
-                <Pipeline 
-                    leads={leads} 
-                    onUpdateLead={handleUpdateLead} 
-                    onSetLeads={setLeads}
-                />
-            )}
-
-            {currentView === ViewState.ONEBOX && (
-                <Onebox />
-            )}
-            
-            {currentView === ViewState.EMAIL_CAMPAIGNS && (
-                <EmailCampaigns />
-            )}
-
-            {currentView === ViewState.EMAIL_ACCOUNTS && (
-                <EmailAccounts />
-            )}
-
-            {currentView === ViewState.ANALYTICS && (
-                <Analytics />
-            )}
-            
-            {currentView === ViewState.BLACKLIST_MONITOR && (
-                <BlacklistMonitor />
-            )}
-
-            {currentView === ViewState.LIVE_AGENT && (
-                <div className="max-w-4xl mx-auto space-y-8">
-                    <div>
-                        <h2 className="text-3xl font-bold text-white mb-2">AI Employee & Router</h2>
-                        <p className="text-slate-400">The central nervous system for routing calls, emails, and tasks.</p>
-                    </div>
-                    <LiveAgent />
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
-                            <i className="ph-duotone ph-address-book text-3xl text-blue-400 mb-3"></i>
-                            <h3 className="font-bold text-white mb-1">List Loader</h3>
-                            <p className="text-sm text-slate-400">Sync with the Pipeline to auto-dial qualified leads.</p>
-                        </div>
-                        <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
-                            <i className="ph-duotone ph-scroll text-3xl text-purple-400 mb-3"></i>
-                            <h3 className="font-bold text-white mb-1">Script Strategy</h3>
-                            <p className="text-sm text-slate-400">Agent uses Gemini Thinking model to adapt scripts dynamically.</p>
-                        </div>
-                        <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
-                            <i className="ph-duotone ph-record text-3xl text-red-400 mb-3"></i>
-                            <h3 className="font-bold text-white mb-1">Call Recording</h3>
-                            <p className="text-sm text-slate-400">All calls are transcribed and pushed to your CRM automatically.</p>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {currentView === ViewState.SETTINGS && <Settings />}
+    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans flex">
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <main className="flex-1 ml-64 p-8 h-screen overflow-y-auto">
+        <div className="max-w-7xl mx-auto h-full">
+            {renderContent()}
         </div>
       </main>
     </div>
   );
-}
+};
+
+export default App;

@@ -1,8 +1,5 @@
 {
-  "name": "OrenGenMail AI",
-  "description": "A comprehensive automated lead generation and CRM system leveraging Gemini Maps Grounding, Thinking models, and Live Audio API to find, analyze, and contact businesses.",
-  "requestFramePermissions": [
-    "microphone",
-    "geolocation"
-  ]
+  "name": "OrenGen Gov AI",
+  "description": "The All-In-One Bidding and Grants Hub. AI-driven contract sourcing, scoring, and proposal generation for aggressive federal and state capture.",
+  "requestFramePermissions": []
 }
