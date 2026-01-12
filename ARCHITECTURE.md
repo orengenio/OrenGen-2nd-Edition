@@ -83,7 +83,7 @@ Complete 3-layer infrastructure for AI-powered automation platform.
 │   ├── services.html      # Services showcase
 │   ├── pricing.html       # Pricing tiers
 │   ├── case-studies.html  # Portfolio/case studies
-│   ├── about.html         # Company info, HUB certification
+│   ├── about.html         # Company info
 │   ├── contact.html       # Contact forms
 │   ├── assets/images/     # Local images (11MB)
 │   ├── nginx.conf         # Custom nginx config

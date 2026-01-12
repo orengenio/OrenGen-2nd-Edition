@@ -1035,4 +1035,4 @@ GitHub:        https://github.com/orengenio
 
 ---
 
-**OrenGen Worldwide** | 2026 | HUB Certified Minority Business Enterprise
+**OrenGen Worldwide** | 2026 | All rights reserved.

@@ -700,4 +700,3 @@ MIT License - see [LICENSE](LICENSE) for details.
 **Built with love by OrenGen Worldwide**
 
 2026 OrenGen Worldwide. All rights reserved.
-HUB Certified Minority Business Enterprise
