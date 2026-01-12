@@ -95,9 +95,14 @@ npm install
 # Setup database (creates tables & admin user)
 npm run db:setup
 
-# Start development server
+# Run migrations (webhooks, assignments, speed-to-lead features)
+npm run db:migrate
+
+# Start development server (includes WebSocket server)
 npm run dev
 ```
+
+**Note:** The custom server.js now includes Socket.IO for real-time notifications.
 
 ### Step 4: Access the Application
 
@@ -211,47 +216,61 @@ Before going to production:
 
 ---
 
-## 📈 Next Steps & Enhancements
+## 📈 Speed-to-Lead System (✅ COMPLETED!)
 
-### 🎯 Priority: Speed-to-Lead Optimization
+### 🎯 Industry-Leading Features Now Live
 
-As requested, here are enhancements to compete with industry leaders:
+**✅ 1. Real-Time Lead Notifications**
+- ✅ WebSocket integration for instant lead alerts
+- ✅ Desktop/browser push notifications
+- ✅ Sound alerts for high-value leads
+- ✅ NotificationBell component with unread count
+- ⏳ SMS alerts for high-value leads (Twilio - Coming Soon)
+- ⏳ Slack/Teams integration (Coming Soon)
 
-**1. Real-Time Lead Notifications**
-- WebSocket integration for instant lead alerts
-- Desktop/mobile push notifications
-- SMS alerts for high-value leads
-- Slack/Teams integration
+**✅ 2. Auto-Assignment Rules**
+- ✅ Round-robin distribution
+- ✅ Workload balancing (assigns to rep with fewest leads)
+- ✅ Assignment history tracking
+- ✅ Assignment analytics API
+- ⏳ Territory-based assignment (Coming Soon)
+- ⏳ Skill-based routing (Coming Soon)
 
-**2. Auto-Assignment Rules**
-- Round-robin distribution
-- Territory-based assignment
-- Skill-based routing
-- Workload balancing
+**✅ 3. Speed-to-Lead Features**
+- ✅ One-click email/website visit from lead queue
+- ✅ Lead queue with priority scoring (HOT/WARM/COLD)
+- ✅ SLA time display (5 min, 30 min, 2 hr)
+- ✅ Real-time auto-refresh on new leads
+- ✅ Bulk assignment operations
+- ⏳ Pre-filled email templates (Coming Soon)
+- ⏳ Response time tracking & leaderboards (Coming Soon)
 
-**3. Speed-to-Lead Features**
-- One-click call/email from lead page
-- Pre-filled templates for instant outreach
-- Lead queue with priority scoring
-- Response time tracking & leaderboards
+**✅ 4. Advanced Filtering**
+- ✅ Multi-criteria search (status, score, date)
+- ✅ Priority filtering (All, Hot, Warm, Cold)
+- ✅ Sort by score or date
+- ✅ Bulk operations (assign, select)
+- ⏳ Saved filters (Coming Soon)
+- ⏳ Smart lists / dynamic segments (Coming Soon)
 
-**4. Advanced Filtering**
-- Multi-criteria search
-- Saved filters
-- Smart lists (dynamic segments)
-- Bulk operations (assign, tag, export)
+**✅ 5. Lead Scoring AI**
+- ✅ Advanced multi-factor scoring (0-100)
+- ✅ WHOIS, enrichment, tech stack, business data
+- ✅ Lead tier classification with SLA
+- ✅ Time decay for stale leads
+- ✅ Predictive conversion probability
+- ⏳ Machine learning-based scoring (Coming Soon)
+- ⏳ Behavior tracking (Coming Soon)
 
-**5. Lead Scoring AI**
-- Machine learning-based scoring
-- Behavior tracking
-- Engagement history
-- Predictive analytics
+**✅ 6. Integration Ecosystem**
+- ✅ Webhook API for Zapier/Make.com
+- ✅ Event types: lead.created, lead.assigned, lead.status_changed, lead.converted
+- ✅ Webhook logs for debugging
+- ⏳ Email sync (Gmail, Outlook) (Coming Soon)
+- ⏳ Calendar integration (Coming Soon)
+- ⏳ VoIP integration (Twilio, RingCentral) (Coming Soon)
 
-**6. Integration Ecosystem**
-- Zapier/Make.com webhooks
-- Email sync (Gmail, Outlook)
-- Calendar integration
-- VoIP integration (Twilio, RingCentral)
+**📊 See Full Documentation:** [SPEED-TO-LEAD.md](./SPEED-TO-LEAD.md)
 
 ### 🛠️ Technical Improvements
 
