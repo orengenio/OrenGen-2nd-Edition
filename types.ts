@@ -1,49 +1,74 @@
-
-export interface CloudflareConfig {
-  apiKey: string;
-  email: string;
+export enum AppView {
+  DASHBOARD = 'DASHBOARD',
+  WIZARD = 'WIZARD',
+  STUDIO = 'STUDIO',
+  SETTINGS = 'SETTINGS'
 }
 
-export interface DomainInfo {
+export enum BlueprintTab {
+  OVERVIEW = 'OVERVIEW',
+  PRD = 'PRD',
+  WIREFRAMES = 'WIREFRAMES',
+  COPY = 'COPY',
+  DESIGN_SYSTEM = 'DESIGN_SYSTEM',
+  POLICIES = 'POLICIES',
+  ASSETS = 'ASSETS',
+  CONTENT_STUDIO = 'CONTENT_STUDIO',
+  DEV_HANDOFF = 'DEV_HANDOFF'
+}
+
+export interface ReferenceLink {
+  id: string;
+  url: string;
+  type: 'COMPETITOR' | 'INSPIRATION' | 'REQUIREMENTS' | 'BRAND' | 'LEGAL' | 'TECH' | 'OTHER';
+  note: string;
+}
+
+export interface ProjectData {
   id: string;
   name: string;
-  status: string;
-  paused: boolean;
-  type: string;
+  category: string;
+  targetUsers: string;
+  corePromise: string;
+  userActions: string[];
+  monetization: string;
+  platforms: string[];
+  integrations: string[];
+  complianceLevel: 'LOW' | 'MEDIUM' | 'HIGH';
+  brandTone: string;
+  referenceLinks: ReferenceLink[];
+  screenshots?: string[]; // Base64
 }
 
-export interface DNSRecord {
+export interface WireframeComponent {
+  type: 'Button' | 'Input' | 'Image' | 'Text' | 'Card' | 'Navigation' | 'List';
+  label: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+}
+
+export interface WireframeScreen {
   id: string;
-  type: string;
-  name: string;
-  content: string;
-  proxiable: boolean;
-  proxied: boolean;
-  ttl: number;
+  title: string;
+  description: string;
+  components: WireframeComponent[];
 }
 
-export enum Tab {
-  Dashboard = 'dashboard',
-  Cloudflare = 'cloudflare',
-  ISPCenter = 'isp-center',
-  Auditor = 'auditor',
-  Automation = 'automation',
-  Bulk = 'bulk'
+export interface Artifacts {
+  prd: string;
+  wireframes: string; // JSON String of WireframeScreen[]
+  copyDeck: string;
+  designSystem: string;
+  policies: string;
+  tickets: string;
+  generatedAssets: string[]; // URLs/Base64
+  insights: string;
+  marketingPlan: string;
+  marketingGrounding?: { title: string; url: string }[];
 }
 
-export type ISPProvider = 'google' | 'microsoft' | 'yahoo' | 'generic';
-
-export interface AutomationTask {
-  id: string;
-  domain: string;
-  token: string;
-  status: 'idle' | 'searching' | 'injecting' | 'propagating' | 'completed' | 'failed';
-  error?: string;
-  isp?: ISPProvider;
-}
-
-export interface VerificationResult {
-  success: boolean;
-  message: string;
-  error?: any;
+export interface Project {
+  data: ProjectData;
+  artifacts: Artifacts;
+  status: 'DRAFT' | 'GENERATING' | 'COMPLETE';
+  lastUpdated: number;
 }

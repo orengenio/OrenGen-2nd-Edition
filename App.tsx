@@ -1,533 +1,894 @@
+import React, { useState, useEffect } from 'react';
+import { AppView, Project, BlueprintTab, ProjectData, WireframeScreen } from './types';
+import { SYSTEM_INSTRUCTION_ARCHITECT, SYSTEM_INSTRUCTION_UX, SYSTEM_INSTRUCTION_COPY, SYSTEM_INSTRUCTION_POLICY, SYSTEM_INSTRUCTION_MARKETER, Icons } from './constants';
+import * as gemini from './services/geminiService';
+import LiveSession from './components/LiveSession';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { 
-  ShieldCheck, 
-  LayoutDashboard, 
-  Cloud, 
-  Mail, 
-  Activity, 
-  Plus, 
-  Trash2, 
-  AlertCircle, 
-  CheckCircle2, 
-  RefreshCw,
-  Search,
-  ExternalLink,
-  ChevronRight,
-  Info,
-  Globe,
-  Lock,
-  Server,
-  Zap,
-  Terminal,
-  Play,
-  Pause,
-  StopCircle,
-  X,
-  ClipboardList,
-  Cpu,
-  Layers,
-  Database,
-  Eye,
-  Settings
-} from 'lucide-react';
-import { CloudflareService } from './services/cloudflareService';
-import { analyzeDNSCompliance, extractISPData } from './services/geminiService';
-import { Tab, DomainInfo, DNSRecord, VerificationResult, ISPProvider, AutomationTask } from './types';
+// -- Sub-Components --
 
-const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.Dashboard);
-  const [cfToken, setCfToken] = useState<string>(localStorage.getItem('cf_token') || '');
-  const [domains, setDomains] = useState<DomainInfo[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedDomain, setSelectedDomain] = useState<DomainInfo | null>(null);
-  const [dnsRecords, setDnsRecords] = useState<DNSRecord[]>([]);
-  
-  // Bulk & ISP Session States
-  const [bulkDomains, setBulkDomains] = useState('');
-  const [bulkISPToken, setBulkISPToken] = useState('');
-  const [rawISPData, setRawISPData] = useState('');
-  const [isExtracting, setIsExtracting] = useState(false);
-  
-  // Automation Core
-  const [automationQueue, setAutomationQueue] = useState<AutomationTask[]>([]);
-  const [isAutomationRunning, setIsAutomationRunning] = useState(false);
-  const [logs, setLogs] = useState<string[]>([]);
-  const logEndRef = useRef<HTMLDivElement>(null);
-
-  const cfService = cfToken ? new CloudflareService(cfToken) : null;
-
-  const addLog = (msg: string) => {
-    setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`].slice(-150));
-  };
-
-  useEffect(() => {
-    logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [logs]);
-
-  const fetchDomains = useCallback(async () => {
-    if (!cfService) return;
-    setLoading(true);
-    try {
-      const fetched = await cfService.listZones();
-      setDomains(fetched);
-      addLog(`Core: Synchronized ${fetched.length} domain nodes from Cloudflare API.`);
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }, [cfService]);
-
-  useEffect(() => {
-    if (cfToken) fetchDomains();
-  }, [cfToken, fetchDomains]);
-
-  // Handle manual bulk domain list input
-  const processBulkInput = () => {
-    if (!bulkDomains.trim()) return;
-    const list = bulkDomains.split('\n').map(d => d.trim()).filter(d => d.includes('.'));
-    const tasks: AutomationTask[] = list.map(domain => ({
-      id: Math.random().toString(36).substr(2, 9),
-      domain,
-      token: bulkISPToken, // Shared token if provided, otherwise can be updated via Neural Sync
-      status: 'idle'
-    }));
-    setAutomationQueue(prev => [...prev, ...tasks]);
-    setBulkDomains('');
-    addLog(`Bulk: Queued ${tasks.length} domains for autonomous processing.`);
-    setActiveTab(Tab.Automation);
-  };
-
-  // The "State of the Art" Neural Sync - Pulls domains and tokens from raw ISP dashboard text
-  const handleNeuralISPSync = async () => {
-    if (!rawISPData.trim()) return;
-    setIsExtracting(true);
-    addLog("Neural Agent: Analyzing ISP session data...");
-    try {
-      const extracted = await extractISPData(rawISPData);
-      if (extracted && extracted.length > 0) {
-        const tasks: AutomationTask[] = extracted.map((item: any) => ({
-          id: Math.random().toString(36).substr(2, 9),
-          domain: item.domain,
-          token: item.token,
-          status: 'idle',
-          isp: 'generic'
-        }));
-        setAutomationQueue(prev => [...prev, ...tasks]);
-        setRawISPData('');
-        addLog(`Neural Agent: Discovered ${extracted.length} valid domain/token pairs from ISP source.`);
-        setActiveTab(Tab.Automation);
-      } else {
-        addLog("Neural Agent: Source data was insufficient or contained no valid patterns.");
-      }
-    } catch (err) {
-      addLog("Neural Agent: Error parsing source data.");
-    } finally {
-      setIsExtracting(false);
-    }
-  };
-
-  const startAutonomousAgent = async () => {
-    if (!cfService || isAutomationRunning || automationQueue.length === 0) return;
-    setIsAutomationRunning(true);
-    addLog("Agent: Commencing Autonomous Validation Sequence...");
-
-    const queue = [...automationQueue];
-    for (let i = 0; i < queue.length; i++) {
-      if (!isAutomationRunning) break; // Allow pausing
-      const task = queue[i];
-      if (task.status === 'completed') continue;
-
-      // Stage 1: Discovery
-      queue[i] = { ...task, status: 'searching' };
-      setAutomationQueue([...queue]);
-      addLog(`Agent: Locating ${task.domain} in network inventory...`);
-      
-      const zone = domains.find(d => d.name.toLowerCase() === task.domain.toLowerCase());
-      
-      if (!zone) {
-        queue[i] = { ...task, status: 'failed', error: 'Domain node missing from Cloudflare' };
-        addLog(`Agent: [FAILURE] ${task.domain} not found in this account.`);
-        setAutomationQueue([...queue]);
-        continue;
-      }
-
-      // Stage 2: DNS Injection
-      queue[i] = { ...task, status: 'injecting' };
-      setAutomationQueue([...queue]);
-      addLog(`Agent: Injecting TXT validation record for ${task.domain}...`);
-
-      try {
-        const result = await cfService.createTXTRecord(zone.id, '@', task.token);
-        if (result.success) {
-          queue[i] = { ...task, status: 'completed' };
-          addLog(`Agent: [SUCCESS] ${task.domain} is now pending ISP verification.`);
-        } else {
-          queue[i] = { ...task, status: 'failed', error: result.message };
-          addLog(`Agent: [ERROR] Injection failed for ${task.domain}: ${result.message}`);
-        }
-      } catch (e: any) {
-        queue[i] = { ...task, status: 'failed', error: e.message };
-      }
-      setAutomationQueue([...queue]);
-      
-      // Safety throttle
-      await new Promise(r => setTimeout(r, 1000));
-    }
-    setIsAutomationRunning(false);
-    addLog("Agent: Sequence finalized.");
-  };
-
-  const handleSelectDomain = async (domain: DomainInfo) => {
-    setSelectedDomain(domain);
-    if (!cfService) return;
-    setLoading(true);
-    try {
-      const records = await cfService.listDNSRecords(domain.id);
-      setDnsRecords(records);
-    } catch (err: any) {
-      addLog(`Inspector: Error reading ${domain.name} - ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-slate-950 text-slate-200">
-      {/* Sidebar Navigation */}
-      <nav className="w-full md:w-72 bg-slate-900 border-r border-slate-800 p-8 flex flex-col gap-8 sticky top-0 h-auto md:h-screen z-30 shadow-2xl">
-        <div className="flex items-center gap-4">
-          <div className="bg-indigo-600 p-3 rounded-2xl shadow-xl shadow-indigo-600/30">
-            <Cpu size={28} className="text-white" />
-          </div>
-          <div>
-            <h1 className="text-xl font-black tracking-tighter text-white italic uppercase">Validator<span className="text-indigo-400 italic">X</span></h1>
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Autonomous Sync</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <SidebarItem icon={<LayoutDashboard size={18} />} label="Network Map" active={activeTab === Tab.Dashboard} onClick={() => setActiveTab(Tab.Dashboard)} />
-          <SidebarItem icon={<Layers size={18} />} label="Bulk Onboard" active={activeTab === Tab.Bulk} onClick={() => setActiveTab(Tab.Bulk)} />
-          <SidebarItem icon={<Zap size={18} />} label="Neural Sync" active={activeTab === Tab.ISPCenter} onClick={() => setActiveTab(Tab.ISPCenter)} />
-          <SidebarItem icon={<Terminal size={18} />} label="Agent HUD" active={activeTab === Tab.Automation} onClick={() => setActiveTab(Tab.Automation)} />
-          <SidebarItem icon={<Settings size={18} />} label="API Config" active={activeTab === Tab.Cloudflare} onClick={() => setActiveTab(Tab.Cloudflare)} />
-        </div>
-
-        <div className="mt-auto space-y-4">
-          <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
-             <div className="flex items-center justify-between mb-2">
-               <span className="text-[10px] font-bold text-slate-500 uppercase">System Status</span>
-               <div className={`w-2 h-2 rounded-full ${cfToken ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`}></div>
-             </div>
-             <p className="text-xs font-mono text-slate-400 truncate">{isAutomationRunning ? 'AGENT_EXECUTING' : 'IDLE_READY'}</p>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Command Console */}
-      <main className="flex-1 p-6 md:p-12 overflow-y-auto">
-        <header className="flex justify-between items-center mb-12 border-b border-slate-800 pb-8">
-          <div>
-            <h2 className="text-4xl font-black text-white capitalize italic tracking-tighter">{activeTab.replace('-', ' ')}</h2>
-            <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] mt-1">Cross-ISP Cloudflare Automation Engine</p>
-          </div>
-          <div className="flex items-center gap-4">
-             {cfToken && <button onClick={fetchDomains} className="p-3 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-all border border-slate-700"><RefreshCw size={20} className={loading ? 'animate-spin' : ''} /></button>}
-             <div className="bg-indigo-600/10 px-6 py-3 rounded-2xl border border-indigo-500/20 flex items-center gap-3">
-                <Globe size={16} className="text-indigo-400" />
-                <span className="text-xs font-black text-indigo-400 uppercase tracking-tighter">{domains.length} Nodes Online</span>
-             </div>
-          </div>
-        </header>
-
-        <section className="space-y-10">
-          {activeTab === Tab.Dashboard && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 space-y-6">
-                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
-                   <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none"><Database size={150} /></div>
-                   <h3 className="text-xl font-black text-white mb-8 italic uppercase tracking-tighter">Network Inventory</h3>
-                   <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
-                     {domains.map(d => (
-                       <div key={d.id} onClick={() => handleSelectDomain(d)} className={`flex items-center justify-between p-5 rounded-2xl border transition-all cursor-pointer ${selectedDomain?.id === d.id ? 'bg-indigo-600/20 border-indigo-500 shadow-xl translate-x-1' : 'bg-slate-950 border-slate-800 hover:border-slate-700'}`}>
-                          <div className="flex items-center gap-4">
-                             <div className={`p-3 rounded-xl ${selectedDomain?.id === d.id ? 'bg-indigo-600' : 'bg-slate-800'}`}>
-                               <Globe size={20} className="text-white" />
-                             </div>
-                             <div>
-                               <p className="font-bold text-white tracking-tight">{d.name}</p>
-                               <p className="text-[10px] font-black text-slate-500 uppercase">{d.status}</p>
-                             </div>
-                          </div>
-                          <ChevronRight size={18} className={selectedDomain?.id === d.id ? 'text-indigo-400' : 'text-slate-800'} />
-                       </div>
-                     ))}
-                   </div>
-                </div>
-              </div>
-              <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl h-fit">
-                <h3 className="text-xl font-black text-white mb-8 italic uppercase tracking-tighter">Live Inspector</h3>
-                {selectedDomain ? (
-                  <div className="space-y-4">
-                    <div className="bg-slate-950 p-4 rounded-2xl border border-indigo-500/30">
-                       <p className="text-[10px] font-black text-slate-500 uppercase mb-1">Target Node</p>
-                       <p className="text-sm font-bold text-indigo-400 italic">{selectedDomain.name}</p>
-                    </div>
-                    <div className="space-y-2">
-                       {dnsRecords.map(r => (
-                         <div key={r.id} className="p-3 bg-slate-950/50 rounded-xl border border-slate-800 font-mono text-[10px] truncate">
-                            <span className="text-indigo-500 font-bold mr-2">{r.type}</span>
-                            <span className="text-slate-300">{r.name}</span>
-                            <p className="text-slate-600 truncate mt-1">{r.content}</p>
-                         </div>
-                       ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center py-24 opacity-20"><Eye size={64} className="mx-auto" /></div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {activeTab === Tab.Bulk && (
-            <div className="max-w-4xl mx-auto">
-               <div className="bg-slate-900 border border-slate-800 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
-                  <div className="absolute -top-20 -right-20 w-80 h-80 bg-indigo-600/10 blur-[100px] pointer-events-none"></div>
-                  <div className="flex items-center gap-6 mb-10">
-                    <div className="bg-indigo-600 p-4 rounded-2xl shadow-xl shadow-indigo-600/20">
-                      <Layers size={32} className="text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-3xl font-black text-white tracking-tighter italic uppercase leading-none">Bulk Domain Onboarding</h3>
-                      <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] mt-2">Load up to 1,000 domains into the queue instantly.</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-[11px] font-black text-slate-500 uppercase mb-3 tracking-widest">Domains (One per line)</label>
-                      <textarea 
-                        className="w-full h-64 bg-slate-950 border border-slate-800 rounded-3xl p-8 text-sm font-mono text-indigo-300 focus:outline-none focus:border-indigo-500/50 transition-all resize-none shadow-inner"
-                        placeholder="example.com&#10;my-store.net&#10;business.io"
-                        value={bulkDomains}
-                        onChange={(e) => setBulkDomains(e.target.value)}
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                       <div>
-                         <label className="block text-[11px] font-black text-slate-500 uppercase mb-3 tracking-widest">Shared Token (Optional)</label>
-                         <input 
-                           type="text" 
-                           className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-6 py-4 text-sm text-white focus:outline-none focus:border-indigo-500/50"
-                           placeholder="google-site-verification=..."
-                           value={bulkISPToken}
-                           onChange={(e) => setBulkISPToken(e.target.value)}
-                         />
-                       </div>
-                       <div className="flex items-end">
-                         <button 
-                           onClick={processBulkInput}
-                           className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-4 rounded-2xl shadow-xl shadow-indigo-600/20 transition-all flex items-center justify-center gap-3 uppercase italic tracking-tighter"
-                         >
-                           <Plus size={20} /> Load to Queue
-                         </button>
-                       </div>
-                    </div>
-                  </div>
-               </div>
-            </div>
-          )}
-
-          {activeTab === Tab.ISPCenter && (
-             <div className="max-w-4xl mx-auto space-y-8">
-                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
-                  <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-600/10 blur-[100px] pointer-events-none"></div>
-                  <div className="flex items-center gap-6 mb-10">
-                    <div className="bg-purple-600 p-4 rounded-2xl shadow-xl shadow-purple-600/20">
-                      <Zap size={32} className="text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-3xl font-black text-white tracking-tighter italic uppercase leading-none">Neural ISP Bridge</h3>
-                      <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] mt-2">Connect your ISP dashboard via Autonomous Synchronisation.</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-8">
-                    <div className="bg-indigo-950/20 border border-indigo-500/10 p-6 rounded-3xl flex gap-6">
-                       <div className="p-3 bg-indigo-500/10 rounded-2xl h-fit"><Info className="text-indigo-400" /></div>
-                       <div>
-                         <h4 className="font-bold text-white mb-2 italic uppercase tracking-tighter">Instructions for Sync</h4>
-                         <p className="text-xs text-slate-400 leading-relaxed font-medium">
-                           1. Open your ISP Dashboard (Google Postmaster, MS SNDS, Bing, etc) in a new tab.<br/>
-                           2. Log in as you normally would.<br/>
-                           3. Press <kbd className="bg-slate-800 px-1.5 py-0.5 rounded font-mono">CTRL+A</kbd> then <kbd className="bg-slate-800 px-1.5 py-0.5 rounded font-mono">CTRL+C</kbd> to copy everything.<br/>
-                           4. Paste the raw content below. Our Neural Agent will extract unverified domains and tokens.
-                         </p>
-                       </div>
-                    </div>
-
-                    <textarea 
-                      className="w-full h-80 bg-slate-950 border border-slate-800 rounded-3xl p-8 text-sm font-mono text-purple-300/80 focus:outline-none focus:border-purple-500/50 transition-all resize-none shadow-inner"
-                      placeholder="Paste raw content from your ISP portal here..."
-                      value={rawISPData}
-                      onChange={(e) => setRawISPData(e.target.value)}
-                    />
-
-                    <button 
-                      onClick={handleNeuralISPSync}
-                      disabled={!rawISPData || isExtracting}
-                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black py-5 rounded-2xl shadow-2xl transition-all flex items-center justify-center gap-3 text-lg italic tracking-tight uppercase"
-                    >
-                      {isExtracting ? <RefreshCw className="animate-spin" /> : <ShieldCheck size={24} />}
-                      {isExtracting ? 'DECODING ISP CONTENT...' : 'DECODE & SYNC SESSIONS'}
-                    </button>
-                  </div>
-                </div>
-             </div>
-          )}
-
-          {activeTab === Tab.Automation && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-               <div className="lg:col-span-2 space-y-6">
-                  <div className="bg-slate-900 border border-slate-800 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
-                     <div className="flex justify-between items-center mb-12">
-                        <div>
-                           <h3 className="text-2xl font-black text-white italic tracking-tighter uppercase leading-none">Agent HUD</h3>
-                           <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-2">Active Tasks: {automationQueue.length}</p>
-                        </div>
-                        <div className="flex gap-4">
-                           {!isAutomationRunning ? (
-                             <button onClick={startAutonomousAgent} className="bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-2xl flex items-center gap-3 font-black italic tracking-tight shadow-xl shadow-green-600/20">
-                               <Play size={20} /> START AGENT
-                             </button>
-                           ) : (
-                             <button onClick={() => setIsAutomationRunning(false)} className="bg-amber-600 hover:bg-amber-500 text-white px-8 py-3 rounded-2xl flex items-center gap-3 font-black italic tracking-tight">
-                               <Pause size={20} /> PAUSE CORE
-                             </button>
-                           )}
-                           <button onClick={() => setAutomationQueue([])} className="bg-slate-800 text-slate-500 p-3 rounded-2xl hover:text-red-500 border border-slate-700 transition-all">
-                              <StopCircle size={22} />
-                           </button>
-                        </div>
-                     </div>
-
-                     <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
-                        {automationQueue.map(task => (
-                          <div key={task.id} className="bg-slate-950/40 border border-slate-800 p-6 rounded-2xl flex items-center justify-between transition-all group">
-                             <div className="flex items-center gap-6">
-                                <div className={`w-3 h-3 rounded-full ${
-                                  task.status === 'completed' ? 'bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)]' :
-                                  task.status === 'failed' ? 'bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.6)]' :
-                                  task.status === 'idle' ? 'bg-slate-700' : 'bg-indigo-500 animate-pulse'
-                                }`}></div>
-                                <div>
-                                   <p className="font-bold text-white text-sm">{task.domain}</p>
-                                   <p className="text-[10px] font-mono text-slate-500 mt-1 truncate max-w-xs">{task.token || 'Awaiting Sync'}</p>
-                                </div>
-                             </div>
-                             <div className="flex items-center gap-4">
-                                <span className={`text-[10px] font-black uppercase tracking-widest ${task.status === 'completed' ? 'text-green-500' : 'text-slate-500'}`}>{task.status}</span>
-                                {task.status === 'injecting' && <RefreshCw size={14} className="animate-spin text-indigo-400" />}
-                                {task.status === 'completed' && <CheckCircle2 size={18} className="text-green-500" />}
-                                {task.status === 'failed' && <AlertCircle size={18} className="text-red-500" title={task.error} />}
-                             </div>
-                          </div>
-                        ))}
-                        {automationQueue.length === 0 && (
-                          <div className="text-center py-32 bg-slate-950/20 rounded-3xl border-2 border-dashed border-slate-800">
-                             <Terminal size={48} className="mx-auto mb-4 opacity-10" />
-                             <p className="text-slate-600 font-black uppercase tracking-widest text-sm italic">Queue Empty. Load data via Bulk or Neural Sync.</p>
-                          </div>
-                        )}
-                     </div>
-                  </div>
-               </div>
-               
-               <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col h-[760px] shadow-2xl">
-                  <div className="flex items-center justify-between mb-8 border-b border-slate-800 pb-4">
-                     <h4 className="text-xs font-black text-slate-500 uppercase tracking-[0.4em] flex items-center gap-3 italic">
-                        <Terminal size={18} className="text-indigo-400" /> Kernel Logs
-                     </h4>
-                     <button onClick={() => setLogs([])} className="text-[10px] font-bold text-slate-700 hover:text-slate-400 transition-all uppercase">Flush</button>
-                  </div>
-                  <div className="flex-1 bg-black/40 rounded-2xl p-6 font-mono text-[10px] text-indigo-300/80 overflow-y-auto custom-scrollbar border border-slate-800/50 leading-relaxed shadow-inner">
-                     {logs.map((log, i) => (
-                       <div key={i} className="mb-2 hover:bg-indigo-500/5 transition-colors p-1 rounded">
-                          <span className="text-slate-700 mr-2">[{i.toString().padStart(3, '0')}]</span>
-                          {log}
-                       </div>
-                     ))}
-                     {logs.length === 0 && <p className="text-slate-800 italic uppercase">Kernel idle...</p>}
-                     <div ref={logEndRef} />
-                  </div>
-               </div>
-            </div>
-          )}
-
-          {activeTab === Tab.Cloudflare && (
-            <div className="max-w-xl mx-auto py-12">
-               <div className="bg-slate-900 border border-slate-800 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none"><Cloud size={100} /></div>
-                  <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter mb-10 flex items-center gap-4">
-                     <Lock size={24} className="text-indigo-400" /> Network Auth
-                  </h3>
-                  <div className="space-y-8">
-                     <div>
-                        <label className="block text-[11px] font-black text-slate-500 uppercase mb-3 tracking-widest">Global API Token</label>
-                        <input 
-                          type="password" 
-                          value={cfToken}
-                          onChange={(e) => setCfToken(e.target.value)}
-                          placeholder="••••••••••••••••••••••••••••"
-                          className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-6 py-4 text-white font-mono focus:outline-none focus:border-indigo-500/50 transition-all text-sm"
-                        />
-                     </div>
-                     <button 
-                       onClick={() => { localStorage.setItem('cf_token', cfToken); fetchDomains(); }}
-                       className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-5 rounded-2xl shadow-xl shadow-indigo-600/20 transition-all uppercase italic tracking-tighter"
-                     >
-                       Authorize Network Session
-                     </button>
-                     <div className="p-5 bg-indigo-950/20 rounded-2xl border border-indigo-500/10 flex gap-4">
-                        <Info size={20} className="text-indigo-400 shrink-0 mt-0.5" />
-                        <p className="text-[10px] text-slate-500 font-bold uppercase leading-relaxed tracking-tight">Requires: Zone:Read, DNS:Edit. Tokens are localized and never shared.</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-          )}
-        </section>
-      </main>
-
-      <style>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 20px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #334155; }
-        
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100%); }
-        }
-      `}</style>
-    </div>
-  );
-};
-
-const SidebarItem: React.FC<{ icon: React.ReactNode, label: string, active: boolean, onClick: () => void }> = ({ icon, label, active, onClick }) => (
+const SidebarItem = ({ active, icon, label, onClick }: any) => (
   <button 
     onClick={onClick}
-    className={`flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group ${active ? 'bg-indigo-600 text-white shadow-2xl shadow-indigo-600/40 translate-x-1' : 'text-slate-500 hover:text-white hover:bg-slate-800/50'}`}
+    className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors ${
+      active 
+        ? 'bg-brand-primary text-white border-r-4 border-brand-accent' 
+        : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+    }`}
   >
-    <div className={`transition-transform duration-300 ${active ? 'scale-110' : 'group-hover:scale-110'}`}>
-      {icon}
-    </div>
-    <span className="font-black text-[10px] uppercase tracking-[0.2em]">{label}</span>
+    {icon}
+    <span>{label}</span>
   </button>
 );
 
-export default App;
+const WizardStep = ({ title, children }: any) => (
+  <div className="max-w-3xl mx-auto bg-white dark:bg-slate-800 p-8 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+    <h2 className="text-2xl font-bold text-brand-primary dark:text-white mb-6">{title}</h2>
+    {children}
+  </div>
+);
+
+// New Component: Renders JSON wireframes visually
+const WireframeRenderer = ({ data }: { data: string }) => {
+    let screens: WireframeScreen[] = [];
+    try {
+        const parsed = JSON.parse(data);
+        screens = parsed.screens || [];
+    } catch (e) {
+        return <div className="text-red-500">Invalid Wireframe Data</div>;
+    }
+
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {screens.map((screen) => (
+                <div key={screen.id} className="border border-slate-300 dark:border-slate-600 rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-sm flex flex-col">
+                    <div className="bg-slate-100 dark:bg-slate-700 px-4 py-2 border-b border-slate-300 dark:border-slate-600 flex justify-between items-center">
+                        <span className="font-bold text-sm dark:text-white">{screen.title}</span>
+                        <div className="flex gap-1">
+                            <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                            <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                            <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                        </div>
+                    </div>
+                    <div className="p-6 space-y-4 flex-1 bg-slate-50 dark:bg-slate-900 min-h-[300px]">
+                        {screen.components.map((comp, idx) => {
+                             if (comp.type === 'Button') {
+                                 const bg = comp.variant === 'primary' ? 'bg-brand-primary text-white' : comp.variant === 'secondary' ? 'bg-slate-200 text-slate-800' : 'bg-transparent border border-slate-400 text-slate-500';
+                                 return <button key={idx} className={`w-full py-2 rounded shadow-sm ${bg}`}>{comp.label}</button>
+                             }
+                             if (comp.type === 'Input') {
+                                 return <input key={idx} type="text" placeholder={comp.label} className="w-full p-2 border rounded bg-white dark:bg-slate-800 dark:border-slate-600" disabled />
+                             }
+                             if (comp.type === 'Card') {
+                                 return <div key={idx} className="p-4 bg-white dark:bg-slate-800 rounded shadow border dark:border-slate-700"><h4 className="font-bold mb-2">{comp.label}</h4><div className="h-10 bg-slate-100 dark:bg-slate-700 rounded"></div></div>
+                             }
+                             if (comp.type === 'Image') {
+                                 return <div key={idx} className="w-full h-32 bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-slate-400">{comp.label}</div>
+                             }
+                             if (comp.type === 'Navigation') {
+                                 return <div key={idx} className="flex justify-between border-b pb-2 mb-2 font-bold text-sm"><span>Logo</span><span>Menu</span></div>
+                             }
+                             return <div key={idx} className="p-2 border border-dashed border-slate-300 text-center text-xs text-slate-400">{comp.type}: {comp.label}</div>
+                        })}
+                    </div>
+                    <div className="p-3 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-700 text-xs text-slate-500">
+                        {screen.description}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+
+// -- Main App Component --
+
+export default function App() {
+  const [view, setView] = useState<AppView>(AppView.DASHBOARD);
+  const [currentProject, setCurrentProject] = useState<Project | null>(null);
+  const [activeTab, setActiveTab] = useState<BlueprintTab>(BlueprintTab.OVERVIEW);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showVoiceSession, setShowVoiceSession] = useState(false);
+  
+  // URL Import State
+  const [importUrl, setImportUrl] = useState('');
+  const [analyzing, setAnalyzing] = useState(false);
+
+  // Wizard State
+  const [wizardStep, setWizardStep] = useState(0);
+  const [wizardData, setWizardData] = useState<Partial<ProjectData>>({
+    userActions: [],
+    platforms: [],
+    integrations: [],
+    referenceLinks: [],
+    screenshots: []
+  });
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  const handleStartProject = () => {
+    setView(AppView.WIZARD);
+    setWizardStep(0);
+    setWizardData({
+      userActions: [],
+      platforms: [],
+      integrations: [],
+      referenceLinks: [],
+      screenshots: []
+    });
+  };
+
+  const handleUrlAnalysis = async () => {
+    if (!importUrl) return;
+    setAnalyzing(true);
+    try {
+        const data = await gemini.analyzeProjectUrl(importUrl);
+        
+        // Reset and Merge with defaults
+        setWizardData({
+            userActions: [],
+            platforms: [],
+            integrations: [],
+            screenshots: [],
+            referenceLinks: [{ id: Date.now().toString(), url: importUrl, type: 'REQUIREMENTS', note: 'Source URL' }],
+            ...data
+        });
+        
+        // Jump to Wizard to review data
+        setView(AppView.WIZARD);
+        setWizardStep(0);
+    } catch (e) {
+        console.error(e);
+        alert("Failed to analyze URL. Please try again or start manually.");
+    } finally {
+        setAnalyzing(false);
+    }
+  };
+
+  const handleCreateProject = () => {
+    const newProject: Project = {
+      data: wizardData as ProjectData,
+      artifacts: {
+        prd: '',
+        wireframes: '',
+        copyDeck: '',
+        designSystem: '',
+        policies: '',
+        tickets: '',
+        generatedAssets: [],
+        insights: '',
+        marketingPlan: ''
+      },
+      status: 'DRAFT',
+      lastUpdated: Date.now()
+    };
+    setCurrentProject(newProject);
+    setView(AppView.STUDIO);
+  };
+
+  const generateSection = async (type: 'PRD' | 'WIREFRAMES' | 'COPY' | 'POLICIES') => {
+    if (!currentProject) return;
+    setLoading(true);
+    
+    // Clear previous if regenerating to show streaming
+    if (type !== 'WIREFRAMES') {
+        setCurrentProject(prev => {
+            if (!prev) return null;
+            const key = type === 'COPY' ? 'copyDeck' : type === 'POLICIES' ? 'policies' : 'prd';
+            return { ...prev, artifacts: { ...prev.artifacts, [key]: '' } };
+        });
+    }
+
+    try {
+      let instruction = "";
+      switch (type) {
+        case 'PRD': instruction = SYSTEM_INSTRUCTION_ARCHITECT; break;
+        case 'WIREFRAMES': instruction = SYSTEM_INSTRUCTION_UX; break;
+        case 'COPY': instruction = SYSTEM_INSTRUCTION_COPY; break;
+        case 'POLICIES': instruction = SYSTEM_INSTRUCTION_POLICY; break;
+      }
+      
+      const content = await gemini.generateArtifactStream(
+          type, 
+          currentProject.data, 
+          currentProject.artifacts, // Pass existing artifacts for context awareness
+          instruction,
+          (chunk) => {
+              // Streaming Update Callback
+              if (type !== 'WIREFRAMES') {
+                   setCurrentProject(prev => {
+                        if (!prev) return null;
+                        const key = type === 'COPY' ? 'copyDeck' : type === 'POLICIES' ? 'policies' : 'prd';
+                        return { ...prev, artifacts: { ...prev.artifacts, [key]: chunk } };
+                    });
+              }
+          }
+      );
+      
+      // Final set for Wireframes (since they are JSON and not streamed to text directly)
+      if (type === 'WIREFRAMES') {
+           setCurrentProject(prev => prev ? { ...prev, artifacts: { ...prev.artifacts, wireframes: content } } : null);
+      }
+
+    } catch (e) {
+      console.error(e);
+      alert("Failed to generate content. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const readAloud = async (text: string) => {
+      try {
+          // Chunk for TTS if long
+          const audioBuffer = await gemini.generateSpeech(text.slice(0, 500)); 
+          const ctx = new AudioContext();
+          const source = ctx.createBufferSource();
+          const audioData = await ctx.decodeAudioData(audioBuffer);
+          source.buffer = audioData;
+          source.connect(ctx.destination);
+          source.start(0);
+      } catch(e) {
+          console.error(e);
+      }
+  };
+
+  // -- Render Helpers --
+
+  const renderDashboard = () => (
+    <div className="p-12 max-w-6xl mx-auto">
+      <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-brand-primary dark:text-white mb-4">OrenGen Blueprint</h1>
+          <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+            Transform your ideas into build-ready specs, wireframes, and design systems.
+          </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {/* Card 1: Start Fresh */}
+          <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 flex flex-col items-center text-center hover:border-brand-accent transition-colors">
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-full flex items-center justify-center mb-6">
+                  <Icons.Sparkle />
+              </div>
+              <h3 className="text-xl font-bold mb-2 dark:text-white">Start from Scratch</h3>
+              <p className="text-slate-500 mb-6 text-sm">Follow our wizard to define your product vision manually.</p>
+              <button 
+                onClick={handleStartProject}
+                className="w-full bg-brand-primary hover:bg-brand-dark text-white px-6 py-3 rounded-lg font-bold transition-transform hover:scale-105"
+              >
+                Create New Project
+              </button>
+          </div>
+
+          {/* Card 2: Import from URL */}
+          <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 flex flex-col items-center text-center hover:border-brand-accent transition-colors">
+               <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 text-orange-600 rounded-full flex items-center justify-center mb-6">
+                  <Icons.Document /> 
+              </div>
+              <h3 className="text-xl font-bold mb-2 dark:text-white">Import from URL</h3>
+              <p className="text-slate-500 mb-6 text-sm">Analyze an existing website or doc to auto-fill your blueprint.</p>
+              <div className="w-full space-y-3">
+                  <input 
+                    type="text" 
+                    placeholder="https://example.com"
+                    className="w-full p-3 border rounded bg-slate-50 dark:bg-slate-900 dark:border-slate-600 dark:text-white text-sm"
+                    value={importUrl}
+                    onChange={(e) => setImportUrl(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleUrlAnalysis()}
+                  />
+                  <button 
+                    onClick={handleUrlAnalysis}
+                    disabled={analyzing || !importUrl}
+                    className="w-full bg-brand-accent hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-bold transition-transform hover:scale-105 disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-2"
+                  >
+                    {analyzing ? (
+                        <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            Analyzing...
+                        </>
+                    ) : 'Analyze & Start'}
+                  </button>
+              </div>
+          </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {[
+            { title: "Architect", desc: "Generates comprehensive PRDs & Scope" },
+            { title: "UX Studio", desc: "Auto-renders UI Wireframes" },
+            { title: "Content Studio", desc: "Create Ads, Presentations & Tutorials" }
+        ].map((item, i) => (
+            <div key={i} className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow border border-slate-100 dark:border-slate-700">
+                <h3 className="font-bold text-lg mb-2 dark:text-white">{item.title}</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{item.desc}</p>
+            </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderWizard = () => (
+    <div className="max-w-4xl mx-auto py-10 px-4">
+      {wizardStep === 0 && (
+        <WizardStep title="Core Concept">
+          <div className="space-y-4">
+            <div>
+                <label className="block text-sm font-bold mb-1 dark:text-slate-200">Product Name</label>
+                <input 
+                    type="text" 
+                    className="w-full p-3 border rounded bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white"
+                    placeholder="e.g. FitTrack Pro"
+                    value={wizardData.name || ''}
+                    onChange={e => setWizardData({...wizardData, name: e.target.value})}
+                />
+            </div>
+            <div>
+                <label className="block text-sm font-bold mb-1 dark:text-slate-200">Core Promise</label>
+                <textarea 
+                    className="w-full p-3 border rounded bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white"
+                    placeholder="What problem does it solve?"
+                    value={wizardData.corePromise || ''}
+                    onChange={e => setWizardData({...wizardData, corePromise: e.target.value})}
+                />
+            </div>
+            <div className="flex justify-end mt-6">
+                <button onClick={() => setWizardStep(1)} className="bg-brand-primary text-white px-6 py-2 rounded">Next: Users & Actions</button>
+            </div>
+          </div>
+        </WizardStep>
+      )}
+      
+      {wizardStep === 1 && (
+        <WizardStep title="Target Audience & Behavior">
+            <div className="space-y-4">
+                <div>
+                    <label className="block text-sm font-bold mb-1 dark:text-slate-200">Target Users</label>
+                    <input 
+                        type="text" 
+                        className="w-full p-3 border rounded bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white"
+                        placeholder="e.g. Busy parents, Freelance designers"
+                        value={wizardData.targetUsers || ''}
+                        onChange={e => setWizardData({...wizardData, targetUsers: e.target.value})}
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-bold mb-1 dark:text-slate-200">Top 3 User Actions (Jobs-to-be-done)</label>
+                    <div className="space-y-2">
+                        {[0, 1, 2].map(i => (
+                            <input 
+                                key={i}
+                                type="text" 
+                                className="w-full p-2 border rounded bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white"
+                                placeholder={`Action ${i + 1}`}
+                                value={wizardData.userActions?.[i] || ''}
+                                onChange={e => {
+                                    const newActions = [...(wizardData.userActions || [])];
+                                    newActions[i] = e.target.value;
+                                    setWizardData({...wizardData, userActions: newActions});
+                                }}
+                            />
+                        ))}
+                    </div>
+                </div>
+                <div className="flex justify-between mt-6">
+                    <button onClick={() => setWizardStep(0)} className="text-slate-500">Back</button>
+                    <button onClick={() => setWizardStep(2)} className="bg-brand-primary text-white px-6 py-2 rounded">Next: Tech & Biz</button>
+                </div>
+            </div>
+        </WizardStep>
+      )}
+
+      {wizardStep === 2 && (
+          <WizardStep title="Tech, Business & References">
+              <div className="space-y-4">
+                <div>
+                    <label className="block text-sm font-bold mb-1 dark:text-slate-200">Reference URL (Competitor/Inspiration)</label>
+                    <input 
+                        type="text" 
+                        className="w-full p-3 border rounded bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white"
+                        placeholder="https://example.com"
+                        onBlur={(e) => {
+                            if(e.target.value) {
+                                setWizardData({
+                                    ...wizardData, 
+                                    referenceLinks: [...(wizardData.referenceLinks || []), { id: Date.now().toString(), url: e.target.value, type: 'INSPIRATION', note: '' }]
+                                })
+                                e.target.value = '';
+                            }
+                        }}
+                    />
+                    <div className="mt-2 text-sm text-slate-500">
+                        {wizardData.referenceLinks?.map(l => (
+                            <div key={l.id} className="flex gap-2 items-center">
+                                <span className="font-mono text-xs bg-slate-200 dark:bg-slate-700 px-1 rounded">{l.type}</span>
+                                <span className="truncate">{l.url}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                 <div>
+                    <label className="block text-sm font-bold mb-1 dark:text-slate-200">Screenshots (Optional)</label>
+                    <input 
+                        type="file" 
+                        accept="image/*"
+                        onChange={(e) => {
+                            if (e.target.files?.[0]) {
+                                const reader = new FileReader();
+                                reader.onload = (ev) => {
+                                    setWizardData({
+                                        ...wizardData, 
+                                        screenshots: [...(wizardData.screenshots || []), ev.target?.result as string]
+                                    });
+                                };
+                                reader.readAsDataURL(e.target.files[0]);
+                            }
+                        }}
+                        className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-primary file:text-white hover:file:bg-brand-dark"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-bold mb-1 dark:text-slate-200">Brand Tone</label>
+                    <select 
+                        className="w-full p-3 border rounded bg-slate-50 dark:bg-slate-900 dark:border-slate-700 dark:text-white"
+                        onChange={e => setWizardData({...wizardData, brandTone: e.target.value})}
+                        value={wizardData.brandTone || ''}
+                    >
+                        <option value="">Select Tone</option>
+                        <option value="Professional & Corporate">Professional & Corporate</option>
+                        <option value="Playful & Bold">Playful & Bold</option>
+                        <option value="Minimalist & Clean">Minimalist & Clean</option>
+                        <option value="Technical & Detailed">Technical & Detailed</option>
+                    </select>
+                </div>
+                 <div className="flex justify-between mt-6">
+                    <button onClick={() => setWizardStep(1)} className="text-slate-500">Back</button>
+                    <button onClick={handleCreateProject} className="bg-brand-accent text-white px-6 py-2 rounded font-bold shadow-lg animate-pulse">Generate Blueprint</button>
+                </div>
+              </div>
+          </WizardStep>
+      )}
+    </div>
+  );
+
+  const renderStudio = () => {
+    if (!currentProject) return null;
+
+    const TabButton = ({ id, label }: any) => (
+      <button
+        onClick={() => setActiveTab(id)}
+        className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+          activeTab === id 
+            ? 'border-brand-accent text-brand-primary dark:text-white' 
+            : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400'
+        }`}
+      >
+        {label}
+      </button>
+    );
+
+    return (
+      <div className="flex flex-col h-full overflow-hidden">
+        {/* Top Utility Bar */}
+        <div className="h-14 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-6">
+            <h2 className="font-bold text-lg dark:text-white">{currentProject.data.name} <span className="text-xs font-normal text-slate-500 px-2 py-0.5 bg-slate-100 dark:bg-slate-700 rounded-full ml-2">DRAFT</span></h2>
+            <div className="flex items-center gap-3">
+                 <button 
+                    onClick={() => setShowVoiceSession(true)}
+                    className="p-2 text-brand-accent bg-orange-50 dark:bg-orange-900/20 rounded hover:bg-orange-100 dark:hover:bg-orange-900/40 transition-colors" 
+                    title="Voice Brainstorm"
+                 >
+                    <Icons.Mic />
+                 </button>
+                 <div className="w-px h-6 bg-slate-300 dark:bg-slate-600"></div>
+                 <button className="text-sm font-medium text-brand-primary dark:text-slate-200">Export</button>
+            </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex items-center gap-2 px-6 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 overflow-x-auto">
+            <TabButton id={BlueprintTab.PRD} label="PRD & Scope" />
+            <TabButton id={BlueprintTab.WIREFRAMES} label="Wireframes" />
+            <TabButton id={BlueprintTab.COPY} label="UI Copy" />
+            <TabButton id={BlueprintTab.POLICIES} label="Policies" />
+            <TabButton id={BlueprintTab.ASSETS} label="Assets" />
+            <TabButton id={BlueprintTab.CONTENT_STUDIO} label="Content Studio" />
+        </div>
+
+        {/* Content Area */}
+        <div className="flex-1 overflow-auto p-8 bg-slate-50 dark:bg-slate-950">
+            
+            {/* Loading State Overlay */}
+            {loading && activeTab !== BlueprintTab.CONTENT_STUDIO && (
+                <div className="absolute inset-0 bg-white/50 dark:bg-black/50 z-10 flex items-center justify-center backdrop-blur-sm pointer-events-none">
+                    <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-xl flex flex-col items-center">
+                        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-brand-accent mb-4"></div>
+                        <p className="font-medium text-slate-700 dark:text-slate-200">Generating...</p>
+                    </div>
+                </div>
+            )}
+
+            {activeTab === BlueprintTab.PRD && (
+                <div className="max-w-4xl mx-auto">
+                    <div className="flex justify-between items-center mb-6">
+                        <h3 className="text-2xl font-bold dark:text-white">Product Requirements</h3>
+                        <div className="flex gap-2">
+                             {currentProject.artifacts.prd && (
+                                <button onClick={() => readAloud(currentProject.artifacts.prd)} className="text-sm text-brand-primary flex items-center gap-1 hover:underline">
+                                    <Icons.Sparkle /> Listen
+                                </button>
+                             )}
+                             <button 
+                                onClick={() => generateSection('PRD')}
+                                className="bg-brand-primary text-white px-4 py-2 rounded text-sm hover:bg-brand-dark"
+                             >
+                                {currentProject.artifacts.prd ? 'Regenerate PRD' : 'Generate PRD'}
+                             </button>
+                        </div>
+                    </div>
+                    {currentProject.artifacts.prd ? (
+                        <article className="prose dark:prose-invert max-w-none bg-white dark:bg-slate-900 p-8 rounded shadow-sm">
+                            <pre className="whitespace-pre-wrap font-sans">{currentProject.artifacts.prd}</pre>
+                        </article>
+                    ) : (
+                         <div className="text-center py-20 bg-white dark:bg-slate-900 rounded border border-dashed border-slate-300 dark:border-slate-700">
+                            <p className="text-slate-500">No PRD generated yet. Ask the Architect to start.</p>
+                        </div>
+                    )}
+                </div>
+            )}
+
+             {activeTab === BlueprintTab.WIREFRAMES && (
+                <div className="max-w-6xl mx-auto">
+                    <div className="flex justify-between items-center mb-6">
+                        <h3 className="text-2xl font-bold dark:text-white">Wireframes & Flows</h3>
+                        <button 
+                            onClick={() => generateSection('WIREFRAMES')}
+                            className="bg-brand-primary text-white px-4 py-2 rounded text-sm hover:bg-brand-dark"
+                        >
+                            {currentProject.artifacts.wireframes ? 'Regenerate' : 'Generate Wireframes'}
+                        </button>
+                    </div>
+                    {currentProject.artifacts.wireframes ? (
+                        <WireframeRenderer data={currentProject.artifacts.wireframes} />
+                    ) : (
+                         <div className="text-center py-20 bg-white dark:bg-slate-900 rounded border border-dashed border-slate-300 dark:border-slate-700">
+                            <p className="text-slate-500">No wireframes generated yet.</p>
+                        </div>
+                    )}
+                </div>
+            )}
+
+            {activeTab === BlueprintTab.ASSETS && (
+                <AssetGenerator />
+            )}
+
+            {activeTab === BlueprintTab.CONTENT_STUDIO && (
+                <ContentStudio 
+                    project={currentProject} 
+                    onUpdate={(text, grounding) => setCurrentProject(prev => prev ? {...prev, artifacts: {...prev.artifacts, marketingPlan: text, marketingGrounding: grounding}} : null)}
+                />
+            )}
+            
+            {(activeTab === BlueprintTab.COPY || activeTab === BlueprintTab.POLICIES) && (
+                <div className="max-w-4xl mx-auto">
+                     <div className="flex justify-between items-center mb-6">
+                        <h3 className="text-2xl font-bold dark:text-white">
+                            {activeTab === BlueprintTab.COPY ? 'UI Copy Deck' : 'Policies & Compliance'}
+                        </h3>
+                        <button 
+                            onClick={() => generateSection(activeTab === BlueprintTab.COPY ? 'COPY' : 'POLICIES')}
+                            className="bg-brand-primary text-white px-4 py-2 rounded text-sm hover:bg-brand-dark"
+                        >
+                            Generate
+                        </button>
+                    </div>
+                    <div className="bg-white dark:bg-slate-900 p-8 rounded shadow-sm whitespace-pre-wrap dark:text-slate-300">
+                        {activeTab === BlueprintTab.COPY ? currentProject.artifacts.copyDeck : currentProject.artifacts.policies}
+                        {!((activeTab === BlueprintTab.COPY ? currentProject.artifacts.copyDeck : currentProject.artifacts.policies)) && (
+                             <p className="text-slate-500 text-center italic">Content not generated yet.</p>
+                        )}
+                    </div>
+                </div>
+            )}
+
+        </div>
+      </div>
+    );
+  };
+
+  // Content Studio Sub-Component
+  const ContentStudio = ({ project, onUpdate }: { project: Project, onUpdate: (t: string, g?: any[]) => void }) => {
+      const [url, setUrl] = useState('');
+      const [type, setType] = useState('Presentation');
+      const [constraints, setConstraints] = useState('Professional tone, medium length');
+      const [generating, setGenerating] = useState(false);
+      const [videoPrompt, setVideoPrompt] = useState('');
+      const [videoUrl, setVideoUrl] = useState('');
+      const [videoStatus, setVideoStatus] = useState('');
+      const [videoLoading, setVideoLoading] = useState(false);
+
+      const handleGeneratePlan = async () => {
+          setGenerating(true);
+          onUpdate(''); // Clear previous
+          try {
+              // Streaming Update
+              const result = await gemini.generateMarketingContent(
+                  project.data, 
+                  url, 
+                  type, 
+                  constraints, 
+                  SYSTEM_INSTRUCTION_MARKETER,
+                  (chunk) => onUpdate(chunk)
+              );
+              // Final update with grounding
+              onUpdate(result.text, result.grounding);
+          } catch(e) {
+              console.error(e);
+              alert("Error generating content plan");
+          } finally {
+              setGenerating(false);
+          }
+      };
+
+      const handleGenerateVideo = async () => {
+          if (!(window as any).aistudio) {
+              alert("AI Studio global not found. Please ensure script is loaded or env is correct.");
+              return;
+          }
+          setVideoLoading(true);
+          setVideoStatus("Checking API Key...");
+          try {
+             const hasKey = await (window as any).aistudio.hasSelectedApiKey();
+             if (!hasKey) {
+                 await (window as any).aistudio.openSelectKey();
+             }
+             
+             const url = await gemini.generateVideo(
+                 videoPrompt || `A cinematic commercial for ${project.data.name}`,
+                 (status) => setVideoStatus(status)
+             );
+             setVideoUrl(url);
+
+          } catch(e) {
+             console.error(e);
+             alert("Video generation failed.");
+             if ((e as any).message?.includes("Requested entity was not found")) {
+                 await (window as any).aistudio.openSelectKey();
+             }
+          } finally {
+              setVideoLoading(false);
+              setVideoStatus('');
+          }
+      }
+
+      return (
+          <div className="max-w-4xl mx-auto space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4 bg-white dark:bg-slate-900 p-6 rounded shadow-sm">
+                      <h3 className="font-bold text-lg dark:text-white flex items-center gap-2">
+                          <Icons.Presentation /> Source & Config
+                      </h3>
+                      <div>
+                          <label className="block text-sm font-medium mb-1 dark:text-slate-300">Source URL (Deep Analysis)</label>
+                          <input 
+                            className="w-full p-2 border rounded dark:bg-slate-800 dark:border-slate-700 dark:text-white" 
+                            placeholder="https://mysite.com or specific article"
+                            value={url}
+                            onChange={e => setUrl(e.target.value)}
+                          />
+                      </div>
+                      <div>
+                          <label className="block text-sm font-medium mb-1 dark:text-slate-300">Content Type</label>
+                          <select 
+                            className="w-full p-2 border rounded dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+                            value={type}
+                            onChange={e => setType(e.target.value)}
+                          >
+                              <option>Presentation Deck</option>
+                              <option>Video Ad Script</option>
+                              <option>Written Tutorial</option>
+                              <option>One-Pager PDF</option>
+                              <option>Product Demo Flow</option>
+                          </select>
+                      </div>
+                      <div>
+                          <label className="block text-sm font-medium mb-1 dark:text-slate-300">Style & Constraints</label>
+                          <input 
+                            className="w-full p-2 border rounded dark:bg-slate-800 dark:border-slate-700 dark:text-white" 
+                            value={constraints}
+                            onChange={e => setConstraints(e.target.value)}
+                          />
+                      </div>
+                      <button 
+                        onClick={handleGeneratePlan}
+                        disabled={generating}
+                        className="w-full bg-brand-primary text-white py-2 rounded font-bold hover:bg-brand-dark disabled:opacity-50"
+                      >
+                          {generating ? 'Analyzing & Generating...' : 'Generate Content'}
+                      </button>
+                  </div>
+
+                  {/* Video Section */}
+                  <div className="space-y-4 bg-slate-900 text-white p-6 rounded shadow-sm">
+                       <h3 className="font-bold text-lg flex items-center gap-2">
+                           Video Studio (Veo)
+                       </h3>
+                       <p className="text-sm text-slate-400">Generate high-fidelity videos for ads or demos.</p>
+                       <div>
+                           <label className="block text-sm font-medium mb-1 text-slate-300">Video Prompt</label>
+                           <textarea 
+                              className="w-full p-2 border border-slate-700 rounded bg-slate-800 text-white h-24"
+                              placeholder={`A futuristic commercial for ${project.data.name}...`}
+                              value={videoPrompt}
+                              onChange={e => setVideoPrompt(e.target.value)}
+                           />
+                       </div>
+                       <button 
+                          onClick={handleGenerateVideo}
+                          disabled={videoLoading}
+                          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-2 rounded font-bold hover:opacity-90 disabled:opacity-50"
+                        >
+                            {videoLoading ? videoStatus : 'Generate Video (Veo)'}
+                        </button>
+                        {videoUrl && (
+                            <div className="mt-4">
+                                <video src={videoUrl} controls className="w-full rounded border border-slate-700" />
+                            </div>
+                        )}
+                  </div>
+              </div>
+
+              {/* Result Area */}
+              <div className="bg-white dark:bg-slate-900 p-8 rounded shadow-sm min-h-[400px]">
+                  <h3 className="font-bold text-xl mb-4 dark:text-white flex justify-between">
+                      Generated Content Plan
+                      {project.artifacts.marketingGrounding && (
+                          <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                              {project.artifacts.marketingGrounding.length} Sources Analyzed
+                          </span>
+                      )}
+                  </h3>
+                  
+                  {project.artifacts.marketingGrounding && project.artifacts.marketingGrounding.length > 0 && (
+                      <div className="mb-6 p-4 bg-slate-50 dark:bg-slate-800 rounded text-sm">
+                          <strong className="block mb-2 text-slate-500">Sources Used:</strong>
+                          <div className="flex flex-wrap gap-2">
+                              {project.artifacts.marketingGrounding.map((g: any, i) => (
+                                  <a key={i} href={g.web?.uri} target="_blank" rel="noreferrer" className="text-brand-accent hover:underline bg-white dark:bg-slate-700 px-2 py-1 rounded border dark:border-slate-600 truncate max-w-[200px]">
+                                      {g.web?.title || 'Source ' + (i+1)}
+                                  </a>
+                              ))}
+                          </div>
+                      </div>
+                  )}
+
+                  {project.artifacts.marketingPlan ? (
+                       <article className="prose dark:prose-invert max-w-none whitespace-pre-wrap">
+                           {project.artifacts.marketingPlan}
+                       </article>
+                  ) : (
+                      <div className="text-center text-slate-500 py-10">
+                          Content plan will appear here.
+                      </div>
+                  )}
+              </div>
+          </div>
+      );
+  };
+
+  // Asset Generator Sub-Component (Isolated for clarity)
+  const AssetGenerator = () => {
+      const [prompt, setPrompt] = useState("");
+      const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+      const [loadingImg, setLoadingImg] = useState(false);
+      const [editMode, setEditMode] = useState(false);
+
+      const handleGen = async () => {
+          setLoadingImg(true);
+          try {
+              // 1K size by default as per UI
+              const result = await gemini.generateImage(prompt, '1K');
+              setGeneratedImage(result);
+              setEditMode(false);
+          } catch(e) {
+              console.error(e);
+          } finally {
+              setLoadingImg(false);
+          }
+      };
+
+      const handleEdit = async () => {
+          if (!generatedImage) return;
+          setLoadingImg(true);
+          try {
+            const result = await gemini.editImage(generatedImage, prompt);
+            if(result) setGeneratedImage(result);
+          } catch(e) { console.error(e); } finally { setLoadingImg(false); }
+      }
+
+      return (
+          <div className="max-w-4xl mx-auto space-y-6">
+              <h3 className="text-2xl font-bold dark:text-white">Asset Studio</h3>
+              <div className="flex gap-4">
+                  <input 
+                    type="text" 
+                    className="flex-1 p-3 border rounded dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+                    placeholder={editMode ? "Describe edit (e.g. 'Add a retro filter')" : "Describe asset to generate (e.g. 'App Icon for fitness app')"}
+                    value={prompt}
+                    onChange={e => setPrompt(e.target.value)}
+                  />
+                  <button 
+                    onClick={editMode ? handleEdit : handleGen}
+                    disabled={loadingImg}
+                    className="bg-brand-accent text-white px-6 rounded font-bold hover:bg-orange-700 disabled:opacity-50"
+                  >
+                      {loadingImg ? 'Processing...' : editMode ? 'Edit Asset' : 'Generate'}
+                  </button>
+              </div>
+
+              {generatedImage && (
+                  <div className="bg-white dark:bg-slate-800 p-4 rounded shadow flex flex-col items-center">
+                      <img src={generatedImage} alt="Generated Asset" className="max-h-96 rounded shadow-lg mb-4" />
+                      <div className="flex gap-4">
+                          <button onClick={() => setEditMode(!editMode)} className="text-brand-primary underline text-sm">
+                              {editMode ? 'Cancel Edit' : 'Edit this image'}
+                          </button>
+                          <a href={generatedImage} download="asset.png" className="text-brand-primary underline text-sm">Download</a>
+                      </div>
+                  </div>
+              )}
+          </div>
+      );
+  }
+
+  return (
+    <div className="flex h-screen bg-slate-100 dark:bg-black font-sans text-slate-900">
+      
+      {/* Sidebar */}
+      <div className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+        <div className="h-16 flex items-center px-6 border-b border-slate-100 dark:border-slate-800">
+            <div className="w-8 h-8 bg-brand-primary rounded mr-3"></div>
+            <span className="font-bold text-lg tracking-tight dark:text-white">OrenGen</span>
+        </div>
+        
+        <div className="flex-1 py-6 space-y-1">
+            <SidebarItem active={view === AppView.DASHBOARD} label="Dashboard" onClick={() => setView(AppView.DASHBOARD)} icon={<Icons.Sparkle />} />
+            {currentProject && (
+                <SidebarItem active={view === AppView.STUDIO} label="Project Studio" onClick={() => setView(AppView.STUDIO)} icon={<Icons.Document />} />
+            )}
+        </div>
+
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800">
+             <button 
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className="w-full py-2 bg-slate-100 dark:bg-slate-800 rounded text-xs font-medium text-slate-600 dark:text-slate-400"
+            >
+                Toggle {isDarkMode ? 'Light' : 'Dark'} Mode
+            </button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col relative">
+        {view === AppView.DASHBOARD && renderDashboard()}
+        {view === AppView.WIZARD && renderWizard()}
+        {view === AppView.STUDIO && renderStudio()}
+      </div>
+
+      {/* Voice Session Modal */}
+      {showVoiceSession && (
+          <LiveSession 
+            onClose={() => setShowVoiceSession(false)} 
+            context={currentProject ? `Project: ${currentProject.data.name}. Context: ${currentProject.data.corePromise}` : 'No project selected.'}
+          />
+      )}
+
+    </div>
+  );
+}

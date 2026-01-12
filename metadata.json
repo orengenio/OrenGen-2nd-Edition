@@ -1,5 +1,8 @@
 {
-  "name": "DomainValidator Pro",
-  "description": "A robust domain validation and DNS compliance suite for Cloudflare users, specifically designed for Google Postmaster and ISP verification.",
-  "requestFramePermissions": []
+  "name": "OrenGen Blueprint",
+  "description": "A multi-agent AI product blueprint generator that transforms ideas into build-ready specs, wireframes, and policies.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
 }
