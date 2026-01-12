@@ -1,5 +1,7 @@
 {
-  "name": "OrenGen Gov AI",
-  "description": "The All-In-One Bidding and Grants Hub. AI-driven contract sourcing, scoring, and proposal generation for aggressive federal and state capture.",
-  "requestFramePermissions": []
+  "name": "Antigravity OS",
+  "description": "A goal-driven AI orchestrator that safely operates web apps and local files using specialized agents, permission gates, and Gemini intelligence.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }

@@ -1,53 +1,58 @@
-export type OpportunityStatus = 'NEW' | 'QUALIFIED' | 'DRAFTING' | 'SUBMITTED' | 'AWARDED' | 'LOST';
 
-export interface NaicsCode {
-  code: string;
-  desc: string;
+export enum AgentMode {
+  WEB = 'WEB',
+  LOCAL = 'LOCAL',
+  HYBRID = 'HYBRID',
+  EXTENSIONS = 'EXTENSIONS'
 }
 
-export interface CompanyProfile {
-  name: string;
-  location: string;
-  uei: string;
-  cage: string;
-  hubStatus: string;
-  certifications: string[];
-  naics: NaicsCode[];
-  aggressiveTarget: number;
-  strategyDescription: string;
+export enum StepStatus {
+  PENDING = 'PENDING',
+  RUNNING = 'RUNNING',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+  WAITING_APPROVAL = 'WAITING_APPROVAL'
 }
 
-export interface Opportunity {
+export interface PlanStep {
   id: string;
-  title: string;
-  agency: string;
-  source: 'SAM.gov' | 'Grants.gov' | 'Texas CMBL' | 'DIR';
-  naics: string;
-  value: number;
-  postedDate: string;
-  deadline: string;
-  status: OpportunityStatus;
-  aiScore: number;
-  matchReason: string;
   description: string;
-  setAside?: string;
+  tool: 'BROWSER_CLICK' | 'BROWSER_TYPE' | 'BROWSER_NAVIGATE' | 'FILE_READ' | 'FILE_WRITE' | 'ANALYSIS' | 'WEBHOOK_TRIGGER' | 'BROWSER_INSTALL_EXTENSION';
+  params: Record<string, any>;
+  status: StepStatus;
+  riskLevel: 'LOW' | 'MEDIUM' | 'HIGH';
+  evidence?: string; // Screenshot URL or log snippet
 }
 
-export interface AgentStatus {
-  name: string;
-  status: 'active' | 'idle' | 'error';
-  lastRun: string;
-  itemsFound: number;
-}
-
-export interface NavItem {
+export interface ChatMessage {
   id: string;
-  label: string;
-  icon: any;
+  role: 'user' | 'model' | 'system';
+  content: string;
+  timestamp: number;
 }
 
-export interface ProposalRequest {
-  opportunityId: string;
-  strategy: 'aggressive' | 'standard' | 'compliance';
-  undercutPercent: number;
+export interface FileNode {
+  id: string;
+  name: string;
+  type: 'file' | 'folder';
+  children?: FileNode[];
+  content?: string;
+  lastModified?: string;
+}
+
+export interface LogEntry {
+  id: string;
+  timestamp: number;
+  agent: 'ORCHESTRATOR' | 'ANALYST' | 'WEB_OP' | 'FILE_OP' | 'GUARD' | 'AUTOMATION';
+  message: string;
+  type: 'info' | 'warning' | 'error' | 'success';
+}
+
+export interface Extension {
+  id: string;
+  name: string;
+  description: string;
+  version: string;
+  author: string;
+  installed: boolean;
 }
