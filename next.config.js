@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   // Enable Turbopack (default in Next.js 16)
   turbopack: {},
   // Keep webpack config for fallback compatibility
@@ -9,6 +10,12 @@ const nextConfig = {
       use: ["@svgr/webpack"]
     });
     return config;
+  },
+  images: {
+    domains: ['blog.orengen.io', 'images.unsplash.com'],
+  },
+  env: {
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   },
 };
 
