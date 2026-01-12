@@ -1,28 +1,31 @@
-# Refferq - Open Source Affiliate Platform
-# https://www.refferq.com
+# OrenGen - AI-Powered Business Automation Platform
+# https://orengen.io
 
 User-agent: *
 Allow: /
-Allow: /features.html
-Allow: /pricing.html
-Allow: /docs.html
+Allow: /services
+Allow: /about
+Allow: /contact
+Allow: /case-studies
+Allow: /pricing
+Allow: /knowledge-base
 
-# Disallow admin and user areas
+# Disallow admin and internal areas
 Disallow: /admin/
-Disallow: /affiliate/
 Disallow: /api/
+Disallow: /nexus/
 
 # Disallow authentication pages from indexing
 Disallow: /login
 Disallow: /register
-Disallow: /verify-otp
+Disallow: /dashboard/
 
 # Disallow private user data
 Disallow: /profile/
 Disallow: /settings/
 
 # Sitemap
-Sitemap: https://www.refferq.com/sitemap.xml
+Sitemap: https://orengen.io/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 5

@@ -286,4 +286,4 @@ const darkModeStyles = `
     }
 `;
 
-console.log('Refferq Frontend Loaded ✨');
+console.log('OrenGen Platform Loaded');

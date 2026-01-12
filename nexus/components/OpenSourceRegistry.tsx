@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { 
-  Box, ExternalLink, Power, RefreshCw, Server, 
-  Layout, MessageSquare, Database, GitBranch, 
-  FileText, Activity, Share2, PenTool, Users
+import {
+  Box, ExternalLink, Power, RefreshCw, Server,
+  Layout, MessageSquare, Database, GitBranch,
+  FileText, Activity, Share2, PenTool, Users,
+  Headphones, Search, AppWindow, BarChart3
 } from 'lucide-react';
 
 interface FOSSService {
@@ -28,6 +29,10 @@ const OpenSourceRegistry: React.FC = () => {
     { id: 'postiz', name: 'Postiz', category: 'Marketing', status: 'Updating', url: 'http://localhost:4200', description: 'The ultimate AI social media scheduling tool.', icon: <Share2 size={24} />, version: '1.1.0', port: 4200 },
     { id: 'pgbackweb', name: 'pgBackWeb', category: 'DevOps', status: 'Running', url: 'http://localhost:8085', description: 'Web interface for PostgreSQL backups.', icon: <Server size={24} />, version: '0.1.0', port: 8085 },
     { id: 'orangehrm', name: 'OrangeHRM', category: 'HR', status: 'Stopped', url: 'http://localhost:8090', description: 'Open source HR management system.', icon: <Users size={24} />, version: '5.6', port: 8090 },
+    { id: 'chatwoot', name: 'OrenDesk (Chatwoot)', category: 'Support', status: 'Running', url: 'http://localhost:3100', description: 'Open source customer engagement platform. Live chat, email, and omnichannel support.', icon: <Headphones size={24} />, version: '3.5.0', port: 3100 },
+    { id: 'serpbear', name: 'OrenSEO (SerpBear)', category: 'Marketing', status: 'Running', url: 'http://localhost:3200', description: 'Open source SEO rank tracking tool. Monitor keyword positions across search engines.', icon: <Search size={24} />, version: '2.1.0', port: 3200 },
+    { id: 'appsmith', name: 'OrenApps (Appsmith)', category: 'Development', status: 'Running', url: 'http://localhost:8280', description: 'Low-code platform to build internal tools, admin panels, and dashboards rapidly.', icon: <AppWindow size={24} />, version: '1.9.60', port: 8280 },
+    { id: 'matomo', name: 'OrenMetrics (Matomo)', category: 'Analytics', status: 'Running', url: 'http://localhost:8380', description: 'Privacy-focused web analytics platform. GDPR compliant alternative to Google Analytics.', icon: <BarChart3 size={24} />, version: '5.0.3', port: 8380 },
   ]);
 
   const toggleStatus = (id: string) => {
