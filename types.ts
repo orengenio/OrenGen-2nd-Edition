@@ -1,58 +1,49 @@
 
-export enum AgentMode {
-  WEB = 'WEB',
-  LOCAL = 'LOCAL',
-  HYBRID = 'HYBRID',
-  EXTENSIONS = 'EXTENSIONS'
+export interface CloudflareConfig {
+  apiKey: string;
+  email: string;
 }
 
-export enum StepStatus {
-  PENDING = 'PENDING',
-  RUNNING = 'RUNNING',
-  COMPLETED = 'COMPLETED',
-  FAILED = 'FAILED',
-  WAITING_APPROVAL = 'WAITING_APPROVAL'
-}
-
-export interface PlanStep {
+export interface DomainInfo {
   id: string;
-  description: string;
-  tool: 'BROWSER_CLICK' | 'BROWSER_TYPE' | 'BROWSER_NAVIGATE' | 'FILE_READ' | 'FILE_WRITE' | 'ANALYSIS' | 'WEBHOOK_TRIGGER' | 'BROWSER_INSTALL_EXTENSION';
-  params: Record<string, any>;
-  status: StepStatus;
-  riskLevel: 'LOW' | 'MEDIUM' | 'HIGH';
-  evidence?: string; // Screenshot URL or log snippet
+  name: string;
+  status: string;
+  paused: boolean;
+  type: string;
 }
 
-export interface ChatMessage {
+export interface DNSRecord {
   id: string;
-  role: 'user' | 'model' | 'system';
+  type: string;
+  name: string;
   content: string;
-  timestamp: number;
+  proxiable: boolean;
+  proxied: boolean;
+  ttl: number;
 }
 
-export interface FileNode {
-  id: string;
-  name: string;
-  type: 'file' | 'folder';
-  children?: FileNode[];
-  content?: string;
-  lastModified?: string;
+export enum Tab {
+  Dashboard = 'dashboard',
+  Cloudflare = 'cloudflare',
+  ISPCenter = 'isp-center',
+  Auditor = 'auditor',
+  Automation = 'automation',
+  Bulk = 'bulk'
 }
 
-export interface LogEntry {
+export type ISPProvider = 'google' | 'microsoft' | 'yahoo' | 'generic';
+
+export interface AutomationTask {
   id: string;
-  timestamp: number;
-  agent: 'ORCHESTRATOR' | 'ANALYST' | 'WEB_OP' | 'FILE_OP' | 'GUARD' | 'AUTOMATION';
+  domain: string;
+  token: string;
+  status: 'idle' | 'searching' | 'injecting' | 'propagating' | 'completed' | 'failed';
+  error?: string;
+  isp?: ISPProvider;
+}
+
+export interface VerificationResult {
+  success: boolean;
   message: string;
-  type: 'info' | 'warning' | 'error' | 'success';
-}
-
-export interface Extension {
-  id: string;
-  name: string;
-  description: string;
-  version: string;
-  author: string;
-  installed: boolean;
+  error?: any;
 }

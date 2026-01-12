@@ -1,494 +1,533 @@
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { 
-  Search, Shield, LayoutGrid, Globe, HardDrive, Terminal, 
-  Settings, PlayCircle, StopCircle, Mic, Bot, FileText, ShieldAlert,
-  Lock, Unlock, Zap, Puzzle
+  ShieldCheck, 
+  LayoutDashboard, 
+  Cloud, 
+  Mail, 
+  Activity, 
+  Plus, 
+  Trash2, 
+  AlertCircle, 
+  CheckCircle2, 
+  RefreshCw,
+  Search,
+  ExternalLink,
+  ChevronRight,
+  Info,
+  Globe,
+  Lock,
+  Server,
+  Zap,
+  Terminal,
+  Play,
+  Pause,
+  StopCircle,
+  X,
+  ClipboardList,
+  Cpu,
+  Layers,
+  Database,
+  Eye,
+  Settings
 } from 'lucide-react';
-import { LandingPage } from './components/LandingPage';
-import { PlanViewer } from './components/PlanViewer';
-import { FileSystem } from './components/FileSystem';
-import { LiveVoice } from './components/LiveVoice';
-import { ChatInterface } from './components/ChatInterface';
-import { ExtensionsView } from './components/ExtensionsView';
-import { 
-  generateOperationalPlan, 
-  sendMessageToChat, 
-  generateSpeech,
-  analyzePageContent,
-  generateTechAnalysis
-} from './services/geminiService';
-import { AgentMode, PlanStep, StepStatus, FileNode, LogEntry, ChatMessage, Extension } from './types';
-import { MOCK_FILE_SYSTEM, MOCK_BROWSER_DOM } from './constants';
+import { CloudflareService } from './services/cloudflareService';
+import { analyzeDNSCompliance, extractISPData } from './services/geminiService';
+import { Tab, DomainInfo, DNSRecord, VerificationResult, ISPProvider, AutomationTask } from './types';
 
-const MOCK_EXTENSIONS: Extension[] = [
-    { id: 'ext_auth_bridge', name: 'Agent Auth Bridge', description: 'Securely injects session cookies and handles 2FA challenges automatically.', version: '2.1.0', author: 'Antigravity Labs', installed: false },
-    { id: 'ext_captcha_solver', name: 'CaptchaSolver Pro', description: 'AI-powered visual recognition to bypass standard captcha challenges.', version: '1.4.2', author: 'DeepMind', installed: false },
-    { id: 'ext_dom_xray', name: 'DOM X-Ray', description: 'Exposes hidden form fields and shadow DOM elements for deep automation.', version: '3.0.1', author: 'OpenAI', installed: true },
-    { id: 'ext_net_intercept', name: 'Network Interceptor', description: 'Monitors and modifies socket connections for advanced debugging.', version: '0.9.8', author: 'Ghost Protocol', installed: false },
-    { id: 'ext_vpn_agent', name: 'Proxy/VPN Switcher', description: 'Rotates IP addresses per request to prevent rate limiting.', version: '1.1.0', author: 'Nord Security', installed: false },
-];
-
-function App() {
-  // State: App Navigation
-  const [showLanding, setShowLanding] = useState(true);
-
-  // State: Core
-  const [url, setUrl] = useState('');
-  const [mode, setMode] = useState<AgentMode>(AgentMode.WEB);
+const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.Dashboard);
+  const [cfToken, setCfToken] = useState<string>(localStorage.getItem('cf_token') || '');
+  const [domains, setDomains] = useState<DomainInfo[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedDomain, setSelectedDomain] = useState<DomainInfo | null>(null);
+  const [dnsRecords, setDnsRecords] = useState<DNSRecord[]>([]);
   
-  // State: Execution
-  const [plan, setPlan] = useState<PlanStep[]>([]);
-  const [isPlanning, setIsPlanning] = useState(false);
-  const [isExecuting, setIsExecuting] = useState(false);
-  const [currentStepId, setCurrentStepId] = useState<string | null>(null);
-  const [godMode, setGodMode] = useState(false);
+  // Bulk & ISP Session States
+  const [bulkDomains, setBulkDomains] = useState('');
+  const [bulkISPToken, setBulkISPToken] = useState('');
+  const [rawISPData, setRawISPData] = useState('');
+  const [isExtracting, setIsExtracting] = useState(false);
   
-  // State: Data
-  const [files, setFiles] = useState<FileNode[]>(MOCK_FILE_SYSTEM);
-  const [extensions, setExtensions] = useState<Extension[]>(MOCK_EXTENSIONS);
-  const [selectedFile, setSelectedFile] = useState<FileNode | null>(null);
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
-  const [isChatProcessing, setIsChatProcessing] = useState(false);
-  const [browserContent, setBrowserContent] = useState<string | null>(null);
+  // Automation Core
+  const [automationQueue, setAutomationQueue] = useState<AutomationTask[]>([]);
+  const [isAutomationRunning, setIsAutomationRunning] = useState(false);
+  const [logs, setLogs] = useState<string[]>([]);
+  const logEndRef = useRef<HTMLDivElement>(null);
 
-  // State: UI
-  const [activeTab, setActiveTab] = useState<'PLANNER' | 'CHAT'>('PLANNER');
-  const [isVoiceOpen, setIsVoiceOpen] = useState(false);
-  const logsEndRef = useRef<HTMLDivElement>(null);
+  const cfService = cfToken ? new CloudflareService(cfToken) : null;
 
-  // Helper: Logging
-  const addLog = (msg: string, type: LogEntry['type'] = 'info', agent: LogEntry['agent'] = 'ORCHESTRATOR') => {
-    setLogs(prev => [...prev, {
-      id: Date.now().toString(),
-      timestamp: Date.now(),
-      message: msg,
-      type,
-      agent
-    }]);
+  const addLog = (msg: string) => {
+    setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`].slice(-150));
   };
 
-  // Scroll logs
   useEffect(() => {
-    if (!showLanding) {
-        logsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [logs, showLanding]);
+    logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [logs]);
 
-  // Handler: Analyze & Plan
-  const handleAnalyze = async () => {
-    if (!url && mode === AgentMode.WEB) return;
-    
-    setIsPlanning(true);
-    setActiveTab('PLANNER');
-    addLog(`Starting analysis for ${mode === AgentMode.WEB ? url : 'Local System'}`, 'info', 'ANALYST');
-    
-    // Simulate web analysis / Context building
-    let context = '';
-    if (mode === AgentMode.WEB) {
-        // Dynamic Mock Generation based on URL to avoid confusing the AI
-        let simulatedDom = MOCK_BROWSER_DOM;
-        if (url && !url.includes('stripe')) {
-             simulatedDom = `
-             <html>
-                <head><title>${url} - Analysis Mode</title></head>
-                <body>
-                    <div id="root">
-                        <header><h1>${url}</h1></header>
-                        <main>
-                            <p>Remote content loaded from ${url}...</p>
-                            <!-- The Analyst Agent will infer tech stack from the URL itself since live scraping is restricted -->
-                        </main>
-                    </div>
-                </body>
-             </html>`;
-        }
-        
-        setBrowserContent(simulatedDom);
-        context = `Target URL: ${url}. \nSimulated DOM Snapshot: ${simulatedDom}`;
-        addLog(`Connecting to ${url}...`, 'info', 'WEB_OP');
-        await new Promise(r => setTimeout(r, 800)); // Fake network delay
-        addLog('DOM Snapshot captured. Running heuristics...', 'success', 'WEB_OP');
-    } else {
-        context = `Root Dir: Project Alpha. Files: src/App.tsx, package.json...`;
-        addLog('File system index built.', 'success', 'FILE_OP');
-    }
-
+  const fetchDomains = useCallback(async () => {
+    if (!cfService) return;
+    setLoading(true);
     try {
-        // 1. Generate Operational Plan
-        const generatedPlanPromise = generateOperationalPlan(
-            `Analyze and map the environment at ${url || 'root'}. Check for sensitive data.`, 
-            context, 
-            mode
-        );
-        
-        // 2. Generate Tech Recon Report (Parallel)
-        const techReportPromise = generateTechAnalysis(context);
-
-        const [generatedPlan, techReport] = await Promise.all([generatedPlanPromise, techReportPromise]);
-        
-        // Handle Tech Report
-        if (techReport) {
-            const analysisMsg: ChatMessage = {
-                id: Date.now().toString(),
-                role: 'model',
-                content: `🔍 **Technical Reconnaissance Report**\n\n${techReport}`,
-                timestamp: Date.now()
-            };
-            setChatHistory(prev => [...prev, analysisMsg]);
-            addLog('Tech stack analysis complete. Report sent to Chat.', 'success', 'ANALYST');
-            // Optional: Switch to chat to show report immediately if user prefers, 
-            // but usually we keep them on Planner to see execution steps.
-        }
-
-        // Handle Plan
-        setPlan(generatedPlan);
-        if (generatedPlan.length > 0) {
-            addLog(`Plan generated with ${generatedPlan.length} steps. Waiting for approval.`, 'warning', 'ORCHESTRATOR');
-            // Speak alert
-            const audio = await generateSpeech("Analysis complete. Tech report and execution plan ready.");
-            if (audio) {
-                const ctx = new AudioContext();
-                const source = ctx.createBufferSource();
-                ctx.decodeAudioData(audio, (buffer) => {
-                    source.buffer = buffer;
-                    source.connect(ctx.destination);
-                    source.start();
-                });
-            }
-        } else {
-            addLog('No actionable steps found or plan failed.', 'error', 'ANALYST');
-        }
-    } catch (e) {
-        addLog('Planning failed critically.', 'error', 'ORCHESTRATOR');
+      const fetched = await cfService.listZones();
+      setDomains(fetched);
+      addLog(`Core: Synchronized ${fetched.length} domain nodes from Cloudflare API.`);
+    } catch (err: any) {
+      setError(err.message);
     } finally {
-        setIsPlanning(false);
+      setLoading(false);
     }
+  }, [cfService]);
+
+  useEffect(() => {
+    if (cfToken) fetchDomains();
+  }, [cfToken, fetchDomains]);
+
+  // Handle manual bulk domain list input
+  const processBulkInput = () => {
+    if (!bulkDomains.trim()) return;
+    const list = bulkDomains.split('\n').map(d => d.trim()).filter(d => d.includes('.'));
+    const tasks: AutomationTask[] = list.map(domain => ({
+      id: Math.random().toString(36).substr(2, 9),
+      domain,
+      token: bulkISPToken, // Shared token if provided, otherwise can be updated via Neural Sync
+      status: 'idle'
+    }));
+    setAutomationQueue(prev => [...prev, ...tasks]);
+    setBulkDomains('');
+    addLog(`Bulk: Queued ${tasks.length} domains for autonomous processing.`);
+    setActiveTab(Tab.Automation);
   };
 
-  // Handler: Execute Step
-  const executeNextStep = async () => {
-    const nextStepIdx = plan.findIndex(s => s.status === StepStatus.PENDING || s.status === StepStatus.WAITING_APPROVAL);
-    if (nextStepIdx === -1) return;
-
-    const step = plan[nextStepIdx];
-    
-    // Safety Guard (Bypassed in God Mode)
-    if (step.riskLevel === 'HIGH' && step.status !== StepStatus.WAITING_APPROVAL && !godMode) {
-        const newPlan = [...plan];
-        newPlan[nextStepIdx].status = StepStatus.WAITING_APPROVAL;
-        setPlan(newPlan);
-        addLog(`Safety Guard paused execution. Step '${step.description}' requires explicit approval.`, 'warning', 'GUARD');
-        return;
-    }
-
-    if (godMode && step.riskLevel === 'HIGH') {
-        addLog(`Safety Guard BYPASSED by Admin Override for: ${step.description}`, 'warning', 'GUARD');
-    }
-
-    setIsExecuting(true);
-    setCurrentStepId(step.id);
-    
-    // Update status to RUNNING
-    const runningPlan = [...plan];
-    runningPlan[nextStepIdx].status = StepStatus.RUNNING;
-    setPlan(runningPlan);
-
-    // Determine executing agent
-    let agent: LogEntry['agent'] = 'WEB_OP';
-    if (step.tool.startsWith('FILE')) agent = 'FILE_OP';
-    if (step.tool === 'WEBHOOK_TRIGGER') agent = 'AUTOMATION';
-
-    addLog(`Executing: ${step.description}`, 'info', agent);
-
-    // Execution Logic
-    if (step.tool === 'WEBHOOK_TRIGGER') {
-        try {
-            // Mock fetch execution
-            addLog(`POST ${step.params.target || 'https://api.n8n.io/webhook/...'}`, 'info', 'AUTOMATION');
-            await new Promise(r => setTimeout(r, 1500)); // Simulate network latency
-        } catch (e) {
-            addLog('Webhook trigger failed.', 'error', 'AUTOMATION');
-        }
-    } else if (step.tool === 'BROWSER_INSTALL_EXTENSION') {
-        // Mock installation
-        const extName = step.params.value || step.params.extensionId || 'Security Extension';
-        addLog(`Installing extension: ${extName}...`, 'info', 'WEB_OP');
-        await new Promise(r => setTimeout(r, 2000));
-        
-        setExtensions(prev => prev.map(e => {
-            if (e.name.toLowerCase().includes(extName.toLowerCase()) || e.id === step.params.extensionId) {
-                return { ...e, installed: true };
-            }
-            return e;
+  // The "State of the Art" Neural Sync - Pulls domains and tokens from raw ISP dashboard text
+  const handleNeuralISPSync = async () => {
+    if (!rawISPData.trim()) return;
+    setIsExtracting(true);
+    addLog("Neural Agent: Analyzing ISP session data...");
+    try {
+      const extracted = await extractISPData(rawISPData);
+      if (extracted && extracted.length > 0) {
+        const tasks: AutomationTask[] = extracted.map((item: any) => ({
+          id: Math.random().toString(36).substr(2, 9),
+          domain: item.domain,
+          token: item.token,
+          status: 'idle',
+          isp: 'generic'
         }));
-        addLog(`Extension installed successfully into Agent Browser.`, 'success', 'WEB_OP');
-    } else {
-        // Standard Simulation Delay
-        await new Promise(r => setTimeout(r, 1500));
-    }
-
-    // Success Logic
-    const completedPlan = [...plan];
-    completedPlan[nextStepIdx].status = StepStatus.COMPLETED;
-    completedPlan[nextStepIdx].evidence = `Exec_ID_${Date.now().toString().slice(-4)}`; // Mock evidence
-    setPlan(completedPlan);
-    
-    addLog(`Step completed. Evidence captured.`, 'success', 'GUARD');
-    setIsExecuting(false);
-    setCurrentStepId(null);
-  };
-
-  const handleApprove = () => {
-      const pendingIdx = plan.findIndex(s => s.status === StepStatus.WAITING_APPROVAL);
-      if (pendingIdx === -1) return;
-      
-      const newPlan = [...plan];
-      newPlan[pendingIdx].status = StepStatus.PENDING; // Reset to pending so executeNext picks it up immediately or manually
-      setPlan(newPlan);
-      addLog('User approved high-risk action.', 'success', 'GUARD');
-      executeNextStep(); 
-  };
-
-  // Handler: Chat
-  const handleChatMessage = async (msg: string) => {
-    const newUserMsg: ChatMessage = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: msg,
-      timestamp: Date.now()
-    };
-    
-    const newHistory = [...chatHistory, newUserMsg];
-    setChatHistory(newHistory);
-    setIsChatProcessing(true);
-
-    try {
-      const response = await sendMessageToChat(newHistory, msg);
-      
-      const newAiMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: 'model',
-        content: response || "I'm having trouble connecting right now.",
-        timestamp: Date.now()
-      };
-      setChatHistory([...newHistory, newAiMsg]);
-    } catch (e) {
-      console.error(e);
-      addLog('Chat service failed.', 'error', 'ORCHESTRATOR');
+        setAutomationQueue(prev => [...prev, ...tasks]);
+        setRawISPData('');
+        addLog(`Neural Agent: Discovered ${extracted.length} valid domain/token pairs from ISP source.`);
+        setActiveTab(Tab.Automation);
+      } else {
+        addLog("Neural Agent: Source data was insufficient or contained no valid patterns.");
+      }
+    } catch (err) {
+      addLog("Neural Agent: Error parsing source data.");
     } finally {
-      setIsChatProcessing(false);
+      setIsExtracting(false);
     }
   };
 
-  if (showLanding) {
-      return <LandingPage onEnter={() => setShowLanding(false)} />;
-  }
+  const startAutonomousAgent = async () => {
+    if (!cfService || isAutomationRunning || automationQueue.length === 0) return;
+    setIsAutomationRunning(true);
+    addLog("Agent: Commencing Autonomous Validation Sequence...");
+
+    const queue = [...automationQueue];
+    for (let i = 0; i < queue.length; i++) {
+      if (!isAutomationRunning) break; // Allow pausing
+      const task = queue[i];
+      if (task.status === 'completed') continue;
+
+      // Stage 1: Discovery
+      queue[i] = { ...task, status: 'searching' };
+      setAutomationQueue([...queue]);
+      addLog(`Agent: Locating ${task.domain} in network inventory...`);
+      
+      const zone = domains.find(d => d.name.toLowerCase() === task.domain.toLowerCase());
+      
+      if (!zone) {
+        queue[i] = { ...task, status: 'failed', error: 'Domain node missing from Cloudflare' };
+        addLog(`Agent: [FAILURE] ${task.domain} not found in this account.`);
+        setAutomationQueue([...queue]);
+        continue;
+      }
+
+      // Stage 2: DNS Injection
+      queue[i] = { ...task, status: 'injecting' };
+      setAutomationQueue([...queue]);
+      addLog(`Agent: Injecting TXT validation record for ${task.domain}...`);
+
+      try {
+        const result = await cfService.createTXTRecord(zone.id, '@', task.token);
+        if (result.success) {
+          queue[i] = { ...task, status: 'completed' };
+          addLog(`Agent: [SUCCESS] ${task.domain} is now pending ISP verification.`);
+        } else {
+          queue[i] = { ...task, status: 'failed', error: result.message };
+          addLog(`Agent: [ERROR] Injection failed for ${task.domain}: ${result.message}`);
+        }
+      } catch (e: any) {
+        queue[i] = { ...task, status: 'failed', error: e.message };
+      }
+      setAutomationQueue([...queue]);
+      
+      // Safety throttle
+      await new Promise(r => setTimeout(r, 1000));
+    }
+    setIsAutomationRunning(false);
+    addLog("Agent: Sequence finalized.");
+  };
+
+  const handleSelectDomain = async (domain: DomainInfo) => {
+    setSelectedDomain(domain);
+    if (!cfService) return;
+    setLoading(true);
+    try {
+      const records = await cfService.listDNSRecords(domain.id);
+      setDnsRecords(records);
+    } catch (err: any) {
+      addLog(`Inspector: Error reading ${domain.name} - ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="flex flex-col h-screen bg-slate-950 text-slate-200 font-sans overflow-hidden">
-      
-      {/* 1. TOP BAR */}
-      <header className={`h-14 border-b flex items-center px-4 gap-4 backdrop-blur transition-colors duration-500 ${godMode ? 'bg-red-950/20 border-red-900/30' : 'bg-slate-900/50 border-slate-800'}`}>
-        <div className="font-bold text-lg tracking-tight flex items-center gap-2">
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${godMode ? 'bg-red-600' : 'bg-blue-600'}`}>
-                {godMode ? <Zap size={18} className="text-white fill-current" /> : <LayoutGrid size={18} className="text-white" />}
-            </div>
-            Antigravity OS
+    <div className="flex flex-col md:flex-row min-h-screen bg-slate-950 text-slate-200">
+      {/* Sidebar Navigation */}
+      <nav className="w-full md:w-72 bg-slate-900 border-r border-slate-800 p-8 flex flex-col gap-8 sticky top-0 h-auto md:h-screen z-30 shadow-2xl">
+        <div className="flex items-center gap-4">
+          <div className="bg-indigo-600 p-3 rounded-2xl shadow-xl shadow-indigo-600/30">
+            <Cpu size={28} className="text-white" />
+          </div>
+          <div>
+            <h1 className="text-xl font-black tracking-tighter text-white italic uppercase">Validator<span className="text-indigo-400 italic">X</span></h1>
+            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Autonomous Sync</p>
+          </div>
         </div>
 
-        <div className="flex-1 max-w-2xl mx-auto flex items-center bg-slate-900 border border-slate-700 rounded-md px-3 py-1.5 focus-within:ring-1 focus-within:ring-blue-500 transition-all">
-             <div className="pr-3 border-r border-slate-700 mr-3 flex gap-2">
-                 <button 
-                    onClick={() => setMode(AgentMode.WEB)}
-                    className={`p-1 rounded ${mode === AgentMode.WEB ? 'bg-slate-700 text-white' : 'text-slate-500 hover:text-slate-300'}`}
-                    title="Web Browser Mode"
-                 >
-                     <Globe size={16} />
-                 </button>
-                 <button 
-                    onClick={() => setMode(AgentMode.LOCAL)}
-                    className={`p-1 rounded ${mode === AgentMode.LOCAL ? 'bg-slate-700 text-white' : 'text-slate-500 hover:text-slate-300'}`}
-                    title="Local File Mode"
-                 >
-                     <HardDrive size={16} />
-                 </button>
+        <div className="flex flex-col gap-2">
+          <SidebarItem icon={<LayoutDashboard size={18} />} label="Network Map" active={activeTab === Tab.Dashboard} onClick={() => setActiveTab(Tab.Dashboard)} />
+          <SidebarItem icon={<Layers size={18} />} label="Bulk Onboard" active={activeTab === Tab.Bulk} onClick={() => setActiveTab(Tab.Bulk)} />
+          <SidebarItem icon={<Zap size={18} />} label="Neural Sync" active={activeTab === Tab.ISPCenter} onClick={() => setActiveTab(Tab.ISPCenter)} />
+          <SidebarItem icon={<Terminal size={18} />} label="Agent HUD" active={activeTab === Tab.Automation} onClick={() => setActiveTab(Tab.Automation)} />
+          <SidebarItem icon={<Settings size={18} />} label="API Config" active={activeTab === Tab.Cloudflare} onClick={() => setActiveTab(Tab.Cloudflare)} />
+        </div>
+
+        <div className="mt-auto space-y-4">
+          <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
+             <div className="flex items-center justify-between mb-2">
+               <span className="text-[10px] font-bold text-slate-500 uppercase">System Status</span>
+               <div className={`w-2 h-2 rounded-full ${cfToken ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500'}`}></div>
              </div>
-             <input 
-                type="text" 
-                className="bg-transparent border-none outline-none flex-1 text-sm placeholder-slate-500"
-                placeholder={mode === AgentMode.WEB ? "Enter URL to analyze..." : "Select local directory or search files..."}
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
-             />
-             <button 
-                onClick={handleAnalyze}
-                disabled={isPlanning}
-                className="ml-2 text-blue-400 hover:text-blue-300 disabled:opacity-50"
-             >
-                 {isPlanning ? <span className="animate-spin">⟳</span> : <PlayCircle size={18} />}
-             </button>
+             <p className="text-xs font-mono text-slate-400 truncate">{isAutomationRunning ? 'AGENT_EXECUTING' : 'IDLE_READY'}</p>
+          </div>
         </div>
+      </nav>
 
-        <div className="flex items-center gap-3">
-             <button
-                onClick={() => {
-                    setGodMode(!godMode);
-                    addLog(godMode ? 'Safety protocols re-engaged.' : 'WARNING: Unfettered Access Enabled. Safety protocols disabled.', 'warning', 'GUARD');
-                }}
-                className={`p-2 rounded-full border transition-all ${godMode ? 'bg-red-500 text-white border-red-400 shadow-[0_0_15px_rgba(239,68,68,0.5)]' : 'bg-slate-800 text-slate-500 border-slate-700 hover:text-slate-300'}`}
-                title={godMode ? "Disable God Mode" : "Enable God Mode"}
-             >
-                 {godMode ? <Unlock size={18} /> : <Lock size={18} />}
-             </button>
-
-             <button 
-                onClick={() => setIsVoiceOpen(true)}
-                className="p-2 bg-red-500/10 text-red-400 border border-red-500/50 rounded-full hover:bg-red-500/20 transition-all"
-             >
-                 <Mic size={18} />
-             </button>
-             <div className="h-8 w-8 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700">
-                 <Settings size={16} className="text-slate-400" />
+      {/* Main Command Console */}
+      <main className="flex-1 p-6 md:p-12 overflow-y-auto">
+        <header className="flex justify-between items-center mb-12 border-b border-slate-800 pb-8">
+          <div>
+            <h2 className="text-4xl font-black text-white capitalize italic tracking-tighter">{activeTab.replace('-', ' ')}</h2>
+            <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] mt-1">Cross-ISP Cloudflare Automation Engine</p>
+          </div>
+          <div className="flex items-center gap-4">
+             {cfToken && <button onClick={fetchDomains} className="p-3 bg-slate-800 rounded-2xl hover:bg-slate-700 transition-all border border-slate-700"><RefreshCw size={20} className={loading ? 'animate-spin' : ''} /></button>}
+             <div className="bg-indigo-600/10 px-6 py-3 rounded-2xl border border-indigo-500/20 flex items-center gap-3">
+                <Globe size={16} className="text-indigo-400" />
+                <span className="text-xs font-black text-indigo-400 uppercase tracking-tighter">{domains.length} Nodes Online</span>
              </div>
-        </div>
-      </header>
+          </div>
+        </header>
 
-      {/* 2. MAIN WORKSPACE */}
-      <div className="flex-1 flex overflow-hidden">
-        
-        {/* LEFT SIDEBAR (Icons) */}
-        <div className="w-14 border-r border-slate-800 flex flex-col items-center py-4 gap-4 bg-slate-900">
-            <button onClick={() => setMode(AgentMode.EXTENSIONS)} className={`p-2 rounded-lg ${mode === AgentMode.EXTENSIONS ? 'bg-slate-800 text-white' : 'text-slate-500 hover:text-slate-300'}`} title="Extensions Store">
-                <Puzzle size={20} />
-            </button>
-            <button className="p-2 rounded-lg bg-blue-600/20 text-blue-400"><Terminal size={20} /></button>
-            <button className="p-2 rounded-lg hover:bg-slate-800 text-slate-500"><HardDrive size={20} /></button>
-            <button className="p-2 rounded-lg hover:bg-slate-800 text-slate-500"><ShieldAlert size={20} /></button>
-        </div>
-
-        {/* CENTER PANEL (Operator View) */}
-        <div className="flex-1 flex flex-col bg-black relative">
-            {/* Status Bar */}
-            <div className="h-8 bg-slate-950 border-b border-slate-800 flex items-center px-4 text-xs font-mono text-slate-500 justify-between">
-                <span>MODE: {mode}</span>
-                <span>AGENT STATUS: {isExecuting ? 'ACTIVE' : 'IDLE'}</span>
-            </div>
-            
-            <div className="flex-1 overflow-auto relative">
-                {mode === AgentMode.WEB ? (
-                    <div className="p-8 h-full">
-                        {browserContent ? (
-                            <div className="bg-white rounded-lg shadow-xl h-full overflow-hidden text-black font-sans relative">
-                                <div className="bg-gray-100 border-b p-2 flex gap-2">
-                                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                                    <div className="ml-4 text-xs text-gray-500 flex-1 text-center bg-white rounded px-2">{url || 'stripe.com/dashboard'}</div>
-                                </div>
-                                <div className="p-6" dangerouslySetInnerHTML={{ __html: browserContent }} />
-                                
-                                {/* Overlay for Agent Actions */}
-                                {isExecuting && (
-                                    <div className="absolute inset-0 bg-blue-500/10 z-10 pointer-events-none flex items-center justify-center">
-                                        <div className="bg-blue-600 text-white px-4 py-2 rounded shadow-lg animate-pulse font-mono text-sm">
-                                            Agent Operating Mouse...
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="h-full flex flex-col items-center justify-center text-slate-600">
-                                <Globe size={64} className="mb-4 opacity-20" />
-                                <p>No Active Session</p>
-                            </div>
-                        )}
+        <section className="space-y-10">
+          {activeTab === Tab.Dashboard && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2 space-y-6">
+                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                   <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none"><Database size={150} /></div>
+                   <h3 className="text-xl font-black text-white mb-8 italic uppercase tracking-tighter">Network Inventory</h3>
+                   <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+                     {domains.map(d => (
+                       <div key={d.id} onClick={() => handleSelectDomain(d)} className={`flex items-center justify-between p-5 rounded-2xl border transition-all cursor-pointer ${selectedDomain?.id === d.id ? 'bg-indigo-600/20 border-indigo-500 shadow-xl translate-x-1' : 'bg-slate-950 border-slate-800 hover:border-slate-700'}`}>
+                          <div className="flex items-center gap-4">
+                             <div className={`p-3 rounded-xl ${selectedDomain?.id === d.id ? 'bg-indigo-600' : 'bg-slate-800'}`}>
+                               <Globe size={20} className="text-white" />
+                             </div>
+                             <div>
+                               <p className="font-bold text-white tracking-tight">{d.name}</p>
+                               <p className="text-[10px] font-black text-slate-500 uppercase">{d.status}</p>
+                             </div>
+                          </div>
+                          <ChevronRight size={18} className={selectedDomain?.id === d.id ? 'text-indigo-400' : 'text-slate-800'} />
+                       </div>
+                     ))}
+                   </div>
+                </div>
+              </div>
+              <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl h-fit">
+                <h3 className="text-xl font-black text-white mb-8 italic uppercase tracking-tighter">Live Inspector</h3>
+                {selectedDomain ? (
+                  <div className="space-y-4">
+                    <div className="bg-slate-950 p-4 rounded-2xl border border-indigo-500/30">
+                       <p className="text-[10px] font-black text-slate-500 uppercase mb-1">Target Node</p>
+                       <p className="text-sm font-bold text-indigo-400 italic">{selectedDomain.name}</p>
                     </div>
-                ) : mode === AgentMode.LOCAL ? (
-                    <FileSystem 
-                        nodes={files} 
-                        onSelect={(node) => {
-                            setSelectedFile(node);
-                            addLog(`User selected ${node.name}`, 'info', 'ORCHESTRATOR');
-                        }} 
-                    />
+                    <div className="space-y-2">
+                       {dnsRecords.map(r => (
+                         <div key={r.id} className="p-3 bg-slate-950/50 rounded-xl border border-slate-800 font-mono text-[10px] truncate">
+                            <span className="text-indigo-500 font-bold mr-2">{r.type}</span>
+                            <span className="text-slate-300">{r.name}</span>
+                            <p className="text-slate-600 truncate mt-1">{r.content}</p>
+                         </div>
+                       ))}
+                    </div>
+                  </div>
                 ) : (
-                    <ExtensionsView extensions={extensions} />
+                  <div className="text-center py-24 opacity-20"><Eye size={64} className="mx-auto" /></div>
                 )}
+              </div>
             </div>
-            
-            {/* LOGS PANEL (Bottom of center) */}
-            <div className="h-48 border-t border-slate-800 bg-slate-950 flex flex-col">
-                <div className="px-4 py-2 border-b border-slate-800 text-xs font-bold text-slate-500 flex justify-between">
-                    <span>SYSTEM LOGS</span>
-                    <button onClick={() => setLogs([])} className="hover:text-slate-300">CLEAR</button>
+          )}
+
+          {activeTab === Tab.Bulk && (
+            <div className="max-w-4xl mx-auto">
+               <div className="bg-slate-900 border border-slate-800 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
+                  <div className="absolute -top-20 -right-20 w-80 h-80 bg-indigo-600/10 blur-[100px] pointer-events-none"></div>
+                  <div className="flex items-center gap-6 mb-10">
+                    <div className="bg-indigo-600 p-4 rounded-2xl shadow-xl shadow-indigo-600/20">
+                      <Layers size={32} className="text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-3xl font-black text-white tracking-tighter italic uppercase leading-none">Bulk Domain Onboarding</h3>
+                      <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] mt-2">Load up to 1,000 domains into the queue instantly.</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-[11px] font-black text-slate-500 uppercase mb-3 tracking-widest">Domains (One per line)</label>
+                      <textarea 
+                        className="w-full h-64 bg-slate-950 border border-slate-800 rounded-3xl p-8 text-sm font-mono text-indigo-300 focus:outline-none focus:border-indigo-500/50 transition-all resize-none shadow-inner"
+                        placeholder="example.com&#10;my-store.net&#10;business.io"
+                        value={bulkDomains}
+                        onChange={(e) => setBulkDomains(e.target.value)}
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                       <div>
+                         <label className="block text-[11px] font-black text-slate-500 uppercase mb-3 tracking-widest">Shared Token (Optional)</label>
+                         <input 
+                           type="text" 
+                           className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-6 py-4 text-sm text-white focus:outline-none focus:border-indigo-500/50"
+                           placeholder="google-site-verification=..."
+                           value={bulkISPToken}
+                           onChange={(e) => setBulkISPToken(e.target.value)}
+                         />
+                       </div>
+                       <div className="flex items-end">
+                         <button 
+                           onClick={processBulkInput}
+                           className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-4 rounded-2xl shadow-xl shadow-indigo-600/20 transition-all flex items-center justify-center gap-3 uppercase italic tracking-tighter"
+                         >
+                           <Plus size={20} /> Load to Queue
+                         </button>
+                       </div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+          )}
+
+          {activeTab === Tab.ISPCenter && (
+             <div className="max-w-4xl mx-auto space-y-8">
+                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
+                  <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-600/10 blur-[100px] pointer-events-none"></div>
+                  <div className="flex items-center gap-6 mb-10">
+                    <div className="bg-purple-600 p-4 rounded-2xl shadow-xl shadow-purple-600/20">
+                      <Zap size={32} className="text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-3xl font-black text-white tracking-tighter italic uppercase leading-none">Neural ISP Bridge</h3>
+                      <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] mt-2">Connect your ISP dashboard via Autonomous Synchronisation.</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-8">
+                    <div className="bg-indigo-950/20 border border-indigo-500/10 p-6 rounded-3xl flex gap-6">
+                       <div className="p-3 bg-indigo-500/10 rounded-2xl h-fit"><Info className="text-indigo-400" /></div>
+                       <div>
+                         <h4 className="font-bold text-white mb-2 italic uppercase tracking-tighter">Instructions for Sync</h4>
+                         <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                           1. Open your ISP Dashboard (Google Postmaster, MS SNDS, Bing, etc) in a new tab.<br/>
+                           2. Log in as you normally would.<br/>
+                           3. Press <kbd className="bg-slate-800 px-1.5 py-0.5 rounded font-mono">CTRL+A</kbd> then <kbd className="bg-slate-800 px-1.5 py-0.5 rounded font-mono">CTRL+C</kbd> to copy everything.<br/>
+                           4. Paste the raw content below. Our Neural Agent will extract unverified domains and tokens.
+                         </p>
+                       </div>
+                    </div>
+
+                    <textarea 
+                      className="w-full h-80 bg-slate-950 border border-slate-800 rounded-3xl p-8 text-sm font-mono text-purple-300/80 focus:outline-none focus:border-purple-500/50 transition-all resize-none shadow-inner"
+                      placeholder="Paste raw content from your ISP portal here..."
+                      value={rawISPData}
+                      onChange={(e) => setRawISPData(e.target.value)}
+                    />
+
+                    <button 
+                      onClick={handleNeuralISPSync}
+                      disabled={!rawISPData || isExtracting}
+                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black py-5 rounded-2xl shadow-2xl transition-all flex items-center justify-center gap-3 text-lg italic tracking-tight uppercase"
+                    >
+                      {isExtracting ? <RefreshCw className="animate-spin" /> : <ShieldCheck size={24} />}
+                      {isExtracting ? 'DECODING ISP CONTENT...' : 'DECODE & SYNC SESSIONS'}
+                    </button>
+                  </div>
                 </div>
-                <div className="flex-1 overflow-y-auto p-2 space-y-1 font-mono text-xs">
-                    {logs.map(log => (
-                        <div key={log.id} className="flex gap-2">
-                            <span className="text-slate-600">[{new Date(log.timestamp).toLocaleTimeString()}]</span>
-                            <span className={`font-bold w-24 shrink-0 ${
-                                log.agent === 'GUARD' ? 'text-orange-500' :
-                                log.agent === 'ANALYST' ? 'text-purple-400' :
-                                log.agent === 'WEB_OP' ? 'text-blue-400' :
-                                log.agent === 'AUTOMATION' ? 'text-cyan-400' :
-                                'text-slate-400'
-                            }`}>{log.agent}</span>
-                            <span className={`${
-                                log.type === 'error' ? 'text-red-500' :
-                                log.type === 'success' ? 'text-green-400' :
-                                log.type === 'warning' ? 'text-yellow-500' :
-                                'text-slate-300'
-                            }`}>{log.message}</span>
+             </div>
+          )}
+
+          {activeTab === Tab.Automation && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+               <div className="lg:col-span-2 space-y-6">
+                  <div className="bg-slate-900 border border-slate-800 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
+                     <div className="flex justify-between items-center mb-12">
+                        <div>
+                           <h3 className="text-2xl font-black text-white italic tracking-tighter uppercase leading-none">Agent HUD</h3>
+                           <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-2">Active Tasks: {automationQueue.length}</p>
                         </div>
-                    ))}
-                    <div ref={logsEndRef} />
-                </div>
-            </div>
-        </div>
+                        <div className="flex gap-4">
+                           {!isAutomationRunning ? (
+                             <button onClick={startAutonomousAgent} className="bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-2xl flex items-center gap-3 font-black italic tracking-tight shadow-xl shadow-green-600/20">
+                               <Play size={20} /> START AGENT
+                             </button>
+                           ) : (
+                             <button onClick={() => setIsAutomationRunning(false)} className="bg-amber-600 hover:bg-amber-500 text-white px-8 py-3 rounded-2xl flex items-center gap-3 font-black italic tracking-tight">
+                               <Pause size={20} /> PAUSE CORE
+                             </button>
+                           )}
+                           <button onClick={() => setAutomationQueue([])} className="bg-slate-800 text-slate-500 p-3 rounded-2xl hover:text-red-500 border border-slate-700 transition-all">
+                              <StopCircle size={22} />
+                           </button>
+                        </div>
+                     </div>
 
-        {/* RIGHT PANEL (Intelligence) */}
-        <div className="w-80 border-l border-slate-800 bg-slate-900 flex flex-col">
-            <div className="flex border-b border-slate-800">
-                <button 
-                    onClick={() => setActiveTab('PLANNER')}
-                    className={`flex-1 py-3 text-xs font-bold ${activeTab === 'PLANNER' ? 'text-blue-400 border-b-2 border-blue-500' : 'text-slate-500 hover:text-slate-300'}`}
-                >
-                    PLANNER
-                </button>
-                <button 
-                    onClick={() => setActiveTab('CHAT')}
-                    className={`flex-1 py-3 text-xs font-bold ${activeTab === 'CHAT' ? 'text-blue-400 border-b-2 border-blue-500' : 'text-slate-500 hover:text-slate-300'}`}
-                >
-                    CHAT
-                </button>
+                     <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+                        {automationQueue.map(task => (
+                          <div key={task.id} className="bg-slate-950/40 border border-slate-800 p-6 rounded-2xl flex items-center justify-between transition-all group">
+                             <div className="flex items-center gap-6">
+                                <div className={`w-3 h-3 rounded-full ${
+                                  task.status === 'completed' ? 'bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.6)]' :
+                                  task.status === 'failed' ? 'bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.6)]' :
+                                  task.status === 'idle' ? 'bg-slate-700' : 'bg-indigo-500 animate-pulse'
+                                }`}></div>
+                                <div>
+                                   <p className="font-bold text-white text-sm">{task.domain}</p>
+                                   <p className="text-[10px] font-mono text-slate-500 mt-1 truncate max-w-xs">{task.token || 'Awaiting Sync'}</p>
+                                </div>
+                             </div>
+                             <div className="flex items-center gap-4">
+                                <span className={`text-[10px] font-black uppercase tracking-widest ${task.status === 'completed' ? 'text-green-500' : 'text-slate-500'}`}>{task.status}</span>
+                                {task.status === 'injecting' && <RefreshCw size={14} className="animate-spin text-indigo-400" />}
+                                {task.status === 'completed' && <CheckCircle2 size={18} className="text-green-500" />}
+                                {task.status === 'failed' && <AlertCircle size={18} className="text-red-500" title={task.error} />}
+                             </div>
+                          </div>
+                        ))}
+                        {automationQueue.length === 0 && (
+                          <div className="text-center py-32 bg-slate-950/20 rounded-3xl border-2 border-dashed border-slate-800">
+                             <Terminal size={48} className="mx-auto mb-4 opacity-10" />
+                             <p className="text-slate-600 font-black uppercase tracking-widest text-sm italic">Queue Empty. Load data via Bulk or Neural Sync.</p>
+                          </div>
+                        )}
+                     </div>
+                  </div>
+               </div>
+               
+               <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col h-[760px] shadow-2xl">
+                  <div className="flex items-center justify-between mb-8 border-b border-slate-800 pb-4">
+                     <h4 className="text-xs font-black text-slate-500 uppercase tracking-[0.4em] flex items-center gap-3 italic">
+                        <Terminal size={18} className="text-indigo-400" /> Kernel Logs
+                     </h4>
+                     <button onClick={() => setLogs([])} className="text-[10px] font-bold text-slate-700 hover:text-slate-400 transition-all uppercase">Flush</button>
+                  </div>
+                  <div className="flex-1 bg-black/40 rounded-2xl p-6 font-mono text-[10px] text-indigo-300/80 overflow-y-auto custom-scrollbar border border-slate-800/50 leading-relaxed shadow-inner">
+                     {logs.map((log, i) => (
+                       <div key={i} className="mb-2 hover:bg-indigo-500/5 transition-colors p-1 rounded">
+                          <span className="text-slate-700 mr-2">[{i.toString().padStart(3, '0')}]</span>
+                          {log}
+                       </div>
+                     ))}
+                     {logs.length === 0 && <p className="text-slate-800 italic uppercase">Kernel idle...</p>}
+                     <div ref={logEndRef} />
+                  </div>
+               </div>
             </div>
-            
-            <div className="flex-1 overflow-hidden relative">
-                {activeTab === 'PLANNER' ? (
-                    <PlanViewer 
-                        plan={plan} 
-                        onApprove={handleApprove} 
-                        onExecuteNext={executeNextStep} 
-                        isExecuting={isExecuting}
-                        godMode={godMode}
-                    />
-                ) : (
-                    <ChatInterface 
-                        messages={chatHistory} 
-                        onSendMessage={handleChatMessage} 
-                        isProcessing={isChatProcessing}
-                    />
-                )}
-            </div>
-        </div>
-      </div>
+          )}
 
-      {/* LIVE VOICE OVERLAY */}
-      <LiveVoice isOpen={isVoiceOpen} onClose={() => setIsVoiceOpen(false)} />
+          {activeTab === Tab.Cloudflare && (
+            <div className="max-w-xl mx-auto py-12">
+               <div className="bg-slate-900 border border-slate-800 rounded-3xl p-10 shadow-2xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none"><Cloud size={100} /></div>
+                  <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter mb-10 flex items-center gap-4">
+                     <Lock size={24} className="text-indigo-400" /> Network Auth
+                  </h3>
+                  <div className="space-y-8">
+                     <div>
+                        <label className="block text-[11px] font-black text-slate-500 uppercase mb-3 tracking-widest">Global API Token</label>
+                        <input 
+                          type="password" 
+                          value={cfToken}
+                          onChange={(e) => setCfToken(e.target.value)}
+                          placeholder="••••••••••••••••••••••••••••"
+                          className="w-full bg-slate-950 border border-slate-800 rounded-2xl px-6 py-4 text-white font-mono focus:outline-none focus:border-indigo-500/50 transition-all text-sm"
+                        />
+                     </div>
+                     <button 
+                       onClick={() => { localStorage.setItem('cf_token', cfToken); fetchDomains(); }}
+                       className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-5 rounded-2xl shadow-xl shadow-indigo-600/20 transition-all uppercase italic tracking-tighter"
+                     >
+                       Authorize Network Session
+                     </button>
+                     <div className="p-5 bg-indigo-950/20 rounded-2xl border border-indigo-500/10 flex gap-4">
+                        <Info size={20} className="text-indigo-400 shrink-0 mt-0.5" />
+                        <p className="text-[10px] text-slate-500 font-bold uppercase leading-relaxed tracking-tight">Requires: Zone:Read, DNS:Edit. Tokens are localized and never shared.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+          )}
+        </section>
+      </main>
+
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 20px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #334155; }
+        
+        @keyframes scan {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(100%); }
+        }
+      `}</style>
     </div>
   );
-}
+};
+
+const SidebarItem: React.FC<{ icon: React.ReactNode, label: string, active: boolean, onClick: () => void }> = ({ icon, label, active, onClick }) => (
+  <button 
+    onClick={onClick}
+    className={`flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group ${active ? 'bg-indigo-600 text-white shadow-2xl shadow-indigo-600/40 translate-x-1' : 'text-slate-500 hover:text-white hover:bg-slate-800/50'}`}
+  >
+    <div className={`transition-transform duration-300 ${active ? 'scale-110' : 'group-hover:scale-110'}`}>
+      {icon}
+    </div>
+    <span className="font-black text-[10px] uppercase tracking-[0.2em]">{label}</span>
+  </button>
+);
 
 export default App;

@@ -1,7 +1,5 @@
 {
-  "name": "Antigravity OS",
-  "description": "A goal-driven AI orchestrator that safely operates web apps and local files using specialized agents, permission gates, and Gemini intelligence.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
+  "name": "DomainValidator Pro",
+  "description": "A robust domain validation and DNS compliance suite for Cloudflare users, specifically designed for Google Postmaster and ISP verification.",
+  "requestFramePermissions": []
 }
