@@ -190,6 +190,39 @@ Complete reference guide for all OrenGen services, white-label branding, and dep
 
 ---
 
+#### OrenCRM
+**Powered by:** Custom AI-Powered CRM
+**Port:** 3000
+**Description:** AI-powered CRM with intelligent contact management, deal tracking, and automated workflows. Built specifically for OrenGen with deep AI integration.
+
+| Plan | Price | Contacts | Users | Pipelines |
+|------|-------|----------|-------|-----------|
+| **Starter** | $49/mo | 5,000 | 5 | 3 |
+| **Professional** | $149/mo | 25,000 | 25 | 10 |
+| **Business** | $299/mo | 100,000 | 100 | Unlimited |
+| **Enterprise** | $599/mo | Unlimited | Unlimited | Unlimited |
+
+**Features by Plan:**
+
+| Feature | Starter | Professional | Business | Enterprise |
+|---------|---------|--------------|----------|------------|
+| Contact management | Yes | Yes | Yes | Yes |
+| Company records | Yes | Yes | Yes | Yes |
+| Deal pipeline | Yes | Yes | Yes | Yes |
+| Activity tracking | Yes | Yes | Yes | Yes |
+| AI lead scoring | - | Yes | Yes | Yes |
+| Email sync & tracking | Yes | Yes | Yes | Yes |
+| Custom fields | 10 | 50 | Unlimited | Unlimited |
+| Workflow automations | 5 | 25 | Unlimited | Unlimited |
+| AI deal predictions | - | Yes | Yes | Yes |
+| API access | - | Yes | Yes | Yes |
+| White-label portal | - | - | Yes | Yes |
+| SSO/SAML | - | - | - | Yes |
+
+**White-Label Service:** Custom Build (Next.js + PostgreSQL)
+
+---
+
 #### OrenAgents
 **Powered by:** Buy-Lingual AI Voice Technology
 **Description:** 24/7 multilingual AI voice agents for inbound support and outbound sales. Handles calls in 40+ languages with human-like conversation quality.
@@ -368,6 +401,37 @@ Complete reference guide for all OrenGen services, white-label branding, and dep
 | Client workspaces | - | - | 5 | Unlimited |
 
 **White-Label Service:** Postiz
+
+---
+
+#### OrenMail
+**Powered by:** Mautic + MailWizz
+**Port:** 8025
+**Description:** Self-hosted email marketing and automation platform. Send newsletters, drip campaigns, and transactional emails with full deliverability control.
+
+| Plan | Price | Emails/mo | Lists | Domains |
+|------|-------|-----------|-------|---------|
+| **Free** | $0/mo | 5,000 | 3 | 1 |
+| **Starter** | $49/mo | 50,000 | 10 | 3 |
+| **Business** | $149/mo | 500,000 | Unlimited | 10 |
+| **Enterprise** | $399/mo | Unlimited | Unlimited | Unlimited |
+
+**Features by Plan:**
+
+| Feature | Free | Starter | Business | Enterprise |
+|---------|------|---------|----------|------------|
+| Email campaigns | Yes | Yes | Yes | Yes |
+| Automation workflows | 3 | 10 | 50 | Unlimited |
+| Landing pages | - | Yes | Yes | Yes |
+| A/B testing | - | Yes | Yes | Yes |
+| Contact segmentation | Basic | Advanced | Advanced | Custom |
+| Email templates | 10 | 50 | Unlimited | Unlimited |
+| Deliverability monitoring | - | Yes | Yes | Yes |
+| Dedicated IP | - | - | 1 | Unlimited |
+| SMTP relay | - | Yes | Yes | Yes |
+| API access | - | Yes | Yes | Yes |
+
+**White-Label Service:** Mautic + MailWizz
 
 ---
 
@@ -617,6 +681,38 @@ Complete reference guide for all OrenGen services, white-label branding, and dep
 
 ---
 
+#### OrenCalendar
+**Powered by:** Custom Booking & Calendar System
+**Description:** AI-powered scheduling and booking platform with multi-provider calendar sync. Built-in booking pages for appointments, consultations, and meetings.
+
+| Plan | Price | Event Types | Bookings/mo | Team Members |
+|------|-------|-------------|-------------|--------------|
+| **Starter** | $19/mo | 3 | 100 | 2 |
+| **Professional** | $49/mo | Unlimited | 500 | 10 |
+| **Business** | $99/mo | Unlimited | 2,000 | 50 |
+| **Enterprise** | $249/mo | Unlimited | Unlimited | Unlimited |
+
+**Features by Plan:**
+
+| Feature | Starter | Professional | Business | Enterprise |
+|---------|---------|--------------|----------|------------|
+| Booking pages | Yes | Yes | Yes | Yes |
+| Google Calendar sync | Yes | Yes | Yes | Yes |
+| Outlook sync | - | Yes | Yes | Yes |
+| iCloud sync | - | Yes | Yes | Yes |
+| Email reminders | Yes | Yes | Yes | Yes |
+| SMS reminders | - | Yes | Yes | Yes |
+| Custom branding | - | Yes | Yes | Yes |
+| Meeting type categories | 3 | 10 | Unlimited | Unlimited |
+| Round-robin scheduling | - | - | Yes | Yes |
+| Team availability | - | - | Yes | Yes |
+| Embed widget | Yes | Yes | Yes | Yes |
+| API access | - | - | Yes | Yes |
+
+**White-Label Service:** Custom Build (React + Multi-Provider Integration)
+
+---
+
 ### Operations & HR
 
 ---
@@ -801,24 +897,33 @@ Complete reference guide for all OrenGen services, white-label branding, and dep
 
 ## Self-Hosted FOSS Services
 
-Complete list of all self-hosted open source services with their white-label names:
+Complete list of all 23 OrenGen services with their underlying technology:
 
-| White-Label Name | Open Source Software | Category | Port | Description |
-|------------------|---------------------|----------|------|-------------|
+| White-Label Name | Powered By | Category | Port | Description |
+|------------------|------------|----------|------|-------------|
+| **OrenCRM** | Custom (Next.js) | CRM | 3000 | AI-powered CRM platform |
+| **OrenAgents** | Buy-Lingual AI | Voice | - | Multilingual AI voice agents |
 | **OrenDesk** | Chatwoot | Support | 3100 | Customer engagement & live chat |
-| **OrenSEO** | SerpBear | Marketing | 3200 | SEO rank tracking |
-| **OrenApps** | Appsmith | Development | 8280 | Low-code internal tools |
-| **OrenMetrics** | Matomo | Analytics | 8380 | Privacy-focused analytics |
-| **OrenDesign** | Penpot | Design | 9001 | Design & prototyping |
 | **OrenChat** | Mattermost | Collaboration | 8065 | Team messaging |
-| **OrenData** | NocoDB | Data | 8080 | Database spreadsheet UI |
-| **OrenMonitor** | Grafana | Monitoring | 3000 | Observability platform |
-| **OrenDocs** | Paperless-ngx | Productivity | 8000 | Document management |
+| **OrenLeads** | Custom AI | Lead Gen | - | AI lead generation & enrichment |
+| **OrenSEO** | SerpBear | Marketing | 3200 | SEO rank tracking |
 | **OrenSocial** | Postiz | Marketing | 4200 | Social media scheduling |
-| **OrenBackup** | pgBackWeb | DevOps | 8085 | PostgreSQL backups |
-| **OrenHR** | OrangeHRM | HR | 8090 | HR management |
-| **OrenCI** | Jenkins | DevOps | 8081 | CI/CD automation |
+| **OrenMail** | Mautic + MailWizz | Email | 8025 | Email marketing platform |
+| **OrenMetrics** | Matomo | Analytics | 8380 | Privacy-focused analytics |
+| **OrenMonitor** | Grafana | Monitoring | 3000 | Observability platform |
+| **OrenData** | NocoDB | Data | 8080 | Database spreadsheet UI |
+| **OrenApps** | Appsmith | Development | 8280 | Low-code internal tools |
 | **OrenAutomate** | n8n | Automation | 5678 | Workflow automation |
+| **OrenFlow** | Custom | Pipeline | - | Visual pipeline builder |
+| **OrenDocs** | Paperless-ngx | Productivity | 8000 | Document management |
+| **OrenDesign** | Penpot | Design | 9001 | Design & prototyping |
+| **OrenCalendar** | Custom Build | Scheduling | - | Appointment scheduling |
+| **OrenHR** | OrangeHRM | HR | 8090 | HR management |
+| **OrenVoice** | Twilio + ElevenLabs | Voice | - | Voice infrastructure |
+| **OrenBackup** | pgBackWeb | DevOps | 8085 | PostgreSQL backups |
+| **OrenCI** | Jenkins | DevOps | 8081 | CI/CD automation |
+| **OrenFederal** | SAM.gov + AI | Government | - | Federal contracting tools |
+| **OrenWeb** | Custom AI | Web Builder | - | AI website builder |
 
 ---
 

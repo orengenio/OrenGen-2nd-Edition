@@ -503,26 +503,50 @@ docker compose up -d
 
 ---
 
-## Self-Hosted Services
+## White-Label Product Suite (23 Services)
 
-OrenGen includes a FOSS Registry for managing self-hosted services.
+OrenGen provides a comprehensive suite of 23 white-labeled products, each powered by custom builds or open-source technology.
 
-### Available Services
+### Complete Service Reference
 
-| Service | Purpose | Port |
-|---------|---------|------|
-| **OrenDesk (Chatwoot)** | Customer support | 3100 |
-| **OrenSEO (SerpBear)** | SEO tracking | 3200 |
-| **OrenApps (Appsmith)** | Internal tools | 8280 |
-| **OrenMetrics (Matomo)** | Web analytics | 8380 |
-| **Penpot** | Design tool | 9001 |
-| **Mattermost** | Team chat | 8065 |
-| **NocoDB** | Database UI | 8080 |
-| **Grafana** | Monitoring | 3000 |
-| **Paperless-ngx** | Document management | 8000 |
-| **n8n** | Automation | 5678 |
+| Service | Powered By | Purpose | Port |
+|---------|------------|---------|------|
+| **OrenCRM** | Custom Build | AI-powered CRM platform | 3000 |
+| **OrenAgents** | Buy-Lingual AI | Multilingual AI voice agents | - |
+| **OrenDesk** | Chatwoot | Customer support & live chat | 3100 |
+| **OrenChat** | Mattermost | Team messaging & collaboration | 8065 |
+| **OrenLeads** | Custom AI | AI lead generation & enrichment | - |
+| **OrenSEO** | SerpBear | SEO rank tracking | 3200 |
+| **OrenSocial** | Postiz | Social media scheduling | 4200 |
+| **OrenMail** | Mautic + MailWizz | Email marketing platform | 8025 |
+| **OrenMetrics** | Matomo | Privacy-focused web analytics | 8380 |
+| **OrenMonitor** | Grafana | Infrastructure monitoring | 3000 |
+| **OrenData** | NocoDB | No-code database UI | 8080 |
+| **OrenApps** | Appsmith | Low-code internal tools | 8280 |
+| **OrenAutomate** | n8n | Workflow automation | 5678 |
+| **OrenFlow** | Custom Build | Visual pipeline builder | - |
+| **OrenDocs** | Paperless-ngx | Document management | 8000 |
+| **OrenDesign** | Penpot | Design & prototyping | 9001 |
+| **OrenCalendar** | Custom Build | Scheduling & bookings | - |
+| **OrenHR** | OrangeHRM | Human resources management | 8090 |
+| **OrenVoice** | Twilio + ElevenLabs | Voice infrastructure | - |
+| **OrenBackup** | pgBackWeb | PostgreSQL backup management | 8085 |
+| **OrenCI** | Jenkins | CI/CD automation | 8081 |
+| **OrenFederal** | SAM.gov + AI | Federal contracting tools | - |
+| **OrenWeb** | Custom AI | AI website builder | - |
 
-### Adding Services
+### Service Categories
+
+**Communication & Support:** OrenCRM, OrenAgents, OrenDesk, OrenChat
+**Marketing & Growth:** OrenLeads, OrenSEO, OrenSocial, OrenMail
+**Analytics & Data:** OrenMetrics, OrenMonitor, OrenData
+**Development & Tools:** OrenApps, OrenAutomate, OrenFlow
+**Productivity & Documents:** OrenDocs, OrenDesign, OrenCalendar
+**Operations & HR:** OrenHR, OrenVoice
+**DevOps & Infrastructure:** OrenBackup, OrenCI
+**Government & Enterprise:** OrenFederal, OrenWeb
+
+### Managing Services
 
 Services are managed in `nexus/components/OpenSourceRegistry.tsx`.
 
@@ -530,6 +554,8 @@ To add a new service:
 1. Add Docker container via Coolify
 2. Update the FOSS Registry component
 3. Configure reverse proxy for subdomain
+
+For detailed pricing and feature matrices, see [SERVICES.md](SERVICES.md).
 
 ---
 
