@@ -4,7 +4,7 @@ import {
   Megaphone, Workflow as WorkflowIcon, BarChart3, Bot, ShoppingBag, Settings, Users,
   Radar, FileSearch, ScrollText, ShieldCheck, Landmark, MessageSquare, Book, Database, Calendar as CalendarIcon, FormInput,
   Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target, Star, AtSign, Smartphone, Briefcase,
-  CreditCard, Package, Building, Activity, Rocket, Brain, Plug
+  CreditCard, Package, Building, Activity, Rocket, Brain, Plug, UserCog, VideoIcon, Mail, Layers, Image, UserCheck
 } from 'lucide-react';
 
 export const INITIAL_TOOLS: ToolConnection[] = [
@@ -30,10 +30,16 @@ export const NAV_ITEMS = [
   
   // Growth Studios
   { id: '/new-project', label: 'New Project', icon: PlusCircle, section: 'growth' },
+  { id: '/ai-sdr', label: 'AI SDR', icon: UserCog, section: 'growth' },
+  { id: '/ai-employees', label: 'AI Employees', icon: UserCheck, section: 'growth' },
+  { id: '/avatar-studio', label: 'Avatar Studio', icon: VideoIcon, section: 'growth' },
+  { id: '/inbox-studio', label: 'Email & Inbox', icon: Mail, section: 'growth' },
+  { id: '/funnel-studio', label: 'Funnel Builder', icon: Layers, section: 'growth' },
+  { id: '/ad-studio', label: 'Ad Creative', icon: Image, section: 'growth' },
   { id: '/brand-studio', label: 'Brand & Press', icon: PenTool, section: 'growth' },
   { id: '/ugc-studio', label: 'UGC / Creator', icon: Video, section: 'growth' },
-  { id: '/web-studio', label: 'Web & Funnel', icon: LayoutTemplate, section: 'growth' },
-  { id: '/form-studio', label: 'Form Generator', icon: FormInput, section: 'growth' }, 
+  { id: '/web-studio', label: 'Web Studio', icon: LayoutTemplate, section: 'growth' },
+  { id: '/form-studio', label: 'Form Generator', icon: FormInput, section: 'growth' },
   { id: '/campaign-studio', label: 'Omni-Channel Ops', icon: Megaphone, section: 'growth' },
   { id: '/community-studio', label: 'Community & Courses', icon: MessageSquare, section: 'growth' },
   { id: '/reputation', label: 'Reputation Manager', icon: Star, section: 'growth' },
