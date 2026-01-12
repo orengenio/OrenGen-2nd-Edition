@@ -1,8 +1,5 @@
 {
-  "name": "OrenGen Blueprint",
-  "description": "A multi-agent AI product blueprint generator that transforms ideas into build-ready specs, wireframes, and policies.",
-  "requestFramePermissions": [
-    "microphone",
-    "camera"
-  ]
+  "name": "ColdMail Pro",
+  "description": "A professional cold email marketing generator that creates viral, spam-free copy and high-resolution visuals using Gemini models.",
+  "requestFramePermissions": []
 }
