@@ -61,6 +61,7 @@ import InboxStudio from './components/InboxStudio';
 import AIEmployees from './components/AIEmployees';
 import FunnelStudio from './components/FunnelStudio';
 import AdStudio from './components/AdStudio';
+import SignStudio from './components/SignStudio';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -220,6 +221,7 @@ const inboxStudioRoute = createRoute({ getParentRoute: () => appLayoutRoute, pat
 const aiEmployeesRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ai-employees', component: AIEmployees });
 const funnelStudioRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/funnel-studio', component: FunnelStudio });
 const adStudioRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ad-studio', component: AdStudio });
+const signStudioRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/sign-studio', component: SignStudio });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -227,7 +229,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, plansBillingRoute, featureManagementRoute, clientManagementRoute, systemHealthRoute, onboardingRoute, rfpIntelligenceRoute, mcpHubRoute, aiSdrRoute, avatarStudioRoute, inboxStudioRoute, aiEmployeesRoute, funnelStudioRoute, adStudioRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, plansBillingRoute, featureManagementRoute, clientManagementRoute, systemHealthRoute, onboardingRoute, rfpIntelligenceRoute, mcpHubRoute, aiSdrRoute, avatarStudioRoute, inboxStudioRoute, aiEmployeesRoute, funnelStudioRoute, adStudioRoute, signStudioRoute, settingsRoute
   ])
 ]);
 
