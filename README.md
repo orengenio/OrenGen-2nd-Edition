@@ -29,16 +29,25 @@ OrenGen is a comprehensive all-in-one business operating system featuring AI-pow
 
 ## Platform Overview
 
-OrenGen consists of multiple interconnected services:
+OrenGen uses a simplified two-tier architecture with role-based access control:
 
 | Component | URL | Purpose |
 |-----------|-----|---------|
 | **Marketing Site** | orengen.io | Public-facing website |
-| **Nexus Admin** | nexus.orengen.io | Internal admin control center |
-| **CRM** | crm.orengen.io | Customer relationship management |
-| **Client Portal** | app.orengen.io | White-label client dashboard |
+| **OrenGen App** | app.orengen.io | Unified platform (Admin, CRM, Client Portal) |
 | **Blog** | blog.orengen.io | WordPress blog |
 | **n8n** | n8n.orengen.io | Workflow automation |
+
+### Role-Based Access Control (RBAC)
+
+All functionality is accessed through **app.orengen.io** with permissions based on user role:
+
+| Role | Access Level | Capabilities |
+|------|--------------|--------------|
+| **Admin** | Ultimate | Full platform control, all services, user management, billing, system settings |
+| **Manager** | High | Team management, reporting, client oversight, service configuration |
+| **Agent** | Standard | CRM access, lead management, customer support, assigned services |
+| **Client** | Limited | Client portal, their own data, support tickets, invoices |
 
 ### Key Features
 
@@ -62,25 +71,16 @@ OrenGen consists of multiple interconnected services:
                     Form submissions → n8n webhooks
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                    LAYER 2: BACKEND                         │
-│               crm.orengen.io (Twenty CRM)                   │
-│          PostgreSQL 15 + Redis 7 + GraphQL API              │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                        API calls
-                              ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    LAYER 3: ADMIN                           │
-│               nexus.orengen.io (Control Room)               │
-│               React 19 + Vite + TanStack Router             │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                     Client management
-                              ↓
-┌─────────────────────────────────────────────────────────────┐
-│                   LAYER 4: CLIENT PORTAL                    │
-│                 app.orengen.io (Dashboard)                  │
-│                    Next.js 15 + API routes                  │
+│                 LAYER 2: UNIFIED APP                        │
+│                    app.orengen.io                           │
+│         Role-Based Access to All Platform Features          │
+│                                                             │
+│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │
+│   │   ADMIN     │  │     CRM     │  │   CLIENT    │        │
+│   │  (Ultimate) │  │  (Agents)   │  │  (Portal)   │        │
+│   └─────────────┘  └─────────────┘  └─────────────┘        │
+│                                                             │
+│            React 19 + Vite + PostgreSQL + Redis             │
 └─────────────────────────────────────────────────────────────┘
 ```
 

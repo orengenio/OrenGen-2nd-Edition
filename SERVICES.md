@@ -176,11 +176,20 @@ Complete reference guide for all OrenGen services, white-label branding, and dep
 | Service | Domain | Description |
 |---------|--------|-------------|
 | **Marketing Site** | orengen.io | Public-facing website with product info, pricing, case studies |
-| **Nexus Control Room** | nexus.orengen.io | Internal admin dashboard for all operations |
-| **Client Portal** | app.orengen.io | White-label client dashboard |
-| **CRM Backend** | crm.orengen.io | Twenty CRM with GraphQL API |
+| **OrenGen App** | app.orengen.io | Unified platform with role-based access (Admin, CRM, Client Portal) |
 | **Automation** | n8n.orengen.io | Workflow automation and webhooks |
 | **Blog** | blog.orengen.io | WordPress blog (external) |
+
+### Role-Based Access Control
+
+All users access the platform at **app.orengen.io** with permissions based on role:
+
+| Role | Access Level | Capabilities |
+|------|--------------|--------------|
+| **Admin** | Ultimate | Full platform control, all 23 services, user management, billing, system settings |
+| **Manager** | High | Team management, reporting, client oversight, service configuration |
+| **Agent** | Standard | CRM access, lead management, customer support, assigned services |
+| **Client** | Limited | Client portal, their own data, support tickets, invoices |
 
 ---
 
@@ -996,8 +1005,7 @@ Complete list of all 23 OrenGen services with their underlying technology:
 
 ```
 Marketing Site     : 80/443 (orengen.io)
-Nexus Admin        : 80/443 (nexus.orengen.io)
-Twenty CRM         : 3000   (crm.orengen.io)
+OrenGen App        : 80/443 (app.orengen.io)
 n8n Automation     : 5678   (n8n.orengen.io)
 PostgreSQL         : 5432   (internal)
 Redis              : 6379   (internal)
@@ -1015,7 +1023,7 @@ docker compose logs -f
 # Restart service
 docker compose restart <service>
 
-# Build Nexus
+# Build App
 cd nexus && npm run build
 
 # Build Marketing
@@ -1026,8 +1034,7 @@ docker build -t orengen-marketing -f Dockerfile .
 
 ```
 Marketing:     https://orengen.io
-Admin:         https://nexus.orengen.io
-CRM:           https://crm.orengen.io
+App:           https://app.orengen.io
 Automation:    https://n8n.orengen.io
 Blog:          https://blog.orengen.io
 GitHub:        https://github.com/orengenio
