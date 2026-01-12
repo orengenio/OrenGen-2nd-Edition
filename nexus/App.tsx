@@ -47,6 +47,7 @@ import AgentStudio from './components/AgentStudio';
 import ReputationDashboard from './components/ReputationDashboard';
 import SocialCommenting from './components/SocialCommenting';
 import SIMIntegration from './components/SIMIntegration';
+import FreelanceHub from './components/FreelanceHub';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -192,6 +193,7 @@ const reportingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path:
 const reputationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/reputation', component: ReputationDashboard });
 const socialCommentingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/social-commenting', component: SocialCommenting });
 const simIntegrationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/sim-integration', component: SIMIntegration });
+const freelanceHubRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/freelance-hub', component: FreelanceHub });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -199,7 +201,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, settingsRoute
   ])
 ]);
 
