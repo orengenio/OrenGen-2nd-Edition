@@ -3,7 +3,7 @@ import {
   LayoutDashboard, PlusCircle, PenTool, Video, LayoutTemplate,
   Megaphone, Workflow as WorkflowIcon, BarChart3, Bot, ShoppingBag, Settings, Users,
   Radar, FileSearch, ScrollText, ShieldCheck, Landmark, MessageSquare, Book, Database, Calendar as CalendarIcon, FormInput,
-  Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target
+  Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target, Star, AtSign, Smartphone
 } from 'lucide-react';
 
 export const INITIAL_TOOLS: ToolConnection[] = [
@@ -35,6 +35,9 @@ export const NAV_ITEMS = [
   { id: '/form-studio', label: 'Form Generator', icon: FormInput, section: 'growth' }, 
   { id: '/campaign-studio', label: 'Omni-Channel Ops', icon: Megaphone, section: 'growth' },
   { id: '/community-studio', label: 'Community & Courses', icon: MessageSquare, section: 'growth' },
+  { id: '/reputation', label: 'Reputation Manager', icon: Star, section: 'growth' },
+  { id: '/social-commenting', label: 'Smart Commenting', icon: AtSign, section: 'growth' },
+  { id: '/sim-integration', label: 'SIM & Numbers', icon: Smartphone, section: 'growth' },
   
   // Federal Studios
   { id: '/opportunity-studio', label: 'Opportunity Studio', icon: Radar, section: 'federal' },

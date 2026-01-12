@@ -44,6 +44,9 @@ import LeadGenStudio from './components/LeadGenStudio';
 import UGCStudio from './components/UGCStudio';
 import ReportingDashboard from './components/ReportingDashboard';
 import AgentStudio from './components/AgentStudio';
+import ReputationDashboard from './components/ReputationDashboard';
+import SocialCommenting from './components/SocialCommenting';
+import SIMIntegration from './components/SIMIntegration';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -186,6 +189,9 @@ const vaultRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/v
 const fossRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/opensource-registry', component: OpenSourceRegistry });
 const leadGenRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/leadgen-studio', component: LeadGenStudio });
 const reportingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/reporting', component: ReportingDashboard });
+const reputationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/reputation', component: ReputationDashboard });
+const socialCommentingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/social-commenting', component: SocialCommenting });
+const simIntegrationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/sim-integration', component: SIMIntegration });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -193,7 +199,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, settingsRoute
   ])
 ]);
 
