@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { apiClient } from '@/lib/api-client';
+import NotificationBell from '@/components/NotificationBell';
 
 export default function DashboardLayout({
   children,
@@ -177,6 +178,13 @@ export default function DashboardLayout({
         </div>
       </div>
 
+      {/* Top bar with notification bell */}
+      <div className="lg:pl-64 fixed top-0 right-0 z-30 bg-gray-900 border-b border-gray-800">
+        <div className="flex items-center justify-end h-16 px-6 gap-4">
+          <NotificationBell />
+        </div>
+      </div>
+
       {/* Mobile menu button */}
       <div className="lg:hidden fixed top-0 left-0 z-40 p-4">
         <button
@@ -190,7 +198,7 @@ export default function DashboardLayout({
       </div>
 
       {/* Main content */}
-      <div className="lg:pl-64">
+      <div className="lg:pl-64 pt-16">
         <main className="min-h-screen p-8">
           {children}
         </main>

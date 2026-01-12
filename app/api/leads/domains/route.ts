@@ -7,6 +7,8 @@ import {
   unauthorizedResponse,
   forbiddenResponse,
 } from '@/lib/api-response';
+import { calculateLeadScore, getLeadTier } from '@/lib/lead-scoring';
+import { notifyNewLead, notifyHighValueLead } from '@/lib/websocket-server';
 
 // GET /api/leads/domains - List domain leads
 export async function GET(request: NextRequest) {
@@ -107,12 +109,18 @@ export async function POST(request: NextRequest) {
       return errorResponse('Domain already exists in leads', 409);
     }
 
+    // Calculate initial lead score (will be 0 for manual entry, enrichment will update it)
+    const initialScore = 0;
+
     const newLead = await query(
-      `INSERT INTO domain_leads (domain, status, assigned_to, notes)
-       VALUES ($1, 'new', $2, $3)
+      `INSERT INTO domain_leads (domain, status, assigned_to, notes, lead_score)
+       VALUES ($1, 'new', $2, $3, $4)
        RETURNING *`,
-      [domain, user.userId, notes]
+      [domain, user.userId, notes, initialScore]
     );
+
+    // Send real-time notification for new lead
+    notifyNewLead(newLead[0], user.userId);
 
     return successResponse(newLead[0], 'Domain lead created successfully', 201);
   } catch (error: any) {

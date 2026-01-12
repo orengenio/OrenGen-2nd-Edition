@@ -8,6 +8,8 @@ import {
   forbiddenResponse,
   notFoundResponse,
 } from '@/lib/api-response';
+import { calculateLeadScore, getLeadTier } from '@/lib/lead-scoring';
+import { notifyLeadStatusChange, notifyHighValueLead } from '@/lib/websocket-server';
 import axios from 'axios';
 
 // POST /api/leads/domains/[id]/enrich - Enrich domain lead data
@@ -76,16 +78,14 @@ export async function POST(
       }
     }
 
-    // Calculate lead score based on enriched data
-    let leadScore = lead.lead_score || 0;
-
-    if (enrichmentData.whoisData) {
-      leadScore += 20; // Has WHOIS data
-    }
-
-    if (enrichmentData.enrichmentData?.emails?.length > 0) {
-      leadScore += 30; // Has contact emails
-    }
+    // Calculate lead score using the advanced scoring algorithm
+    const leadData = {
+      ...lead,
+      whoisData: enrichmentData.whoisData || lead.whois_data,
+      enrichmentData: enrichmentData.enrichmentData || lead.enrichment_data,
+    };
+    const leadScore = calculateLeadScore(leadData);
+    const leadTier = getLeadTier(leadScore);
 
     // Update the domain lead with enriched data
     const updated = await query(
@@ -93,19 +93,32 @@ export async function POST(
         whois_data = $1,
         enrichment_data = $2,
         lead_score = $3,
-        status = CASE WHEN status = 'new' THEN 'enriched' ELSE status END
+        status = CASE WHEN status = 'new' THEN 'enriched' ELSE status END,
+        updated_at = CURRENT_TIMESTAMP
        WHERE id = $4
        RETURNING *`,
       [
-        enrichmentData.whoisData ? JSON.stringify(enrichmentData.whoisData) : null,
-        enrichmentData.enrichmentData ? JSON.stringify(enrichmentData.enrichmentData) : null,
-        Math.min(leadScore, 100), // Cap at 100
+        enrichmentData.whoisData ? JSON.stringify(enrichmentData.whoisData) : lead.whois_data,
+        enrichmentData.enrichmentData ? JSON.stringify(enrichmentData.enrichmentData) : lead.enrichment_data,
+        leadScore,
         params.id,
       ]
     );
 
+    const updatedLead = updated[0];
+
+    // Send notifications
+    if (lead.status !== updatedLead.status) {
+      notifyLeadStatusChange(updatedLead, lead.status, updatedLead.status);
+    }
+
+    // Notify if this is a high-value lead (score >= 80)
+    if (leadTier.tier === 'hot' && updatedLead.assigned_to) {
+      notifyHighValueLead(updatedLead, updatedLead.assigned_to);
+    }
+
     return successResponse(
-      updated[0],
+      updatedLead,
       'Domain lead enriched successfully'
     );
   } catch (error: any) {
