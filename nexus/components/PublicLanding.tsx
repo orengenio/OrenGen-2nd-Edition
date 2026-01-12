@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from '@tanstack/react-router';
-import { 
-  Rocket, ShieldCheck, Zap, Bot, ArrowRight, LayoutDashboard, 
-  BarChart3, Globe, CheckCircle2, ChevronRight 
+import {
+  Rocket, ShieldCheck, Zap, Bot, ArrowRight, LayoutDashboard,
+  BarChart3, Globe, CheckCircle2, ChevronRight
 } from 'lucide-react';
+import FloatingNav from './FloatingNav';
 
 const PublicLanding: React.FC = () => {
   const buttonText = "Initialize Nexus";
@@ -167,28 +168,9 @@ const PublicLanding: React.FC = () => {
           .btn-letter:nth-child(${i + 1}) { animation-delay: ${i * 0.1}s; }
         `).join('')}
       `}</style>
-      
+
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
-            <span className="text-orange-500">ORENGEN</span>
-            <span className="text-white">NEXUS</span>
-          </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-            <a href="#features" className="hover:text-white transition-colors">Features</a>
-            <a href="#agents" className="hover:text-white transition-colors">AI Workforce</a>
-            <a href="#federal" className="hover:text-white transition-colors">Federal Intel</a>
-            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link to="/dashboard" className="hidden md:block text-sm font-medium hover:text-white text-slate-300">Log In</Link>
-            <Link to="/dashboard" className="px-5 py-2 bg-orange-600 hover:bg-orange-500 text-white rounded-lg font-semibold text-sm transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)]">
-              Launch Console
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <FloatingNav />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
