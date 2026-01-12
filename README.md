@@ -1,52 +1,20 @@
-# OrenGen CRM - Complete Full Stack Application
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-🚀 **AI-Powered B2B CRM with Lead Generation and Website Builder**
+# Run and deploy your AI Studio app
 
-Complete, production-ready CRM system built with Next.js 15, PostgreSQL, Anthropic Claude & Google Gemini.
+This contains everything you need to run your app locally.
 
-## 🎯 Features
+View your app in AI Studio: https://ai.studio/apps/drive/1qeIfz5RPs-QhS24C9rB8svPN2mXyGAEf
 
-✅ **B2B CRM System** - Companies, Contacts, Deals, Activities with RBAC  
-✅ **Lead Generation** - Auto-scraping, enrichment, scoring  
-✅ **AI Website Builder** - Claude-powered wireframes & code generation  
-✅ **Modern Dashboard** - React 19, TypeScript, Tailwind CSS  
-✅ **Secure** - JWT auth, bcrypt, Row-Level Security  
+## Run Locally
 
-## 📦 Quick Start
+**Prerequisites:**  Node.js
 
-```bash
-npm install
-cp .env.example .env.local
-# Edit .env.local with DATABASE_URL, JWT_SECRET, CLAUDE_API_KEY
-npm run db:setup
-npm run dev
-```
 
-**Default Login:** `admin@orengen.io` / `admin123`
-
-## 📚 Documentation
-
-- [API Documentation](./API-DOCUMENTATION.md)
-- [Backend Guide](./BACKEND-README.md)
-
-## 🛠️ Tech Stack
-
-Frontend: Next.js 15, React 19, TypeScript, Tailwind  
-Backend: Next.js API, PostgreSQL, JWT  
-AI: Anthropic Claude, Google Gemini  
-
-## 🚀 Deployment
-
-Vercel: `vercel`  
-Docker: `docker build -t orengen-crm .`  
-
-See [BACKEND-README.md](./BACKEND-README.md) for full deployment guide.
-
-## 📞 Support
-
-Email: support@orengen.io  
-GitHub: [Issues](https://github.com/orengenio/OrenGen-2nd-Edition/issues)  
-
----
-
-**Built by OrenGen Worldwide** | January 2026
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
