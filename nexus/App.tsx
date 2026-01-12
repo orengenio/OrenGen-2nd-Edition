@@ -41,6 +41,8 @@ import MarketplaceStudio from './components/MarketplaceStudio';
 import Settings from './components/Settings';
 import Wiki from './components/Wiki';
 import LeadGenStudio from './components/LeadGenStudio';
+import UGCStudio from './components/UGCStudio';
+import ReportingDashboard from './components/ReportingDashboard';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -170,7 +172,7 @@ const grantRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/g
 
 // Agent Studios & Tools
 const brandRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/brand-studio', component: BrandStudio });
-const ugcRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ugc-studio', component: () => <AgentRoute type="creator_manager" title="UGC Studio" desc="Synthesize creator archetypes." /> });
+const ugcRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ugc-studio', component: UGCStudio });
 const webRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/web-studio', component: WebStudio });
 const formRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/form-studio', component: FormStudio }); 
 const automationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/automation-studio', component: AutomationStudio }); 
@@ -182,6 +184,7 @@ const devPortalRoute = createRoute({ getParentRoute: () => appLayoutRoute, path:
 const vaultRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/vault-studio', component: VaultStudio });
 const fossRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/opensource-registry', component: OpenSourceRegistry });
 const leadGenRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/leadgen-studio', component: LeadGenStudio });
+const reportingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/reporting', component: ReportingDashboard });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -189,7 +192,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, settingsRoute
   ])
 ]);
 

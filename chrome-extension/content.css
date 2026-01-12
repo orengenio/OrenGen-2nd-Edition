@@ -1,0 +1,40 @@
+/* OrenGen Lead Capture - Content Script Styles */
+
+/* Email highlights */
+.orengen-email-highlight {
+  background: #fef3c7 !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  transition: background 0.2s !important;
+}
+
+.orengen-email-highlight:hover {
+  background: #fde68a !important;
+}
+
+/* Selection tooltip */
+.orengen-selection-tooltip {
+  position: fixed;
+  background: #1e293b;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  z-index: 999999;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.orengen-selection-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: #1e293b transparent transparent;
+}

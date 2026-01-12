@@ -49,7 +49,8 @@ export const NAV_ITEMS = [
   { id: '/vault-studio', label: 'Vault (Secrets)', icon: Lock, section: 'infrastructure' },
   { id: '/automation-studio', label: 'Automation (n8n)', icon: WorkflowIcon, section: 'infrastructure' },
   { id: '/data-studio', label: 'Data & Sheets', icon: BarChart3, section: 'infrastructure' },
-  
+  { id: '/reporting', label: 'Reports & Analytics', icon: BarChart3, section: 'infrastructure' },
+
   { id: '/agent-studio', label: 'Agent Studio', icon: Bot, section: 'system' },
   { id: '/developer-portal', label: 'API & Developers', icon: Terminal, section: 'system' },
   { id: '/settings', label: 'Settings', icon: Settings, section: 'system' },

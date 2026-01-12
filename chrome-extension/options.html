@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrenGen Lead Capture - Settings</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 28px;
+      height: 28px;
+      color: white;
+    }
+
+    .logo-text {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .subtitle {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .label-hint {
+      font-weight: 400;
+      color: #94a3b8;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="url"] {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #f97316;
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+    }
+
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .toggle-group:last-child {
+      border-bottom: none;
+    }
+
+    .toggle-info {
+      flex: 1;
+    }
+
+    .toggle-label {
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 2px;
+    }
+
+    .toggle-desc {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .toggle {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #e2e8f0;
+      border-radius: 14px;
+      transition: 0.3s;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: #f97316;
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(20px);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: #f8fafc;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .status {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .status.success {
+      display: block;
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .status.error {
+      display: block;
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .keyboard-shortcuts {
+      margin-top: 16px;
+    }
+
+    .shortcut {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+    }
+
+    .shortcut kbd {
+      background: #f1f5f9;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .shortcut span {
+      color: #64748b;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <span class="logo-text">OrenGen</span>
+      </div>
+      <p class="subtitle">Lead Capture Extension Settings</p>
+    </header>
+
+    <div id="status" class="status"></div>
+
+    <div class="card">
+      <h2 class="card-title">API Connection</h2>
+      <form id="settings-form">
+        <div class="form-group">
+          <label for="apiUrl">
+            API URL
+            <span class="label-hint">(Your OrenGen instance)</span>
+          </label>
+          <input type="url" id="apiUrl" name="apiUrl" placeholder="https://your-orengen.com">
+        </div>
+
+        <div class="form-group">
+          <label for="apiKey">
+            API Key
+            <span class="label-hint">(From Settings > API Keys)</span>
+          </label>
+          <input type="password" id="apiKey" name="apiKey" placeholder="Enter your API key">
+        </div>
+
+        <div class="actions">
+          <button type="button" id="test-btn" class="btn btn-secondary">Test Connection</button>
+          <button type="submit" class="btn btn-primary">Save Settings</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">Capture Preferences</h2>
+
+      <div class="toggle-group">
+        <div class="toggle-info">
+          <div class="toggle-label">Show Floating Button</div>
+          <div class="toggle-desc">Display a capture button on every page</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="showFloatingButton">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-group">
+        <div class="toggle-info">
+          <div class="toggle-label">Auto-Capture on Visit</div>
+          <div class="toggle-desc">Automatically capture domains as you browse</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="captureOnVisit">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-group">
+        <div class="toggle-info">
+          <div class="toggle-label">Notifications</div>
+          <div class="toggle-desc">Show notifications when leads are captured</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="notificationsEnabled" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">Keyboard Shortcuts</h2>
+      <div class="keyboard-shortcuts">
+        <div class="shortcut">
+          <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd>
+          <span>Quick capture current page</span>
+        </div>
+        <div class="shortcut">
+          <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>O</kbd>
+          <span>Open capture widget</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load saved settings
+    document.addEventListener('DOMContentLoaded', () => {
+      chrome.storage.sync.get([
+        'apiUrl',
+        'apiKey',
+        'showFloatingButton',
+        'captureOnVisit',
+        'notificationsEnabled',
+      ], (result) => {
+        document.getElementById('apiUrl').value = result.apiUrl || '';
+        document.getElementById('apiKey').value = result.apiKey || '';
+        document.getElementById('showFloatingButton').checked = result.showFloatingButton || false;
+        document.getElementById('captureOnVisit').checked = result.captureOnVisit || false;
+        document.getElementById('notificationsEnabled').checked = result.notificationsEnabled !== false;
+      });
+    });
+
+    // Save settings
+    document.getElementById('settings-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const settings = {
+        apiUrl: document.getElementById('apiUrl').value.trim().replace(/\/$/, ''),
+        apiKey: document.getElementById('apiKey').value.trim(),
+        showFloatingButton: document.getElementById('showFloatingButton').checked,
+        captureOnVisit: document.getElementById('captureOnVisit').checked,
+        notificationsEnabled: document.getElementById('notificationsEnabled').checked,
+      };
+
+      chrome.storage.sync.set(settings, () => {
+        showStatus('Settings saved successfully!', 'success');
+      });
+    });
+
+    // Save toggles on change
+    ['showFloatingButton', 'captureOnVisit', 'notificationsEnabled'].forEach(id => {
+      document.getElementById(id).addEventListener('change', (e) => {
+        chrome.storage.sync.set({ [id]: e.target.checked });
+      });
+    });
+
+    // Test connection
+    document.getElementById('test-btn').addEventListener('click', async () => {
+      const apiUrl = document.getElementById('apiUrl').value.trim().replace(/\/$/, '');
+      const apiKey = document.getElementById('apiKey').value.trim();
+
+      if (!apiUrl || !apiKey) {
+        showStatus('Please enter API URL and key first', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('test-btn');
+      btn.textContent = 'Testing...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch(`${apiUrl}/api/health`, {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+          },
+        });
+
+        if (response.ok) {
+          showStatus('Connection successful! Your OrenGen instance is reachable.', 'success');
+        } else {
+          showStatus('Connection failed. Please check your API URL and key.', 'error');
+        }
+      } catch (error) {
+        showStatus('Connection failed. Make sure the URL is correct and accessible.', 'error');
+      } finally {
+        btn.textContent = 'Test Connection';
+        btn.disabled = false;
+      }
+    });
+
+    // Show status message
+    function showStatus(message, type) {
+      const status = document.getElementById('status');
+      status.textContent = message;
+      status.className = `status ${type}`;
+
+      setTimeout(() => {
+        status.className = 'status';
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
