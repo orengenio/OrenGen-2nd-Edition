@@ -53,6 +53,8 @@ import FeatureManagement from './components/FeatureManagement';
 import ClientManagement from './components/ClientManagement';
 import SystemHealth from './components/SystemHealth';
 import OnboardingWizard from './components/OnboardingWizard';
+import RFPIntelligence from './components/RFPIntelligence';
+import MCPHub from './components/MCPHub';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -204,6 +206,8 @@ const featureManagementRoute = createRoute({ getParentRoute: () => appLayoutRout
 const clientManagementRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/client-management', component: ClientManagement });
 const systemHealthRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/system-health', component: SystemHealth });
 const onboardingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/onboarding', component: OnboardingWizard });
+const rfpIntelligenceRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/rfp-intelligence', component: RFPIntelligence });
+const mcpHubRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/mcp-hub', component: MCPHub });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -211,7 +215,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, plansBillingRoute, featureManagementRoute, clientManagementRoute, systemHealthRoute, onboardingRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, plansBillingRoute, featureManagementRoute, clientManagementRoute, systemHealthRoute, onboardingRoute, rfpIntelligenceRoute, mcpHubRoute, settingsRoute
   ])
 ]);
 

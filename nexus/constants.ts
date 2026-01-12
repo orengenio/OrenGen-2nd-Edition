@@ -4,7 +4,7 @@ import {
   Megaphone, Workflow as WorkflowIcon, BarChart3, Bot, ShoppingBag, Settings, Users,
   Radar, FileSearch, ScrollText, ShieldCheck, Landmark, MessageSquare, Book, Database, Calendar as CalendarIcon, FormInput,
   Terminal, Lock, Server, Box, Sheet, Phone, Mic, MessageCircle, Target, Star, AtSign, Smartphone, Briefcase,
-  CreditCard, Package, Building, Activity, Rocket
+  CreditCard, Package, Building, Activity, Rocket, Brain, Plug
 } from 'lucide-react';
 
 export const INITIAL_TOOLS: ToolConnection[] = [
@@ -43,13 +43,15 @@ export const NAV_ITEMS = [
 
   // Federal Studios
   { id: '/opportunity-studio', label: 'Opportunity Studio', icon: Radar, section: 'federal' },
-  { id: '/rfp-studio', label: 'RFP Intelligence', icon: FileSearch, section: 'federal' },
+  { id: '/rfp-intelligence', label: 'RFP Intelligence', icon: Brain, section: 'federal' },
+  { id: '/rfp-studio', label: 'RFP Analysis', icon: FileSearch, section: 'federal' },
   { id: '/proposal-studio', label: 'Proposal Studio', icon: ScrollText, section: 'federal' },
   { id: '/grant-studio', label: 'Grant Studio', icon: Landmark, section: 'federal' },
   { id: '/compliance-studio', label: 'Compliance & Risk', icon: ShieldCheck, section: 'federal' },
 
   // System
   { id: '/marketplace-studio', label: 'Integrations Hub', icon: ShoppingBag, section: 'infrastructure' },
+  { id: '/mcp-hub', label: 'MCP Hub', icon: Plug, section: 'infrastructure' },
   { id: '/opensource-registry', label: 'FOSS Registry', icon: Box, section: 'infrastructure' },
   { id: '/vault-studio', label: 'Vault (Secrets)', icon: Lock, section: 'infrastructure' },
   { id: '/automation-studio', label: 'Automation (n8n)', icon: WorkflowIcon, section: 'infrastructure' },
