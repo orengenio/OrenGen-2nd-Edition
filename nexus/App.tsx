@@ -55,6 +55,12 @@ import SystemHealth from './components/SystemHealth';
 import OnboardingWizard from './components/OnboardingWizard';
 import RFPIntelligence from './components/RFPIntelligence';
 import MCPHub from './components/MCPHub';
+import AISDRStudio from './components/AISDRStudio';
+import AvatarStudio from './components/AvatarStudio';
+import InboxStudio from './components/InboxStudio';
+import AIEmployees from './components/AIEmployees';
+import FunnelStudio from './components/FunnelStudio';
+import AdStudio from './components/AdStudio';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -208,6 +214,12 @@ const systemHealthRoute = createRoute({ getParentRoute: () => appLayoutRoute, pa
 const onboardingRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/onboarding', component: OnboardingWizard });
 const rfpIntelligenceRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/rfp-intelligence', component: RFPIntelligence });
 const mcpHubRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/mcp-hub', component: MCPHub });
+const aiSdrRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ai-sdr', component: AISDRStudio });
+const avatarStudioRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/avatar-studio', component: AvatarStudio });
+const inboxStudioRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/inbox-studio', component: InboxStudio });
+const aiEmployeesRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ai-employees', component: AIEmployees });
+const funnelStudioRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/funnel-studio', component: FunnelStudio });
+const adStudioRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/ad-studio', component: AdStudio });
 const settingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/settings', component: Settings }); 
 
 const routeTree = rootRoute.addChildren([
@@ -215,7 +227,7 @@ const routeTree = rootRoute.addChildren([
   appLayoutRoute.addChildren([
     dashboardRoute, crmRoute, communityRoute, calendarRoute, newProjectRoute, wikiRoute, adminKbRoute,
     oppStudioRoute, rfpRoute, proposalRoute, complianceRoute, grantRoute,
-    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, plansBillingRoute, featureManagementRoute, clientManagementRoute, systemHealthRoute, onboardingRoute, rfpIntelligenceRoute, mcpHubRoute, settingsRoute
+    brandRoute, ugcRoute, webRoute, formRoute, campaignRoute, automationRoute, dataRoute, agentSettingsRoute, marketRoute, devPortalRoute, vaultRoute, fossRoute, leadGenRoute, reportingRoute, reputationRoute, socialCommentingRoute, simIntegrationRoute, freelanceHubRoute, plansBillingRoute, featureManagementRoute, clientManagementRoute, systemHealthRoute, onboardingRoute, rfpIntelligenceRoute, mcpHubRoute, aiSdrRoute, avatarStudioRoute, inboxStudioRoute, aiEmployeesRoute, funnelStudioRoute, adStudioRoute, settingsRoute
   ])
 ]);
 
