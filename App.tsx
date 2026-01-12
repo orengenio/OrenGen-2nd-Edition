@@ -1,117 +1,105 @@
 import React, { useState } from 'react';
-import { View } from './types';
+import { Pipeline } from './components/Dashboard'; // Formerly Dashboard
+import { LeadFinder } from './components/LeadFinder';
+import { LiveAgent } from './components/LiveAgent';
+import { EmailAccounts } from './components/EmailAccounts';
+import { EmailCampaigns } from './components/EmailCampaigns';
+import { Onebox } from './components/Onebox';
+import { Analytics } from './components/Analytics';
+import { BlacklistMonitor } from './components/BlacklistMonitor';
+import { Settings } from './components/Settings';
 import { Sidebar } from './components/Sidebar';
-import { Dashboard } from './components/Dashboard';
-import { CampaignWizard } from './components/CampaignWizard';
-import { ContentStudio } from './components/ContentStudio';
-import { IntelligenceHub } from './components/IntelligenceHub';
-import { LiveVoice } from './components/LiveVoice';
-import { AgentOrchestrator } from './components/AgentOrchestrator';
-import { Bot, X, Send } from 'lucide-react';
-import { createChatSession } from './services/geminiService';
+import { ViewState, Lead } from './types';
 
-const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<View>(View.DASHBOARD);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [chatMessage, setChatMessage] = useState('');
-  const [chatHistory, setChatHistory] = useState<{role: string, text: string}[]>([
-    { role: 'model', text: 'Hello! I am your Gemini 3.0 Pro assistant. How can I help with your marketing today?' }
-  ]);
-  
-  // Persistent chat session ref would go here in a real app,
-  // For demo we re-init or use a context, but here we just use the service function directly on send.
-  const [chatSession] = useState(() => createChatSession());
+export default function App() {
+  const [currentView, setCurrentView] = useState<ViewState>(ViewState.PIPELINE);
+  const [leads, setLeads] = useState<Lead[]>([]);
 
-  const handleSendMessage = async () => {
-    if (!chatMessage.trim()) return;
-    
-    const userMsg = { role: 'user', text: chatMessage };
-    setChatHistory(prev => [...prev, userMsg]);
-    setChatMessage('');
+  const handleUpdateLead = (updatedLead: Lead) => {
+    setLeads(prev => prev.map(l => l.id === updatedLead.id ? updatedLead : l));
+  };
 
-    try {
-      const result = await chatSession.sendMessage(userMsg.text);
-      const modelMsg = { role: 'model', text: result.response.text() };
-      setChatHistory(prev => [...prev, modelMsg]);
-    } catch (e) {
-      console.error(e);
-      setChatHistory(prev => [...prev, { role: 'model', text: 'Sorry, I encountered an error.' }]);
-    }
+  const handleAddLeads = (newLeads: Lead[]) => {
+    setLeads(prev => [...newLeads, ...prev]);
+    setCurrentView(ViewState.PIPELINE); // Redirect to pipeline after adding
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50 font-sans">
-      <Sidebar currentView={currentView} onViewChange={setCurrentView} />
-      
-      <main className="flex-1 ml-64 relative">
-        {currentView === View.DASHBOARD && <Dashboard />}
-        {currentView === View.AGENT_ORCHESTRATOR && <AgentOrchestrator />}
-        {currentView === View.CAMPAIGN_WIZARD && <CampaignWizard />}
-        {currentView === View.CONTENT_STUDIO && <ContentStudio />}
-        {currentView === View.INTELLIGENCE_HUB && <IntelligenceHub />}
-        {currentView === View.LIVE_VOICE && <LiveVoice />}
-      </main>
+    <div className="min-h-screen bg-[#0f172a] text-slate-100 flex font-sans selection:bg-blue-500/30">
+      <Sidebar currentView={currentView} onNavigate={setCurrentView} />
 
-      {/* Floating Chat Assistant (Available on all screens except Live Voice and Agent Orchestrator) */}
-      {currentView !== View.LIVE_VOICE && currentView !== View.AGENT_ORCHESTRATOR && (
-        <>
-          {!isChatOpen && (
-            <button
-              onClick={() => setIsChatOpen(true)}
-              className="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-xl hover:bg-blue-700 transition-all z-40"
-            >
-              <Bot size={28} />
-            </button>
-          )}
+      {/* Main Content Area */}
+      <main className="flex-1 ml-64 p-8 overflow-y-auto h-screen relative">
+        
+        {/* Only show the top fade overlay if NOT in Onebox view (Onebox handles its own layout) */}
+        {currentView !== ViewState.ONEBOX && (
+           <div className="fixed top-0 left-64 right-0 h-8 bg-gradient-to-b from-[#0f172a] to-transparent z-10 pointer-events-none"></div>
+        )}
 
-          {isChatOpen && (
-            <div className="fixed bottom-6 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col z-50 overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
-              <div className="bg-blue-600 text-white p-4 flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                  <Bot size={20} />
-                  <span className="font-semibold">Gemini Assistant</span>
-                </div>
-                <button onClick={() => setIsChatOpen(false)} className="hover:bg-blue-700 p-1 rounded">
-                  <X size={18} />
-                </button>
-              </div>
-              
-              <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-slate-50">
-                {chatHistory.map((msg, idx) => (
-                  <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                      msg.role === 'user' 
-                        ? 'bg-blue-600 text-white rounded-br-none' 
-                        : 'bg-white border border-slate-200 text-slate-700 rounded-bl-none shadow-sm'
-                    }`}>
-                      {msg.text}
-                    </div>
-                  </div>
-                ))}
-              </div>
+        <div className={currentView === ViewState.ONEBOX ? "h-full" : "max-w-7xl mx-auto pb-12"}>
+            {currentView === ViewState.FINDER && (
+                <LeadFinder onAddLeads={handleAddLeads} />
+            )}
 
-              <div className="p-4 bg-white border-t border-slate-100 flex gap-2">
-                <input
-                  type="text"
-                  value={chatMessage}
-                  onChange={(e) => setChatMessage(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                  placeholder="Ask anything..."
-                  className="flex-1 p-2 border border-slate-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {currentView === ViewState.PIPELINE && (
+                <Pipeline 
+                    leads={leads} 
+                    onUpdateLead={handleUpdateLead} 
+                    onSetLeads={setLeads}
                 />
-                <button 
-                  onClick={handleSendMessage}
-                  className="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
-                >
-                  <Send size={18} />
-                </button>
-              </div>
-            </div>
-          )}
-        </>
-      )}
+            )}
+
+            {currentView === ViewState.ONEBOX && (
+                <Onebox />
+            )}
+            
+            {currentView === ViewState.EMAIL_CAMPAIGNS && (
+                <EmailCampaigns />
+            )}
+
+            {currentView === ViewState.EMAIL_ACCOUNTS && (
+                <EmailAccounts />
+            )}
+
+            {currentView === ViewState.ANALYTICS && (
+                <Analytics />
+            )}
+            
+            {currentView === ViewState.BLACKLIST_MONITOR && (
+                <BlacklistMonitor />
+            )}
+
+            {currentView === ViewState.LIVE_AGENT && (
+                <div className="max-w-4xl mx-auto space-y-8">
+                    <div>
+                        <h2 className="text-3xl font-bold text-white mb-2">AI Employee & Router</h2>
+                        <p className="text-slate-400">The central nervous system for routing calls, emails, and tasks.</p>
+                    </div>
+                    <LiveAgent />
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i className="ph-duotone ph-address-book text-3xl text-blue-400 mb-3"></i>
+                            <h3 className="font-bold text-white mb-1">List Loader</h3>
+                            <p className="text-sm text-slate-400">Sync with the Pipeline to auto-dial qualified leads.</p>
+                        </div>
+                        <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i className="ph-duotone ph-scroll text-3xl text-purple-400 mb-3"></i>
+                            <h3 className="font-bold text-white mb-1">Script Strategy</h3>
+                            <p className="text-sm text-slate-400">Agent uses Gemini Thinking model to adapt scripts dynamically.</p>
+                        </div>
+                        <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i className="ph-duotone ph-record text-3xl text-red-400 mb-3"></i>
+                            <h3 className="font-bold text-white mb-1">Call Recording</h3>
+                            <p className="text-sm text-slate-400">All calls are transcribed and pushed to your CRM automatically.</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {currentView === ViewState.SETTINGS && <Settings />}
+        </div>
+      </main>
     </div>
   );
-};
-
-export default App;
+}

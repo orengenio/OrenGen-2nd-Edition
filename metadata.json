@@ -1,6 +1,6 @@
 {
-  "name": "OmniMarketer AI",
-  "description": "An integrated AI marketing platform combining CRM, Campaign Management, and Content Generation powered by Gemini 2.5 and 3.0 models.",
+  "name": "OrenGenMail AI",
+  "description": "A comprehensive automated lead generation and CRM system leveraging Gemini Maps Grounding, Thinking models, and Live Audio API to find, analyze, and contact businesses.",
   "requestFramePermissions": [
     "microphone",
     "geolocation"

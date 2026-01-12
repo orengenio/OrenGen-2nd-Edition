@@ -1,38 +1,79 @@
-export enum View {
-  DASHBOARD = 'DASHBOARD',
-  CAMPAIGN_WIZARD = 'CAMPAIGN_WIZARD', // Mautic/MailWizz style
-  CONTENT_STUDIO = 'CONTENT_STUDIO',   // WordPress/ImageGen style
-  INTELLIGENCE_HUB = 'INTELLIGENCE_HUB', // Search/Maps
-  LIVE_VOICE = 'LIVE_VOICE',            // Gemini Live
-  AGENT_ORCHESTRATOR = 'AGENT_ORCHESTRATOR' // AI Agents + MCP
+
+
+export enum LeadStatus {
+  NEW = 'NEW',
+  ANALYZING = 'ANALYZING',
+  QUALIFIED = 'QUALIFIED',
+  CONTACTED = 'CONTACTED',
+  CLOSED = 'CLOSED',
+  UNQUALIFIED = 'UNQUALIFIED'
 }
 
-export interface ChatMessage {
+export enum LeadCategory {
+  WEBSITE_DESIGN = 'WEBSITE_DESIGN',
+  AI_AGENT = 'AI_AGENT',
+  TALKING_WEBSITE = 'TALKING_WEBSITE',
+  SEO = 'SEO',
+  GENERAL = 'GENERAL'
+}
+
+export interface Lead {
   id: string;
-  role: 'user' | 'model';
-  text: string;
-  timestamp: Date;
+  name: string;
+  address: string;
+  website?: string;
+  placeId?: string;
+  status: LeadStatus;
+  category?: LeadCategory;
+  aiAnalysis?: string;
+  email?: string;
+  emailContent?: string; // The generated cold email content
+  linkedinUrl?: string;
+  score?: number;
+  // External IDs and Statuses
+  supabaseId?: string;
+  ghlId?: string;
+  websiteStatus?: 'ACTIVE' | 'INACTIVE' | 'UNKNOWN' | 'NEEDS_UPDATE';
+  lastContactedAt?: string;
 }
 
-export interface SearchResult {
-  title: string;
-  uri: string;
+export interface EmailAccount {
+  id: string;
+  email: string;
+  provider: 'google' | 'microsoft' | 'other';
+  password?: string; // Stored securely in real app, simplified here
+  daily_sent: number;
+  daily_limit: number;
+  warmup_active: boolean;
+  warmup_emails_sent: number;
+  health_score: number; // 0-100
+  status: 'active' | 'error' | 'paused';
+  // Super Charged Settings
+  ramp_up_speed?: 'conservative' | 'balanced' | 'ludicrous';
+  reply_rate_target?: number;
+  peer_network_enabled?: boolean;
+  bounces?: number;
 }
 
-export interface MapResult {
-  title: string;
-  uri: string;
-  rating?: number;
-  userRatingCount?: number;
+export interface AppSettings {
+  supabaseUrl: string;
+  supabaseKey: string;
+  ghlApiKey: string;
+  n8nWebhookUrl: string;
+  // MailWizz Settings
+  mailwizzUrl?: string;
+  mailwizzPublicKey?: string;
+  mailwizzSecret?: string;
 }
 
-export enum AspectRatio {
-  SQUARE = '1:1',
-  PORTRAIT_2_3 = '2:3',
-  LANDSCAPE_3_2 = '3:2',
-  PORTRAIT_3_4 = '3:4',
-  LANDSCAPE_4_3 = '4:3',
-  PORTRAIT_9_16 = '9:16',
-  LANDSCAPE_16_9 = '16:9',
-  CINEMATIC_21_9 = '21:9'
+export enum ViewState {
+  PIPELINE = 'PIPELINE',
+  FINDER = 'FINDER',
+  LIVE_AGENT = 'LIVE_AGENT',
+  EMAIL_ACCOUNTS = 'EMAIL_ACCOUNTS',
+  EMAIL_CAMPAIGNS = 'EMAIL_CAMPAIGNS',
+  ONEBOX = 'ONEBOX',
+  ANALYTICS = 'ANALYTICS',
+  BLACKLIST_MONITOR = 'BLACKLIST_MONITOR',
+  SETTINGS = 'SETTINGS'
 }
