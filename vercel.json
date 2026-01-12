@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "refferq",
+  "name": "orengen",
   "framework": "nextjs",
   "buildCommand": "npx prisma generate && npm run build",
   "installCommand": "npm install",

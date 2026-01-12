@@ -1,6 +1,14 @@
-# SEO Checklist for Refferq
+# SEO Checklist for OrenGen
 
-## ✅ Completed Items
+## Overview
+This checklist covers SEO optimization for the OrenGen platform across all subdomains:
+- **orengen.io** - Main marketing site
+- **nexus.orengen.io** - Admin control center
+- **app.orengen.io** - Client portal
+- **crm.orengen.io** - CRM backend
+- **blog.orengen.io** - WordPress blog
+
+## Completed Items
 
 ### Technical SEO
 - [x] **Sitemap.xml** - Created and includes all pages
@@ -10,12 +18,12 @@
 - [x] **Twitter Cards** - Twitter sharing optimized
 - [x] **Canonical URLs** - Set on all pages
 - [x] **Responsive Design** - Mobile-friendly
-- [x] **HTTPS Ready** - Redirects configured in .htaccess
+- [x] **HTTPS** - SSL via Let's Encrypt (Traefik)
 - [x] **Semantic HTML** - Proper heading hierarchy (H1, H2, H3)
-- [x] **Alt Text** - SVG icons have aria-labels
-- [x] **Page Speed** - Optimized CSS/JS, no heavy frameworks
-- [x] **Compression** - Gzip enabled in .htaccess
-- [x] **Browser Caching** - Configured in .htaccess
+- [x] **Alt Text** - Images have descriptive alt text
+- [x] **Page Speed** - Optimized CSS/JS, code splitting
+- [x] **Compression** - Gzip enabled via nginx
+- [x] **Browser Caching** - Configured in nginx
 - [x] **Manifest.json** - PWA support
 - [x] **Favicon** - Set across all pages
 - [x] **Security.txt** - Responsible disclosure policy
@@ -27,213 +35,88 @@
 - [x] **Internal Linking** - Navigation and footer links
 - [x] **Content Structure** - Clear sections with headings
 - [x] **Call-to-Actions** - Multiple CTAs throughout
-- [x] **FAQ Section** - On pricing page
-- [x] **Documentation** - Comprehensive docs page
+- [x] **Case Studies** - Real business success stories
+- [x] **Knowledge Base** - Comprehensive documentation
 
-## 📋 To-Do Before Launch
+## To-Do Items
 
-### Pre-Launch Tasks
-- [ ] **Domain Setup** - Point custom domain to hosting
-- [ ] **SSL Certificate** - Install and verify HTTPS
+### High Priority
 - [ ] **Google Search Console** - Add property and verify ownership
 - [ ] **Bing Webmaster Tools** - Add and verify site
 - [ ] **Submit Sitemap** - To Google and Bing
-- [ ] **Google Analytics** - Add tracking code (optional)
+- [ ] **Schema Markup** - Add Organization and Service structured data
 - [ ] **Test All Links** - Verify internal and external links
-- [ ] **Cross-Browser Testing** - Chrome, Firefox, Safari, Edge
-- [ ] **Mobile Testing** - Test on actual devices
-- [ ] **Page Speed Test** - Run Google PageSpeed Insights
-- [ ] **Accessibility Test** - Run WAVE or aXe checker
-- [ ] **HTML Validation** - W3C Validator
-- [ ] **Schema Markup** - Add structured data (optional)
-
-### Post-Launch Tasks
-- [ ] **Monitor Crawling** - Check Google Search Console for errors
-- [ ] **Track Rankings** - Monitor keyword positions
-- [ ] **Analyze Traffic** - Review analytics data
-- [ ] **Build Backlinks** - Submit to directories
-- [ ] **Social Sharing** - Share on Twitter, LinkedIn, Reddit
-- [ ] **Update Sitemap** - If adding new pages
-- [ ] **Monitor Page Speed** - Regular performance checks
-- [ ] **Content Updates** - Keep documentation current
-- [ ] **Broken Link Checks** - Monthly audits
-
-## 🎯 Priority Actions
-
-### High Priority (Do First)
-1. ✅ Create comprehensive documentation
-2. ✅ Set up proper meta tags
-3. ✅ Create sitemap.xml
-4. ✅ Configure robots.txt
-5. [ ] Set up HTTPS/SSL
-6. [ ] Submit to Google Search Console
-7. [ ] Test mobile responsiveness
 
 ### Medium Priority
-1. [ ] Add Google Analytics
-2. [ ] Create blog section
-3. [ ] Add schema markup
-4. [ ] Build backlinks
-5. [ ] Create video tutorials
-6. [ ] Write case studies
+- [ ] **Add Google Analytics** - Or privacy-focused alternative (Matomo)
+- [ ] **Video Tutorials** - Embed on knowledge base
+- [ ] **Build Backlinks** - Submit to directories
+- [ ] **Social Sharing** - Share on Twitter, LinkedIn
+- [ ] **Regular Content Updates** - Blog posts and guides
 
-### Low Priority (Nice to Have)
-1. [ ] Add AMP versions
-2. [ ] Create API documentation page
-3. [ ] Add changelog page
-4. [ ] Create community page
-5. [ ] Add testimonials
-6. [ ] Create comparison pages
+### Low Priority
+- [ ] **Add AMP versions** - For blog posts
+- [ ] **Create comparison pages** - OrenGen vs competitors
+- [ ] **Add testimonials** - Customer reviews and quotes
+- [ ] **Community showcase** - User success stories
 
-## 📊 Key Metrics to Track
-
-### Performance Metrics
-- **Page Load Time**: Target < 3 seconds
-- **Time to First Byte (TTFB)**: Target < 600ms
-- **First Contentful Paint (FCP)**: Target < 1.8s
-- **Largest Contentful Paint (LCP)**: Target < 2.5s
-- **Cumulative Layout Shift (CLS)**: Target < 0.1
-
-### SEO Metrics
-- **Organic Traffic**: Monthly growth
-- **Keyword Rankings**: Track top 10 keywords
-- **Click-Through Rate (CTR)**: From search results
-- **Bounce Rate**: Keep below 60%
-- **Average Session Duration**: Target > 2 minutes
-- **Pages per Session**: Target > 2 pages
-
-### Indexing Status
-- **Indexed Pages**: Check weekly in GSC
-- **Crawl Errors**: Monitor and fix immediately
-- **Mobile Usability**: No errors
-- **Core Web Vitals**: All green
-
-## 🔍 Target Keywords
+## Target Keywords
 
 ### Primary Keywords
-1. open source affiliate platform
-2. self hosted affiliate software
-3. free affiliate marketing platform
-4. affiliate tracking software
-5. referral program software
+1. AI business automation
+2. Buy-Lingual AI agents
+3. multilingual AI voice agents
+4. AI-powered CRM
+5. lead generation platform
 
 ### Secondary Keywords
-1. affiliate management system
-2. commission tracking software
-3. referral marketing platform
-4. white label affiliate software
-5. nextjs affiliate platform
+1. AI call center software
+2. business automation platform
+3. self-hosted AI solutions
+4. enterprise AI tools
+5. government contracting software
 
 ### Long-Tail Keywords
-1. how to set up affiliate program
-2. best open source affiliate software
-3. free self hosted affiliate platform
-4. affiliate tracking with postgresql
-5. nextjs affiliate marketing system
+1. how to automate business with AI
+2. best AI voice agent platform
+3. multilingual customer support AI
+4. AI-powered federal contracting
+5. self-hosted CRM with AI
 
-## 🛠️ Tools to Use
+## Performance Metrics
 
-### Testing Tools
-- **Google PageSpeed Insights**: https://pagespeed.web.dev/
-- **GTmetrix**: https://gtmetrix.com/
-- **W3C Validator**: https://validator.w3.org/
-- **WAVE Accessibility**: https://wave.webaim.org/
-- **Mobile-Friendly Test**: https://search.google.com/test/mobile-friendly
+### Core Web Vitals Targets
+- **Largest Contentful Paint (LCP)**: < 2.5s
+- **First Input Delay (FID)**: < 100ms
+- **Cumulative Layout Shift (CLS)**: < 0.1
+- **First Contentful Paint (FCP)**: < 1.8s
+- **Time to First Byte (TTFB)**: < 600ms
 
-### SEO Tools
-- **Google Search Console**: Monitor indexing and performance
-- **Bing Webmaster Tools**: Bing visibility
-- **Ahrefs**: Backlink analysis (paid)
-- **SEMrush**: Keyword research (paid)
-- **Ubersuggest**: Free keyword research
+### SEO Metrics to Track
+- Organic traffic growth (monthly)
+- Keyword rankings (top 20)
+- Click-through rate from search
+- Bounce rate (target < 60%)
+- Average session duration (target > 2 min)
 
-### Monitoring Tools
-- **Google Analytics**: Traffic analysis
-- **Hotjar**: User behavior (optional)
-- **Uptime Robot**: Monitor downtime
-- **Lighthouse**: Chrome DevTools audit
+## Directory Submissions
 
-## 📝 Content Calendar
-
-### Month 1
-- Week 1: Documentation launch
-- Week 2: Blog post - "Getting Started with Refferq"
-- Week 3: Tutorial video - "Installation Guide"
-- Week 4: Case study - First user success story
-
-### Month 2
-- Week 1: Blog post - "API Integration Guide"
-- Week 2: Comparison page - "Refferq vs Other Platforms"
-- Week 3: Tutorial video - "Advanced Features"
-- Week 4: Community showcase
-
-### Month 3
-- Week 1: Blog post - "Scaling Your Affiliate Program"
-- Week 2: Webinar - Live Q&A
-- Week 3: Tutorial video - "Custom Integrations"
-- Week 4: Year-end review and roadmap
-
-## 🎯 Conversion Optimization
-
-### Goals
-1. **Primary**: GitHub stars
-2. **Secondary**: Newsletter signups
-3. **Tertiary**: Demo requests
-4. **Long-term**: Community contributors
-
-### A/B Testing Ideas
-- [ ] Test different hero headlines
-- [ ] Test CTA button colors
-- [ ] Test pricing page layout
-- [ ] Test documentation sidebar position
-- [ ] Test feature card ordering
-
-## 🌐 Off-Page SEO
-
-### Directory Submissions
+### Priority Submissions
 - [ ] Product Hunt
+- [ ] G2 Software
+- [ ] Capterra
 - [ ] AlternativeTo
-- [ ] Open Source Alternative
-- [ ] GitHub Awesome Lists
 - [ ] Dev.to
 - [ ] Hacker News
+- [ ] GitHub Awesome Lists
 
-### Community Engagement
-- [ ] Answer questions on Stack Overflow
-- [ ] Participate in Reddit (r/opensource, r/webdev)
-- [ ] Engage on Twitter/X
-- [ ] Write on Dev.to
-- [ ] Guest posts on related blogs
-
-### Backlink Strategy
-- [ ] List on open source directories
-- [ ] Submit to comparison sites
-- [ ] Partner with complementary tools
-- [ ] Create valuable content others will link to
-- [ ] Reach out for reviews/mentions
-
-## 📈 Success Criteria
-
-### 30 Days Post-Launch
-- 100+ indexed pages
-- 50+ organic visitors/day
-- 10+ GitHub stars/week
-- 5+ keywords in top 50
-
-### 90 Days Post-Launch
-- 500+ organic visitors/day
-- 100+ GitHub stars
-- 20+ keywords in top 20
-- 5+ backlinks from quality sites
-
-### 6 Months Post-Launch
-- 2,000+ organic visitors/day
-- 500+ GitHub stars
-- 50+ keywords in top 10
-- 50+ quality backlinks
-- 10+ community contributors
+### Industry-Specific
+- [ ] AI Tool directories
+- [ ] CRM software lists
+- [ ] Marketing automation tools
+- [ ] Government contractor resources
 
 ---
 
-**Last Updated**: October 12, 2025  
-**Next Review**: Check monthly and update as needed
+**Last Updated**: January 12, 2026
+**Next Review**: Monthly updates recommended
