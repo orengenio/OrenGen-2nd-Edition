@@ -43,6 +43,7 @@ import Wiki from './components/Wiki';
 import LeadGenStudio from './components/LeadGenStudio';
 import UGCStudio from './components/UGCStudio';
 import ReportingDashboard from './components/ReportingDashboard';
+import AgentStudio from './components/AgentStudio';
 import { Project, ChecklistItem, AgentType } from './types';
 import { X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -177,7 +178,7 @@ const webRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/web
 const formRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/form-studio', component: FormStudio }); 
 const automationRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/automation-studio', component: AutomationStudio }); 
 const dataRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/data-studio', component: DataStudio }); 
-const agentSettingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/agent-studio', component: () => <AgentRoute type="agent_supervisor" title="Agent Supervisor" desc="Manage workforce." /> });
+const agentSettingsRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/agent-studio', component: AgentStudio });
 const marketRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/marketplace-studio', component: MarketplaceStudio }); 
 const campaignRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/campaign-studio', component: CampaignStudio });
 const devPortalRoute = createRoute({ getParentRoute: () => appLayoutRoute, path: '/developer-portal', component: DeveloperPortal }); 
