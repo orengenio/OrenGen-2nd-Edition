@@ -1,0 +1,28 @@
+Claude i need you to help me deeply research examining each of these tools. and plan this out to give detailed instructions to build it with claude code in github to make for orengen.io i want the best of it all. 
+
+
+INSPIRATION
+- https://workspace.google.com/u/1/marketplace/app/sitemap/131320043767?pageId=none
+- https://mockflow.com/#sitemap
+
+
+- https://slickplan.com/sitemap
+- https://slickplan.com/sitemap/website-architecture
+- https://slickplan.com/sitemap/visual-generator
+- https://visualsitemaps.com/
+- https://elementor.com/ai-site-planner/
+- https://octopus.do/
+- https://octopus.do/sitemap/features
+- https://octopus.do/sitemap/ai
+- https://octopus.do/sitemap/pricing
+- https://miro.com/index/
+- https://slickplan.com/seo-tools
+- https://www.screamingfrog.co.uk/seo-spider/
+- https://dynomapper.com/features/
+- https://www.ragesw.com/products/googlesitemap.html
+- Google Webmaster Tools - Geogaphic Targetting
+
+- https://lucid.app/pricing/lucidchart?utm_source=google&km_CPC_CampaignId=19936600982&km_CPC_Country=9027230&gbraid=0AAAAADLdSjAgFYp2K8iWEDZEYFU_rOTfV&sessionDate=2026-02-04T15%3A51%3A38.955Z&utm_campaign=_chart_en_us_mixed_pmax_nb_&referer=https%3A%2F%2Fwww.lucidchart.com%2Fpages%2Fexamples%2Fsitemap-generator&gad_source=1&utm_medium=cpc&km_CPC_Device=c&anonId=0.21ccccc619c29536381&gad_campaignid=20779663435&gclid=Cj0KCQiA-YvMBhDtARIsAHZuUzJtreRYqkhKuZVloPlbNewU9drrvEE4Alh9JrSF1gmyAEFD1s6FlgsaAlZaEALw_wcB&km_CPC_Network=x&sessionId=0.a5cfc4ca19c29536382#/pricing/chart
+
+- 
+https://visualsitemaps.com/features/
